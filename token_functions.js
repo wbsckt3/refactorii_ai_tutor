@@ -1,7 +1,7 @@
 // Obtener el parámetro `token` de la URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
-    if (token) {
+const urlParams = new URLSearchParams(window.location.search);
+const token = urlParams.get('token');
+if (token) {
 	    // Realiza una solicitud al servicio externo para validar el token
 	    fetch(`https://www.refactorii.com/validate-token?token=${token}`)
 	    .then(response => response.json())
@@ -36,13 +36,22 @@
 	        document.body.innerHTML = 'Error validating token.';
 	        console.error('Error:', error);
 	    });
-    } else {
+} else {
 	    document.body.innerHTML = 'Access denied. No token provided.';
-    }
+}
+
+function decodeJwtResponse(token) {
+	    var base64Url = token.split('.')[1];
+	    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+	    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+	        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+	    }).join(''));
+	    return JSON.parse(jsonPayload);
+}
 
 // Obtener el botón de ai-assistance
-    const runButton = document.getElementById('ai-assistance');	     
-    async function fetchAIResponse() {
+const runButton = document.getElementById('ai-assistance');	     
+async function fetchAIResponse() {
       // Obtén el código del textarea
       const code = document.getElementById('code-editor').value;
       // Obtén el mensaje de desafío
@@ -72,10 +81,10 @@
       const data = await response.json();
       // Extraer solo el mensaje del assistant
       document.getElementById('challenge').textContent = data.choices[0].message.content;
-    }
+}
 
-	// Al presionar el botón "AI Assistance"
-	document.getElementById('ai-assistance').addEventListener('click', () => {
+// Al presionar el botón "AI Assistance"
+document.getElementById('ai-assistance').addEventListener('click', () => {
 	    fetch('https://www.refactorii.com/ai-assistance', {
 	        method: 'POST',
 	        headers: {
@@ -103,7 +112,7 @@
 	    .catch(error => {
 	        console.error('Error:', error);
 	    });
-	});
+});
 
 async function guardarResultados() {
 	    const formData = JSON.parse(localStorage.getItem("formData"));
@@ -139,13 +148,4 @@ async function guardarResultados() {
 	    } catch (error) {
 	        console.error('Error sending the results to the server:', error);
 	    }
-    }
-
-    function decodeJwtResponse(token) {
-	    var base64Url = token.split('.')[1];
-	    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-	    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-	        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-	    }).join(''));
-	    return JSON.parse(jsonPayload);
-    }
+}
