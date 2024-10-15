@@ -49,24 +49,33 @@ function decodeJwtResponse(token) {
 	    return JSON.parse(jsonPayload);
 }
 
- // Obtén los parámetros 'script1' charge_html_data.js y 'script2' tests_cases_scenario.js de la URL proveniente del link del recipe
-const script1 = urlParams.get('script1');  // Ejemplo: 'charge_html_data.js'
-const script2 = urlParams.get('script2');  // Ejemplo: 'test_cases_scenario.js'
-// Función para agregar un script dinámicamente
-function loadScript(scriptUrl) {
+// Obtén los parámetros 'script1' charge_html_data.js y 'script2' tests_cases_scenario.js de la URL proveniente del link del recipe
+const script1 = urlParams.get('script1');
+const script2 = urlParams.get('script2');
+        function loadScript(scriptUrl, callback) {
             if (scriptUrl) {
                 const scriptElement = document.createElement('script');
                 scriptElement.src = scriptUrl;
                 scriptElement.type = 'text/javascript';
                 scriptElement.defer = true;
+                scriptElement.onload = function() {
+                    console.log(`Script ${scriptUrl} cargado.`);
+                    if (callback) {
+                        callback();
+                    }
+                };
+                scriptElement.onerror = function() {
+                    console.error(`Error al cargar el script ${scriptUrl}`);
+                };
                 document.body.appendChild(scriptElement);
             } else {
                 console.log('No se proporcionó un script en la URL');
             }
-}
-// Cargar ambos scripts dinámicamente
-loadScript(script1);  // Cargar el primer script
-loadScript(script2);  // Cargar el segundo script
+        }
+        // Cargar el primer script y luego el segundo cuando el primero haya terminado
+        loadScript(script1, function() {
+        loadScript(script2);
+        });
 
 // Obtener el botón de ai-assistance
 const runButton = document.getElementById('ai-assistance');	     
