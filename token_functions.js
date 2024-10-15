@@ -6,7 +6,7 @@ if (token) {
 	    .then(response => response.json())
 	    .then(data => {
 	        if (data.valid) {
-	            console.log(data.valid);
+	            console.log("data retornada del back: " + data.valid);
 	             // Decodifica el token para obtener el payload
                      const decodedToken = decodeJwtResponse(token);
          	     const recipeId = decodedToken._id; // Asegúrate de usar el nombre correcto del campo en el payload
