@@ -79,8 +79,8 @@
 	    });
 	}
 	loadScript(script1)
-	    .then(() => loadScript(script2)) // Cargar script2 después de script1
-	    .then(() => loadScript(script3)) // Cargar script3 después de script2
+	    .then(() => loadScript(script2))
+	    .then(() => loadScript(script3)) 
 	    .catch((error) => console.error('Error al cargar los scripts:', error));
     </script>
 </body>
