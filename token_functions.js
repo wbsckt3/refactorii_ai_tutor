@@ -1,5 +1,4 @@
 // Obtener el parámetro `token` de la URL
-const urlParams = new URLSearchParams(window.location.search);
 const token = urlParams.get('token');
 if (token) {
 	    // Realiza una solicitud al servicio externo para validar el token
