@@ -1,5 +1,5 @@
 // Obtener el parámetro `token` de la URL
-const token = urlParams.get('token');
+const token = urlParams.get('token'); console.log(token)
 if (token) {
 	    // Realiza una solicitud al servicio externo para validar el token
 	    fetch(`https://www.refactorii.com/validate-token?token=${token}`)
