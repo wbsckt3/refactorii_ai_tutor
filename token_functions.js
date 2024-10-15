@@ -1,6 +1,6 @@
 // Obtener el parámetro `token` de la URL
 const token = urlParams.get('token'); console.log(token)
-if (token) {
+/*if (token) {
 	    // Realiza una solicitud al servicio externo para validar el token
 	    fetch(`https://www.refactorii.com/validate-token?token=${token}`)
 	    .then(response => response.json())
@@ -37,6 +37,54 @@ if (token) {
 	    });
 } else {
 	    document.body.innerHTML = 'Access denied. No token provided.';
+} */
+
+if (token) {
+    // Función asíncrona para validar el token y realizar las siguientes acciones
+    async function validateToken() {
+        try {
+            // Espera la respuesta de la validación del token
+            const response = await fetch(`https://www.refactorii.com/validate-token?token=${token}`);
+            const data = await response.json();
+
+            if (data.valid) {
+                console.log("data retornada del back: " + data.valid);
+
+                // Decodifica el token para obtener el payload
+                const decodedToken = decodeJwtResponse(token);
+                const recipeId = decodedToken._id; // Asegúrate de usar el nombre correcto del campo en el payload
+                console.log('Recipe ID:', recipeId);
+
+                // Almacena recipeId en localStorage
+                localStorage.setItem('recipeId', recipeId);
+
+                // Llama a la función de prueba
+                test_cases_scenario();
+
+                // Mostrar el número de solicitudes restantes
+                document.getElementById('remaining-requests').innerText = `Remaining AI requests: ${data.remainingRequests}`;
+
+                // Habilitar o deshabilitar el botón en función de las solicitudes restantes
+                const sendResponseButton = document.getElementById('ai-assistance');
+                if (data.remainingRequests > 0) {
+                    sendResponseButton.classList.add('enabled');
+                } else {
+                    sendResponseButton.classList.add('disabled');
+                }
+            } else {
+                console.log(data.valid);
+                document.body.innerHTML = 'Access denied. Invalid token.';
+            }
+        } catch (error) {
+            document.body.innerHTML = 'Error validating token.';
+            console.error('Error:', error);
+        }
+    }
+
+    // Llama a la función de validación del token
+    validateToken();
+} else {
+    document.body.innerHTML = 'Access denied. No token provided.';
 }
 
 function decodeJwtResponse(token) {
