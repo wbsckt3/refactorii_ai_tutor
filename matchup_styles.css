@@ -3,44 +3,42 @@ body {
     background-color: #f0f0f0;
 }
 
-h2 {
+h1 {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .container {
     display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
-    justify-content: center;
+    gap: 20px; /* Añadimos un espacio entre las columnas */
     margin-bottom: 20px;
 }
 
+/* Ajustamos las columnas */
+.codes, .concepts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Distribuye en dos columnas */
+    gap: 20px; /* Espacio entre las tarjetas */
+    width: 45%; /* Ajustamos el ancho para que ambas columnas quepan */
+}
+
 .code-snippet, .droppable {
-    width: 300px;
-    height: auto;
     background-color: #ffffff;
     border: 2px solid #cccccc;
-    margin: 10px;
-    padding: 10px;
+    padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .droppable {
     background-color: #e8f5e9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100px; /* Ajusta el alto mínimo para evitar que el texto se salga */
-    font-size: 14px;  /* Ajusta el tamaño de la fuente para que quepa el texto */
-    overflow: hidden; /* Si el texto es muy largo, lo ocultamos o lo manejamos de otra manera */
-    word-wrap: break-word; /* Permite que las palabras largas se rompan a la siguiente línea */
-}
-
-.draggable {
-    background-color: #bbdefb;
-    cursor: grab;
-    margin: 10px 0;
+    min-height: 100px; /* Evitamos que los cuadros se expandan mucho hacia abajo */
+    font-size: 14px;
+    word-wrap: break-word; /* Evita el desbordamiento del texto */
+    overflow: hidden;
 }
 
 .droppable:hover {
@@ -50,7 +48,7 @@ h2 {
 
 button {
     display: block;
-    margin: 0 auto;
+    margin: 20px auto;
     padding: 10px 20px;
     background-color: #42a5f5;
     color: white;
@@ -62,3 +60,4 @@ button {
 button:hover {
     background-color: #1e88e5;
 }
+
