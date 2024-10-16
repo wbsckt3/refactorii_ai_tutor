@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de emparejamiento - Conceptos de JavaScript</title>
+    <link rel="stylesheet" href="matchup_styles.css">
+</head>
+<body>
+    <h1>Empareja el valor Falsy con su explicación</h1>
+    <div class="container">
+        <div class="codes">
+            <div id="code1" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>null</code>
+            </div>
+            <div id="code2" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>undefined</code>
+            </div>
+            <div id="code3" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>NaN</code>
+            </div>
+            <div id="code4" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>0</code>
+            </div>
+            <div id="code5" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>"" (cadena vacía)</code>
+            </div>
+            <div id="code6" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>false</code>
+            </div>
+            <div id="code7" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>-0</code>
+            </div>
+        </div>
 
+        <div class="concepts">
+            <!-- Desordenamos las explicaciones para evitar un patrón predecible -->
+            <div id="concept2" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Indica la ausencia de valor o que algo no se ha definido. Las variables no inicializadas toman este valor.
+            </div>
+            <div id="concept4" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Utilizado en comparaciones numéricas. Puede causar errores lógicos cuando se espera un valor positivo.
+            </div>
+            <div id="concept6" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Representa una falsedad explícita en una condición lógica. Nunca será verdadero en un "if".
+            </div>
+            <div id="concept3" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Este valor indica que no se ha podido realizar una operación matemática válida. Cuidado al operar con números.
+            </div>
+            <div id="concept7" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Igual que su contraparte positiva, pero también se considera "falsy". Úsalo con cuidado en operaciones matemáticas.
+            </div>
+            <div id="concept5" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Esta cadena no contiene caracteres. Si la usas en una condición, se comportará como falsa.
+            </div>
+            <div id="concept1" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Representa la ausencia intencionada de cualquier valor. Utilizado para valores desconocidos o vacíos.
+            </div>
+        </div>
+    </div>
+    <button onclick="checkAnswers()">Enviar respuestas</button>
+
+    <script src="matchup_script.js"></script>
+</body>
+</html>
