@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de emparejamiento - Conceptos avanzados de Vue.js</title>
+    <link rel="stylesheet" href="matchup_styles.css">
+</head>
+<body>
+    <h1>Empareja el fragmento de código de Vue.js con su concepto</h1>
+    <div class="container">
+        <div class="codes">
+            <div id="code1" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>v-slot:header</code>
+            </div>
+            <div id="code2" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>v-once</code>
+            </div>
+            <div id="code3" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>v-cloak</code>
+            </div>
+            <div id="code4" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>$refs.input.focus()</code>
+            </div>
+            <div id="code5" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>v-model.lazy="inputValue"</code>
+            </div>
+            <div id="code6" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>v-bind="$attrs"</code>
+            </div>
+            <div id="code7" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>v-on="listeners"</code>
+            </div>
+            <div id="code8" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>provide() { return { dataKey: this.dataValue } }</code>
+            </div>
+            <div id="code9" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>inject: ['dataKey']</code>
+            </div>
+            <div id="code10" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>is="componentName"</code>
+            </div>
+        </div>
+
+        <div class="concepts">
+            <!-- Desordenamos las explicaciones para evitar un patrón predecible -->
+            <div id="concept1" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Slots: Permite pasar contenido dinámico a una plantilla desde el componente padre.
+            </div>
+            <div id="concept2" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Directiva: Renderiza el contenido solo una vez y lo almacena en caché.
+            </div>
+            <div id="concept3" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Directiva: Evita que el parpadeo inicial del contenido sea visible hasta que Vue esté completamente cargado.
+            </div>
+            <div id="concept4" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Refs: Permite acceder a elementos o componentes del DOM directamente desde el código JavaScript.
+            </div>
+            <div id="concept5" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Modificador de v-model: Actualiza el valor del input solo cuando el usuario termina de escribir y pierde el foco.
+            </div>
+            <div id="concept6" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                $attrs: Permite pasar atributos no declarados explícitamente en un componente hijo a un elemento del DOM.
+            </div>
+            <div id="concept7" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                $listeners: Permite pasar eventos desde el componente padre al componente hijo sin declararlos explícitamente.
+            </div>
+            <div id="concept8" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Provide: Hace que un valor esté disponible para todos los componentes hijos sin necesidad de pasar props.
+            </div>
+            <div id="concept9" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Inject: Recibe valores proporcionados por un componente ancestro a través de `provide`.
+            </div>
+            <div id="concept10" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                is: Permite renderizar dinámicamente un componente basado en su nombre.
+            </div>
+        </div>
+    </div>
+    <button onclick="checkAnswers()">Enviar respuestas</button>
+
+    <script src="matchup_script.js"></script>
+</body>
+</html>
