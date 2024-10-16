@@ -7,72 +7,72 @@
     <link rel="stylesheet" href="matchup_styles.css">
 </head>
 <body>
-    <h1>Empareja el fragmento de código de Vue.js con su concepto</h1>
+    <h1>Empareja el fragmento de código de Vue.js con su concepto avanzado</h1>
     <div class="container">
         <div class="codes">
             <div id="code1" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>{{ message }}</code>
+                <code>&lt;transition&gt;&lt;/transition&gt;</code>
             </div>
             <div id="code2" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>v-if="condition"</code>
+                <code>mixins: [myMixin]</code>
             </div>
             <div id="code3" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>v-bind:src="imageUrl"</code>
+                <code>this.$nextTick()</code>
             </div>
             <div id="code4" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>v-for="item in items" :key="item.id"</code>
+                <code>provide() { return { userData: this.user } }</code>
             </div>
             <div id="code5" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>v-model="inputValue"</code>
+                <code>inject: ['userData']</code>
             </div>
             <div id="code6" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>mounted() { // código }</code>
+                <code>&lt;keep-alive&gt;&lt;/keep-alive&gt;</code>
             </div>
             <div id="code7" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>this.$emit('eventName', data)</code>
+                <code>&lt;slot&gt;&lt;/slot&gt;</code>
             </div>
             <div id="code8" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>props: ['title', 'content']</code>
+                <code>v-once</code>
             </div>
             <div id="code9" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>computed: { fullName() { return this.firstName + ' ' + this.lastName } }</code>
+                <code>render(h) { return h('div', this.message) }</code>
             </div>
             <div id="code10" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>watch: { items(newVal, oldVal) { // código } }</code>
+                <code>this.$refs.myInput</code>
             </div>
         </div>
 
         <div class="concepts">
             <!-- Desordenamos las explicaciones para evitar un patrón predecible -->
             <div id="concept1" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Interpolación: Se usa para mostrar datos dinámicos en el HTML.
+                Transición: Permite añadir animaciones o efectos de transición cuando los elementos entran o salen del DOM.
             </div>
             <div id="concept2" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Directiva: Muestra o esconde elementos en función de una condición booleana.
+                Mixin: Reutiliza lógica en múltiples componentes, inyectando métodos o propiedades comunes.
             </div>
             <div id="concept3" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Directiva: Une dinámicamente atributos o propiedades de un componente a una expresión en JavaScript.
+                Método asíncrono: Ejecuta una función después de que el DOM ha sido actualizado. Útil para asegurarse de que los cambios en la UI están completos.
             </div>
             <div id="concept4" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Directiva: Repite un bloque de código por cada elemento de una lista y requiere un valor único (key).
+                Proveer/inyectar: Proporciona datos a los descendientes sin necesidad de pasarlos como props, útil para compartir datos a través de múltiples componentes.
             </div>
             <div id="concept5" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Directiva: Establece una vinculación bidireccional entre el valor de un input y el estado del componente.
+                Inyección: Recibe datos proporcionados por un componente padre o ancestro, sin necesidad de pasarlos como props.
             </div>
             <div id="concept6" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Hook del ciclo de vida: Se ejecuta después de que el componente se ha montado en el DOM.
+                Cache de componentes: Mantiene el estado de los componentes inactivos sin volver a renderizarlos cuando se reutilizan.
             </div>
             <div id="concept7" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Emisión de eventos: Permite enviar eventos personalizados desde un componente hijo a su padre.
+                Slot: Permite la inserción de contenido dinámico dentro de un componente, dejando que el componente padre defina su estructura.
             </div>
             <div id="concept8" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Propiedades (props): Se usa para pasar datos desde un componente padre a un hijo.
+                Directiva: Renderiza el elemento solo una vez y evita que vuelva a ser re-renderizado en el DOM.
             </div>
             <div id="concept9" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Computed properties: Propiedades calculadas que se recalculan solo cuando cambian sus dependencias.
+                Render function: Define explícitamente cómo debería renderizarse el componente utilizando la API de JavaScript en lugar de plantillas.
             </div>
             <div id="concept10" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Watcher: Permite observar cambios en una propiedad o dato específico y ejecutar código cuando cambia.
+                Referencias: Accede a un elemento del DOM o a un componente hijo desde el script utilizando el atributo `ref`.
             </div>
         </div>
     </div>
