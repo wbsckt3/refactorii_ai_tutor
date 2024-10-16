@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de emparejamiento - Conceptos hard de Vue.js</title>
+    <link rel="stylesheet" href="matchup_styles.css">
+</head>
+<body>
+    <h1>Empareja el fragmento de código de Vue.js con su concepto (Nivel HARD)</h1>
+    <div class="container">
+        <div class="codes">
+            <div id="code1" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>v-bind.sync="childValue"</code>
+            </div>
+            <div id="code2" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>v-once + v-pre</code>
+            </div>
+            <div id="code3" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>functional: true</code>
+            </div>
+            <div id="code4" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>render(h) { return h('div', this.message) }</code>
+            </div>
+            <div id="code5" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>v-model.number="quantity"</code>
+            </div>
+            <div id="code6" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>v-model.trim="text"</code>
+            </div>
+            <div id="code7" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>async asyncData({ params }) { return { data: await fetchData(params.id) } }</code>
+            </div>
+            <div id="code8" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>provide/inject + reactive</code>
+            </div>
+            <div id="code9" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>setup(props, { emit }) { emit('event', data); }</code>
+            </div>
+            <div id="code10" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>watchEffect(() => { /* efecto dependiente de variables reactivas */ })</code>
+            </div>
+        </div>
+
+        <div class="concepts">
+            <!-- Desordenamos las explicaciones para evitar un patrón predecible -->
+            <div id="concept1" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Sync Modifier: Vincula de forma bidireccional entre el valor del padre y el hijo.
+            </div>
+            <div id="concept2" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Optimización de Renderizado: `v-once` almacena el HTML en caché y `v-pre` evita que se compile el contenido.
+            </div>
+            <div id="concept3" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Componentes Funcionales: Se usan para componentes sin estado y sin instancias de Vue, optimizando el rendimiento.
+            </div>
+            <div id="concept4" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Función Render: Define explícitamente cómo se debe renderizar el componente utilizando la API `h`.
+            </div>
+            <div id="concept5" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Modificador v-model.number: Convierte automáticamente el valor del input a un número.
+            </div>
+            <div id="concept6" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Modificador v-model.trim: Elimina espacios en blanco al inicio y al final del valor del input.
+            </div>
+            <div id="concept7" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                asyncData: Se usa en frameworks como Nuxt.js para obtener datos asíncronos antes de renderizar la página.
+            </div>
+            <div id="concept8" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Reactividad Avanzada: Utiliza `provide/inject` junto con objetos reactivos para compartir estado entre componentes.
+            </div>
+            <div id="concept9" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Composition API + emit: Emite eventos personalizados desde la función `setup` usando la Composition API.
+            </div>
+            <div id="concept10" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                watchEffect: Ejecuta efectos reactivos que dependen de variables reactivas de forma automática.
+            </div>
+        </div>
+    </div>
+    <button onclick="checkAnswers()">Enviar respuestas</button>
+
+    <script src="matchup_script.js"></script>
+</body>
+</html>
