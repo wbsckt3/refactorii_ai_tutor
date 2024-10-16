@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de emparejamiento - Conceptos Vue.js Hacker</title>
+    <link rel="stylesheet" href="matchup_styles.css">
+</head>
+<body>
+    <h1>Empareja el fragmento de código de Vue.js con su concepto (Nivel HACKER)</h1>
+    <div class="container">
+        <div class="codes">
+            <div id="code1" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>v-once + MutationObserver</code>
+            </div>
+            <div id="code2" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>this.$el.setAttribute('data-test', 'true')</code>
+            </div>
+            <div id="code3" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>Object.defineProperty(this, 'customProp', { get() { return 'value'; } })</code>
+            </div>
+            <div id="code4" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>Directiva personalizada: inserted(el, binding) {}</code>
+            </div>
+            <div id="code5" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>renderTracked + renderTriggered</code>
+            </div>
+            <div id="code6" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>defineAsyncComponent(() => import('./HeavyComponent.vue'))</code>
+            </div>
+            <div id="code7" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>this.$refs.dynamicRef.innerHTML = 'Hello DOM'</code>
+            </div>
+            <div id="code8" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>Teleport + z-index stacking context</code>
+            </div>
+            <div id="code9" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>template refs + IntersectionObserver</code>
+            </div>
+            <div id="code10" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>getCurrentInstance() + Proxy traps</code>
+            </div>
+        </div>
+
+        <div class="concepts">
+            <div id="concept1" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Optimización extrema: `v-once` con observadores de mutación para detectar cambios específicos en el DOM.
+            </div>
+            <div id="concept2" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Manipulación directa del DOM: Usar `$el` para acceder y modificar atributos HTML.
+            </div>
+            <div id="concept3" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Definición de propiedades dinámicas en tiempo de ejecución mediante `Object.defineProperty`.
+            </div>
+            <div id="concept4" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Directivas personalizadas: Ejecutar código al insertar un elemento en el DOM, útil para integraciones con APIs del DOM.
+            </div>
+            <div id="concept5" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Depuración avanzada: Uso de `renderTracked` y `renderTriggered` para identificar qué reacciones reactivas desencadenan renders.
+            </div>
+            <div id="concept6" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Componentes asíncronos: Cargar componentes pesados de manera asíncrona con `defineAsyncComponent`.
+            </div>
+            <div id="concept7" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Refs dinámicos: Manipular contenido directamente usando `$refs` para alterar el DOM sin intermediarios de Vue.
+            </div>
+            <div id="concept8" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Teleport avanzado: Mover elementos a otros nodos en el DOM y lidiar con problemas de contexto de apilamiento `z-index`.
+            </div>
+            <div id="concept9" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Observación avanzada: Usar `template refs` con `IntersectionObserver` para observar la visibilidad de un elemento.
+            </div>
+            <div id="concept10" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Reactividad interna: Obtener la instancia actual de Vue con `getCurrentInstance()` y manipularla usando traps de Proxy.
+            </div>
+        </div>
+    </div>
+    <button onclick="checkAnswers()">Enviar respuestas</button>
+
+    <script src="matchup_script.js"></script>
+</body>
+</html>
