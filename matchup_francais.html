@@ -1,78 +1,77 @@
-m<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego de emparejamiento - Conceptos de JavaScript</title>
+    <title>Juego de emparejamiento - Gramática francesa</title>
     <link rel="stylesheet" href="matchup_styles.css">
 </head>
 <body>
-    <h1>Empareja el código con su descripción</h1>
+    <h1>Empareja la frase en francés con su tiempo verbal o explicación gramatical</h1>
     <div class="container">
         <div class="codes">
             <div id="code1" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>Array.isArray([1, 2, 3])</code>
+                <code>Je mange du pain.</code>
             </div>
             <div id="code2" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>let nombre = "Juan";</code>
+                <code>Nous irons à Paris.</code>
             </div>
             <div id="code3" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>Math.max(5, 10)</code>
+                <code>Il a fini ses devoirs.</code>
             </div>
             <div id="code4" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>function saludo() { return "Hola"; }</code>
+                <code>Elles sont allées au cinéma.</code>
             </div>
             <div id="code5" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>document.getElementById("app")</code>
+                <code>Vous écrivez une lettre.</code>
             </div>
             <div id="code6" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>const suma = (a, b) => a + b;</code>
+                <code>J'avais parlé avec lui.</code>
             </div>
             <div id="code7" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>new Date()</code>
+                <code>Il fera beau demain.</code>
             </div>
             <div id="code8" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>parseInt("42")</code>
+                <code>Tu aurais pu venir.</code>
             </div>
             <div id="code9" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>window.localStorage</code>
+                <code>Ils parlent français.</code>
             </div>
             <div id="code10" class="code-snippet" draggable="true" ondragstart="drag(event)">
-                <code>console.log("Hola Mundo")</code>
+                <code>Je suis en train d'étudier.</code>
             </div>
         </div>
 
         <div class="concepts">
-            
+            <div id="concept1" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Présent de l'indicatif
+            </div>
             <div id="concept2" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Sirve para almacenar información en la memoria, la cual puede ser cambiada o mantenida según la necesidad del código.
+                Futur simple
             </div>
             <div id="concept3" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Función usada para encontrar el número más alto entre un conjunto de valores.
+                Passé composé
             </div>
             <div id="concept4" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Se utiliza para definir bloques de código reutilizables que pueden ejecutarse varias veces con diferentes valores.
+                Verbe pronominal au passé composé
             </div>
             <div id="concept5" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Permite la manipulación de los elementos HTML en una página web.
-            </div>
-            <div id="concept1" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Utilizado para trabajar eficientemente con conjuntos de datos almacenados en una estructura que permite acceder a elementos por su posición.
+                Impératif présent
             </div>
             <div id="concept6" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Manera concisa de definir una operación que recibe parámetros y retorna un valor.
+                Plus-que-parfait
             </div>
             <div id="concept7" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Utilizado para trabajar con fechas y realizar cálculos con días, meses o años.
+                Futur simple
             </div>
             <div id="concept8" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Se emplea cuando se necesita transformar un valor de un tipo de dato a otro.
+                Conditionnel passé
             </div>
             <div id="concept9" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Permite guardar datos en el navegador de manera persistente, accesible incluso después de recargar la página.
+                Présent de l'indicatif
             </div>
             <div id="concept10" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
-                Herramienta que ayuda a mostrar información durante el desarrollo para fines de depuración.
+                Présent progressif
             </div>
         </div>
     </div>
@@ -81,3 +80,4 @@ m<!DOCTYPE html>
     <script src="matchup_script.js"></script>
 </body>
 </html>
+
