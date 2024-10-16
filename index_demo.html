@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tutor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/8.4.0/mocha.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.6.3/dist/vuetify.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>  
+    <link rel="stylesheet" href="https://wbsckt3.github.io/mocha_test_cases_styles_2/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.6.3/dist/vuetify.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuex@3.6.2/dist/vuex.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/8.4.0/mocha.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.3.4/chai.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@4.0.0/build/cjs/index.min.js"></script>    	
+</head>
+<body>
+    <div id="editor-container">
+        <textarea id="code-editor"></textarea>
+	<img id="logo" src="logo_refactorii.png" alt="Refactorii AI Tutor">
+        <button id="run-button">Run</button>
+    </div>
+    <div id="app-container">
+        <div id="app">
+	    <h5><button id="ai-assistance">Get AI assistance</button> <span id="remaining-requests"></span> </h5>
+	    <h5 id="h5_title"></h5>
+	    <p id="challenge"></p>
+            <p id="modify-message"></p>
+	    <button id="send-response-button" onClick= "guardarResultados()">Send Response</button>
+        </div>
+    </div>
+    <div id="console-container"><div id="console"></div></div>
+    <div id="mocha-container"><div id="mocha"></div></div>
+    <script>mocha.setup('bdd');</script>
+
+    <!-- Modal -->
+    <div class="modal fade" id="errorMessageModal" tabindex="-1" role="dialog" aria-labelledby="errorMessageModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorMessageModalLabel">Concept</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="errorMessageModalBody"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+	const script1 = urlParams.get('script1');
+	const script2 = urlParams.get('script2');
+	const script3 = urlParams.get('script3');
+	function loadScript(scriptUrl) {
+	    return new Promise((resolve, reject) => {
+	        if (scriptUrl) {
+	            const scriptElement = document.createElement('script');
+	            scriptElement.src = scriptUrl;
+	            scriptElement.type = 'text/javascript';
+	            scriptElement.defer = true;
+	            scriptElement.onload = resolve;
+	            scriptElement.onerror = reject;
+	            document.body.appendChild(scriptElement);
+	        } else {
+	            reject('No se proporcionó un script en la URL');
+	        }
+	    });
+	}
+	loadScript(script1)
+	    .then(() => loadScript(script2))
+	    .then(() => loadScript(script3)) 
+	    .catch((error) => console.error('Error al cargar los scripts:', error));
+    </script>
+</body>
+</html>
