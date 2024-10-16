@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de emparejamiento - Conceptos avanzados de JavaScript y ECMAScript</title>
+    <link rel="stylesheet" href="matchup_styles.css">
+</head>
+<body>
+    <h1>Empareja el fragmento de código ECMAScript con su concepto avanzado</h1>
+    <div class="container">
+        <div class="codes">
+            <div id="code1" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>const proxy = new Proxy(target, handler);</code>
+            </div>
+            <div id="code2" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>Reflect.get(target, propertyKey, receiver);</code>
+            </div>
+            <div id="code3" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>Object.defineProperty(obj, 'prop', descriptor);</code>
+            </div>
+            <div id="code4" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>class MyComponent extends HTMLElement { }</code>
+            </div>
+            <div id="code5" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>import { reactive } from 'vue';</code>
+            </div>
+            <div id="code6" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>async function fetchData() { const result = await fetch(url); }</code>
+            </div>
+            <div id="code7" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>const generator = function* () { yield 1; yield 2; }</code>
+            </div>
+            <div id="code8" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>const observable = new WeakMap();</code>
+            </div>
+            <div id="code9" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>const privateField = Symbol();</code>
+            </div>
+            <div id="code10" class="code-snippet" draggable="true" ondragstart="drag(event)">
+                <code>const state = Object.freeze({ value: 0 });</code>
+            </div>
+        </div>
+
+        <div class="concepts">
+            <!-- Desordenamos las explicaciones para evitar un patrón predecible -->
+            <div id="concept1" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Proxy: Permite interceptar y redefinir operaciones fundamentales en objetos. Vue lo utiliza para reactividad.
+            </div>
+            <div id="concept2" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Reflect API: Facilita la interacción con objetos mediante metaprogramación. Vue usa Reflect para realizar operaciones seguras en Proxies.
+            </div>
+            <div id="concept3" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Definición de propiedades: Controla el acceso y la modificación de propiedades en un objeto. Vue define propiedades reactivas usando esta técnica.
+            </div>
+            <div id="concept4" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Web Components: Clase nativa de JavaScript para crear elementos personalizados. Vue puede integrar Web Components.
+            </div>
+            <div id="concept5" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Reactividad: Hace que los objetos sean reactivos, permitiendo que Vue detecte cambios y actualice la vista automáticamente.
+            </div>
+            <div id="concept6" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Promesas y async/await: Permiten manejar operaciones asíncronas de forma más legible. Vue utiliza estas estructuras para cargar datos dinámicamente.
+            </div>
+            <div id="concept7" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Generadores: Permiten pausar y reanudar funciones. Vue podría usar generadores en el control del flujo de datos.
+            </div>
+            <div id="concept8" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                WeakMap: Estructura de datos usada para almacenar objetos sin evitar que sean recogidos por el garbage collector. Vue usa WeakMaps para el manejo interno de reactividad.
+            </div>
+            <div id="concept9" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Symbol: Un identificador único y privado, usado en Vue para proteger ciertas propiedades internas.
+            </div>
+            <div id="concept10" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)">
+                Object.freeze: Inmuniza objetos ante cambios, útil para mantener el estado inmutable en Vuex.
+            </div>
+        </div>
+    </div>
+
+    <button onclick="checkAnswers()">Enviar respuestas</button>
+
+    <script src="matchup_script.js"></script>
+</body>
+</html>
