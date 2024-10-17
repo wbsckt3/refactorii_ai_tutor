@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+/*document.addEventListener("DOMContentLoaded", function () {
     // Función para cargar dinámicamente los códigos y conceptos desde JSON
     function cargarContenido() {
         fetch('contenido.json')
@@ -83,4 +83,114 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Llamar a la función para cargar el contenido al cargar la página
     cargarContenido();
+}); */
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Función para cargar dinámicamente los códigos y conceptos desde JSON
+    function cargarContenido(reto) {
+        fetch('contenido.json')
+            .then(response => response.json())
+            .then(data => {
+                let content;
+                if (reto === 1) {
+                    content = data.codesReto1;
+                } else if (reto === 2) {
+                    content = data.codesReto2;
+                }
+
+                // Limpiar el contenedor de códigos y conceptos anteriores
+                const codesContainer = document.querySelector('.codes');
+                const conceptsContainer = document.querySelector('.concepts');
+                codesContainer.innerHTML = '';
+                conceptsContainer.innerHTML = '';
+
+                // Cargar los snippets de código
+                content.codes.forEach(item => {
+                    const codeDiv = document.createElement('div');
+                    codeDiv.id = item.id;
+                    codeDiv.className = 'code-snippet';
+                    codeDiv.innerHTML = `<code>${item.code}</code>`;
+                    codesContainer.appendChild(codeDiv);
+                });
+
+                // Cargar los conceptos
+                content.concepts.forEach(item => {
+                    const conceptDiv = document.createElement('div');
+                    conceptDiv.id = item.id;
+                    conceptDiv.className = 'droppable';
+                    conceptDiv.textContent = item.description;
+                    conceptsContainer.appendChild(conceptDiv);
+                });
+
+                // Configurar Sortable después de cargar el contenido
+                iniciarSortable();
+            })
+            .catch(error => console.error('Error cargando el contenido:', error));
+    }
+
+    // Función para inicializar Sortable después de cargar el contenido dinámicamente
+    function iniciarSortable() {
+        const codesContainer = document.querySelector('.codes');
+
+        // Crear Sortable para los bloques de código
+        Sortable.create(codesContainer, {
+            group: 'shared',
+            animation: 150
+        });
+
+        // Crear Sortable para las descripciones de conceptos
+        document.querySelectorAll('.droppable').forEach(function (concept) {
+            Sortable.create(concept, {
+                group: 'shared',
+                animation: 150,
+                ghostClass: 'sortable-ghost'
+            });
+        });
+    }
+
+    // Función para verificar si todas las respuestas fueron completadas
+    function verificarCompletado() {
+        const droppables = document.querySelectorAll('.droppable');
+        let completado = true;
+
+        droppables.forEach(droppable => {
+            if (!droppable.querySelector('.code-snippet')) {
+                completado = false;
+            }
+        });
+
+        if (completado) {
+            mostrarBotonSegundoReto();
+        }
+    }
+
+    // Función para mostrar el botón del segundo reto
+    function mostrarBotonSegundoReto() {
+        const container = document.querySelector('.container');
+        const botonSegundoReto = document.createElement('button');
+        botonSegundoReto.textContent = 'Reto 2: Empareja el valor Falsy con su explicación';
+        botonSegundoReto.className = 'boton-reto';
+
+        botonSegundoReto.addEventListener('click', function () {
+            mostrarSegundoReto();
+        });
+
+        container.appendChild(botonSegundoReto);
+    }
+
+    // Función para mostrar el segundo reto
+    function mostrarSegundoReto() {
+        // Cambia el título
+        document.querySelector('h1').textContent = 'Empareja el valor Falsy con su explicación';
+
+        // Cargar el contenido del segundo reto
+        cargarContenido(2);
+    }
+
+    // Agregar evento para verificar cuando se completan todos los elementos
+    document.addEventListener('dragend', verificarCompletado);
+
+    // Cargar el primer reto al cargar la página
+    cargarContenido(1);
 });
+
