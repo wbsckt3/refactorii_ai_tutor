@@ -81,7 +81,7 @@
     ]
   },
   "codesReto4": {
-    "title": "VUE Basic Concepts",
+    "title": "VUE conceptos básicos",
     "codes": [
       { "id": "code1", "code": "{{ message }}" },
       { "id": "code2", "code": "v-if=\"condition\"" },
@@ -105,6 +105,33 @@
       { "id": "concept8", "description": "Props: Se usa para pasar datos desde un componente padre a un hijo." },
       { "id": "concept9", "description": "Propiedades computadas: Propiedades que se recalculan solo cuando cambian sus dependencias." },
       { "id": "concept10", "description": "Watcher: Observa cambios en una propiedad o dato específico y ejecuta código cuando cambia." }
+    ]
+  },
+  "codesReto5": {
+    "titulo": "VUE conceptos intermedios",
+    "codes": [
+      { "id": "code1", "code": "v-slot:header" },
+      { "id": "code2", "code": "v-once" },
+      { "id": "code3", "code": "v-cloak" },
+      { "id": "code4", "code": "$refs.input.focus()" },
+      { "id": "code5", "code": "v-model.lazy=\"inputValue\"" },
+      { "id": "code6", "code": "v-bind=\"$attrs\"" },
+      { "id": "code7", "code": "v-on=\"listeners\"" },
+      { "id": "code8", "code": "provide() { return { dataKey: this.dataValue } }" },
+      { "id": "code9", "code": "inject: ['dataKey']" },
+      { "id": "code10", "code": "is=\"componentName\"" }
+    ],
+    "concepts": [
+      { "id": "concept1", "description": "Slots: Permite pasar contenido dinámico a una plantilla desde el componente padre." },
+      { "id": "concept2", "description": "Directiva: Renderiza el contenido solo una vez y lo almacena en caché." },
+      { "id": "concept3", "description": "Directiva: Evita que el parpadeo inicial del contenido sea visible hasta que Vue esté completamente cargado." },
+      { "id": "concept4", "description": "Refs: Permite acceder a elementos o componentes del DOM directamente desde el código JavaScript." },
+      { "id": "concept5", "description": "Modificador de v-model: Actualiza el valor del input solo cuando el usuario termina de escribir y pierde el foco." },
+      { "id": "concept6", "description": "$attrs: Permite pasar atributos no declarados explícitamente en un componente hijo a un elemento del DOM." },
+      { "id": "concept7", "description": "$listeners: Permite pasar eventos desde el componente padre al componente hijo sin declararlos explícitamente." },
+      { "id": "concept8", "description": "Provide: Hace que un valor esté disponible para todos los componentes hijos sin necesidad de pasar props." },
+      { "id": "concept9", "description": "Inject: Recibe valores proporcionados por un componente ancestro a través de `provide`." },
+      { "id": "concept10", "description": "is: Permite renderizar dinámicamente un componente basado en su nombre." }
     ]
   }
 }
