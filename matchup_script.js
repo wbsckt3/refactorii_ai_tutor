@@ -156,10 +156,15 @@ document.addEventListener("DOMContentLoaded", function () {
         botonSiguienteReto.textContent = `Siguiente reto >`;
         botonSiguienteReto.className = 'boton-reto';
     
-        // Funcionalidad del botón de siguiente reto
-        botonSiguienteReto.addEventListener('click', function () {
-            cargarContenido(++retoActual);
-        });
+        // Deshabilitar el botón en el primer reto si no hay más retos
+        if (retoActual === 1) {
+            botonSiguienteReto.disabled = true;  // Deshabilitar el botón en el primer reto
+        } else {
+            // Funcionalidad del botón de siguiente reto si no es el primer reto
+            botonSiguienteReto.addEventListener('click', function () {
+                cargarContenido(++retoActual);
+            });
+        }
     
         // Añadir el botón de "Siguiente reto" al contenedor, después del botón "Enviar respuestas"
         container.appendChild(botonSiguienteReto);
