@@ -20,21 +20,23 @@
     </div>
     <p id="visit-count">Cargando contador...</p>
     <script>
-        fetch('http://www.refactorii.com/increment-visit', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.message);
-            // Mostrar el número total de visitas
-            document.getElementById('visit-count').innerText = `Total de visitas: ${data.visitCount}`;
-        })
-        .catch(error => {
-            console.error('Error al incrementar visita:', error);
-        });
+         window.onload = function() {
+            fetch('http://www.refactorii.com/increment-visit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message);
+                // Mostrar el número total de visitas
+                document.getElementById('visit-count').innerText = `Total de visitas: ${data.visitCount}`;
+            })
+            .catch(error => {
+                console.error('Error al incrementar visita:', error);
+            });
+        }
 
         fetch('http://www.refactorii.com/get-visit-count')
             .then(response => response.json())
