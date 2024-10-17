@@ -153,15 +153,16 @@ document.addEventListener("DOMContentLoaded", function () {
     function verificarCompletado() {
         const droppables = document.querySelectorAll('.droppable');
         let completado = true;
-
+    
         droppables.forEach(droppable => {
             if (!droppable.querySelector('.code-snippet')) {
                 completado = false;
             }
         });
-
+    
         if (completado) {
             mostrarBotonSiguienteReto();
+            checkAnswers(); // Llama a checkAnswers después de completar
         }
     }
 
@@ -181,8 +182,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let retoActual = 1;
 
-    // Función para verificar las respuestas
-    function checkAnswers() {
+    // Agregar evento para verificar cuando se completan todos los elementos
+    document.addEventListener('dragend', verificarCompletado);
+
+    // Cargar el primer reto al cargar la página
+    cargarContenido(retoActual);
+});
+
+ // Función para verificar las respuestas
+   window.checkAnswers = function() {
         const correctAnswers = {
             concept1: "code1",  // Método de array
             concept2: "code2",  // Declaración de variable
@@ -208,11 +216,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
         alert(`Tu puntuación es: ${score} de ${Object.keys(correctAnswers).length}`);
     }
-
-    // Agregar evento para verificar cuando se completan todos los elementos
-    document.addEventListener('dragend', verificarCompletado);
-
-    // Cargar el primer reto al cargar la página
-    cargarContenido(retoActual);
-});
 
