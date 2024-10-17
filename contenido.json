@@ -52,5 +52,32 @@
       { "id": "concept9", "description": "Se utiliza para convertir valores en verdaderos o falsos explícitamente." },
       { "id": "concept10", "description": "Convierte cualquier valor en su equivalente booleano utilizando doble negación." }
     ]
+  },
+  "codesReto3": {
+    "title": "Metaprogramación y Reactividad en JavaScript para VUE",
+    "codes": [
+      { "id": "code1", "code": "const proxy = new Proxy(target, handler);" },
+      { "id": "code2", "code": "Reflect.get(target, propertyKey, receiver);" },
+      { "id": "code3", "code": "Object.defineProperty(obj, 'prop', descriptor);" },
+      { "id": "code4", "code": "class MyComponent extends HTMLElement { }" },
+      { "id": "code5", "code": "import { reactive } from 'vue';" },
+      { "id": "code6", "code": "async function fetchData() { const result = await fetch(url); }" },
+      { "id": "code7", "code": "const generator = function* () { yield 1; yield 2; }" },
+      { "id": "code8", "code": "const observable = new WeakMap();" },
+      { "id": "code9", "code": "const privateField = Symbol();" },
+      { "id": "code10", "code": "const state = Object.freeze({ value: 0 });" }
+    ],
+    "concepts": [
+      { "id": "concept1", "description": "Proxy: Permite interceptar y redefinir operaciones fundamentales en objetos. Vue lo utiliza para reactividad." },
+      { "id": "concept2", "description": "Reflect API: Facilita la interacción con objetos mediante metaprogramación. Vue usa Reflect para realizar operaciones seguras en Proxies." },
+      { "id": "concept3", "description": "Definición de propiedades: Controla el acceso y la modificación de propiedades en un objeto. Vue define propiedades reactivas usando esta técnica." },
+      { "id": "concept4", "description": "Web Components: Clase nativa de JavaScript para crear elementos personalizados. Vue puede integrar Web Components." },
+      { "id": "concept5", "description": "Reactividad: Hace que los objetos sean reactivos, permitiendo que Vue detecte cambios y actualice la vista automáticamente." },
+      { "id": "concept6", "description": "Promesas y async/await: Permiten manejar operaciones asíncronas de forma más legible. Vue utiliza estas estructuras para cargar datos dinámicamente." },
+      { "id": "concept7", "description": "Generadores: Permiten pausar y reanudar funciones. Vue podría usar generadores en el control del flujo de datos." },
+      { "id": "concept8", "description": "WeakMap: Estructura de datos usada para almacenar objetos sin evitar que sean recogidos por el garbage collector. Vue usa WeakMaps para el manejo interno de reactividad." },
+      { "id": "concept9", "description": "Symbol: Un identificador único y privado, usado en Vue para proteger ciertas propiedades internas." },
+      { "id": "concept10", "description": "Object.freeze: Inmuniza objetos ante cambios, útil para mantener el estado inmutable en Vuex." }
+    ]
   }
 }
