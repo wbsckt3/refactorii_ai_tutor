@@ -92,3 +92,38 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector('button').addEventListener('click', checkAnswers);
 });
 
+// Función para cargar dinámicamente los códigos y conceptos desde JSON
+function cargarContenido() {
+    fetch('contenido.json')
+        .then(response => response.json())
+        .then(data => {
+            // Cargar los snippets de código
+            const codesContainer = document.querySelector('.codes');
+            data.codes.forEach(item => {
+                const codeDiv = document.createElement('div');
+                codeDiv.id = item.id;
+                codeDiv.className = 'code-snippet';
+                codeDiv.draggable = true;
+                codeDiv.ondragstart = drag; // asignamos el evento drag
+                codeDiv.innerHTML = `<code>${item.code}</code>`;
+                codesContainer.appendChild(codeDiv);
+            });
+
+            // Cargar los conceptos
+            const conceptsContainer = document.querySelector('.concepts');
+            data.concepts.forEach(item => {
+                const conceptDiv = document.createElement('div');
+                conceptDiv.id = item.id;
+                conceptDiv.className = 'droppable';
+                conceptDiv.ondrop = drop; // asignamos el evento drop
+                conceptDiv.ondragover = allowDrop; // asignamos el evento allowDrop
+                conceptDiv.textContent = item.description;
+                conceptsContainer.appendChild(conceptDiv);
+            });
+        })
+        .catch(error => console.error('Error cargando el contenido:', error));
+}
+
+// Llamar a la función para cargar el contenido al cargar la página
+window.onload = cargarContenido;
+
