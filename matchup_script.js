@@ -195,29 +195,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
  // Función para verificar las respuestas
    window.checkAnswers = function() {
-        const correctAnswers = {
-            concept1: "code1",  // Método de array
-            concept2: "code2",  // Declaración de variable
-            concept3: "code3",  // Método Math
-            concept4: "code4",  // Declaración de función
-            concept5: "code5",  // Interacción con el DOM
-            concept6: "code6",  // Función flecha
-            concept7: "code7",  // Objeto Date
-            concept8: "code8",  // Conversión de tipo
-            concept9: "code9",  // API de almacenamiento local
-            concept10: "code10" // Salida en consola
-        };
+            // Ajustar las respuestas correctas según el segundo reto (7 ítems)
+    const correctAnswers = {
+        concept1: "code1",  // Valor 1
+        concept2: "code2",  // Valor 2
+        concept3: "code3",  // Valor 3
+        concept4: "code4",  // Valor 4
+        concept5: "code5",  // Valor 5
+        concept6: "code6",  // Valor 6
+        concept7: "code7"   // Valor 7
+    };
 
-        let score = 0;
+    let score = 0;
+    let totalConcepts = Object.keys(correctAnswers).length;
 
-        for (let concept in correctAnswers) {
-            const conceptDiv = document.getElementById(concept);
-            const codeSnippet = conceptDiv.querySelector('.code-snippet');
-            if (codeSnippet && codeSnippet.id === correctAnswers[concept]) {
-                score++;
-            }
+    for (let concept in correctAnswers) {
+        const conceptDiv = document.getElementById(concept);
+
+        // Verificar si el conceptDiv existe
+        if (!conceptDiv) {
+            console.error(`No se encontró el elemento con ID ${concept}`);
+            continue;  // Saltar este concepto si no se encuentra
         }
 
-        alert(`Tu puntuación es: ${score} de ${Object.keys(correctAnswers).length}`);
+        const codeSnippet = conceptDiv.querySelector('.code-snippet');
+        
+        // Verificar si el codeSnippet existe y su ID es correcto
+        if (codeSnippet && codeSnippet.id === correctAnswers[concept]) {
+            score++;
+        }
     }
 
+    alert(`Tu puntuación es: ${score} de ${totalConcepts}`);
+}
