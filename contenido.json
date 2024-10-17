@@ -35,7 +35,10 @@
       { "id": "code4", "code": "0" },
       { "id": "code5", "code": "\"\" (cadena vacía)" },
       { "id": "code6", "code": "false" },
-      { "id": "code7", "code": "-0" }
+      { "id": "code7", "code": "-0" },
+      { "id": "code8", "code": "true" },
+      { "id": "code9", "code": "Boolean()" },
+      { "id": "code10", "code": "!!(valor)" }
     ],
     "concepts": [
       { "id": "concept1", "description": "Representa la ausencia intencionada de cualquier valor." },
@@ -44,7 +47,10 @@
       { "id": "concept4", "description": "Utilizado en comparaciones numéricas." },
       { "id": "concept5", "description": "Esta cadena no contiene caracteres." },
       { "id": "concept6", "description": "Representa una falsedad explícita en una condición lógica." },
-      { "id": "concept7", "description": "Igual que su contraparte positiva, pero también se considera \"falsy\"." }
+      { "id": "concept7", "description": "Igual que su contraparte positiva, pero también se considera \"falsy\"." },
+      { "id": "concept8", "description": "Este valor lógico representa una verdad." },
+      { "id": "concept9", "description": "Se utiliza para convertir valores en verdaderos o falsos explícitamente." },
+      { "id": "concept10", "description": "Convierte cualquier valor en su equivalente booleano utilizando doble negación." }
     ]
   }
 }
