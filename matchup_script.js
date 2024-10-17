@@ -170,17 +170,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Función para mostrar el botón del siguiente reto
+    // Función para mostrar el botón del siguiente reto al lado del botón "Enviar respuestas"
     function mostrarBotonSiguienteReto() {
-        const container = document.querySelector('.container');
+        const container = document.querySelector('.buttons-container');
+        
+        // Crear el nuevo botón para el siguiente reto
         const botonSiguienteReto = document.createElement('button');
         botonSiguienteReto.textContent = `Reto ${retoActual + 1}: Empareja los conceptos`;
         botonSiguienteReto.className = 'boton-reto';
-
+    
+        // Funcionalidad del botón (aumenta el reto y recarga el contenido)
         botonSiguienteReto.addEventListener('click', function () {
             cargarContenido(++retoActual);
         });
-
+    
+        // Añadir el botón al contenedor
         container.appendChild(botonSiguienteReto);
     }
 
