@@ -21,7 +21,7 @@
     <p id="visit-count">Cargando contador...</p>
     <script>
          window.onload = function() {
-            fetch('http://www.refactorii.com/increment-visit', {
+            fetch('https://www.refactorii.com/increment-visit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -37,7 +37,7 @@
                 console.error('Error al incrementar visita:', error);
             });
 
-        fetch('http://www.refactorii.com/get-visit-count')
+        fetch('https://www.refactorii.com/get-visit-count')
             .then(response => response.json())
             .then(data => {
                 document.getElementById('visit-count').innerText = `Total de visitas: ${data.visitCount}`;
