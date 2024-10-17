@@ -91,11 +91,12 @@ document.addEventListener("DOMContentLoaded", function () {
         fetch('contenido.json')
             .then(response => response.json())
             .then(data => {
-                let content;
-                if (reto === 1) {
-                    content = data.codesReto1;
-                } else if (reto === 2) {
-                    content = data.codesReto2;
+                const retoKey = `codesReto${reto}`;
+                const content = data[retoKey];
+
+                if (!content) {
+                    console.error(`Reto ${reto} no encontrado en el JSON`);
+                    return;
                 }
 
                 // Limpiar el contenedor de códigos y conceptos anteriores
@@ -160,37 +161,30 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (completado) {
-            mostrarBotonSegundoReto();
+            mostrarBotonSiguienteReto();
         }
     }
 
-    // Función para mostrar el botón del segundo reto
-    function mostrarBotonSegundoReto() {
+    // Función para mostrar el botón del siguiente reto
+    function mostrarBotonSiguienteReto() {
         const container = document.querySelector('.container');
-        const botonSegundoReto = document.createElement('button');
-        botonSegundoReto.textContent = 'Reto 2: Empareja el valor Falsy con su explicación';
-        botonSegundoReto.className = 'boton-reto';
+        const botonSiguienteReto = document.createElement('button');
+        botonSiguienteReto.textContent = `Reto ${retoActual + 1}: Empareja los conceptos`;
+        botonSiguienteReto.className = 'boton-reto';
 
-        botonSegundoReto.addEventListener('click', function () {
-            mostrarSegundoReto();
+        botonSiguienteReto.addEventListener('click', function () {
+            cargarContenido(++retoActual);
         });
 
-        container.appendChild(botonSegundoReto);
+        container.appendChild(botonSiguienteReto);
     }
 
-    // Función para mostrar el segundo reto
-    function mostrarSegundoReto() {
-        // Cambia el título
-        document.querySelector('h1').textContent = 'Empareja el valor Falsy con su explicación';
-
-        // Cargar el contenido del segundo reto
-        cargarContenido(2);
-    }
+    let retoActual = 1;
 
     // Agregar evento para verificar cuando se completan todos los elementos
     document.addEventListener('dragend', verificarCompletado);
 
     // Cargar el primer reto al cargar la página
-    cargarContenido(1);
+    cargarContenido(retoActual);
 });
 
