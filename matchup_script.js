@@ -181,6 +181,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let retoActual = 1;
 
+    // Función para verificar las respuestas
+    function checkAnswers() {
+        const correctAnswers = {
+            concept1: "code1",  // Método de array
+            concept2: "code2",  // Declaración de variable
+            concept3: "code3",  // Método Math
+            concept4: "code4",  // Declaración de función
+            concept5: "code5",  // Interacción con el DOM
+            concept6: "code6",  // Función flecha
+            concept7: "code7",  // Objeto Date
+            concept8: "code8",  // Conversión de tipo
+            concept9: "code9",  // API de almacenamiento local
+            concept10: "code10" // Salida en consola
+        };
+
+        let score = 0;
+
+        for (let concept in correctAnswers) {
+            const conceptDiv = document.getElementById(concept);
+            const codeSnippet = conceptDiv.querySelector('.code-snippet');
+            if (codeSnippet && codeSnippet.id === correctAnswers[concept]) {
+                score++;
+            }
+        }
+
+        alert(`Tu puntuación es: ${score} de ${Object.keys(correctAnswers).length}`);
+    }
+
     // Agregar evento para verificar cuando se completan todos los elementos
     document.addEventListener('dragend', verificarCompletado);
 
