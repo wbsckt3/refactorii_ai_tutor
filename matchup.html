@@ -6,6 +6,7 @@
     <title>Juego de emparejamiento - Conceptos de JavaScript</title>
     <link rel="stylesheet" href="matchup_styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js" integrity="sha384-FDWgxFNhzGmrKnzTOoKdcceDF9DK1Q+28qFbsmMbE4Vt+bpTTEZRkz7/tmsD4TOo" crossorigin="anonymous"></script>
 </head>
 <body>
     Refactorii AI Tutor | <h1>Arrastra el código a la tarjeta con el concepto que haga match</h1>
@@ -16,6 +17,15 @@
        <div class="codes"></div>
        <div class="concepts"></div>
     </div>
+    <p id="message"></p>
+    <p id="visit-count"></p>
+    <script>
+        const socket = io();
+        socket.on('userConnected', (data) => {
+            document.getElementById('message').innerText = data.message;
+            document.getElementById('visit-count').innerText = Total de visitas: ${data.totalVisits};
+        });
+    </script>
     <script src="matchup_script.js"></script>
 </body>
 </html>
