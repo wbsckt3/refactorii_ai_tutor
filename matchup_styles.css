@@ -100,7 +100,6 @@ button:hover {
   display: flex;
   justify-content: flex-start;
   gap: -6px;
-  width: 70%;
   margin-left: 33px;
 }
 
