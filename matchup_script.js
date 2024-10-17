@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (retoActual > 0) {
             const botonRetoAnterior = document.createElement('button');
             const tituloAnterior = `Reto ${retoActual}: ${tituloActual}`; // Título del reto anterior
-            botonRetoAnterior.textContent = `Reto anterior: ${tituloAnterior}`;
+            botonRetoAnterior.textContent = `< Reto anterior`;
             botonRetoAnterior.className = 'boton-reto-anterior';
     
             // Funcionalidad del botón de reto anterior
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Crear el botón para el siguiente reto
         const botonSiguienteReto = document.createElement('button');
         const tituloSiguiente = `Reto ${retoActual + 1}: ${tituloActual}`; // Título del siguiente reto
-        botonSiguienteReto.textContent = `Siguiente reto: ${tituloSiguiente}`;
+        botonSiguienteReto.textContent = `Siguiente reto >`;
         botonSiguienteReto.className = 'boton-reto';
     
         // Funcionalidad del botón de siguiente reto
