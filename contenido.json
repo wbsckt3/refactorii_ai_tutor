@@ -94,17 +94,17 @@
       { "id": "code9", "code": "computed: { fullName() { return this.firstName + ' ' + this.lastName } }" },
       { "id": "code10", "code": "watch: { items(newVal, oldVal) { // código } }" }
     ],
-    "concepts": [
-      { "id": "concept1", "description": "Interpolation: Used to display dynamic data in the HTML." },
-      { "id": "concept2", "description": "Directive: Shows or hides elements based on a boolean condition." },
-      { "id": "concept3", "description": "Directive: Dynamically binds attributes or properties of a component to a JavaScript expression." },
-      { "id": "concept4", "description": "Directive: Loops over a list of items and requires a unique value (key)." },
-      { "id": "concept5", "description": "Directive: Establishes two-way binding between an input value and the component's state." },
-      { "id": "concept6", "description": "Lifecycle hook: Executes after the component has been mounted to the DOM." },
-      { "id": "concept7", "description": "Event emission: Allows sending custom events from a child component to its parent." },
-      { "id": "concept8", "description": "Props: Used to pass data from a parent component to a child." },
-      { "id": "concept9", "description": "Computed properties: Properties that are recalculated only when their dependencies change." },
-      { "id": "concept10", "description": "Watcher: Observes changes in a specific property or data and executes code when it changes." }
+   "concepts": [
+      { "id": "concept1", "description": "Interpolación: Se usa para mostrar datos dinámicos en el HTML." },
+      { "id": "concept2", "description": "Directiva: Muestra o esconde elementos en función de una condición booleana." },
+      { "id": "concept3", "description": "Directiva: Une dinámicamente atributos o propiedades de un componente a una expresión en JavaScript." },
+      { "id": "concept4", "description": "Directiva: Repite un bloque de código por cada elemento de una lista y requiere un valor único (key)." },
+      { "id": "concept5", "description": "Directiva: Establece una vinculación bidireccional entre el valor de un input y el estado del componente." },
+      { "id": "concept6", "description": "Hook del ciclo de vida: Se ejecuta después de que el componente se ha montado en el DOM." },
+      { "id": "concept7", "description": "Emisión de eventos: Permite enviar eventos personalizados desde un componente hijo a su padre." },
+      { "id": "concept8", "description": "Props: Se usa para pasar datos desde un componente padre a un hijo." },
+      { "id": "concept9", "description": "Propiedades computadas: Propiedades que se recalculan solo cuando cambian sus dependencias." },
+      { "id": "concept10", "description": "Watcher: Observa cambios en una propiedad o dato específico y ejecuta código cuando cambia." }
     ]
   }
 }
