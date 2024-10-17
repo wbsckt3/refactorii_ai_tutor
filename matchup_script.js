@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const tituloActual = document.querySelector('h1').textContent;
     
         // Botón de "Reto anterior" (si no estamos en el primer reto)
-        if (retoActual > 0) {
+        /*if (retoActual > 0) {
             const botonRetoAnterior = document.createElement('button');
             const tituloAnterior = `Reto ${retoActual}: ${tituloActual}`; // Título del reto anterior
             botonRetoAnterior.textContent = `< Reto anterior`;
@@ -123,7 +123,48 @@ document.addEventListener("DOMContentLoaded", function () {
     
         // Añadir el botón de "Siguiente reto" al contenedor
         container.appendChild(botonSiguienteReto);
+    }*/
+
+    // Función para mostrar los botones de "Reto anterior" y "Siguiente reto"
+    function mostrarBotonesNavegacion() {
+        const container = document.querySelector('.buttons-container');
+        
+        // Verificar si ya existen botones y eliminarlos
+        const botonesExistentes = document.querySelectorAll('.boton-reto, .boton-reto-anterior');
+        botonesExistentes.forEach(boton => boton.remove());
+    
+        // Obtener el texto del h1 actual para los botones
+        const tituloActual = document.querySelector('h1').textContent;
+    
+        // Botón de "Reto anterior" (si no estamos en el primer reto)
+        if (retoActual > 0) {
+            const botonRetoAnterior = document.createElement('button');
+            botonRetoAnterior.textContent = `< Reto anterior`;
+            botonRetoAnterior.className = 'boton-reto-anterior';
+    
+            // Funcionalidad del botón de reto anterior
+            botonRetoAnterior.addEventListener('click', function () {
+                cargarContenido(--retoActual);
+            });
+    
+            // Añadir el botón de "Reto anterior" al contenedor, antes del botón "Enviar respuestas"
+            container.insertBefore(botonRetoAnterior, container.firstChild);
+        }
+    
+        // Crear el botón para el siguiente reto
+        const botonSiguienteReto = document.createElement('button');
+        botonSiguienteReto.textContent = `Siguiente reto >`;
+        botonSiguienteReto.className = 'boton-reto';
+    
+        // Funcionalidad del botón de siguiente reto
+        botonSiguienteReto.addEventListener('click', function () {
+            cargarContenido(++retoActual);
+        });
+    
+        // Añadir el botón de "Siguiente reto" al contenedor, después del botón "Enviar respuestas"
+        container.appendChild(botonSiguienteReto);
     }
+        
     let retoActual = 1;
 
     // Agregar evento para verificar cuando se completan todos los elementos
