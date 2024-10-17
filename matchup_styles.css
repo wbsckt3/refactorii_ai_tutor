@@ -96,9 +96,11 @@ button:hover {
 }
 
 .buttons-container {
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px; /* Espacio entre los botones */
+  display: flex;
+  justify-content: flex-start;
+  gap: -6px;
+  width: 70%;
+  margin-left: 33px;
 }
 
 .boton-reto {
