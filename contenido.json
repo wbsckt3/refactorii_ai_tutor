@@ -22,5 +22,25 @@
     { "id": "concept8", "description": "Se emplea cuando se necesita transformar un valor de un tipo de dato a otro." },
     { "id": "concept9", "description": "Permite guardar datos en el navegador de manera persistente, accesible incluso después de recargar la página." },
     { "id": "concept10", "description": "Herramienta que ayuda a mostrar información durante el desarrollo para fines de depuración." }
-  ]
+  ],
+  "codesReto2": {
+    "codes": [
+      { "id": "code1", "code": "null" },
+      { "id": "code2", "code": "undefined" },
+      { "id": "code3", "code": "NaN" },
+      { "id": "code4", "code": "0" },
+      { "id": "code5", "code": "\"\" (cadena vacía)" },
+      { "id": "code6", "code": "false" },
+      { "id": "code7", "code": "-0" }
+    ],
+    "concepts": [
+      { "id": "concept1", "description": "Representa la ausencia intencionada de cualquier valor." },
+      { "id": "concept2", "description": "Indica la ausencia de valor o que algo no se ha definido." },
+      { "id": "concept3", "description": "Este valor indica que no se ha podido realizar una operación matemática válida." },
+      { "id": "concept4", "description": "Utilizado en comparaciones numéricas." },
+      { "id": "concept5", "description": "Esta cadena no contiene caracteres." },
+      { "id": "concept6", "description": "Representa una falsedad explícita en una condición lógica." },
+      { "id": "concept7", "description": "Igual que su contraparte positiva, pero también se considera \"falsy\"." }
+    ]
+  }
 }
