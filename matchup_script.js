@@ -83,47 +83,58 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Función para mostrar los botones de "Reto anterior" y "Siguiente reto"
-    function mostrarBotonesNavegacion() {
-        const container = document.querySelector('.buttons-container');
-        
-        // Verificar si ya existen botones y eliminarlos
-        const botonesExistentes = document.querySelectorAll('.boton-reto, .boton-reto-anterior');
-        botonesExistentes.forEach(boton => boton.remove());
-    
-        // Obtener el texto del h1 actual para los botones
-        const tituloActual = document.querySelector('h1').textContent;
-    
-        // Botón de "Reto anterior" (si no estamos en el primer reto)
-        if (retoActual > 0) {
-            const botonRetoAnterior = document.createElement('button');
-            const tituloAnterior = `Reto ${retoActual}: ${tituloActual}`; // Título del reto anterior
-            botonRetoAnterior.textContent = `Reto anterior: ${tituloAnterior}`;
-            botonRetoAnterior.className = 'boton-reto-anterior';
-    
-            // Funcionalidad del botón de reto anterior
-            botonRetoAnterior.addEventListener('click', function () {
-                cargarContenido(--retoActual);
-            });
-    
-            // Añadir el botón de "Reto anterior" al contenedor
-            container.appendChild(botonRetoAnterior);
-        }
-    
-        // Crear el botón para el siguiente reto
+    // Función para mostrar los botones de navegación de retos (anterior y siguiente)
+function mostrarBotonesNavegacion() {
+    const container = document.querySelector('.buttons-container');
+
+    // Obtener el título actual del h1 dinámicamente
+    const tituloActual = document.querySelector('h1').textContent;
+
+    // Limpiar los botones previos para evitar duplicados
+    container.innerHTML = '';
+
+    // Botón de reto anterior
+    if (retoActual > 0) {
+        const botonRetoAnterior = document.createElement('button');
+        const tituloAnterior = `Reto ${retoActual}: ${obtenerTituloReto(retoActual - 1)}`;
+        botonRetoAnterior.textContent = `Reto anterior: ${tituloAnterior}`;
+        botonRetoAnterior.className = 'boton-reto-anterior';
+
+        botonRetoAnterior.addEventListener('click', function () {
+            cargarContenido(--retoActual);
+        });
+
+        container.appendChild(botonRetoAnterior);
+    }
+
+    // Botón de siguiente reto
+    if (retoActual < maxRetos - 1) {
         const botonSiguienteReto = document.createElement('button');
-        const tituloSiguiente = `Reto ${retoActual + 1}: ${tituloActual}`; // Título del siguiente reto
+        const tituloSiguiente = `Reto ${retoActual + 1}: ${obtenerTituloReto(retoActual + 1)}`;
         botonSiguienteReto.textContent = `Siguiente reto: ${tituloSiguiente}`;
-        botonSiguienteReto.className = 'boton-reto';
-    
-        // Funcionalidad del botón de siguiente reto
+        botonSiguienteReto.className = 'boton-reto-siguiente';
+
         botonSiguienteReto.addEventListener('click', function () {
             cargarContenido(++retoActual);
         });
-    
-        // Añadir el botón de "Siguiente reto" al contenedor
+
         container.appendChild(botonSiguienteReto);
     }
+}
+
+// Función para obtener dinámicamente el título del reto
+function obtenerTituloReto(reto) {
+    // Aquí deberías tener un array o un objeto con los nombres de los retos
+    const titulosRetos = [
+        "Empareja los conceptos",
+        "Reto Intermedio",
+        "Reto Avanzado",
+        "Reto Experto",
+        "Reto Final"
+    ];
+
+    return titulosRetos[reto] || 'Reto';
+}
 
     let retoActual = 1;
 
