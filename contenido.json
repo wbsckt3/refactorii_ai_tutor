@@ -108,7 +108,7 @@
     ]
   },
   "codesReto5": {
-    "titulo": "VUE conceptos intermedios",
+    "title": "VUE conceptos intermedios",
     "codes": [
       { "id": "code1", "code": "v-slot:header" },
       { "id": "code2", "code": "v-once" },
