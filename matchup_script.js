@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     
         if (completado) {
-            mostrarBotonSiguienteReto();
+            mostrarBotonesNavegacion();
             checkAnswers(); // Llama a checkAnswers después de completar
         }
     }
