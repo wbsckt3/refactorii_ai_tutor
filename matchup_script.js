@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Añadir el botón de "Siguiente reto" al contenedor, después del botón "Enviar respuestas"
         container.appendChild(botonSiguienteReto);
     }
-        
+            
     let retoActual = 1;
 
     // Agregar evento para verificar cuando se completan todos los elementos
