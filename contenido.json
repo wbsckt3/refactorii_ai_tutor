@@ -1,5 +1,6 @@
 {
   "codesReto1": {
+    "title": "Conceptos básicos de Javascript",
     "codes": [
       { "id": "code1", "code": "Array.isArray([1, 2, 3])" },
       { "id": "code2", "code": "let nombre = \"Juan\";" },
@@ -26,6 +27,7 @@
     ]
   },
   "codesReto2": {
+    "title": "Falsy values en Javascript",
     "codes": [
       { "id": "code1", "code": "null" },
       { "id": "code2", "code": "undefined" },
