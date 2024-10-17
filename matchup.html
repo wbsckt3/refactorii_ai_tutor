@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 </head>
 <body>
-    <br/>&nbsp;&nbsp;<b>Refactorii AI Tutor | Retos consecutivos: 1. Conceptos básicos Javascript | 2. Valores Falsy Javascript | 3. Metaprogramación y Reactividad en JavaScript para VUE | 4. Conceptos Básicos VUE | 5. Conceptos intermedios VUE</b> 
+    <div style="padding: 20px"><b>Refactorii AI Tutor | Retos consecutivos: 1. Conceptos básicos Javascript | 2. Valores Falsy Javascript | 3. Metaprogramación y Reactividad en JavaScript para VUE | 4. Conceptos Básicos VUE | 5. Conceptos intermedios VUE</b> </div>
     <h1>Arrastra el código a la tarjeta con el concepto que haga match</h1>
     <div class="buttons-container">
         <button onclick="checkAnswers()">Enviar respuestas</button>
@@ -17,7 +17,7 @@
        <div class="codes"></div>
        <div class="concepts"></div>
     </div>
-    <p id="visit-count">Cargando contador...</p>
+    <p id="visit-count" style="margin-left: 41px;">Cargando contador...</p>
     <script>
          window.onload = function() {
             fetch('https://www.refactorii.com/increment-visit', {
