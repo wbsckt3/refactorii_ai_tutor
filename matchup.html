@@ -18,14 +18,32 @@
        <div class="codes"></div>
        <div class="concepts"></div>
     </div>
-    <p id="message"></p>
-    <p id="visit-count"></p>
+    <p id="visit-count">Cargando contador...</p>
     <script>
-        const socket = io('https://www.refactorii.com'); 
-        socket.on('userConnected', (data) => {
-            document.getElementById('message').innerText = data.message;
-            document.getElementById('visit-count').innerText = `Total de visitas: ${data.totalVisits}`;
+        fetch('http://www.refactorii.com/increment-visit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+            // Mostrar el número total de visitas
+            document.getElementById('visit-count').innerText = `Total de visitas: ${data.visitCount}`;
+        })
+        .catch(error => {
+            console.error('Error al incrementar visita:', error);
         });
+
+        fetch('http://www.refactorii.com/get-visit-count')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('visit-count').innerText = `Total de visitas: ${data.visitCount}`;
+            })
+            .catch(error => {
+                console.error('Error al obtener contador de visitas:', error);
+            });
     </script>
     <script src="matchup_script.js"></script>
 </body>
