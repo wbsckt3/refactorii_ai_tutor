@@ -21,10 +21,10 @@
     <p id="message"></p>
     <p id="visit-count"></p>
     <script>
-        const socket = io();
+        const socket = io('https://www.refactorii.com'); 
         socket.on('userConnected', (data) => {
             document.getElementById('message').innerText = data.message;
-            document.getElementById('visit-count').innerText = Total de visitas: ${data.totalVisits};
+            document.getElementById('visit-count').innerText = `Total de visitas: ${data.totalVisits}`;
         });
     </script>
     <script src="matchup_script.js"></script>
