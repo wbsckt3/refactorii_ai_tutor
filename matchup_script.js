@@ -170,27 +170,45 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Función para mostrar el botón del siguiente reto al lado del botón "Enviar respuestas"
-    function mostrarBotonSiguienteReto() {
+    // Función para mostrar los botones de "Reto anterior" y "Siguiente reto"
+    function mostrarBotonesNavegacion() {
         const container = document.querySelector('.buttons-container');
         
-        // Verificar si ya existe un botón de siguiente reto y eliminarlo
-        const botonExistente = document.querySelector('.boton-reto');
-        if (botonExistente) {
-            botonExistente.remove(); // Eliminar el botón existente
+        // Verificar si ya existen botones y eliminarlos
+        const botonesExistentes = document.querySelectorAll('.boton-reto, .boton-reto-anterior');
+        botonesExistentes.forEach(boton => boton.remove());
+    
+        // Obtener el texto del h1 actual para los botones
+        const tituloActual = document.querySelector('h1').textContent;
+    
+        // Botón de "Reto anterior" (si no estamos en el primer reto)
+        if (retoActual > 0) {
+            const botonRetoAnterior = document.createElement('button');
+            const tituloAnterior = `Reto ${retoActual}: ${tituloActual}`; // Título del reto anterior
+            botonRetoAnterior.textContent = `Reto anterior: ${tituloAnterior}`;
+            botonRetoAnterior.className = 'boton-reto-anterior';
+    
+            // Funcionalidad del botón de reto anterior
+            botonRetoAnterior.addEventListener('click', function () {
+                cargarContenido(--retoActual);
+            });
+    
+            // Añadir el botón de "Reto anterior" al contenedor
+            container.appendChild(botonRetoAnterior);
         }
     
-        // Crear el nuevo botón para el siguiente reto
+        // Crear el botón para el siguiente reto
         const botonSiguienteReto = document.createElement('button');
-        botonSiguienteReto.textContent = `Reto ${retoActual + 1}: Empareja los conceptos`;
+        const tituloSiguiente = `Reto ${retoActual + 1}: ${tituloActual}`; // Título del siguiente reto
+        botonSiguienteReto.textContent = `Siguiente reto: ${tituloSiguiente}`;
         botonSiguienteReto.className = 'boton-reto';
-        
-        // Funcionalidad del botón (aumenta el reto y recarga el contenido)
+    
+        // Funcionalidad del botón de siguiente reto
         botonSiguienteReto.addEventListener('click', function () {
             cargarContenido(++retoActual);
         });
     
-        // Añadir el botón al contenedor
+        // Añadir el botón de "Siguiente reto" al contenedor
         container.appendChild(botonSiguienteReto);
     }
 
