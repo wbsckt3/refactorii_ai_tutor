@@ -203,7 +203,10 @@ document.addEventListener("DOMContentLoaded", function () {
         concept4: "code4",  // Valor 4
         concept5: "code5",  // Valor 5
         concept6: "code6",  // Valor 6
-        concept7: "code7"   // Valor 7
+        concept7: "code7",   // Valor 7
+        concept8: "code8",  // Conversión de tipo
+        concept9: "code9",  // API de almacenamiento local
+        concept10: "code10" // Salida en consola
     };
 
     let score = 0;
