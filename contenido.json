@@ -79,5 +79,32 @@
       { "id": "concept9", "description": "Symbol: Un identificador único y privado, usado en Vue para proteger ciertas propiedades internas." },
       { "id": "concept10", "description": "Object.freeze: Inmuniza objetos ante cambios, útil para mantener el estado inmutable en Vuex." }
     ]
+  },
+  "codesReto4": {
+    "title": "VUE Basic Concepts",
+    "codes": [
+      { "id": "code1", "code": "{{ message }}" },
+      { "id": "code2", "code": "v-if=\"condition\"" },
+      { "id": "code3", "code": "v-bind:src=\"imageUrl\"" },
+      { "id": "code4", "code": "v-for=\"item in items\" :key=\"item.id\"" },
+      { "id": "code5", "code": "v-model=\"inputValue\"" },
+      { "id": "code6", "code": "mounted() { // código }" },
+      { "id": "code7", "code": "this.$emit('eventName', data)" },
+      { "id": "code8", "code": "props: ['title', 'content']" },
+      { "id": "code9", "code": "computed: { fullName() { return this.firstName + ' ' + this.lastName } }" },
+      { "id": "code10", "code": "watch: { items(newVal, oldVal) { // código } }" }
+    ],
+    "concepts": [
+      { "id": "concept1", "description": "Interpolation: Used to display dynamic data in the HTML." },
+      { "id": "concept2", "description": "Directive: Shows or hides elements based on a boolean condition." },
+      { "id": "concept3", "description": "Directive: Dynamically binds attributes or properties of a component to a JavaScript expression." },
+      { "id": "concept4", "description": "Directive: Loops over a list of items and requires a unique value (key)." },
+      { "id": "concept5", "description": "Directive: Establishes two-way binding between an input value and the component's state." },
+      { "id": "concept6", "description": "Lifecycle hook: Executes after the component has been mounted to the DOM." },
+      { "id": "concept7", "description": "Event emission: Allows sending custom events from a child component to its parent." },
+      { "id": "concept8", "description": "Props: Used to pass data from a parent component to a child." },
+      { "id": "concept9", "description": "Computed properties: Properties that are recalculated only when their dependencies change." },
+      { "id": "concept10", "description": "Watcher: Observes changes in a specific property or data and executes code when it changes." }
+    ]
   }
 }
