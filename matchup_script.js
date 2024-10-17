@@ -174,11 +174,17 @@ document.addEventListener("DOMContentLoaded", function () {
     function mostrarBotonSiguienteReto() {
         const container = document.querySelector('.buttons-container');
         
+        // Verificar si ya existe un botón de siguiente reto y eliminarlo
+        const botonExistente = document.querySelector('.boton-reto');
+        if (botonExistente) {
+            botonExistente.remove(); // Eliminar el botón existente
+        }
+    
         // Crear el nuevo botón para el siguiente reto
         const botonSiguienteReto = document.createElement('button');
         botonSiguienteReto.textContent = `Reto ${retoActual + 1}: Empareja los conceptos`;
         botonSiguienteReto.className = 'boton-reto';
-    
+        
         // Funcionalidad del botón (aumenta el reto y recarga el contenido)
         botonSiguienteReto.addEventListener('click', function () {
             cargarContenido(++retoActual);
