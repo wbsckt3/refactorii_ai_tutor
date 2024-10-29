@@ -37,14 +37,7 @@
                 console.error('Error al incrementar visita:', error);
             });
 
-        fetch('https://www.refactorii.com/get-visit-count')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('visit-count').innerText = `Total de visitas: ${data.visitCount}`;
-            })
-            .catch(error => {
-                console.error('Error al obtener contador de visitas:', error);
-            });
+        
         }
     </script>
     <script src="matchup_script.js"></script>
