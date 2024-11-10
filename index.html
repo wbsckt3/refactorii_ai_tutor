@@ -86,28 +86,222 @@
 
 	    // Obtener el parámetro `token` de la URL
 const urlParams = new URLSearchParams(window.location.search);
-const script2 = urlParams.get('script2');
-const script3 = urlParams.get('script3');
+// Cargar data al HTML:
+// El código que deseas agregar al textarea
+const code = `const shape = {
+	  out1() {
+	    
+	  },
+	  out2() {
+	    
+	  },
+	  name: 'Refactorii',
+	  age: 21,
+};
+// Test cases:
+console.log(shape.out1());
+console.log(shape.out2());
+`;
+document.getElementById('code-editor').value = code;
+	
+// titulo del challenge:
+const title = `Exercise 1: Basic Syntax`;
+document.getElementById('h5_title').innerText = title;
+	
+// Texto a agregar al p challenge
+const paragraphText = `To refactor this code, you should modify the methods out1 and out2 to return the values of name and age, respectively. 
+This will allow us to retrieve and use these values when calling the methods.`;
+document.getElementById('challenge').innerText = paragraphText;
+	
+var modal_click_message = "To make the function correctly display 0,1,2 instead of 3,3,3, you can use let instead of var to declare the variable i...";
 
-function loadScript(scriptUrl) {
-    return new Promise((resolve, reject) => {
-        if (scriptUrl) {
-            const scriptElement = document.createElement('script');
-            scriptElement.src = scriptUrl;
-            scriptElement.type = 'text/javascript';
-            scriptElement.defer = true;
-            scriptElement.onload = resolve;
-            scriptElement.onerror = reject;
-            document.body.appendChild(scriptElement);
-        } else {
-            reject('No se proporcionó un script en la URL');
+var error_message = `In JavaScript, objects can have methods that access the properties of the same object using the this keyword. However, 
+	if the methods are not properly defined, they may not return any value or interact with the properties as intended.
+        In the given example, shape is an object with properties name and age, and methods out1 and out2. Currently, these methods only access the 
+	properties without returning any value, which makes them incomplete.
+	To refactor this code, we should modify the methods out1 and out2 to return the values of name and age, respectively. This will allow us to 
+        retrieve and use these values when calling the methods.`;       
+
+var success_message = `🎉 Congratulations! You've successfully completed the challenge! Your determination and skill have paid off. 
+        Keep up the great work and continue pushing your boundaries. Onward to new challenges! 🚀`
+
+	    function test_cases_scenario(){    
+        const editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
+            lineNumbers: true,
+            mode: 'javascript',
+            lineWrapping: true,
+	    theme: 'dracula', // Aplicar el tema oscuro
+            scrollbarStyle: 'null'
+        });
+        
+        // Función para mostrar el modal con el mensaje de error
+        document.getElementById('modify-message').addEventListener('click', function() {
+            $('#errorMessageModalBody').html(error_message); // Coloca el contenido del error en el cuerpo del modal
+            $('#errorMessageModal').modal('show'); // Muestra el modal
+        });
+
+        function logToConsole(message, color) {
+            const consoleElement = document.getElementById('console');
+            const messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            if (color) {
+                messageElement.style.color = color;
+                messageElement.style.fontWeight = 'bold';
+            }
+            consoleElement.appendChild(messageElement);
         }
-    });
-}
 
-loadScript(script2)
-    .then(() => loadScript(script3))
-    .catch((error) => console.error('Error al cargar los scripts:', error));
+        document.getElementById('run-button').addEventListener('click', function() {
+            // Clear previous results
+            document.getElementById('console').innerHTML = '';
+            document.getElementById('mocha').innerHTML = '';
+            mocha.suite.suites = []; // Clear previous test cases
+			
+            // Get the user's code from the editor
+            const userCode = editor.getValue();
+
+            // Redirect console.log to custom console
+			const output = [];
+			const originalConsoleLog = console.log;
+			logToConsole('Running tests....', '#67e810');
+			console.log = function(...args) {
+		                const message = args.join(' ');
+		                originalConsoleLog.apply(console, args); // Still log to the original console
+		                logToConsole(message);
+		        };
+
+			setTimeout(() => {
+
+            // Evaluate the user's code
+            try {
+                new Function(userCode)();
+
+                // Define test cases
+                const expect = chai.expect;
+
+// Tests suite 
+describe('JavaScript Code Tests', function() {
+
+  // Para quitar un extracto del contenido de la función shape
+  // y permitir que se ejecute en consola los test planteados
+  // y aparezca botón reintentar
+  let loggedValues;
+  let originalConsoleLog;
+  beforeEach(function() {
+    // Almacenar la función original de console.log y los valores registrados
+    loggedValues = [];
+    originalConsoleLog = console.log;
+    console.log = (...args) => {
+      loggedValues.push(args[0]); // Captura el valor registrado
+      originalConsoleLog.apply(console, args); // Llama al original console.log
+    };
+  });
+  afterEach(function() {
+    // Restaura console.log después de cada prueba
+    console.log = originalConsoleLog;
+  });
+			
+                    it('should execute without errors', function(done) {
+                        try {
+                            new Function(userCode)();
+                            done();
+                        } catch (e) {
+                            done(e);
+                        }
+                    });
+
+                    it('should log correct values', function(done) {
+					    const output = [];
+						const originalConsoleLog = console.log;
+						console.log = function(message) {
+							output.push(message);
+							originalConsoleLog.apply(console, arguments);
+						};
+						// Ensure output is clear before each run
+						output.length = 0;
+						// Execute user code
+						new Function(userCode)();
+						setTimeout(() => {
+						  try {
+							// Los logs se almacenan en la variable output durante las llamadas a out1() y out2()
+							expect(output[0]).to.equal('Refactorii'); // Verifica el primer log
+							expect(output[1]).to.equal(21); // Verifica el segundo log
+							done();
+						  } catch (err) {
+							done(err);
+						  }
+						}, 10); // Asegúrate de esperar lo suficiente para que se completen las operaciones
+					  });
+
+                    it('should identify falsy values', function() {
+                        expect(false).to.not.be.ok;
+                        expect(0).to.not.be.ok;
+                        expect('').to.not.be.ok;
+                        expect(null).to.not.be.ok;
+                        expect(undefined).to.not.be.ok;
+                        expect(NaN).to.not.be.ok;
+                    });
+
+                    it('should define variables correctly', function() {
+                        let testVar = 123;
+                        expect(testVar).to.equal(123);
+                    });
+
+                    it('should define and call functions correctly', function() {
+                        function testFunction() {
+                            return 'Hello, World!';
+                        }
+                        expect(testFunction()).to.equal('Hello, World!');
+                    });
+                });
+
+		// Variable para rastrear el estado de los tests
+                let allTestsPassed = true;	
+                // Run Mocha tests
+                mocha.run()
+                    .on('test', function(test) {
+                        logToConsole('• Running test: ' + test.title);
+                    })
+                    .on('test end', function(test) {
+                        logToConsole('• Test finished: ' + test.title);
+                    })
+                    .on('pass', function(test) {
+                        logToConsole('• Test passed: ' + test.title);
+                    })
+                    .on('fail', function(test, err) {
+						logToConsole('• Test failed: ' + test.title + ' - ' + err.message);
+						success_message = modal_click_message;
+						const runButton = document.getElementById('run-button');
+						runButton.innerText = 'Reintentar';
+						runButton.style.backgroundColor = '#ff0000ad';
+						runButton.onclick = function() {
+							window.location.reload();
+						};
+			                allTestsPassed = false; // Si cualquier test falla, actualizamos la variable	
+					})
+					.on('end', function() {
+						logToConsole('• All tests finished!');
+						document.getElementById('modify-message').innerText = success_message;
+						document.getElementById('modify-message').style.display = 'block';
+						document.getElementById('modify-message').style.color = 'black';
+						if (allTestsPassed) {
+					               const sendResponseButton = document.getElementById('send-response-button');
+					               sendResponseButton.classList.add('enabled');
+					        } 
+					});
+
+            } catch (e) {
+                console.error('Error evaluating user code:', e);
+                logToConsole('Error: ' + e.message, 'red');
+            } finally {
+                // Restore original console.log
+                console.log = originalConsoleLog;
+            }
+			
+			}, 3000); // 3 seconds delay
+			
+        });
+}
 	    
 const token = urlParams.get('token');
 if (token) {
