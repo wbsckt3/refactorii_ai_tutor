@@ -64,9 +64,13 @@
 	    const urlParams = new URLSearchParams(window.location.search);
 	    const token = urlParams.get('token');
 	    window.encryptedToken = token;
+	
+	    console.log("Token asignado a window.encryptedToken:", window.encryptedToken); // Verificación de asignación
+	
 	    const script1 = urlParams.get('script1');
 	    const script2 = urlParams.get('script2');
 	    const script3 = urlParams.get('script3');
+	
 	    function loadScript(scriptUrl) {
 	        return new Promise((resolve, reject) => {
 	            if (scriptUrl) {
@@ -82,11 +86,11 @@
 	            }
 	        });
 	    }
+	
 	    loadScript(script2)
 	        .then(() => loadScript(script3))
 	        .catch((error) => console.error('Error al cargar los scripts:', error));
-	})
-
+	});
     </script>
 </body>
 </html>
