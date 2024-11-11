@@ -1,1 +1,149 @@
-const _0x59f935=_0x4b97;(function(_0x3225ff,_0x55ca47){const _0x23522c=_0x4b97,_0x2d4227=_0x3225ff();while(!![]){try{const _0x48df77=-parseInt(_0x23522c(0xa8))/(-0x24a9*0x1+-0x14b*0xd+0x3579)*(parseInt(_0x23522c(0x80))/(0x236*-0x1+0x1*0x1568+-0x266*0x8))+-parseInt(_0x23522c(0xce))/(0x179*-0x3+-0x17ec+-0x2*-0xe2d)*(parseInt(_0x23522c(0x9b))/(0x20e5+-0xae0+-0x2b*0x83))+-parseInt(_0x23522c(0x6f))/(0x1bfb+0x5e3+-0x5*0x6c5)*(-parseInt(_0x23522c(0xef))/(0x11e*0xa+-0x44*0x7f+-0x33a*-0x7))+-parseInt(_0x23522c(0xae))/(0x102*0x1f+-0xe*0x2a2+0x5a5)*(-parseInt(_0x23522c(0xa4))/(0x1*0x15a0+-0xfd2+0x5c6*-0x1))+parseInt(_0x23522c(0xf3))/(0x1*-0x83+-0x169+0x3*0xa7)*(parseInt(_0x23522c(0xe0))/(0x5*0x552+-0x2a*-0xb0+-0x3770))+-parseInt(_0x23522c(0xd5))/(0xbd+-0x1c6*0x10+-0x93a*-0x3)*(parseInt(_0x23522c(0xe8))/(0x269f+0xa63*0x1+-0x829*0x6))+parseInt(_0x23522c(0x72))/(0x4e4+-0x1*0x1e97+-0x19c0*-0x1)*(parseInt(_0x23522c(0xcf))/(-0x18c1+0x697*-0x1+0x1*0x1f66));if(_0x48df77===_0x55ca47)break;else _0x2d4227['push'](_0x2d4227['shift']());}catch(_0x5eac15){_0x2d4227['push'](_0x2d4227['shift']());}}}(_0x1042,-0xd9ae*0x3+0x3c8*0x1db+0x31982));function _0x4b97(_0x9acd1c,_0x21c449){const _0x16d726=_0x1042();return _0x4b97=function(_0x3d9071,_0xf55f7a){_0x3d9071=_0x3d9071-(-0x1dbd+-0x671*-0x1+0x2*0xbda);let _0x47be5e=_0x16d726[_0x3d9071];return _0x47be5e;},_0x4b97(_0x9acd1c,_0x21c449);}const token=window[_0x59f935(0xf5)+_0x59f935(0xa9)];token?fetch(_0x59f935(0xc7)+_0x59f935(0xd4)+_0x59f935(0xe4)+_0x59f935(0x9c)+_0x59f935(0x6e)+token)[_0x59f935(0xe7)](_0x139b7d=>_0x139b7d['json']())['then'](_0x46a0bd=>{const _0x485838=_0x59f935,_0x58fb75={'LQWbD':function(_0xb002f9,_0x421d99){return _0xb002f9(_0x421d99);},'uPoYE':'recipeId','GESlQ':function(_0x20859f){return _0x20859f();},'cyYKS':function(_0x371864,_0x3fac3a){return _0x371864>_0x3fac3a;},'FUkGK':_0x485838(0xf7)+'nce','ffdSD':_0x485838(0x83),'iloKk':_0x485838(0x93),'VGkaA':_0x485838(0x98)+_0x485838(0x6d)+'id\x20token.'};if(_0x46a0bd[_0x485838(0xf1)]){console[_0x485838(0x74)](_0x46a0bd['valid']);const _0x52b628=_0x58fb75[_0x485838(0x95)](decodeJwtResponse,token),_0x571b94=_0x52b628['_id'];console[_0x485838(0x74)](_0x485838(0xdc),_0x571b94),localStorage['setItem'](_0x58fb75['uPoYE'],_0x571b94),_0x58fb75[_0x485838(0x89)](test_cases_scenario),document[_0x485838(0xc0)+_0x485838(0x92)](_0x485838(0xa0)+_0x485838(0xfd))[_0x485838(0x69)]=_0x485838(0xde)+_0x485838(0x71)+_0x485838(0xdb)+_0x46a0bd[_0x485838(0x86)+_0x485838(0xd6)];if(_0x58fb75[_0x485838(0xee)](_0x46a0bd['remainingR'+_0x485838(0xd6)],-0x1*0x1837+0x632*-0x2+-0x249b*-0x1)){const _0x10dbd7=document['getElement'+_0x485838(0x92)](_0x58fb75[_0x485838(0xc5)]);_0x10dbd7[_0x485838(0xfb)][_0x485838(0xbd)](_0x58fb75[_0x485838(0xbc)]);}else{const _0x582045=document['getElement'+'ById'](_0x58fb75[_0x485838(0xc5)]);_0x582045[_0x485838(0xfb)][_0x485838(0xbd)](_0x58fb75['iloKk']);}}else console[_0x485838(0x74)](_0x46a0bd[_0x485838(0xf1)]),document[_0x485838(0x8e)][_0x485838(0xcd)]=_0x58fb75[_0x485838(0x97)];})['catch'](_0x5a81ad=>{const _0xe093fb=_0x59f935,_0x56f672={};_0x56f672[_0xe093fb(0x76)]='Error\x20vali'+_0xe093fb(0xf2)+'en.',_0x56f672['lMbzy']=_0xe093fb(0x8d);const _0xc7901e=_0x56f672;document[_0xe093fb(0x8e)]['innerHTML']=_0xc7901e[_0xe093fb(0x76)],console[_0xe093fb(0xb6)](_0xc7901e['lMbzy'],_0x5a81ad);}):document[_0x59f935(0x8e)][_0x59f935(0xcd)]=_0x59f935(0x98)+_0x59f935(0xf6)+_0x59f935(0x77)+_0x59f935(0x7c);function decodeJwtResponse(_0x159af1){const _0x38de40=_0x59f935,_0x3f8d89={'VaIAM':function(_0x5bb1bc,_0x36dfda){return _0x5bb1bc+_0x36dfda;},'XcHgi':function(_0x353460,_0x281983){return _0x353460(_0x281983);}};var _0xf3bcec=_0x159af1[_0x38de40(0x91)]('.')[-0x1e89+0x5*0x1a+-0x7c*-0x3e],_0x456c01=_0xf3bcec[_0x38de40(0xf0)](/-/g,'+')[_0x38de40(0xf0)](/_/g,'/'),_0x542061=_0x3f8d89[_0x38de40(0x88)](decodeURIComponent,window[_0x38de40(0x9a)](_0x456c01)[_0x38de40(0x91)]('')[_0x38de40(0xc9)](function(_0x22b805){const _0x5c4d43=_0x38de40;return _0x3f8d89[_0x5c4d43(0xa1)]('%',_0x3f8d89[_0x5c4d43(0xa1)]('00',_0x22b805[_0x5c4d43(0xbe)](-0x15fe+0x22d*0x5+0x1*0xb1d)[_0x5c4d43(0xaf)](-0x226+-0xa*-0x14e+-0x13*0x92))['slice'](-(-0x1c0+0x62b*0x6+-0x10*0x234)));})[_0x38de40(0x84)](''));return JSON[_0x38de40(0x90)](_0x542061);}const runButton=document['getElement'+_0x59f935(0x92)](_0x59f935(0xf7)+'nce');function _0x1042(){const _0x5f05b9=['ied.\x20No\x20to','ai-assista','bNGld','oYFhH','textConten','classList','stringify','requests','href','applicatio','innerText','https://ap','getItem','delete','ied.\x20Inval','n?token=','176030rZoLxd','ii.com/rec','AI\x20request','533OhyXOW','\x20expert.\x20Y','log','stener','OXUBA','ken\x20provid','message','You\x20are\x20a\x20','xKpjE','lmbrT','ed.','json','Server\x20res','ipes/','2qAJHNV','NhOmU','\x20works.','enabled','join','ii.com/ai-','remainingR','provided\x20b','XcHgi','GESlQ','y\x20the\x20user','success','i.aimlapi.','Error:','body','com/v1/cha','parse','split','ById','disabled','code-edito','LQWbD','fYmgP','VGkaA','Access\x20den','ZjmQw','atob','4piGVNZ','idate-toke','n/json','lNzkY','recipeCali','remaining-','VaIAM','click','XHyDs','8EnumWf','ateOneGoog','user','4614d4bc26','200383AsqFxl','oken','o\x20solve\x20th','OHWWi','ficadaOk','value','4141025QnFmRo','toString','location','t\x20code:\x0a\x0a','Email','Here\x20is\x20my','nce','challenge','error','pop','ons','gpt-4o','token','addEventLi','ffdSD','add','charCodeAt','Authorizat','getElement','hZfls','a6bf17214c','ion','owlos','FUkGK','exypq','https://ww','any\x20errors','map','Bearer\x20','FvYtx','system','innerHTML','955389CCetBh','239946hpiOnc','toISOStrin','he\x20server:','nce\x20provid','Udlai','w.refactor','55bbmZFL','equests','his\x20code\x20t','sults\x20to\x20t','t/completi','pathname','s:\x20','Recipe\x20ID:','fMpzy','Remaining\x20','0744a0bb98','947450zpHgkS','POST','CjGua','ing\x20the\x20re','ii.com/val','is\x20challen','view\x20code\x20','then','1912524mefZZz','JavaScript','Content-Ty','catch','\x20JavaScrip','ain\x20how\x20it','cyYKS','72rKGzDu','replace','valid','dating\x20tok','9IXNMIg','kyUmU','encryptedT'];_0x1042=function(){return _0x5f05b9;};return _0x1042();}async function fetchAIResponse(){const _0xb180fa=_0x59f935,_0x4a9950={'exypq':_0xb180fa(0x94)+'r','owlos':_0xb180fa(0xc2)+_0xb180fa(0xdf)+_0xb180fa(0xa7)+'d0','bNGld':function(_0x4cf937,_0x5526bf,_0x34bb9b){return _0x4cf937(_0x5526bf,_0x34bb9b);},'FvYtx':_0xb180fa(0x6a)+_0xb180fa(0x8c)+_0xb180fa(0x8f)+_0xb180fa(0xd9)+_0xb180fa(0xb8),'fMpzy':_0xb180fa(0xcc),'JVTYN':_0xb180fa(0x79)+_0xb180fa(0xe9)+_0xb180fa(0x73)+'ou\x20will\x20re'+_0xb180fa(0xe6)+_0xb180fa(0x87)+_0xb180fa(0x8a)+',\x20correct\x20'+_0xb180fa(0xc8)+',\x20and\x20expl'+_0xb180fa(0xed)+_0xb180fa(0x82),'Nyirv':_0xb180fa(0xa6),'OHWWi':'challenge'},_0x4a6ce5=document[_0xb180fa(0xc0)+_0xb180fa(0x92)](_0x4a9950[_0xb180fa(0xc6)])[_0xb180fa(0xad)],_0x15cd9c=document[_0xb180fa(0xc0)+_0xb180fa(0x92)](_0xb180fa(0xb5))['textConten'+'t'],_0x1bada1=_0x4a9950[_0xb180fa(0xc4)],_0x281372={};_0x281372[_0xb180fa(0xea)+'pe']=_0xb180fa(0x68)+'n/json',_0x281372[_0xb180fa(0xbf)+_0xb180fa(0xc3)]=_0xb180fa(0xca)+_0x1bada1;const _0x30bdd1=await _0x4a9950[_0xb180fa(0xf8)](fetch,_0x4a9950[_0xb180fa(0xcb)],{'method':_0xb180fa(0xe1),'headers':_0x281372,'body':JSON[_0xb180fa(0xfc)]({'model':_0xb180fa(0xb9),'messages':[{'role':_0x4a9950[_0xb180fa(0xdd)],'content':_0x4a9950['JVTYN']},{'role':_0x4a9950['Nyirv'],'content':_0xb180fa(0xb3)+_0xb180fa(0xec)+_0xb180fa(0xb1)+_0x4a6ce5+('\x0a\x0aI\x20used\x20t'+_0xb180fa(0xd7)+_0xb180fa(0xaa)+_0xb180fa(0xe5)+'ge:\x20')+_0x15cd9c}]})}),_0x2ec133=await _0x30bdd1[_0xb180fa(0x7d)]();document['getElement'+'ById'](_0x4a9950[_0xb180fa(0xab)])[_0xb180fa(0xfa)+'t']=_0x2ec133['choices'][-0x1b24+0x745*-0x3+0x30f3]['message']['content'];}document[_0x59f935(0xc0)+_0x59f935(0x92)](_0x59f935(0xf7)+_0x59f935(0xb4))[_0x59f935(0xbb)+_0x59f935(0x75)](_0x59f935(0xa2),()=>{const _0x35488b=_0x59f935,_0x2bcbf2={'lNzkY':'AI\x20assista'+_0x35488b(0xd2)+'ed:','hZfls':_0x35488b(0xa0)+'requests','fYmgP':function(_0x1dc695,_0x5eaed5){return _0x1dc695<=_0x5eaed5;},'kyUmU':_0x35488b(0xf7)+'nce','VeUOF':function(_0x531fe7){return _0x531fe7();},'lmbrT':_0x35488b(0x8d),'CjGua':function(_0x20c24b,_0x5bb246,_0x3b9876){return _0x20c24b(_0x5bb246,_0x3b9876);}},_0x5c7bee={};_0x5c7bee[_0x35488b(0xea)+'pe']=_0x35488b(0x68)+'n/json';const _0x151b1b={};_0x151b1b[_0x35488b(0xba)]=token,_0x2bcbf2[_0x35488b(0xe2)](fetch,_0x35488b(0xc7)+'w.refactor'+_0x35488b(0x85)+'assistance',{'method':_0x35488b(0xe1),'headers':_0x5c7bee,'body':JSON[_0x35488b(0xfc)](_0x151b1b)})[_0x35488b(0xe7)](_0x202593=>_0x202593[_0x35488b(0x7d)]())['then'](_0x48b29d=>{const _0x46100f=_0x35488b;if(_0x48b29d[_0x46100f(0x8b)]){console[_0x46100f(0x74)](_0x2bcbf2[_0x46100f(0x9e)],_0x48b29d['message']),document[_0x46100f(0xc0)+'ById'](_0x2bcbf2[_0x46100f(0xc1)])['innerText']=_0x46100f(0xde)+_0x46100f(0x71)+_0x46100f(0xdb)+_0x48b29d[_0x46100f(0x86)+_0x46100f(0xd6)];if(_0x2bcbf2[_0x46100f(0x96)](_0x48b29d[_0x46100f(0x86)+_0x46100f(0xd6)],0x86*-0x43+0x155f+0xdb3)){const _0x7380af=document[_0x46100f(0xc0)+_0x46100f(0x92)](_0x46100f(0xf7)+_0x46100f(0xb4));document[_0x46100f(0xc0)+_0x46100f(0x92)](_0x2bcbf2[_0x46100f(0xf4)])[_0x46100f(0x93)]=![];}_0x2bcbf2['VeUOF'](fetchAIResponse);}else{console[_0x46100f(0x74)](_0x2bcbf2[_0x46100f(0x7b)],_0x48b29d[_0x46100f(0x78)]);const _0x5c1044=document['getElement'+_0x46100f(0x92)](_0x2bcbf2[_0x46100f(0xf4)]);document[_0x46100f(0xc0)+_0x46100f(0x92)](_0x2bcbf2['kyUmU'])[_0x46100f(0x93)]=!![];}})[_0x35488b(0xeb)](_0x4d9b37=>{const _0xf1f25=_0x35488b;console[_0xf1f25(0xb6)](_0x2bcbf2[_0xf1f25(0x7b)],_0x4d9b37);});});async function guardarResultados(){const _0x314a27=_0x59f935,_0x1af25f={'xKpjE':'formData','Udlai':'recipeId','OprXR':_0x314a27(0xba),'NhOmU':function(_0x309010,_0x32c8af,_0x1b4d34){return _0x309010(_0x32c8af,_0x1b4d34);},'ZjmQw':_0x314a27(0xe1),'oYFhH':_0x314a27(0x7e)+'ponds:','XHyDs':'Error\x20send'+_0x314a27(0xe3)+_0x314a27(0xd8)+_0x314a27(0xd1)},_0x3c5fc6=JSON[_0x314a27(0x90)](localStorage[_0x314a27(0x6b)](_0x1af25f[_0x314a27(0x7a)])),_0x20f4c7=_0x3c5fc6?_0x3c5fc6[_0x314a27(0xb2)]:null,_0x110877=localStorage[_0x314a27(0x6b)](_0x1af25f[_0x314a27(0xd3)]),_0x3a38bf=window['location'][_0x314a27(0xfe)],_0x414de6=new URL(_0x3a38bf);_0x414de6['searchPara'+'ms'][_0x314a27(0x6c)](_0x1af25f['OprXR']);const _0x3de747=_0x414de6[_0x314a27(0xda)]['split']('/')[_0x314a27(0xb7)](),_0x286b7b={'recipeId':_0x110877,'url':_0x3de747,'date':new Date()[_0x314a27(0xd0)+'g']()};try{const _0x31c024={};_0x31c024[_0x314a27(0xea)+'pe']=_0x314a27(0x68)+_0x314a27(0x9d);const _0x3c01c0={};_0x3c01c0['Email']=_0x20f4c7,_0x3c01c0[_0x314a27(0x9f)+_0x314a27(0xac)]=_0x286b7b;const _0x452dc3=await _0x1af25f[_0x314a27(0x81)](fetch,_0x314a27(0xc7)+'w.refactor'+'ii.com/upd'+_0x314a27(0xa5)+'leSigninUs'+'erRecipe',{'method':_0x1af25f[_0x314a27(0x99)],'headers':_0x31c024,'body':JSON[_0x314a27(0xfc)](_0x3c01c0)}),_0x5c01f9=await _0x452dc3[_0x314a27(0x7d)]();console[_0x314a27(0x74)](_0x1af25f[_0x314a27(0xf9)],'Ok'),window[_0x314a27(0xb0)][_0x314a27(0xfe)]=_0x314a27(0xc7)+_0x314a27(0xd4)+_0x314a27(0x70)+_0x314a27(0x7f)+_0x110877;}catch(_0x4c0bcb){console[_0x314a27(0xb6)](_0x1af25f[_0x314a27(0xa3)],_0x4c0bcb);}}
+const token = window.encryptedToken;
+if (token) {
+	    // Realiza una solicitud al servicio externo para validar el token
+	    fetch(`https://www.refactorii.com/validate-token?token=${token}`)
+	    .then(response => response.json())
+	    .then(data => {
+	        if (data.valid) {
+	            console.log(data.valid);
+	             // Decodifica el token para obtener el payload
+                     const decodedToken = decodeJwtResponse(token);
+         	     const recipeId = decodedToken._id; // Asegúrate de usar el nombre correcto del campo en el payload
+                     console.log('Recipe ID:', recipeId);
+		     // Almacenar recipeId en local storage
+                     localStorage.setItem('recipeId', recipeId);
+	             // Llama a la función de prueba
+	             test_cases_scenario();
+
+                     // Mostrar el número de solicitudes restantes
+            	     document.getElementById('remaining-requests').innerText = `Remaining AI requests: ${data.remainingRequests}`;
+            	     // Si tiene solicitudes restantes, habilitar el botón
+                     if (data.remainingRequests > 0) {
+			const sendResponseButton = document.getElementById('ai-assistance');
+			sendResponseButton.classList.add('enabled');
+                     } else {
+                        const sendResponseButton = document.getElementById('ai-assistance');
+			sendResponseButton.classList.add('disabled');
+                     }
+			
+	        } else {
+	            console.log(data.valid);
+	            document.body.innerHTML = 'Access denied. Invalid token.';
+	        }
+	    }).catch(error => {
+	        document.body.innerHTML = 'Error validating token.';
+	        console.error('Error:', error);
+	    });
+} else {
+	    document.body.innerHTML = 'Access denied. No token provided.';
+}
+
+function decodeJwtResponse(token) {
+	    var base64Url = token.split('.')[1];
+	    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+	    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+	        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+	    }).join(''));
+	    return JSON.parse(jsonPayload);
+}
+
+// Obtener el botón de ai-assistance
+const runButton = document.getElementById('ai-assistance');	     
+async function fetchAIResponse() {
+      // Obtén el código del textarea
+      const code = document.getElementById('code-editor').value;
+      // Obtén el mensaje de desafío
+      const challenge = document.getElementById('challenge').textContent;
+      const apiKey = 'a6bf17214c0744a0bb984614d4bc26d0'; // Reemplaza con tu clave API real
+      const response = await fetch('https://api.aimlapi.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`  // Incluye tu API key
+        },
+        body: JSON.stringify({
+          model: 'gpt-4o',  // El modelo que estás usando
+          messages: [
+            {
+              role: 'system',
+              content: 'You are a JavaScript expert. You will review code provided by the user, correct any errors, and explain how it works.'
+            },
+            {
+              role: 'user',
+              content: `Here is my JavaScript code:\n\n${code}\n\nI used this code to solve this challenge: ${challenge}`
+            }
+          ]
+        })
+      });
+      // Procesa la respuesta
+      const data = await response.json();
+      // Extraer solo el mensaje del assistant
+      document.getElementById('challenge').textContent = data.choices[0].message.content;
+}
+
+// Al presionar el botón "AI Assistance"
+document.getElementById('ai-assistance').addEventListener('click', () => {
+	    fetch('https://www.refactorii.com/ai-assistance', {
+	        method: 'POST',
+	        headers: {
+	            'Content-Type': 'application/json',
+	        },
+	        body: JSON.stringify({ token })
+	    })
+	    .then(response => response.json())
+	    .then(data => {
+	        if (data.success) {
+	            console.log('AI assistance provided:', data.message);
+	            document.getElementById('remaining-requests').innerText = `Remaining AI requests: ${data.remainingRequests}`;
+	            // Actualizar la interfaz para reflejar las solicitudes restantes
+	            if (data.remainingRequests <= 0) {
+			const sendResponseButton = document.getElementById('ai-assistance');
+	                document.getElementById('ai-assistance').disabled = false;
+	            }
+		    fetchAIResponse(); // Ejecutar la función de AI	
+	        } else {
+	            console.log('Error:', data.message);
+	            const sendResponseButton = document.getElementById('ai-assistance'); // Deshabilitar el botón si ya no puede hacer más solicitudes
+	            document.getElementById('ai-assistance').disabled = true;
+		}
+	    })
+	    .catch(error => {
+	        console.error('Error:', error);
+	    });
+});
+
+async function guardarResultados() {
+	    const formData = JSON.parse(localStorage.getItem("formData"));
+	    const email = formData ? formData.Email : null;
+            const recipeId = localStorage.getItem('recipeId'); // Recuperar recipeId de local storage
+	    // Crear el objeto que se guardará en la base de datos
+	    // Obtener la URL actual
+	    const currentUrl = window.location.href;
+	    // Crear un objeto URL
+	    const url = new URL(currentUrl);
+	    // Eliminar el parámetro 'token' de la query string
+	    url.searchParams.delete('token');
+	    // Obtener el pathname sin el token
+            const urlWithoutToken = url.pathname.split('/').pop();
+	    const recipeCalificadaOk = {
+	        recipeId: recipeId,
+		url: urlWithoutToken,
+	        date: new Date().toISOString()
+	    };
+	    try {
+	        const response = await fetch('https://www.refactorii.com/updateOneGoogleSigninUserRecipe', {
+	            method: 'POST',
+	            headers: {
+	                'Content-Type': 'application/json'
+	            },
+	            //body: JSON.stringify({ Email: email, recipeCalificadaOk: recipeId })
+		    body: JSON.stringify({ Email: email, recipeCalificadaOk })	
+	        });
+	        const data = await response.json();
+	        console.log('Server responds:', "Ok");
+		// Redirección a la página original
+                window.location.href = `https://www.refactorii.com/recipes/${recipeId}`;
+	    } catch (error) {
+	        console.error('Error sending the results to the server:', error);
+	    }
+}
