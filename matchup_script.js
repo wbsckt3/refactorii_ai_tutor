@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
                 // Establecer el título del reto en un elemento h1
-                const tituloReto = document.querySelector('h1');
+                const tituloReto = document.querySelector('h2');
                 tituloReto.textContent = content.title || `Reto ${reto}`;
                 
                 // Limpiar el contenedor de códigos y conceptos anteriores
