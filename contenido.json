@@ -1,6 +1,6 @@
 {
   "codesReto1": {
-    "title": "Conceptos básicos de Javascript",
+    "title": "1. Conceptos básicos de Javascript",
     "codes": [
       { "id": "code1", "code": "Array.isArray([1, 2, 3])" },
       { "id": "code2", "code": "let nombre = \"Juan\";" },
@@ -27,7 +27,7 @@
     ]
   },
   "codesReto2": {
-    "title": "Falsy values en Javascript",
+    "title": "2. Falsy values en Javascript",
     "codes": [
       { "id": "code1", "code": "null" },
       { "id": "code2", "code": "undefined" },
@@ -54,7 +54,7 @@
     ]
   },
   "codesReto3": {
-    "title": "Metaprogramación y Reactividad en JavaScript para VUE",
+    "title": "3. Metaprogramación y Reactividad en JavaScript para VUE",
     "codes": [
       { "id": "code1", "code": "const proxy = new Proxy(target, handler);" },
       { "id": "code2", "code": "Reflect.get(target, propertyKey, receiver);" },
@@ -81,7 +81,7 @@
     ]
   },
   "codesReto4": {
-    "title": "VUE conceptos básicos",
+    "title": "4. VUE conceptos básicos",
     "codes": [
       { "id": "code1", "code": "{{ message }}" },
       { "id": "code2", "code": "v-if=\"condition\"" },
@@ -108,7 +108,7 @@
     ]
   },
   "codesReto5": {
-    "title": "VUE conceptos intermedios",
+    "title": "5. VUE conceptos intermedios",
     "codes": [
       { "id": "code1", "code": "v-slot:header" },
       { "id": "code2", "code": "v-once" },
