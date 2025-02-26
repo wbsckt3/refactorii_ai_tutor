@@ -1,3 +1,5 @@
+let retoActual = 1; // Mover esta línea fuera de document.addEventListener("DOMContentLoaded")
+
 document.addEventListener("DOMContentLoaded", function () {
     
     // Función para cargar dinámicamente los códigos y conceptos desde JSON
@@ -48,38 +50,42 @@ document.addEventListener("DOMContentLoaded", function () {
     } */
 
     function cargarContenido(reto) {
-    fetch('contenido.json')
-        .then(response => response.json())
-        .then(data => {
-            const retoKey = `codesReto${reto}`;
-            if (!data[retoKey]) {
-                console.error("No se encontró el reto:", retoKey);
-                return;
-            }
-
-            // Limpia la UI antes de cargar el nuevo reto
-            document.getElementById('contenedorRetos').innerHTML = '';
-
-            // Lógica para cargar el nuevo reto
-            const retoData = data[retoKey];
-            document.getElementById('tituloReto').innerText = retoData.title;
-
-            retoData.concepts.forEach(concept => {
-                const div = document.createElement('div');
-                div.id = concept.id;
-                div.innerHTML = `<p>${concept.description}</p>`;
-                document.getElementById('contenedorRetos').appendChild(div);
-            });
-
-            retoData.codes.forEach(code => {
-                const codeDiv = document.createElement('div');
-                codeDiv.classList.add('code-snippet');
-                codeDiv.id = code.id;
-                codeDiv.innerHTML = `<pre>${code.code}</pre>`;
-                document.getElementById('contenedorRetos').appendChild(codeDiv);
-            });
-        })
-        .catch(error => console.error("Error cargando contenido:", error));
+        fetch('contenido.json')
+            .then(response => response.json())
+            .then(data => {
+                const retoKey = `codesReto${reto}`;
+                if (!data[retoKey]) {
+                    console.error("No se encontró el reto:", retoKey);
+                    return;
+                }
+    
+                // Limpiar contenido anterior
+                const contenedor = document.getElementById('contenedorRetos');
+                contenedor.innerHTML = ''; 
+    
+                // Cargar nuevo reto
+                const retoData = data[retoKey];
+                document.getElementById('tituloReto').innerText = retoData.title;
+    
+                retoData.concepts.forEach(concept => {
+                    const div = document.createElement('div');
+                    div.id = concept.id;
+                    div.classList.add('droppable');
+                    div.innerHTML = `<p>${concept.description}</p>`;
+                    contenedor.appendChild(div);
+                });
+    
+                retoData.codes.forEach(code => {
+                    const codeDiv = document.createElement('div');
+                    codeDiv.classList.add('code-snippet');
+                    codeDiv.id = code.id;
+                    codeDiv.innerHTML = `<pre>${code.code}</pre>`;
+                    contenedor.appendChild(codeDiv);
+                });
+    
+                iniciarSortable(); // Volver a inicializar Sortable tras cargar un nuevo reto
+            })
+            .catch(error => console.error("Error cargando contenido:", error));
     }
 
     // Función para inicializar Sortable después de cargar el contenido dinámicamente
@@ -190,14 +196,11 @@ window.checkAnswers = function() {
 
     for (let concept in correctAnswers) {
         const conceptDiv = document.getElementById(concept);
-
         if (!conceptDiv) {
             console.error(`No se encontró el elemento con ID ${concept}`);
             continue;
         }
-
         const codeSnippet = conceptDiv.querySelector('.code-snippet');
-
         if (codeSnippet && codeSnippet.id === correctAnswers[concept]) {
             score++;
         }
@@ -208,7 +211,7 @@ window.checkAnswers = function() {
     // Si todas las respuestas son correctas, avanzar al siguiente reto
     if (score === totalConcepts) {
         alert("¡Felicidades! Pasaste al siguiente reto.");
-        retoActual++;
+        retoActual++; // Incrementa el reto solo aquí
         cargarContenido(retoActual);
     }
 };
