@@ -109,6 +109,7 @@ window.onload = function () {
             container.appendChild(botonSiguiente);
         }
     }
+};
 
    // Función para verificar las respuestas
   // Función para verificar las respuestas
