@@ -1,29 +1,29 @@
 {
   "codesReto1": {
-    "title": "1. Conceptos básicos de Javascript",
+    "title": "1. Fundamentos de Java en el desarrollo backend",
     "codes": [
-      { "id": "code1", "code": "Array.isArray([1, 2, 3])" },
-      { "id": "code2", "code": "let nombre = \"Juan\";" },
-      { "id": "code3", "code": "Math.max(5, 10)" },
-      { "id": "code4", "code": "function saludo() { return \"Hola\"; }" },
-      { "id": "code5", "code": "document.getElementById(\"app\")" },
-      { "id": "code6", "code": "const suma = (a, b) => a + b;" },
-      { "id": "code7", "code": "new Date()" },
-      { "id": "code8", "code": "parseInt(\"42\")" },
-      { "id": "code9", "code": "window.localStorage" },
-      { "id": "code10", "code": "console.log(\"Hola Mundo\")" }
+      { "id": "code1", "code": "public class Usuario { private String nombre; }" },
+      { "id": "code2", "code": "List<String> lista = new ArrayList<>();" },
+      { "id": "code3", "code": "if (valor > 0) { System.out.println(\"Es positivo\"); }" },
+      { "id": "code4", "code": "public int sumar(int a, int b) { return a + b; }" },
+      { "id": "code5", "code": "new ConexionBD().conectar();" },
+      { "id": "code6", "code": "configuracion.put(\"modo\", \"producción\");" },
+      { "id": "code7", "code": "Instant ahora = Instant.now();" },
+      { "id": "code8", "code": "try { int n = Integer.parseInt(valor); } catch (Exception e) { }" },
+      { "id": "code9", "code": "@Component public class ServicioUsuario { }" },
+      { "id": "code10", "code": "System.out.println(\"¡Hola, mundo!\");" }
     ],
     "concepts": [
-      { "id": "concept1", "description": "Utilizado para trabajar eficientemente con conjuntos de datos almacenados en una estructura que permite acceder a elementos por su posición." },
-      { "id": "concept2", "description": "Sirve para almacenar información en la memoria, la cual puede ser cambiada o mantenida según la necesidad del código." },
-      { "id": "concept3", "description": "Función usada para encontrar el número más alto entre un conjunto de valores." },
-      { "id": "concept4", "description": "Se utiliza para definir bloques de código reutilizables que pueden ejecutarse varias veces con diferentes valores." },
-      { "id": "concept5", "description": "Permite la manipulación de los elementos HTML en una página web." },
-      { "id": "concept6", "description": "Manera concisa de definir una operación que recibe parámetros y retorna un valor." },
-      { "id": "concept7", "description": "Utilizado para trabajar con fechas y realizar cálculos con días, meses o años." },
-      { "id": "concept8", "description": "Se emplea cuando se necesita transformar un valor de un tipo de dato a otro." },
-      { "id": "concept9", "description": "Permite guardar datos en el navegador de manera persistente, accesible incluso después de recargar la página." },
-      { "id": "concept10", "description": "Herramienta que ayuda a mostrar información durante el desarrollo para fines de depuración." }
+      { "id": "concept1", "description": "Estructura que agrupa datos y comportamientos relacionados en un solo objeto reutilizable." },
+      { "id": "concept2", "description": "Una estructura que almacena elementos dinámicamente y permite recorrerlos." },
+      { "id": "concept3", "description": "Permite que el programa decida qué hacer en función de una condición específica." },
+      { "id": "concept4", "description": "Bloque de código reutilizable que toma entradas, realiza cálculos y devuelve un resultado." },
+      { "id": "concept5", "description": "Creación de una instancia de un objeto que maneja la comunicación con una fuente externa." },
+      { "id": "concept6", "description": "Mecanismo para almacenar y recuperar valores de configuración en tiempo de ejecución." },
+      { "id": "concept7", "description": "Representación de un punto exacto en el tiempo, sin zona horaria." },
+      { "id": "concept8", "description": "Mecanismo de manejo de errores para evitar que el programa falle por valores inesperados." },
+      { "id": "concept9", "description": "Indica que un objeto se administrará automáticamente dentro del ciclo de vida del framework." },
+      { "id": "concept10", "description": "Forma más sencilla de visualizar información en la salida estándar." }
     ]
   },
   "codesReto2": {
