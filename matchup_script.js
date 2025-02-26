@@ -132,7 +132,7 @@ window.onload = function () {
 
     // Cargar el primer reto al cargar la página
     cargarContenido(retoActual);
-});
+};
 
  // Función para verificar las respuestas
    window.checkAnswers = function() {
