@@ -2,6 +2,21 @@ let retoActual = 1; // Mover esta línea fuera de document.addEventListener("DOM
 
 document.addEventListener("DOMContentLoaded", function () {
 
+     const codesContainer = document.querySelector('.codes');
+
+    Sortable.create(codesContainer, {
+        group: 'shared',
+        animation: 150
+    });
+
+    document.querySelectorAll('.droppable').forEach(function (concept) {
+        Sortable.create(concept, {
+            group: 'shared',
+            animation: 150,
+            ghostClass: 'sortable-ghost'
+        });
+    });
+    
     function cargarContenido(reto) {
         fetch('contenido.json')
             .then(response => response.json())
