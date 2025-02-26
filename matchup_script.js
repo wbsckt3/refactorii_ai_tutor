@@ -1,4 +1,4 @@
-let currentRetoIndex = 0;  // Empezamos en el primer reto
+let currentRetoIndex = 0;  // Índice del reto actual
 let retosData = [];  // Aquí guardaremos los retos cargados
 
 window.onload = function () {
@@ -25,7 +25,7 @@ window.onload = function () {
                 const content = data[retoKey];
 
                 if (!content) {
-                    console.error(`Reto ${retoIndex} no encontrado en el JSON`);
+                    console.error(`Reto ${retoIndex + 1} no encontrado en el JSON`);
                     return;
                 }
 
@@ -33,11 +33,9 @@ window.onload = function () {
                 const tituloReto = document.querySelector('h2');
                 tituloReto.textContent = content.title || `Reto ${retoIndex + 1}`;
 
-                // Limpiar el contenedor de códigos y conceptos anteriores
-                const codesContainer = document.querySelector('.codes');
-                const conceptsContainer = document.querySelector('.concepts');
-                codesContainer.innerHTML = '';
-                conceptsContainer.innerHTML = '';
+                // Limpiar los contenedores de códigos y conceptos
+                document.querySelector('.codes').innerHTML = '';
+                document.querySelector('.concepts').innerHTML = '';
 
                 // Cargar los snippets de código
                 content.codes.forEach(item => {
@@ -45,7 +43,7 @@ window.onload = function () {
                     codeDiv.id = item.id;
                     codeDiv.className = 'code-snippet';
                     codeDiv.innerHTML = `<code>${item.code}</code>`;
-                    codesContainer.appendChild(codeDiv);
+                    document.querySelector('.codes').appendChild(codeDiv);
                 });
 
                 // Cargar los conceptos
@@ -54,7 +52,7 @@ window.onload = function () {
                     conceptDiv.id = item.id;
                     conceptDiv.className = 'droppable';
                     conceptDiv.textContent = item.description;
-                    conceptsContainer.appendChild(conceptDiv);
+                    document.querySelector('.concepts').appendChild(conceptDiv);
                 });
 
                 // Configurar Sortable después de cargar el contenido
@@ -86,106 +84,74 @@ window.onload = function () {
         });
     }
 
-    // Función para verificar si todas las respuestas fueron completadas
-    function verificarCompletado() {
-        const droppables = document.querySelectorAll('.droppable');
-        let completado = true;
-
-        droppables.forEach(droppable => {
-            if (!droppable.querySelector('.code-snippet')) {
-                completado = false;
-            }
-        });
-
-        if (completado) {
-            mostrarBotonesNavegacion();
-            checkAnswers(); // Llama a checkAnswers después de completar
-        }
-    }
-
-    // Función para mostrar los botones de "Reto anterior" y "Siguiente reto"
+    // Función para mostrar los botones de navegación
     function mostrarBotonesNavegacion() {
         const container = document.querySelector('.buttons-container');
-        
-        // Verificar si ya existen botones y eliminarlos
-        const botonesExistentes = document.querySelectorAll('.boton-reto, .boton-reto-anterior');
-        botonesExistentes.forEach(boton => boton.remove());
 
-        // Botón de "Reto anterior" (si no estamos en el primer reto)
+        // Eliminar botones previos si existen
+        container.innerHTML = '';
+
+        // Botón "Reto Anterior"
         if (currentRetoIndex > 0) {
-            const botonRetoAnterior = document.createElement('button');
-            botonRetoAnterior.textContent = `< Reto anterior`;
-            botonRetoAnterior.className = 'boton-reto-anterior';
-
-            // Funcionalidad del botón de reto anterior
-            botonRetoAnterior.addEventListener('click', function () {
-                cargarContenido(--currentRetoIndex);
-            });
-
-            // Añadir el botón de "Reto anterior" al contenedor
-            container.appendChild(botonRetoAnterior);
+            const botonAnterior = document.createElement('button');
+            botonAnterior.textContent = `< Reto anterior`;
+            botonAnterior.className = 'boton-reto-anterior';
+            botonAnterior.addEventListener('click', () => cargarContenido(--currentRetoIndex));
+            container.appendChild(botonAnterior);
         }
 
-        // Crear el botón para el siguiente reto (si hay más retos)
+        // Botón "Siguiente Reto" (solo si hay más retos)
         if (currentRetoIndex < retosData.length - 1) {
-            const botonSiguienteReto = document.createElement('button');
-            botonSiguienteReto.textContent = `Siguiente reto >`;
-            botonSiguienteReto.className = 'boton-reto';
-
-            // Funcionalidad del botón de siguiente reto
-            botonSiguienteReto.addEventListener('click', function () {
-                cargarContenido(++currentRetoIndex);
-            });
-
-            // Añadir el botón de "Siguiente reto" al contenedor
-            container.appendChild(botonSiguienteReto);
+            const botonSiguiente = document.createElement('button');
+            botonSiguiente.textContent = `Siguiente reto >`;
+            botonSiguiente.className = 'boton-reto';
+            botonSiguiente.addEventListener('click', () => cargarContenido(++currentRetoIndex));
+            container.appendChild(botonSiguiente);
         }
     }
 
-    // Agregar evento para verificar cuando se completan todos los elementos
-    document.addEventListener('dragend', verificarCompletado);
-};
+    // Función para verificar las respuestas
+    window.checkAnswers = function () {
+        fetch('contenido.json')
+            .then(response => response.json())
+            .then(data => {
+                const retoKey = retosData[currentRetoIndex];
+                const content = data[retoKey];
 
-// Función para verificar las respuestas
-window.checkAnswers = function() {
-    fetch('contenido.json')
-        .then(response => response.json())
-        .then(data => {
-            const retoKey = retosData[currentRetoIndex];
-            const content = data[retoKey];
-
-            if (!content || !content.correctAnswers) {
-                console.error(`No se encontraron respuestas correctas para ${retoKey}`);
-                return;
-            }
-
-            const correctAnswers = content.correctAnswers;
-            let score = 0;
-            let totalConcepts = Object.keys(correctAnswers).length;
-
-            for (let concept in correctAnswers) {
-                const conceptDiv = document.getElementById(concept);
-
-                if (!conceptDiv) {
-                    console.error(`No se encontró el elemento con ID ${concept}`);
-                    continue;
+                if (!content || !content.correctAnswers) {
+                    console.error(`No se encontraron respuestas correctas para ${retoKey}`);
+                    return;
                 }
 
-                const codeSnippet = conceptDiv.querySelector('.code-snippet');
+                const correctAnswers = content.correctAnswers;
+                let score = 0;
+                let totalConcepts = Object.keys(correctAnswers).length;
 
-                if (codeSnippet && codeSnippet.id === correctAnswers[concept]) {
-                    score++;
+                for (let concept in correctAnswers) {
+                    const conceptDiv = document.getElementById(concept);
+
+                    if (!conceptDiv) {
+                        console.error(`No se encontró el elemento con ID ${concept}`);
+                        continue;
+                    }
+
+                    const codeSnippet = conceptDiv.querySelector('.code-snippet');
+
+                    if (codeSnippet && codeSnippet.id === correctAnswers[concept]) {
+                        score++;
+                    }
                 }
-            }
 
-            alert(`Tu puntuación es: ${score} de ${totalConcepts}`);
+                alert(`Tu puntuación es: ${score} de ${totalConcepts}`);
 
-            // Pasar al siguiente reto después del alert si hay más retos
-            if (currentRetoIndex < retosData.length - 1) {
-                cargarContenido(++currentRetoIndex);
-            } else {
-                alert("¡Has completado todos los retos!");
-            }
-        })
-        .catch(error => console.error('Error al validar las respuestas:', error));
+                // Si se completaron todos los retos, mostrar mensaje final
+                if (currentRetoIndex >= retosData.length - 1) {
+                    alert("¡Has completado todos los retos!");
+                }
+            })
+            .catch(error => console.error('Error al validar las respuestas:', error));
+    };
+
+    // Cargar el primer reto
+    cargarContenido(currentRetoIndex);
 };
