@@ -1,41 +1,49 @@
 document.addEventListener("DOMContentLoaded", function () {
-    
     // Función para cargar dinámicamente los códigos y conceptos desde JSON
- 
-
     function cargarContenido(reto) {
-    fetch('contenido.json')
-        .then(response => response.json())
-        .then(data => {
-            const retoKey = codesReto${reto};
-            if (!data[retoKey]) {
-                console.error("No se encontró el reto:", retoKey);
-                return;
-            }
+        fetch('contenido.json')
+            .then(response => response.json())
+            .then(data => {
+                const retoKey = codesReto${reto};
+                const content = data[retoKey];
 
-            // Limpia la UI antes de cargar el nuevo reto
-            document.getElementById('contenedorRetos').innerHTML = '';
+                if (!content) {
+                    console.error(Reto ${reto} no encontrado en el JSON);
+                    return;
+                }
 
-            // Lógica para cargar el nuevo reto
-            const retoData = data[retoKey];
-            document.getElementById('tituloReto').innerText = retoData.title;
+                // Establecer el título del reto en un elemento h1
+                const tituloReto = document.querySelector('h2');
+                tituloReto.textContent = content.title || Reto ${reto};
+                
+                // Limpiar el contenedor de códigos y conceptos anteriores
+                const codesContainer = document.querySelector('.codes');
+                const conceptsContainer = document.querySelector('.concepts');
+                codesContainer.innerHTML = '';
+                conceptsContainer.innerHTML = '';
 
-            retoData.concepts.forEach(concept => {
-                const div = document.createElement('div');
-                div.id = concept.id;
-                div.innerHTML = <p>${concept.description}</p>;
-                document.getElementById('contenedorRetos').appendChild(div);
-            });
+                // Cargar los snippets de código
+                content.codes.forEach(item => {
+                    const codeDiv = document.createElement('div');
+                    codeDiv.id = item.id;
+                    codeDiv.className = 'code-snippet';
+                    codeDiv.innerHTML = <code>${item.code}</code>;
+                    codesContainer.appendChild(codeDiv);
+                });
 
-            retoData.codes.forEach(code => {
-                const codeDiv = document.createElement('div');
-                codeDiv.classList.add('code-snippet');
-                codeDiv.id = code.id;
-                codeDiv.innerHTML = <pre>${code.code}</pre>;
-                document.getElementById('contenedorRetos').appendChild(codeDiv);
-            });
-        })
-        .catch(error => console.error("Error cargando contenido:", error));
+                // Cargar los conceptos
+                content.concepts.forEach(item => {
+                    const conceptDiv = document.createElement('div');
+                    conceptDiv.id = item.id;
+                    conceptDiv.className = 'droppable';
+                    conceptDiv.textContent = item.description;
+                    conceptsContainer.appendChild(conceptDiv);
+                });
+
+                // Configurar Sortable después de cargar el contenido
+                iniciarSortable();
+            })
+            .catch(error => console.error('Error cargando el contenido:', error));
     }
 
     // Función para inicializar Sortable después de cargar el contenido dinámicamente
@@ -126,19 +134,20 @@ document.addEventListener("DOMContentLoaded", function () {
     cargarContenido(retoActual);
 });
 
-// Función para verificar las respuestas y avanzar si se completan todas correctamente
-window.checkAnswers = function() {
+ // Función para verificar las respuestas
+   window.checkAnswers = function() {
+            // Ajustar las respuestas correctas según el segundo reto (7 ítems)
     const correctAnswers = {
-        concept1: "code1",
-        concept2: "code2",
-        concept3: "code3",
-        concept4: "code4",
-        concept5: "code5",
-        concept6: "code6",
-        concept7: "code7",
-        concept8: "code8",
-        concept9: "code9",
-        concept10: "code10"
+        concept1: "code1",  // Valor 1
+        concept2: "code2",  // Valor 2
+        concept3: "code3",  // Valor 3
+        concept4: "code4",  // Valor 4
+        concept5: "code5",  // Valor 5
+        concept6: "code6",  // Valor 6
+        concept7: "code7",   // Valor 7
+        concept8: "code8",  // Conversión de tipo
+        concept9: "code9",  // API de almacenamiento local
+        concept10: "code10" // Salida en consola
     };
 
     let score = 0;
@@ -147,24 +156,19 @@ window.checkAnswers = function() {
     for (let concept in correctAnswers) {
         const conceptDiv = document.getElementById(concept);
 
+        // Verificar si el conceptDiv existe
         if (!conceptDiv) {
             console.error(No se encontró el elemento con ID ${concept});
-            continue;
+            continue;  // Saltar este concepto si no se encuentra
         }
 
         const codeSnippet = conceptDiv.querySelector('.code-snippet');
-
+        
+        // Verificar si el codeSnippet existe y su ID es correcto
         if (codeSnippet && codeSnippet.id === correctAnswers[concept]) {
             score++;
         }
     }
 
     alert(Tu puntuación es: ${score} de ${totalConcepts});
-
-    // Si todas las respuestas son correctas, avanzar al siguiente reto
-    if (score === totalConcepts) {
-        alert("¡Felicidades! Pasaste al siguiente reto.");
-        retoActual++;
-        cargarContenido(retoActual);
-    }
-}; 
+}  
