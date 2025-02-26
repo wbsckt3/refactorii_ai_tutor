@@ -54,84 +54,57 @@
     ]
   },
   "codesReto3": {
-    "title": "3. Metaprogramación y Reactividad en JavaScript para VUE",
+    "title": "2. Fundamentos esenciales en Spring Boot y JPA",
     "codes": [
-      { "id": "code1", "code": "const proxy = new Proxy(target, handler);" },
-      { "id": "code2", "code": "Reflect.get(target, propertyKey, receiver);" },
-      { "id": "code3", "code": "Object.defineProperty(obj, 'prop', descriptor);" },
-      { "id": "code4", "code": "class MyComponent extends HTMLElement { }" },
-      { "id": "code5", "code": "import { reactive } from 'vue';" },
-      { "id": "code6", "code": "async function fetchData() { const result = await fetch(url); }" },
-      { "id": "code7", "code": "const generator = function* () { yield 1; yield 2; }" },
-      { "id": "code8", "code": "const observable = new WeakMap();" },
-      { "id": "code9", "code": "const privateField = Symbol();" },
-      { "id": "code10", "code": "const state = Object.freeze({ value: 0 });" }
+      { "id": "code1", "code": "@Entity public class Usuario { private String nombre; }" },
+      { "id": "code2", "code": "@Id @GeneratedValue private Long id;" },
+      { "id": "code3", "code": "public interface UsuarioRepository extends JpaRepository<Usuario, Long> { }" },
+      { "id": "code4", "code": "@RestController public class UsuarioController { }" },
+      { "id": "code5", "code": "@GetMapping(\"/usuarios\") public List<Usuario> obtenerUsuarios() { return service.obtenerTodos(); }" },
+      { "id": "code6", "code": "@Autowired private UsuarioService service;" },
+      { "id": "code7", "code": "spring.datasource.url=jdbc:mysql://localhost:3306/mi_db" },
+      { "id": "code8", "code": "<dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-data-jpa</artifactId> </dependency>" },
+      { "id": "code9", "code": "spring.jpa.hibernate.ddl-auto=update" },
+      { "id": "code10", "code": "mvn clean package" }
     ],
     "concepts": [
-      { "id": "concept1", "description": "Proxy: Permite interceptar y redefinir operaciones fundamentales en objetos. Vue lo utiliza para reactividad." },
-      { "id": "concept2", "description": "Reflect API: Facilita la interacción con objetos mediante metaprogramación. Vue usa Reflect para realizar operaciones seguras en Proxies." },
-      { "id": "concept3", "description": "Definición de propiedades: Controla el acceso y la modificación de propiedades en un objeto. Vue define propiedades reactivas usando esta técnica." },
-      { "id": "concept4", "description": "Web Components: Clase nativa de JavaScript para crear elementos personalizados. Vue puede integrar Web Components." },
-      { "id": "concept5", "description": "Reactividad: Hace que los objetos sean reactivos, permitiendo que Vue detecte cambios y actualice la vista automáticamente." },
-      { "id": "concept6", "description": "Promesas y async/await: Permiten manejar operaciones asíncronas de forma más legible. Vue utiliza estas estructuras para cargar datos dinámicamente." },
-      { "id": "concept7", "description": "Generadores: Permiten pausar y reanudar funciones. Vue podría usar generadores en el control del flujo de datos." },
-      { "id": "concept8", "description": "WeakMap: Estructura de datos usada para almacenar objetos sin evitar que sean recogidos por el garbage collector. Vue usa WeakMaps para el manejo interno de reactividad." },
-      { "id": "concept9", "description": "Symbol: Un identificador único y privado, usado en Vue para proteger ciertas propiedades internas." },
-      { "id": "concept10", "description": "Object.freeze: Inmuniza objetos ante cambios, útil para mantener el estado inmutable en Vuex." }
+      { "id": "concept7", "description": "Cadena de conexión que define cómo la aplicación se conectará a la base de datos." },
+      { "id": "concept3", "description": "Interfaz que facilita operaciones de base de datos sin necesidad de escribir SQL manualmente." },
+      { "id": "concept9", "description": "Configuración de Hibernate que define cómo manejar los cambios en la base de datos." },
+      { "id": "concept1", "description": "Permite mapear una clase de Java con una tabla en la base de datos." },
+      { "id": "concept5", "description": "Método utilizado para exponer información en una API REST." },
+      { "id": "concept10", "description": "Comando utilizado para limpiar y empaquetar una aplicación Java con Maven." },
+      { "id": "concept2", "description": "Se utiliza para definir una clave primaria en una entidad de base de datos." },
+      { "id": "concept8", "description": "Dependencia de Maven necesaria para trabajar con JPA en Spring Boot." },
+      { "id": "concept6", "description": "Inyecta automáticamente dependencias sin necesidad de instanciarlas manualmente." },
+      { "id": "concept4", "description": "Hace que una clase maneje peticiones HTTP de forma automática." }
     ]
   },
   "codesReto4": {
-    "title": "4. VUE conceptos básicos",
+    "title": "4. Práctica de fundamentos esenciales en Spring Boot y JPA",
     "codes": [
-      { "id": "code1", "code": "{{ message }}" },
-      { "id": "code2", "code": "v-if=\"condition\"" },
-      { "id": "code3", "code": "v-bind:src=\"imageUrl\"" },
-      { "id": "code4", "code": "v-for=\"item in items\" :key=\"item.id\"" },
-      { "id": "code5", "code": "v-model=\"inputValue\"" },
-      { "id": "code6", "code": "mounted() { // código }" },
-      { "id": "code7", "code": "this.$emit('eventName', data)" },
-      { "id": "code8", "code": "props: ['title', 'content']" },
-      { "id": "code9", "code": "computed: { fullName() { return this.firstName + ' ' + this.lastName } }" },
-      { "id": "code10", "code": "watch: { items(newVal, oldVal) { // código } }" }
-    ],
-   "concepts": [
-      { "id": "concept1", "description": "Interpolación: Se usa para mostrar datos dinámicos en el HTML." },
-      { "id": "concept2", "description": "Directiva: Muestra o esconde elementos en función de una condición booleana." },
-      { "id": "concept3", "description": "Directiva: Une dinámicamente atributos o propiedades de un componente a una expresión en JavaScript." },
-      { "id": "concept4", "description": "Directiva: Repite un bloque de código por cada elemento de una lista y requiere un valor único (key)." },
-      { "id": "concept5", "description": "Directiva: Establece una vinculación bidireccional entre el valor de un input y el estado del componente." },
-      { "id": "concept6", "description": "Hook del ciclo de vida: Se ejecuta después de que el componente se ha montado en el DOM." },
-      { "id": "concept7", "description": "Emisión de eventos: Permite enviar eventos personalizados desde un componente hijo a su padre." },
-      { "id": "concept8", "description": "Props: Se usa para pasar datos desde un componente padre a un hijo." },
-      { "id": "concept9", "description": "Propiedades computadas: Propiedades que se recalculan solo cuando cambian sus dependencias." },
-      { "id": "concept10", "description": "Watcher: Observa cambios en una propiedad o dato específico y ejecuta código cuando cambia." }
-    ]
-  },
-  "codesReto5": {
-    "title": "5. VUE conceptos intermedios",
-    "codes": [
-      { "id": "code1", "code": "v-slot:header" },
-      { "id": "code2", "code": "v-once" },
-      { "id": "code3", "code": "v-cloak" },
-      { "id": "code4", "code": "$refs.input.focus()" },
-      { "id": "code5", "code": "v-model.lazy=\"inputValue\"" },
-      { "id": "code6", "code": "v-bind=\"$attrs\"" },
-      { "id": "code7", "code": "v-on=\"listeners\"" },
-      { "id": "code8", "code": "provide() { return { dataKey: this.dataValue } }" },
-      { "id": "code9", "code": "inject: ['dataKey']" },
-      { "id": "code10", "code": "is=\"componentName\"" }
+      { "id": "code1", "code": "@Entity\npublic class Producto {\n  @Id @GeneratedValue\n  private Long id;\n  private String nombre;\n}" },
+      { "id": "code2", "code": "public interface ProductoRepository extends JpaRepository<Producto, Long> { }" },
+      { "id": "code3", "code": "@RestController\npublic class ProductoController {\n  @GetMapping(\"/productos\")\n  public List<Producto> listar() {\n    return service.obtenerTodos();\n  }\n}" },
+      { "id": "code4", "code": "spring.datasource.url=jdbc:postgresql://localhost:5432/mi_db" },
+      { "id": "code5", "code": "spring.jpa.hibernate.ddl-auto=create-drop" },
+      { "id": "code6", "code": "@Autowired\nprivate ProductoRepository repository;" },
+      { "id": "code7", "code": "<dependency>\n  <groupId>org.springframework.boot</groupId>\n  <artifactId>spring-boot-starter-web</artifactId>\n</dependency>" },
+      { "id": "code8", "code": "mvn spring-boot:run" },
+      { "id": "code9", "code": "Producto nuevo = new Producto();\nnuevo.setNombre(\"Laptop\");\nrepository.save(nuevo);" },
+      { "id": "code10", "code": "@GetMapping(\"/productos/{id}\")\npublic Producto obtenerPorId(@PathVariable Long id) {\n  return repository.findById(id).orElse(null);\n}" }
     ],
     "concepts": [
-      { "id": "concept1", "description": "Slots: Permite pasar contenido dinámico a una plantilla desde el componente padre." },
-      { "id": "concept2", "description": "Directiva: Renderiza el contenido solo una vez y lo almacena en caché." },
-      { "id": "concept3", "description": "Directiva: Evita que el parpadeo inicial del contenido sea visible hasta que Vue esté completamente cargado." },
-      { "id": "concept4", "description": "Refs: Permite acceder a elementos o componentes del DOM directamente desde el código JavaScript." },
-      { "id": "concept5", "description": "Modificador de v-model: Actualiza el valor del input solo cuando el usuario termina de escribir y pierde el foco." },
-      { "id": "concept6", "description": "$attrs: Permite pasar atributos no declarados explícitamente en un componente hijo a un elemento del DOM." },
-      { "id": "concept7", "description": "$listeners: Permite pasar eventos desde el componente padre al componente hijo sin declararlos explícitamente." },
-      { "id": "concept8", "description": "Provide: Hace que un valor esté disponible para todos los componentes hijos sin necesidad de pasar props." },
-      { "id": "concept9", "description": "Inject: Recibe valores proporcionados por un componente ancestro a través de `provide`." },
-      { "id": "concept10", "description": "is: Permite renderizar dinámicamente un componente basado en su nombre." }
+      { "id": "concept8", "description": "Comando de Maven que ejecuta una aplicación Spring Boot sin necesidad de compilar un JAR." },
+      { "id": "concept3", "description": "Define un controlador REST que expone un endpoint para obtener productos." },
+      { "id": "concept5", "description": "Configuración de Hibernate que define que la base de datos se recreará en cada ejecución." },
+      { "id": "concept1", "description": "Define una entidad que se mapeará a una tabla en la base de datos." },
+      { "id": "concept7", "description": "Dependencia de Maven necesaria para construir una API REST en Spring Boot." },
+      { "id": "concept10", "description": "Endpoint que permite recuperar un producto por su ID desde la base de datos." },
+      { "id": "concept2", "description": "Interfaz que permite realizar operaciones de base de datos sin necesidad de escribir SQL." },
+      { "id": "concept9", "description": "Crea una nueva instancia de Producto y la guarda en la base de datos." },
+      { "id": "concept4", "description": "Cadena de conexión que define cómo la aplicación se conectará a una base de datos PostgreSQL." },
+      { "id": "concept6", "description": "Anotación que inyecta automáticamente una dependencia en un componente de Spring." }
     ]
   }
 }
