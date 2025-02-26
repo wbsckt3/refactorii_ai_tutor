@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
+    
     // Función para cargar dinámicamente los códigos y conceptos desde JSON
-    function cargarContenido(reto) {
+   /* function cargarContenido(reto) {
         fetch('contenido.json')
             .then(response => response.json())
             .then(data => {
@@ -44,6 +45,41 @@ document.addEventListener("DOMContentLoaded", function () {
                 iniciarSortable();
             })
             .catch(error => console.error('Error cargando el contenido:', error));
+    } */
+
+    function cargarContenido(reto) {
+    fetch('contenido.json')
+        .then(response => response.json())
+        .then(data => {
+            const retoKey = `codesReto${reto}`;
+            if (!data[retoKey]) {
+                console.error("No se encontró el reto:", retoKey);
+                return;
+            }
+
+            // Limpia la UI antes de cargar el nuevo reto
+            document.getElementById('contenedorRetos').innerHTML = '';
+
+            // Lógica para cargar el nuevo reto
+            const retoData = data[retoKey];
+            document.getElementById('tituloReto').innerText = retoData.title;
+
+            retoData.concepts.forEach(concept => {
+                const div = document.createElement('div');
+                div.id = concept.id;
+                div.innerHTML = `<p>${concept.description}</p>`;
+                document.getElementById('contenedorRetos').appendChild(div);
+            });
+
+            retoData.codes.forEach(code => {
+                const codeDiv = document.createElement('div');
+                codeDiv.classList.add('code-snippet');
+                codeDiv.id = code.id;
+                codeDiv.innerHTML = `<pre>${code.code}</pre>`;
+                document.getElementById('contenedorRetos').appendChild(codeDiv);
+            });
+        })
+        .catch(error => console.error("Error cargando contenido:", error));
     }
 
     // Función para inicializar Sortable después de cargar el contenido dinámicamente
