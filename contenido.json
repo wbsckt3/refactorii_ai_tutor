@@ -27,7 +27,7 @@
     ]
   },
   "codesReto2": {
-    "title": "2. Práctica de conceptos básicos de Java para Spring Boot",
+    "title": "2. Práctica de cFundamentos de Java en el desarrollo backend",
     "codes": [
       { "id": "code1", "code": "List<Integer> numeros = Arrays.asList(3, 5, 7);\nSystem.out.println(numeros.size());" },
       { "id": "code2", "code": "String texto = \"Java\";\nSystem.out.println(texto.toUpperCase());" },
