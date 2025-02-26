@@ -54,7 +54,7 @@
     ]
   },
   "codesReto3": {
-    "title": "2. Fundamentos esenciales en Spring Boot y JPA",
+    "title": "3. Fundamentos esenciales en Spring Boot y JPA",
     "codes": [
       { "id": "code1", "code": "@Entity public class Usuario { private String nombre; }" },
       { "id": "code2", "code": "@Id @GeneratedValue private Long id;" },
