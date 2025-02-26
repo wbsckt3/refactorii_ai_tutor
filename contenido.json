@@ -27,30 +27,30 @@
     ]
   },
   "codesReto2": {
-    "title": "2. Falsy values en Javascript",
+    "title": "2. Práctica de conceptos básicos de Java para Spring Boot",
     "codes": [
-      { "id": "code1", "code": "null" },
-      { "id": "code2", "code": "undefined" },
-      { "id": "code3", "code": "NaN" },
-      { "id": "code4", "code": "0" },
-      { "id": "code5", "code": "\"\" (cadena vacía)" },
-      { "id": "code6", "code": "false" },
-      { "id": "code7", "code": "-0" },
-      { "id": "code8", "code": "true" },
-      { "id": "code9", "code": "Boolean()" },
-      { "id": "code10", "code": "!!(valor)" }
+      { "id": "code1", "code": "List<Integer> numeros = Arrays.asList(3, 5, 7);\nSystem.out.println(numeros.size());" },
+      { "id": "code2", "code": "String texto = \"Java\";\nSystem.out.println(texto.toUpperCase());" },
+      { "id": "code3", "code": "int maximo = Math.max(8, 12);\nSystem.out.println(maximo);" },
+      { "id": "code4", "code": "public int suma(int a, int b) { return a + b; }\nSystem.out.println(suma(4, 6));" },
+      { "id": "code5", "code": "@Autowired private UsuarioRepository repo;\nSystem.out.println(repo != null ? \"Inyección exitosa\" : \"Error en inyección\");" },
+      { "id": "code6", "code": "Optional<String> opt = Optional.of(\"Spring\");\nSystem.out.println(opt.orElse(\"Desconocido\"));" },
+      { "id": "code7", "code": "LocalDate hoy = LocalDate.now();\nSystem.out.println(hoy.getYear());" },
+      { "id": "code8", "code": "int num = Integer.parseInt(\"10\");\nSystem.out.println(num * 2);" },
+      { "id": "code9", "code": "@RestController public class ApiController { }\nSystem.out.println(\"Controlador registrado\");" },
+      { "id": "code10", "code": "System.out.println(\"¡Hola, mundo!\");" }
     ],
     "concepts": [
-      { "id": "concept1", "description": "Representa la ausencia intencionada de cualquier valor." },
-      { "id": "concept2", "description": "Indica la ausencia de valor o que algo no se ha definido." },
-      { "id": "concept3", "description": "Este valor indica que no se ha podido realizar una operación matemática válida." },
-      { "id": "concept4", "description": "Utilizado en comparaciones numéricas." },
-      { "id": "concept5", "description": "Esta cadena no contiene caracteres." },
-      { "id": "concept6", "description": "Representa una falsedad explícita en una condición lógica." },
-      { "id": "concept7", "description": "Igual que su contraparte positiva, pero también se considera \"falsy\"." },
-      { "id": "concept8", "description": "Este valor lógico representa una verdad." },
-      { "id": "concept9", "description": "Se utiliza para convertir valores en verdaderos o falsos explícitamente." },
-      { "id": "concept10", "description": "Convierte cualquier valor en su equivalente booleano utilizando doble negación." }
+      { "id": "concept6", "description": "Spring" },
+      { "id": "concept9", "description": "Controlador registrado" },
+      { "id": "concept3", "description": "12" },
+      { "id": "concept1", "description": "3" },
+      { "id": "concept10", "description": "¡Hola, mundo!" },
+      { "id": "concept7", "description": "El año actual (ejemplo: 2025)" },
+      { "id": "concept2", "description": "JAVA" },
+      { "id": "concept5", "description": "Inyección exitosa" },
+      { "id": "concept8", "description": "20" },
+      { "id": "concept4", "description": "10" }
     ]
   },
   "codesReto3": {
