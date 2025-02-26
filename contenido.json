@@ -14,16 +14,16 @@
       { "id": "code10", "code": "System.out.println(\"¡Hola, mundo!\");" }
     ],
     "concepts": [
-      { "id": "concept1", "description": "Estructura que agrupa datos y comportamientos relacionados en un solo objeto reutilizable." },
-      { "id": "concept2", "description": "Una estructura que almacena elementos dinámicamente y permite recorrerlos." },
-      { "id": "concept3", "description": "Permite que el programa decida qué hacer en función de una condición específica." },
-      { "id": "concept4", "description": "Bloque de código reutilizable que toma entradas, realiza cálculos y devuelve un resultado." },
-      { "id": "concept5", "description": "Creación de una instancia de un objeto que maneja la comunicación con una fuente externa." },
-      { "id": "concept6", "description": "Mecanismo para almacenar y recuperar valores de configuración en tiempo de ejecución." },
       { "id": "concept7", "description": "Representación de un punto exacto en el tiempo, sin zona horaria." },
+      { "id": "concept2", "description": "Una estructura que almacena elementos dinámicamente y permite recorrerlos." },
+      { "id": "concept10", "description": "Forma más sencilla de visualizar información en la salida estándar." },
+      { "id": "concept5", "description": "Creación de una instancia de un objeto que maneja la comunicación con una fuente externa." },
       { "id": "concept8", "description": "Mecanismo de manejo de errores para evitar que el programa falle por valores inesperados." },
-      { "id": "concept9", "description": "Indica que un objeto se administrará automáticamente dentro del ciclo de vida del framework." },
-      { "id": "concept10", "description": "Forma más sencilla de visualizar información en la salida estándar." }
+      { "id": "concept1", "description": "Estructura que agrupa datos y comportamientos relacionados en un solo objeto reutilizable." },
+      { "id": "concept3", "description": "Permite que el programa decida qué hacer en función de una condición específica." },
+      { "id": "concept6", "description": "Mecanismo para almacenar y recuperar valores de configuración en tiempo de ejecución." },
+      { "id": "concept4", "description": "Bloque de código reutilizable que toma entradas, realiza cálculos y devuelve un resultado." },
+      { "id": "concept9", "description": "Indica que un objeto se administrará automáticamente dentro del ciclo de vida del framework." }
     ]
   },
   "codesReto2": {
