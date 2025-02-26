@@ -134,20 +134,19 @@ document.addEventListener("DOMContentLoaded", function () {
     cargarContenido(retoActual);
 });
 
- // Función para verificar las respuestas
-   window.checkAnswers = function() {
-            // Ajustar las respuestas correctas según el segundo reto (7 ítems)
+// Función para verificar las respuestas y avanzar si se completan todas correctamente
+window.checkAnswers = function() {
     const correctAnswers = {
-        concept1: "code1",  // Valor 1
-        concept2: "code2",  // Valor 2
-        concept3: "code3",  // Valor 3
-        concept4: "code4",  // Valor 4
-        concept5: "code5",  // Valor 5
-        concept6: "code6",  // Valor 6
-        concept7: "code7",   // Valor 7
-        concept8: "code8",  // Conversión de tipo
-        concept9: "code9",  // API de almacenamiento local
-        concept10: "code10" // Salida en consola
+        concept1: "code1",
+        concept2: "code2",
+        concept3: "code3",
+        concept4: "code4",
+        concept5: "code5",
+        concept6: "code6",
+        concept7: "code7",
+        concept8: "code8",
+        concept9: "code9",
+        concept10: "code10"
     };
 
     let score = 0;
@@ -156,19 +155,24 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let concept in correctAnswers) {
         const conceptDiv = document.getElementById(concept);
 
-        // Verificar si el conceptDiv existe
         if (!conceptDiv) {
             console.error(`No se encontró el elemento con ID ${concept}`);
-            continue;  // Saltar este concepto si no se encuentra
+            continue;
         }
 
         const codeSnippet = conceptDiv.querySelector('.code-snippet');
-        
-        // Verificar si el codeSnippet existe y su ID es correcto
+
         if (codeSnippet && codeSnippet.id === correctAnswers[concept]) {
             score++;
         }
     }
 
     alert(`Tu puntuación es: ${score} de ${totalConcepts}`);
-}
+
+    // Si todas las respuestas son correctas, avanzar al siguiente reto
+    if (score === totalConcepts) {
+        alert("¡Felicidades! Pasaste al siguiente reto.");
+        retoActual++;
+        cargarContenido(retoActual);
+    }
+};
