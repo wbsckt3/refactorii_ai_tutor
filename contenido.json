@@ -106,8 +106,7 @@
       { "id": "concept9", "description": "Crea una nueva instancia de Producto y la guarda en la base de datos." },
       { "id": "concept10", "description": "Endpoint que permite recuperar un producto por su ID desde la base de datos." }
     ]
-  }
-},
+  },
   "codesReto5": {
     "title": "5. VUE conceptos intermedios",
     "codes": [
