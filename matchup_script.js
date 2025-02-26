@@ -111,7 +111,8 @@ window.onload = function () {
     }
 
    // Función para verificar las respuestas
-    window.checkAnswers = function () {
+  // Función para verificar las respuestas
+    window.checkAnswers = function() {
         fetch('contenido.json')
             .then(response => response.json())
             .then(data => {
@@ -119,7 +120,7 @@ window.onload = function () {
                 const content = data[retoKey];
     
                 if (!content || !content.correctAnswers) {
-                    mostrarMensaje(`No se encontraron respuestas correctas para ${retoKey}`, "error");
+                    console.error(`No se encontraron respuestas correctas para ${retoKey}`);
                     return;
                 }
     
@@ -131,7 +132,7 @@ window.onload = function () {
                     const conceptDiv = document.getElementById(concept);
     
                     if (!conceptDiv) {
-                        mostrarMensaje(`No se encontró el elemento con ID ${concept}`, "error");
+                        console.error(`No se encontró el elemento con ID ${concept}`);
                         continue;
                     }
     
@@ -142,50 +143,15 @@ window.onload = function () {
                     }
                 }
     
-                mostrarMensaje(`✅ Tu puntuación es: ${score} de ${totalConcepts}`, "success");
+                alert(`Tu puntuación es: ${score} de ${totalConcepts}`);
     
-                // Si se completaron todos los retos, mostrar mensaje final
-                if (currentRetoIndex >= retosData.length - 1) {
-                    mostrarMensaje("🎉 ¡Has completado todos los retos!", "success");
+                // Pasar al siguiente reto después del alert si hay más retos
+                if (currentRetoIndex < retosData.length - 1) {
+                    cargarContenido(++currentRetoIndex);
+                } else {
+                    alert("¡Has completado todos los retos!");
                 }
             })
-            .catch(error => mostrarMensaje('Error al validar las respuestas.', "error"));
+            .catch(error => console.error('Error al validar las respuestas:', error));
     };
-    
-    // Función para mostrar mensajes en pantalla
-    function mostrarMensaje(texto, tipo) {
-        let mensajeDiv = document.getElementById("mensaje");
-    
-        if (!mensajeDiv) {
-            mensajeDiv = document.createElement("div");
-            mensajeDiv.id = "mensaje";
-            document.body.appendChild(mensajeDiv);
-        }
-    
-        mensajeDiv.textContent = texto;
-        mensajeDiv.className = tipo; // Puede ser "success" o "error"
-    
-        // Estilos básicos para el mensaje
-        mensajeDiv.style.position = "fixed";
-        mensajeDiv.style.bottom = "20px";
-        mensajeDiv.style.left = "50%";
-        mensajeDiv.style.transform = "translateX(-50%)";
-        mensajeDiv.style.padding = "10px 20px";
-        mensajeDiv.style.color = "#fff";
-        mensajeDiv.style.borderRadius = "5px";
-        mensajeDiv.style.zIndex = "1000";
-    
-        if (tipo === "success") {
-            mensajeDiv.style.backgroundColor = "green";
-        } else {
-            mensajeDiv.style.backgroundColor = "red";
-        }
-    
-        // Eliminar el mensaje después de 3 segundos
-        setTimeout(() => mensajeDiv.remove(), 3000);
-    }
 
-
-    // Cargar el primer reto
-    cargarContenido(currentRetoIndex);
-};
