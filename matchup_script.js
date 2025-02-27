@@ -102,11 +102,14 @@ window.checkAnswers = function () {
     
     document.querySelectorAll('.droppable').forEach(conceptDiv => {
         const assignedCode = conceptDiv.querySelector('.code-snippet');
+        console.log(`Concept ID: ${conceptDiv.id}, Correct Code: ${conceptDiv.dataset.correctCode}, Assigned Code: ${assignedCode ? assignedCode.id : 'None'}`);
+        
         if (assignedCode && assignedCode.id === conceptDiv.dataset.correctCode) {
             score++;
         }
     });
 
+    console.log(`Final Score: ${score} / ${totalConcepts}`);
     mostrarMensaje(`✅ Tu puntuación es: ${score} de ${totalConcepts}`, "success");
     if (score >= totalConcepts) {
         document.querySelector('.boton-reto').style.display = 'inline-block';
