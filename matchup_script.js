@@ -18,7 +18,6 @@ function cargarContenido(retoIndex) {
     }
 
     const retoKey = retosData[retoIndex];
-
     fetch('contenido.json')
         .then(response => response.json())
         .then(data => {
@@ -59,6 +58,7 @@ function iniciarSortable() {
         group: 'shared',
         animation: 150
     });
+
     document.querySelectorAll('.droppable').forEach(concept => {
         Sortable.create(concept, {
             group: 'shared',
@@ -77,6 +77,21 @@ function mostrarBotones() {
     botonValidar.className = 'boton-validar';
     botonValidar.addEventListener('click', checkAnswers);
     container.appendChild(botonValidar);
+
+    if (currentRetoIndex > 0) {
+        const botonAnterior = document.createElement('button');
+        botonAnterior.textContent = `< Reto anterior`;
+        botonAnterior.className = 'boton-reto-anterior';
+        botonAnterior.addEventListener('click', () => cargarContenido(--currentRetoIndex));
+        container.appendChild(botonAnterior);
+    }
+
+    const botonSiguiente = document.createElement('button');
+    botonSiguiente.textContent = `Siguiente reto >`;
+    botonSiguiente.className = 'boton-reto';
+    botonSiguiente.style.display = 'none';
+    botonSiguiente.addEventListener('click', () => cargarContenido(++currentRetoIndex));
+    container.appendChild(botonSiguiente);
 }
 
 window.checkAnswers = function () {
@@ -90,27 +105,29 @@ window.checkAnswers = function () {
                 return;
             }
 
-            let correctAnswers = {};
+            let score = 0;
+            let totalConcepts = content.concepts.length;
+            
             content.concepts.forEach((concept, index) => {
-                if (content.codes[index]) {
-                    correctAnswers[concept.id] = content.codes[index].id;
+                const conceptDiv = document.getElementById(concept.id);
+                if (!conceptDiv) {
+                    mostrarMensaje(`No se encontró el elemento con ID ${concept.id}`, "error");
+                    return;
+                }
+
+                const assignedCode = conceptDiv.querySelector('.code-snippet');
+                if (assignedCode && assignedCode.id === content.codes[index].id) {
+                    score++;
                 }
             });
 
-            let score = 0;
-            let totalConcepts = Object.keys(correctAnswers).length;
-            
-            for (let concept in correctAnswers) {
-                const conceptDiv = document.getElementById(concept);
-                if (!conceptDiv) continue;
-
-                const codeSnippet = conceptDiv.querySelector('.code-snippet');
-                if (codeSnippet && codeSnippet.id === correctAnswers[concept]) {
-                    score++;
-                }
-            }
-
             mostrarMensaje(`✅ Tu puntuación es: ${score} de ${totalConcepts}`, "success");
+            if (score >= totalConcepts) {
+                document.querySelector('.boton-reto').style.display = 'inline-block';
+            }
+            if (currentRetoIndex >= retosData.length - 1) {
+                mostrarMensaje("🎉 ¡Has completado todos los retos!", "success");
+            }
         })
         .catch(error => mostrarMensaje('Error al validar las respuestas.', "error"));
 };
