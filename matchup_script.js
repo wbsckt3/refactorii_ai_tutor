@@ -1,11 +1,11 @@
-let currentRetoIndex = 0;  // Índice del reto actual 
-let retosData = [];  // Lista de retos cargados
+let currentRetoIndex = 0;
+let retosData = [];
 
 window.onload = function () {
     fetch('contenido.json')
         .then(response => response.json())
         .then(data => {
-            retosData = Object.keys(data); // Guardamos las claves de los retos
+            retosData = Object.keys(data);
             cargarContenido(currentRetoIndex);
         })
         .catch(error => console.error('Error cargando el JSON:', error));
@@ -18,6 +18,7 @@ function cargarContenido(retoIndex) {
     }
 
     const retoKey = retosData[retoIndex];
+
     fetch('contenido.json')
         .then(response => response.json())
         .then(data => {
@@ -58,7 +59,6 @@ function iniciarSortable() {
         group: 'shared',
         animation: 150
     });
-
     document.querySelectorAll('.droppable').forEach(concept => {
         Sortable.create(concept, {
             group: 'shared',
@@ -77,21 +77,6 @@ function mostrarBotones() {
     botonValidar.className = 'boton-validar';
     botonValidar.addEventListener('click', checkAnswers);
     container.appendChild(botonValidar);
-
-    if (currentRetoIndex > 0) {
-        const botonAnterior = document.createElement('button');
-        botonAnterior.textContent = `< Reto anterior`;
-        botonAnterior.className = 'boton-reto-anterior';
-        botonAnterior.addEventListener('click', () => cargarContenido(--currentRetoIndex));
-        container.appendChild(botonAnterior);
-    }
-
-    const botonSiguiente = document.createElement('button');
-    botonSiguiente.textContent = `Siguiente reto >`;
-    botonSiguiente.className = 'boton-reto';
-    botonSiguiente.style.display = 'none';
-    botonSiguiente.addEventListener('click', () => cargarContenido(++currentRetoIndex));
-    container.appendChild(botonSiguiente);
 }
 
 window.checkAnswers = function () {
@@ -100,35 +85,32 @@ window.checkAnswers = function () {
         .then(data => {
             const retoKey = retosData[currentRetoIndex];
             const content = data[retoKey];
-
-            if (!content || !content.correctAnswers) {
+            if (!content) {
                 mostrarMensaje(`No se encontraron respuestas correctas para ${retoKey}`, "error");
                 return;
             }
 
-            const correctAnswers = content.correctAnswers;
-            let score = 0;
-            let totalConcepts = Object.keys(correctAnswers).length;
-
-            Object.keys(correctAnswers).forEach(concept => {
-                const conceptDiv = document.getElementById(concept);
-                if (!conceptDiv) return;
-
-                const assignedCode = conceptDiv.querySelector('.code-snippet');
-                if (assignedCode && assignedCode.id === correctAnswers[concept]) {
-                    score++;
+            let correctAnswers = {};
+            content.concepts.forEach((concept, index) => {
+                if (content.codes[index]) {
+                    correctAnswers[concept.id] = content.codes[index].id;
                 }
             });
 
+            let score = 0;
+            let totalConcepts = Object.keys(correctAnswers).length;
+            
+            for (let concept in correctAnswers) {
+                const conceptDiv = document.getElementById(concept);
+                if (!conceptDiv) continue;
+
+                const codeSnippet = conceptDiv.querySelector('.code-snippet');
+                if (codeSnippet && codeSnippet.id === correctAnswers[concept]) {
+                    score++;
+                }
+            }
+
             mostrarMensaje(`✅ Tu puntuación es: ${score} de ${totalConcepts}`, "success");
-
-            if (score >= totalConcepts) {
-                document.querySelector('.boton-reto').style.display = 'inline-block';
-            }
-
-            if (currentRetoIndex >= retosData.length - 1) {
-                mostrarMensaje("🎉 ¡Has completado todos los retos!", "success");
-            }
         })
         .catch(error => mostrarMensaje('Error al validar las respuestas.', "error"));
 };
@@ -140,7 +122,6 @@ function mostrarMensaje(texto, tipo) {
         mensajeDiv.id = "mensaje";
         document.body.appendChild(mensajeDiv);
     }
-    
     mensajeDiv.textContent = texto;
     mensajeDiv.className = tipo;
     mensajeDiv.style.position = "fixed";
@@ -152,7 +133,5 @@ function mostrarMensaje(texto, tipo) {
     mensajeDiv.style.borderRadius = "5px";
     mensajeDiv.style.zIndex = "1000";
     mensajeDiv.style.backgroundColor = tipo === "success" ? "green" : "red";
-    
     setTimeout(() => mensajeDiv.remove(), 3000);
 }
-
