@@ -67,10 +67,10 @@ function iniciarSortable() {
             animation: 150,
             ghostClass: 'sortable-ghost',
             onAdd: function (evt) {
-                evt.item.dataset.assignedTo = concept.dataset.correctCode;
+                concept.dataset.assignedCode = evt.item.id; // Asigna el ID correctamente
             },
             onRemove: function (evt) {
-                delete evt.item.dataset.assignedTo;
+                delete concept.dataset.assignedCode;
             }
         });
     });
@@ -107,8 +107,8 @@ window.checkAnswers = function () {
     let totalConcepts = document.querySelectorAll('.droppable').length;
     
     document.querySelectorAll('.droppable').forEach(conceptDiv => {
-        const assignedCode = conceptDiv.querySelector('.code-snippet');
-        if (assignedCode && assignedCode.id === conceptDiv.dataset.correctCode) {
+        const assignedCode = conceptDiv.dataset.assignedCode;
+        if (assignedCode && assignedCode === conceptDiv.dataset.correctCode) {
             score++;
             conceptDiv.style.backgroundColor = "#a8e6cf"; // Verde si es correcto
         } else {
