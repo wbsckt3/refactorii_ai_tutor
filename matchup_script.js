@@ -76,8 +76,13 @@ function iniciarSortable() {
                     console.warn(`⚠️ No se pudo asignar código a ${concept.id}`);
                 }
             },
-            onRemove: function () {
-                concept.dataset.assignedCode = ''; // Limpia el código cuando se remueve
+            onRemove: function (evt) {
+                setTimeout(() => {
+                    if (evt.from.children.length === 0) {
+                        evt.from.dataset.assignedCode = ''; 
+                        console.log(`🗑️ Eliminado: ${evt.from.id} ahora está vacío.`);
+                    }
+                }, 50); // Pequeño delay para permitir que SortableJS procese los cambios
             }
         });
     });
