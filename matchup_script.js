@@ -69,7 +69,8 @@ function iniciarSortable() {
             onAdd: function (evt) {
                 // Verifica si el elemento arrastrado tiene un ID válido
                 if (evt.item && evt.item.id) {
-                    concept.dataset.assignedCode = evt.item.id; 
+                    //concept.dataset.assignedCode = evt.item.id; 
+                    evt.to.dataset.assignedCode = evt.item.id; 
                     console.log(`✅ Asignado correctamente: ${evt.item.id} a ${concept.id}`);
                 } else {
                     console.warn(`⚠️ No se pudo asignar código a ${concept.id}`);
