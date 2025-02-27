@@ -67,10 +67,12 @@ function iniciarSortable() {
             animation: 150,
             ghostClass: 'sortable-ghost',
             onAdd: function (evt) {
-                concept.dataset.assignedCode = evt.item.id; // Asigna el ID correctamente
+                evt.to.dataset.assignedCode = evt.item.id; // Se asigna correctamente
+                console.log(`Asignado: ${evt.item.id} a ${evt.to.id}`);
             },
             onRemove: function (evt) {
-                delete concept.dataset.assignedCode;
+                delete evt.from.dataset.assignedCode;
+                console.log(`Eliminado código de: ${evt.from.id}`);
             }
         });
     });
@@ -108,6 +110,8 @@ window.checkAnswers = function () {
     
     document.querySelectorAll('.droppable').forEach(conceptDiv => {
         const assignedCode = conceptDiv.dataset.assignedCode;
+        console.log(`Evaluando Concepto: ${conceptDiv.id} -> Asignado: ${assignedCode}, Correcto: ${conceptDiv.dataset.correctCode}`);
+
         if (assignedCode && assignedCode === conceptDiv.dataset.correctCode) {
             score++;
             conceptDiv.style.backgroundColor = "#a8e6cf"; // Verde si es correcto
