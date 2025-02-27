@@ -42,7 +42,7 @@ function cargarContenido(retoIndex) {
 
             content.concepts.forEach(item => {
                 const conceptDiv = document.createElement('div');
-                conceptDiv.id = item.id;
+                conceptDiv.id = `concept-${item.id}`;
                 conceptDiv.className = 'droppable';
                 conceptDiv.dataset.correctCode = item.correctCode || '';
                 conceptDiv.textContent = item.description;
@@ -67,7 +67,7 @@ function iniciarSortable() {
             animation: 150,
             ghostClass: 'sortable-ghost',
             onAdd: function (evt) {
-                evt.item.dataset.assignedTo = evt.to.id;
+                evt.item.dataset.assignedTo = concept.dataset.correctCode;
             },
             onRemove: function (evt) {
                 delete evt.item.dataset.assignedTo;
