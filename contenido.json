@@ -11,19 +11,19 @@
       { "id": "code7", "code": "Instant ahora = Instant.now();" },
       { "id": "code8", "code": "try { int n = Integer.parseInt(valor); } catch (Exception e) { }" },
       { "id": "code9", "code": "@Component public class ServicioUsuario { }" },
-      { "id": "code10", "code": "System.out.println(\"¡Hola, mundo!\");" }
+      { "id": "code10", "code": "System.out.println(\"\u00a1Hola, mundo!\");" }
     ],
     "concepts": [
-      { "id": "concept7", "description": "Representación de un punto exacto en el tiempo, sin zona horaria." },
-      { "id": "concept2", "description": "Una estructura que almacena elementos dinámicamente y permite recorrerlos." },
-      { "id": "concept10", "description": "Forma más sencilla de visualizar información en la salida estándar." },
-      { "id": "concept5", "description": "Creación de una instancia de un objeto que maneja la comunicación con una fuente externa." },
-      { "id": "concept8", "description": "Mecanismo de manejo de errores para evitar que el programa falle por valores inesperados." },
-      { "id": "concept1", "description": "Estructura que agrupa datos y comportamientos relacionados en un solo objeto reutilizable." },
-      { "id": "concept3", "description": "Permite que el programa decida qué hacer en función de una condición específica." },
-      { "id": "concept6", "description": "Mecanismo para almacenar y recuperar valores de configuración en tiempo de ejecución." },
-      { "id": "concept4", "description": "Bloque de código reutilizable que toma entradas, realiza cálculos y devuelve un resultado." },
-      { "id": "concept9", "description": "Indica que un objeto se administrará automáticamente dentro del ciclo de vida del framework." }
+      { "id": "concept7", "description": "Representación de un punto exacto en el tiempo, sin zona horaria.", "correctCode": "code7" },
+      { "id": "concept2", "description": "Una estructura que almacena elementos dinámicamente y permite recorrerlos.", "correctCode": "code2" },
+      { "id": "concept10", "description": "Forma más sencilla de visualizar información en la salida estándar.", "correctCode": "code10" },
+      { "id": "concept5", "description": "Creación de una instancia de un objeto que maneja la comunicación con una fuente externa.", "correctCode": "code5" },
+      { "id": "concept8", "description": "Mecanismo de manejo de errores para evitar que el programa falle por valores inesperados.", "correctCode": "code8" },
+      { "id": "concept1", "description": "Estructura que agrupa datos y comportamientos relacionados en un solo objeto reutilizable.", "correctCode": "code1" },
+      { "id": "concept3", "description": "Permite que el programa decida qué hacer en función de una condición específica.", "correctCode": "code3" },
+      { "id": "concept6", "description": "Mecanismo para almacenar y recuperar valores de configuración en tiempo de ejecución.", "correctCode": "code6" },
+      { "id": "concept4", "description": "Bloque de código reutilizable que toma entradas, realiza cálculos y devuelve un resultado.", "correctCode": "code4" },
+      { "id": "concept9", "description": "Indica que un objeto se administrará automáticamente dentro del ciclo de vida del framework.", "correctCode": "code9" }
     ]
   },
   "codesReto2": {
@@ -41,16 +41,16 @@
       { "id": "code10", "code": "System.out.println(\"¡Hola, mundo!\");" }
     ],
     "concepts": [
-      { "id": "concept6", "description": "Spring" },
-      { "id": "concept9", "description": "Controlador registrado" },
-      { "id": "concept3", "description": "12" },
-      { "id": "concept1", "description": "3" },
-      { "id": "concept10", "description": "¡Hola, mundo!" },
-      { "id": "concept7", "description": "El año actual (ejemplo: 2025)" },
-      { "id": "concept2", "description": "JAVA" },
-      { "id": "concept5", "description": "Inyección exitosa" },
-      { "id": "concept8", "description": "20" },
-      { "id": "concept4", "description": "10" }
+      { "id": "concept6", "description": "Spring", "correctCode": "code6" },
+      { "id": "concept9", "description": "Controlador registrado", "correctCode": "code9" },
+      { "id": "concept3", "description": "12", "correctCode": "code3" },
+      { "id": "concept1", "description": "3", "correctCode": "code1" },
+      { "id": "concept10", "description": "¡Hola, mundo!", "correctCode": "code10" },
+      { "id": "concept7", "description": "El año actual (ejemplo: 2025)", "correctCode": "code7" },
+      { "id": "concept2", "description": "JAVA", "correctCode": "code2" },
+      { "id": "concept5", "description": "Inyección exitosa", "correctCode": "code5" },
+      { "id": "concept8", "description": "20", "correctCode": "code8" },
+      { "id": "concept4", "description": "10", "correctCode": "code4" }
     ]
   },
   "codesReto3": {
@@ -68,16 +68,16 @@
       { "id": "code10", "code": "mvn clean package" }
     ],
     "concepts": [
-      { "id": "concept7", "description": "Cadena de conexión que define cómo la aplicación se conectará a la base de datos." },
-      { "id": "concept3", "description": "Interfaz que facilita operaciones de base de datos sin necesidad de escribir SQL manualmente." },
-      { "id": "concept9", "description": "Configuración de Hibernate que define cómo manejar los cambios en la base de datos." },
-      { "id": "concept1", "description": "Permite mapear una clase de Java con una tabla en la base de datos." },
-      { "id": "concept5", "description": "Método utilizado para exponer información en una API REST." },
-      { "id": "concept10", "description": "Comando utilizado para limpiar y empaquetar una aplicación Java con Maven." },
-      { "id": "concept2", "description": "Se utiliza para definir una clave primaria en una entidad de base de datos." },
-      { "id": "concept8", "description": "Dependencia de Maven necesaria para trabajar con JPA en Spring Boot." },
-      { "id": "concept6", "description": "Inyecta automáticamente dependencias sin necesidad de instanciarlas manualmente." },
-      { "id": "concept4", "description": "Hace que una clase maneje peticiones HTTP de forma automática." }
+      { "id": "concept7", "description": "Cadena de conexión que define cómo la aplicación se conectará a la base de datos.", "correctCode": "code7" },
+      { "id": "concept3", "description": "Interfaz que facilita operaciones de base de datos sin necesidad de escribir SQL manualmente.", "correctCode": "code3" },
+      { "id": "concept9", "description": "Configuración de Hibernate que define cómo manejar los cambios en la base de datos.", "correctCode": "code9" },
+      { "id": "concept1", "description": "Permite mapear una clase de Java con una tabla en la base de datos.", "correctCode": "code1" },
+      { "id": "concept5", "description": "Método utilizado para exponer información en una API REST.", "correctCode": "code5" },
+      { "id": "concept10", "description": "Comando utilizado para limpiar y empaquetar una aplicación Java con Maven.", "correctCode": "code10" },
+      { "id": "concept2", "description": "Se utiliza para definir una clave primaria en una entidad de base de datos.", "correctCode": "code2" },
+      { "id": "concept8", "description": "Dependencia de Maven necesaria para trabajar con JPA en Spring Boot.", "correctCode": "code8" },
+      { "id": "concept6", "description": "Inyecta automáticamente dependencias sin necesidad de instanciarlas manualmente.", "correctCode": "code6" },
+      { "id": "concept4", "description": "Hace que una clase maneje peticiones HTTP de forma automática.", "correctCode": "code4" }
     ]
   },
   "codesReto4": {
@@ -95,16 +95,16 @@
       { "id": "code10", "code": "@GetMapping(\"/productos/{id}\")\npublic Producto obtenerPorId(@PathVariable Long id) {\n  return repository.findById(id).orElse(null);\n}" }
     ],
     "concepts": [
-      { "id": "concept8", "description": "Comando de Maven que ejecuta una aplicación Spring Boot sin necesidad de compilar un JAR." },
-      { "id": "concept3", "description": "Define un controlador REST que expone un endpoint para obtener productos." },
-      { "id": "concept5", "description": "Configuración de Hibernate que define que la base de datos se recreará en cada ejecución." },
-      { "id": "concept1", "description": "Define una entidad que se mapeará a una tabla en la base de datos." },
-      { "id": "concept7", "description": "Dependencia de Maven necesaria para construir una API REST en Spring Boot." },
-      { "id": "concept10", "description": "Endpoint que permite recuperar un producto por su ID desde la base de datos." },
-      { "id": "concept2", "description": "Interfaz que permite realizar operaciones de base de datos sin necesidad de escribir SQL." },
-      { "id": "concept9", "description": "Crea una nueva instancia de Producto y la guarda en la base de datos." },
-      { "id": "concept4", "description": "Cadena de conexión que define cómo la aplicación se conectará a una base de datos PostgreSQL." },
-      { "id": "concept6", "description": "Anotación que inyecta automáticamente una dependencia en un componente de Spring." }
+      { "id": "concept8", "description": "Comando de Maven que ejecuta una aplicación Spring Boot sin necesidad de compilar un JAR.", "correctCode": "code8" },
+      { "id": "concept3", "description": "Define un controlador REST que expone un endpoint para obtener productos.", "correctCode": "code3" },
+      { "id": "concept5", "description": "Configuración de Hibernate que define que la base de datos se recreará en cada ejecución.", "correctCode": "code5" },
+      { "id": "concept1", "description": "Define una entidad que se mapeará a una tabla en la base de datos.", "correctCode": "code1" },
+      { "id": "concept7", "description": "Dependencia de Maven necesaria para construir una API REST en Spring Boot.", "correctCode": "code7" },
+      { "id": "concept10", "description": "Endpoint que permite recuperar un producto por su ID desde la base de datos.", "correctCode": "code10" },
+      { "id": "concept2", "description": "Interfaz que permite realizar operaciones de base de datos sin necesidad de escribir SQL.", "correctCode": "code2" },
+      { "id": "concept9", "description": "Crea una nueva instancia de Producto y la guarda en la base de datos.", "correctCode": "code9" },
+      { "id": "concept4", "description": "Cadena de conexión que define cómo la aplicación se conectará a una base de datos PostgreSQL.", "correctCode": "code4" },
+      { "id": "concept6", "description": "Anotación que inyecta automáticamente una dependencia en un componente de Spring.", "correctCode": "code6" }
     ]
   }
 }
