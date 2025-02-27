@@ -67,11 +67,16 @@ function iniciarSortable() {
             animation: 150,
             ghostClass: 'sortable-ghost',
             onAdd: function (evt) {
-                concept.dataset.assignedCode = evt.item.id; // Guarda el ID correctamente
-                console.log(`Asignado: ${evt.item.id} a ${concept.id}`);
+                // Verifica si el elemento arrastrado tiene un ID válido
+                if (evt.item && evt.item.id) {
+                    concept.dataset.assignedCode = evt.item.id; 
+                    console.log(`✅ Asignado correctamente: ${evt.item.id} a ${concept.id}`);
+                } else {
+                    console.warn(`⚠️ No se pudo asignar código a ${concept.id}`);
+                }
             },
             onRemove: function () {
-                concept.dataset.assignedCode = ''; // Limpia cuando se remueve
+                concept.dataset.assignedCode = ''; // Limpia el código cuando se remueve
             }
         });
     });
@@ -108,12 +113,12 @@ window.checkAnswers = function () {
     let totalConcepts = document.querySelectorAll('.droppable').length;
     
     document.querySelectorAll('.droppable').forEach(conceptDiv => {
-        const assignedCode = conceptDiv.dataset.assignedCode;
-        const correctCode = conceptDiv.dataset.correctCode;
+        const assignedCode = conceptDiv.dataset.assignedCode || "❌ No asignado";
+        const correctCode = conceptDiv.dataset.correctCode || "❌ No definido";
 
-        console.log(`Evaluando Concepto: ${conceptDiv.id} -> Asignado: ${assignedCode}, Correcto: ${correctCode}`);
+        console.log(`🧐 Evaluando Concepto: ${conceptDiv.id} -> Asignado: ${assignedCode}, Correcto: ${correctCode}`);
 
-        if (assignedCode && assignedCode === correctCode) {
+        if (assignedCode !== "❌ No asignado" && assignedCode === correctCode) {
             score++;
             conceptDiv.style.backgroundColor = "#a8e6cf"; // Verde si es correcto
         } else {
