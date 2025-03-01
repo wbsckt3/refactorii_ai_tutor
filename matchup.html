@@ -27,10 +27,9 @@
     	             }).join(''));
                          const decodedToken = JSON.parse(jsonPayload);
              	     const recipeId = decodedToken._id; // Asegúrate de usar el nombre correcto del campo en el payload
-                         console.log('Recipe ID:', recipeId);
-    		     // Almacenar recipeId en local storage
-                         localStorage.setItem('recipeId', recipeId);
-    		     // loadMarkdownFiles();
+                        console.log('Recipe ID:', recipeId);
+                        localStorage.setItem('recipeId', recipeId);
+                        document.body.style.display = "block";
     	    	} else {
     	  	    console.log(data.valid);
     	  	    document.body.innerHTML = 'Access denied. Invalid token.';
@@ -44,6 +43,11 @@
          document.body.innerHTML = 'Access denied. No token provided.';
       }
     </script>
+    <style>
+        body {
+            display: none; /* Oculta el contenido hasta que se valide el token */
+        }
+    </style>
 </head>
 <body>
     <p style="text-align: center;"> Aprende programación a traves de Retos de codificacion automatizados <a href="https://www.refactorii.com">www.refactorii.com</a> </p>
