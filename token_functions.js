@@ -57,15 +57,15 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		      const code = document.getElementById('code-editor').value;
 		      // Obtén el mensaje de desafío
 		      const challenge = document.getElementById('challenge').textContent;
-		      const apiKey = 'a6bf17214c0744a0bb984614d4bc26d0'; // Reemplaza con tu clave API real
-		      const response = await fetch('https://api.aimlapi.com/v1/chat/completions', {
+		      const apiKey = 'sk-f105145c838248dab59a4c3a54127e0f'; // Reemplaza con tu clave API real
+		      const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
 		        method: 'POST',
 		        headers: {
 		          'Content-Type': 'application/json',
 		          'Authorization': `Bearer ${apiKey}`  // Incluye tu API key
 		        },
 		        body: JSON.stringify({
-		          model: 'gpt-4o',  // El modelo que estás usando
+		          model: 'deepseek-chat',  // El modelo que estás usando 
 		          messages: [
 		            {
 		              role: 'system',
@@ -75,7 +75,9 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		              role: 'user',
 		              content: `Here is my JavaScript code:\n\n${code}\n\nI used this code to solve this challenge: ${challenge}`
 		            }
-		          ]
+		          ],
+			  "temperature": 0.5,
+			  "max_tokens": 300
 		        })
 		      });
 		      // Procesa la respuesta
@@ -150,3 +152,5 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 			        console.error('Error sending the results to the server:', error);
 			    }
 		}
+	
+	
