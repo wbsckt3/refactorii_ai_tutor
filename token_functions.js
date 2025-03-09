@@ -68,12 +68,12 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		          model: 'deepseek-chat',  // El modelo que estás usando 
 		          messages: [
 		            {
-		              role: 'system',
-		              content: 'You are a JavaScript expert. You will review code provided by the user, correct any errors, and explain how it works.'
+		                role: 'system',
+		                content: 'Eres un experto en JavaScript. Revisarás el código proporcionado por el usuario, corregirás errores y explicarás cómo funciona en español.'
 		            },
 		            {
-		              role: 'user',
-		              content: `Here is my JavaScript code:\n\n${code}\n\nI used this code to solve this challenge: ${challenge}`
+		                role: 'user',
+		                content: `Aquí está mi código en JavaScript:\n\n${code}\n\nUsé este código para resolver este desafío: ${challenge}`
 		            }
 		          ],
 			  "temperature": 0.5,
