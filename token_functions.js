@@ -83,7 +83,15 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		      // Procesa la respuesta
 		      const data = await response.json();
 		      // Extraer solo el mensaje del assistant
-		      document.getElementById('challenge').textContent = data.choices[0].message.content;
+		      //document.getElementById('challenge').textContent = data.choices[0].message.content;
+		      document.getElementById('challenge').innerHTML = `<pre><code>${escapeHTML(data.choices[0].message.content)}</code></pre>`;
+		}
+
+		// Función para escapar caracteres especiales en HTML
+		function escapeHTML(str) {
+    			return str.replace(/&/g, "&amp;")
+              		.replace(/</g, "&lt;")
+             	 	.replace(/>/g, "&gt;");
 		}
 		
 		// Al presionar el botón "AI Assistance"
