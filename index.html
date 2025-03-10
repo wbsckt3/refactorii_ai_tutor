@@ -88,43 +88,6 @@
 	        .catch((error) => console.error('Error al cargar los scripts:', error));
 	});
 
-
-
-
-	    
-// Definir la prueba con un marcador para las expectativas
-const testTemplate = `
-it('should log correct greetings from greet function', function (done) {
-    const output = [];
-    const originalConsoleLog = console.log;
-
-    // Redirigir console.log para capturar los mensajes
-    console.log = function (message) {
-        output.push(message);
-        originalConsoleLog.apply(console, arguments);
-    };
-
-    // Limpiar el output antes de cada ejecución
-    output.length = 0;
-    new Function(userCode)();
-
-    setTimeout(() => {
-        try {
-            // Marcador para inyectar las expectativas
-            ${expectations}
-        } catch (err) {
-            done(err); // Indicar que la prueba ha fallado
-        }
-    }, 10); // Esperar un poco para que se completen las operaciones
-});
-`;
-
-// Reemplazar el marcador con las expectativas generadas
-const testCode = testTemplate.replace('${expectations}', expectations);
-
-// Mostrar la prueba en la consola o en el HTML (opcional)
-console.log(testCode);  // Para ver la prueba completa en la consola
-
 	    
 function test_cases_scenario() {
     // Configuración del editor CodeMirror
