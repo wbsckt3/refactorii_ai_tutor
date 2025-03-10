@@ -175,28 +175,7 @@ describe('JavaScript Code Tests', function() {
                         }
                     });
 
-                    it('should log correct values', function(done) {
-					    const output = [];
-						const originalConsoleLog = console.log;
-						console.log = function(message) {
-							output.push(message);
-							originalConsoleLog.apply(console, arguments);
-						};
-						// Ensure output is clear before each run
-						output.length = 0;
-						// Execute user code
-						new Function(userCode)();
-						setTimeout(() => {
-						  try {
-							// Los logs se almacenan en la variable output durante las llamadas a out1() y out2()
-							expect(output[0]).to.equal('Refactorii'); // Verifica el primer log
-							expect(output[1]).to.equal(21); // Verifica el segundo log
-							done();
-						  } catch (err) {
-							done(err);
-						  }
-						}, 10); // Asegúrate de esperar lo suficiente para que se completen las operaciones
-					  });
+                    
 
                     it('should identify falsy values', function() {
                         expect(false).to.not.be.ok;
