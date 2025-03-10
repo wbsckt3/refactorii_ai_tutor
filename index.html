@@ -138,9 +138,10 @@ document.getElementById('run-button').addEventListener('click', function() {
         try {
             // Evaluar el código del usuario en el ámbito global
             eval(userCode);
+            window.shape = shape; // Asignar shape al ámbito global
 
             // Verificar que el objeto shape esté definido
-            if (typeof shape === 'undefined') {
+            if (typeof window.shape === 'undefined') {
                 throw new Error('El objeto "shape" no está definido.');
             }
 
@@ -150,36 +151,36 @@ document.getElementById('run-button').addEventListener('click', function() {
             describe('JavaScript Code Tests', function() {
                 // Verifica que el objeto shape esté definido
                 it('should have the shape object defined', function() {
-                    expect(shape).to.exist;
-                    expect(shape).to.be.an('object');
+                    expect(window.shape).to.exist;
+                    expect(window.shape).to.be.an('object');
                 });
 
                 // Verifica que el método out1 retorne el nombre correcto
                 it('should return the correct name using out1', function() {
-                    expect(shape.out1()).to.equal('Refactorii');
+                    expect(window.shape.out1()).to.equal('Refactorii');
                 });
 
                 // Verifica que el método out2 retorne la edad correcta
                 it('should return the correct age using out2', function() {
-                    expect(shape.out2()).to.equal(21);
+                    expect(window.shape.out2()).to.equal(21);
                 });
 
                 // Verifica que el objeto shape tenga la propiedad name
                 it('should have a property named "name"', function() {
-                    expect(shape).to.have.property('name');
-                    expect(shape.name).to.equal('Refactorii');
+                    expect(window.shape).to.have.property('name');
+                    expect(window.shape.name).to.equal('Refactorii');
                 });
 
                 // Verifica que el objeto shape tenga la propiedad age
                 it('should have a property named "age"', function() {
-                    expect(shape).to.have.property('age');
-                    expect(shape.age).to.equal(21);
+                    expect(window.shape).to.have.property('age');
+                    expect(window.shape.age).to.equal(21);
                 });
 
                 // Verifica que los métodos out1 y out2 sean funciones
                 it('should have out1 and out2 as functions', function() {
-                    expect(shape.out1).to.be.a('function');
-                    expect(shape.out2).to.be.a('function');
+                    expect(window.shape.out1).to.be.a('function');
+                    expect(window.shape.out2).to.be.a('function');
                 });
             });
 
