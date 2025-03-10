@@ -175,7 +175,33 @@ describe('JavaScript Code Tests', function() {
                         }
                     });
 
-                    
+it('should log correct values from calculator object', function (done) {
+    const output = [];
+    const originalConsoleLog = console.log;
+
+    // Redirigir console.log para capturar los mensajes
+    console.log = function (message) {
+        output.push(message);
+        originalConsoleLog.apply(console, arguments);
+    };
+
+    // Limpiar el output antes de cada ejecución
+    output.length = 0;
+
+    // Ejecutar el código del usuario
+    new Function(userCode)();
+
+    setTimeout(() => {
+        try {
+            // Verificar los valores registrados en console.log
+            expect(output[0]).to.equal(5); // Verifica el resultado de add(2, 3)
+            expect(output[1]).to.equal(20); // Verifica el resultado de multiply(4, 5)
+            done(); // Indicar que la prueba ha terminado
+        } catch (err) {
+            done(err); // Indicar que la prueba ha fallado
+        }
+    }, 10); // Esperar un poco para que se completen las operaciones
+});
 
                     it('should identify falsy values', function() {
                         expect(false).to.not.be.ok;
