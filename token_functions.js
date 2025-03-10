@@ -76,16 +76,26 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		                content: `Aquí está mi código en JavaScript:\n\n${code}\n\nUsé este código para resolver este desafío: ${challenge}`
 		            }
 		          ],*/
-				messages: [
+			  /* messages: [
+		            {
+		                role: 'system',
+		                content: 'Eres un experto en JavaScript. Revisarás el código proporcionado por el usuario, corregirás errores y generarás pruebas automáticas basadas en un molde específico.'
+		            },
+		            {
+		                role: 'user',
+		                content: `Aquí está mi código en JavaScript:\n\n${code}\n\nUsé este código para resolver este desafío: ${challenge}\n\nPor favor, genera una prueba automática que siga este molde:\n\n\`\`\`javascript\nit('should log correct values from calculator object', function (done) {\n    const output = [];\n    const originalConsoleLog = console.log;\n\n    // Redirigir console.log para capturar los mensajes\n    console.log = function (message) {\n        output.push(message);\n        originalConsoleLog.apply(console, arguments);\n    };\n\n    // Limpiar el output antes de cada ejecución\n    output.length = 0;\n\n    // Ejecutar el código del usuario\n    new Function(userCode)();\n\n    setTimeout(() => {\n        try {\n            // Verificar los valores registrados en console.log\n            expect(output[0]).to.equal(5); // Verifica el resultado de add(2, 3)\n            expect(output[1]).to.equal(20); // Verifica el resultado de multiply(4, 5)\n            done(); // Indicar que la prueba ha terminado\n        } catch (err) {\n            done(err); // Indicar que la prueba ha fallado\n        }\n    }, 10); // Esperar un poco para que se completen las operaciones\n});\n\`\`\`\n\nAsegúrate de que la prueba verifique los valores correctos que se deben registrar en \`console.log\` según el código proporcionado.`
+		            }
+		          ], */
+			  messages: [
             {
                 role: 'system',
-                content: 'Eres un experto en JavaScript. Revisarás el código proporcionado por el usuario, corregirás errores y generarás pruebas automáticas basadas en un molde específico.'
+                content: 'Eres un experto en JavaScript. Analizarás el código proporcionado por el usuario y generarás las expectativas (`expect`) para una prueba automática que verifique los valores registrados en `console.log`. Solo debes generar el bloque dentro del `try`.'
             },
             {
                 role: 'user',
-                content: `Aquí está mi código en JavaScript:\n\n${code}\n\nUsé este código para resolver este desafío: ${challenge}\n\nPor favor, genera una prueba automática que siga este molde:\n\n\`\`\`javascript\nit('should log correct values from calculator object', function (done) {\n    const output = [];\n    const originalConsoleLog = console.log;\n\n    // Redirigir console.log para capturar los mensajes\n    console.log = function (message) {\n        output.push(message);\n        originalConsoleLog.apply(console, arguments);\n    };\n\n    // Limpiar el output antes de cada ejecución\n    output.length = 0;\n\n    // Ejecutar el código del usuario\n    new Function(userCode)();\n\n    setTimeout(() => {\n        try {\n            // Verificar los valores registrados en console.log\n            expect(output[0]).to.equal(5); // Verifica el resultado de add(2, 3)\n            expect(output[1]).to.equal(20); // Verifica el resultado de multiply(4, 5)\n            done(); // Indicar que la prueba ha terminado\n        } catch (err) {\n            done(err); // Indicar que la prueba ha fallado\n        }\n    }, 10); // Esperar un poco para que se completen las operaciones\n});\n\`\`\`\n\nAsegúrate de que la prueba verifique los valores correctos que se deben registrar en \`console.log\` según el código proporcionado.`
+                content: `Aquí está el código en JavaScript:\n\n${code}\n\nGenera las expectativas (\`expect\`) para verificar los valores registrados en \`console.log\`. Solo necesito el bloque dentro del \`try\`, sin el resto de la prueba.`
             }
-        ],
+        ],	
 			  "temperature": 0.5,
 			  "max_tokens": 500
 		        })
@@ -94,7 +104,8 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		      const data = await response.json();
 		      // Extraer solo el mensaje del assistant
 		      //document.getElementById('challenge').textContent = data.choices[0].message.content;
-		      document.getElementById('challenge').innerHTML = `<pre><code>${escapeHTML(data.choices[0].message.content)}</code></pre>`;
+		      //document.getElementById('challenge').innerHTML = `<pre><code>${escapeHTML(data.choices[0].message.content)}</code></pre>`;
+		      const expectations = data.choices[0].message.content;  // Extraer las expectativas
 		}
 
 		// Función para escapar caracteres especiales en HTML
