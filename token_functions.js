@@ -109,10 +109,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		const rawResponse = data.choices[0].message.content;
 		
 		// Filtrar solo las líneas que contienen "expect(...)"
-		const expectations = rawResponse
-		    .split('\n')  // Separar por líneas
-		    .filter(line => line.trim().startsWith('expect('))  // Mantener solo las expectativas
-		    .join('\n');  // Unirlas de nuevo
+		const expectations = rawResponse.match(/expect\([^\n\r]+\);/g)?.join('\n') || '';
 		
 		// Guardar en localStorage solo las expectativas
 		localStorage.setItem('testExpectations', expectations);
