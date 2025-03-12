@@ -87,15 +87,15 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		            }
 		          ], */
 			  messages: [
-            {
-                role: 'system',
-                content: 'Eres un experto en JavaScript. Analizarás el código proporcionado por el usuario y generarás las expectativas (`expect`) para una prueba automática que verifique los valores registrados en `console.log`. Solo debes generar el bloque dentro del `try`.'
-            },
-            {
-                role: 'user',
-                content: `Aquí está el código en JavaScript:\n\n${code}\n\nGenera las expectativas (\`expect\`) para verificar los valores registrados en \`console.log\`. Solo necesito el bloque dentro del \`try\`, sin el resto de la prueba.`
-            }
-        ],	
+    {
+        role: 'system',
+        content: 'Eres un experto en JavaScript. Analizarás el código proporcionado por el usuario y generarás exclusivamente las expectativas (`expect`) necesarias para verificar los valores registrados en `console.log`. No incluyas ninguna otra parte del código, ni `try`, ni declaraciones de variables, ni comentarios. Solo devuelve las líneas con `expect(...)`.'
+    },
+    {
+        role: 'user',
+        content: `Aquí está el código en JavaScript:\n\n${code}\n\nExtrae únicamente las expectativas (\`expect\`) que verifican los valores registrados en \`console.log\`, sin ninguna otra parte del código.`
+    }
+]
 			  "temperature": 0.5,
 			  "max_tokens": 500
 		        })
@@ -105,10 +105,17 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		      // Extraer solo el mensaje del assistant
 		      //document.getElementById('challenge').textContent = data.choices[0].message.content;
 		      //document.getElementById('challenge').innerHTML = `<pre><code>${escapeHTML(data.choices[0].message.content)}</code></pre>`;
-		      const expectations = data.choices[0].message.content;  // Extraer las expectativas
-
-                      // Guardar en localStorage
-                      localStorage.setItem('testExpectations', expectations);
+		      // Extraer solo el mensaje del assistant
+		const rawResponse = data.choices[0].message.content;
+		
+		// Filtrar solo las líneas que contienen "expect(...)"
+		const expectations = rawResponse
+		    .split('\n')  // Separar por líneas
+		    .filter(line => line.trim().startsWith('expect('))  // Mantener solo las expectativas
+		    .join('\n');  // Unirlas de nuevo
+		
+		// Guardar en localStorage solo las expectativas
+		localStorage.setItem('testExpectations', expectations);
 			
 		}
 
