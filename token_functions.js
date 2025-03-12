@@ -106,6 +106,10 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		      //document.getElementById('challenge').textContent = data.choices[0].message.content;
 		      //document.getElementById('challenge').innerHTML = `<pre><code>${escapeHTML(data.choices[0].message.content)}</code></pre>`;
 		      const expectations = data.choices[0].message.content;  // Extraer las expectativas
+
+                      // Guardar en localStorage
+                      localStorage.setItem('testExpectations', expectations);
+			
 		}
 
 		// Función para escapar caracteres especiales en HTML
