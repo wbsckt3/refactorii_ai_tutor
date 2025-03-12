@@ -237,7 +237,32 @@ describe('JavaScript Code Tests', function() {
 }); */
 
     // Prueba generada dinámicamente
-    eval(testCode);  // Inyectar y ejecutar la prueba generada
+     const expectations = localStorage.getItem('testExpectations') || ''; // Obtener expectativas de localStorage
+
+    it('should log correct greetings from greet function', function (done) {
+        const output = [];
+        const originalConsoleLog = console.log;
+
+        // Redirigir console.log para capturar los mensajes
+        console.log = function (message) {
+            output.push(message);
+            originalConsoleLog.apply(console, arguments);
+        };
+
+        // Limpiar el output antes de cada ejecución
+        output.length = 0;
+        new Function(userCode)();
+
+        setTimeout(() => {
+            try {
+                ${expectations} // Inyectar expectativas guardadas
+                done(); // Indicar que la prueba ha terminado
+            } catch (err) {
+                done(err); // Indicar que la prueba ha fallado
+            }
+        }, 10);
+    });
+   
 
                     it('should identify falsy values', function() {
                         expect(false).to.not.be.ok;
