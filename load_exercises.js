@@ -16,7 +16,9 @@ function loadExercise(index) {
        currentExerciseIndex = index;
        const exercise = exercises[index];
 
-       //document.getElementById("exercise-title").innerText = exercise.title;
+       // Actualizar título y descripción del ejercicio
+       document.getElementById("h5_title").innerText = exercise.title;
+       document.getElementById("challenge").innerText = exercise.description;
        document.getElementById("code-editor").value = exercise.codeKoToRefactor;
 
        // Pasamos codeOkForExpect a token_functions.js
