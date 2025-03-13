@@ -88,20 +88,24 @@
 	        .catch((error) => console.error('Error al cargar los scripts:', error));
 	});
 
-const okTestForExpect = `function greet(name) {
-    console.log(`Hello, ${name}!`);
+async function getAIExpect() {
+    const codeOkForExpect = `function greet(name) {
+        console.log(\`Hello, \${name}!\`);
+    }
+
+    // Test cases:
+    greet('Alice'); // Debe imprimir "Hello, Alice!"
+    greet('Bob'); // Debe imprimir "Hello, Bob!"`;
+
+    try {
+        await fetchAIResponseGetAiExpect(codeOkForExpect); // ✅ Ahora `await` funciona
+    } catch (error) {
+        console.error("Error al obtener las expectativas de IA:", error);
+    }
 }
 
-// Test cases:
-greet('Alice'); // Debe imprimir "Hello, Alice!"
-greet('Bob'); // Debe imprimir "Hello, Bob!"`
-
-// Get the code for ia expect
-try {
-   await fetchAIResponseGetAiExpect(okTestForExpect); // Ejecutar la función de AI	
-} catch (error) {
-   console.error("Error al obtener las expectativas de IA:", error);
-}
+// Llamar a la función async
+getAIExpect();
     
 function test_cases_scenario() {
     // Configuración del editor CodeMirror
