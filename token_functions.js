@@ -235,15 +235,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 			localStorage.setItem('testExpectations', expectations);
 		 }
 
-		async function getAIExpect() {
-		    const codeOkForExpect = `function greet(name) {
-		        console.log(\`Hello, \${name}!\`);
-		    }
-		
-		    // Test cases:
-		    greet('Alice'); // Debe imprimir "Hello, Alice!"
-		    greet('Bob'); // Debe imprimir "Hello, Bob!"`;
-		
+		async function getAIExpect(codeOkForExpect) {
 		    try {
 		        await fetchAIResponseGetAiExpect(codeOkForExpect); // ✅ Ahora `await` funciona
 		    } catch (error) {
