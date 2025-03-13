@@ -171,6 +171,12 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		}
 
                  async function getAiExpect() {
+
+			 const aiButton = document.getElementById('ai-assistance');
+			 const loader = document.createElement('span');
+			 loader.innerHTML = ' ⏳'; // Icono de carga
+			 aiButton.appendChild(loader); // Agregar el icono de carga
+			 
                           fetch('https://www.refactorii.com/ai-assistance', {
 			        method: 'POST',
 			        headers: {
