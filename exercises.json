@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "title": "Refactorizar función greet",
+        "codeKoToRefactor": "function greet(name) {\n    console.log(`Hello, ${name}!`);\n}\n\n// Test cases:\ngreet('Mat'); // Debe imprimir \"Hello, Alice!\"\ngreet('Bob'); // Debe imprimir \"Hello, Bob!\"",
+        "codeOkForExpect": "function greet(name) {\n    console.log(`Hello, ${name}!`);\n}\n\n// Test cases:\ngreet('Alice'); // Debe imprimir \"Hello, Alice!\"\ngreet('Bob'); // Debe imprimir \"Hello, Bob!\""
+    },
+    {
+        "id": 2,
+        "title": "Ejemplo de otro ejercicio",
+        "codeKoToRefactor": "function sum(a, b) {\n    return a + b;\n}\n\n// Test cases:\nconsole.log(sum(2, 3)); // Debe imprimir 6",
+        "codeOkForExpect": "function sum(a, b) {\n    return a + b;\n}\n\n// Test cases:\nconsole.log(sum(2, 3)); // Debe imprimir 5"
+    }
+]
