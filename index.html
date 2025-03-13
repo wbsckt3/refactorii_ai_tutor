@@ -61,7 +61,17 @@
         </div>
     </div>
     <script>
-	document.addEventListener("DOMContentLoaded", function() {
+
+        const urlParams = new URLSearchParams(window.location.search);
+	const exerciseId = urlParams.get('exercise'); // Capturar el parámetro exercise de la URL
+	
+	if (exerciseId) {
+	   loadExercises(parseInt(exerciseId, 10)); // Pasar el número de ejercicio como entero
+	} else {
+	   console.error("No se encontró el parámetro 'exercise' en la URL.");
+	}
+	    
+	 /*document.addEventListener("DOMContentLoaded", function() {
 	    const urlParams = new URLSearchParams(window.location.search);
 	    const script1 = urlParams.get('script1');
 	    const script2 = urlParams.get('script2');
@@ -83,14 +93,14 @@
 	    }
 	
 	    // Cargar script1, luego script2, luego script3
-	    loadScript(script1)
+	   loadScript(script1)
 	        //.then(() => loadScript(script2))
 	        .then(() => loadScript(script3))
-	        .catch((error) => console.error('Error al cargar los scripts:', error));
+	        .catch((error) => console.error('Error al cargar los scripts:', error));*/
 		
 	});
 
-document.addEventListener("DOMContentLoaded", loadExercises);
+// document.addEventListener("DOMContentLoaded", loadExercises);
 	    
 function test_cases_scenario() {
     // Configuración del editor CodeMirror
