@@ -87,15 +87,15 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		            }
 		          ], */
 			  messages: [
-    {
-        role: 'system',
-        content: 'Eres un experto en JavaScript. Analizarás el código proporcionado por el usuario y generarás exclusivamente las expectativas (`expect`) necesarias para verificar los valores registrados en `console.log`. No incluyas ninguna otra parte del código, ni `try`, ni declaraciones de variables, ni comentarios. Solo devuelve las líneas con `expect(...)`.'
-    },
-    {
-        role: 'user',
-        content: `Aquí está el código en JavaScript:\n\n${code}\n\nExtrae únicamente las expectativas (\`expect\`) que verifican los valores registrados en \`console.log\`, sin ninguna otra parte del código.`
-    }
-]
+			    {
+			        role: 'system',
+			        content: 'Eres un experto en JavaScript. Analizarás el código proporcionado por el usuario y generarás exclusivamente las expectativas (`expect`) necesarias para verificar los valores registrados en `console.log`. No incluyas ninguna otra parte del código, ni `try`, ni declaraciones de variables, ni comentarios. Solo devuelve las líneas con `expect(...)`.'
+			    },
+			    {
+			        role: 'user',
+			        content: `Aquí está el código en JavaScript:\n\n${code}\n\nExtrae únicamente las expectativas (\`expect\`) que verifican los valores registrados en \`console.log\`, sin ninguna otra parte del código.`
+			    }
+			],
 			  "temperature": 0.5,
 			  "max_tokens": 500
 		        })
@@ -109,8 +109,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		const rawResponse = data.choices[0].message.content;
 		
 		// Filtrar solo las líneas que contienen "expect(...)"
-		//const expectations = rawResponse.match(/expect\([^\n\r]+\);/g)?.join('\n') || '';
-		console.log(rawResponse)
+		const expectations = rawResponse.match(/expect\([^\n\r]+\);/g)?.join('\n') || '';
 		// Guardar en localStorage solo las expectativas
 		localStorage.setItem('testExpectations', expectations);
 			
