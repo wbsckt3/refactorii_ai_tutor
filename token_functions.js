@@ -94,36 +94,44 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		}
 		
 		// Al presionar el botón "AI Assistance"
-		document.getElementById('ai-assistance').addEventListener('click', () => {
-			    fetch('https://www.refactorii.com/ai-assistance', {
-			        method: 'POST',
-			        headers: {
-			            'Content-Type': 'application/json',
-			        },
-			        body: JSON.stringify({ token })
-			    })
-			    .then(response => response.json())
-			    .then(data => {
-			        if (data.success) {
-			            console.log('AI assistance provided:', data.message);
-			            document.getElementById('remaining-requests').innerText = `Remaining AI requests: ${data.remainingRequests}`;
-			            // Actualizar la interfaz para reflejar las solicitudes restantes
-			            if (data.remainingRequests <= 0) {
-					const sendResponseButton = document.getElementById('ai-assistance');
-			                document.getElementById('ai-assistance').disabled = false;
-			            }
-				    // Obtener el código actualizado justo antes de llamar a fetchAIResponse
-                                    const latestCode = document.getElementById('code-editor').value;
-				    fetchAIResponse(latestCode); // Ejecutar la función de AI	
-			        } else {
-			            console.log('Error:', data.message);
-			            const sendResponseButton = document.getElementById('ai-assistance'); // Deshabilitar el botón si ya no puede hacer más solicitudes
-			            document.getElementById('ai-assistance').disabled = true;
-				}
-			    })
-			    .catch(error => {
-			        console.error('Error:', error);
-			    });
+		document.addEventListener("DOMContentLoaded", function () {
+			    const aiButton = document.getElementById('ai-assistance');
+			    if (aiButton) {
+			        aiButton.addEventListener('click', () => {
+			            console.log("Botón de asistencia de IA clickeado");
+				    fetch('https://www.refactorii.com/ai-assistance', {
+			        		method: 'POST',
+			        		headers: {
+			            		'Content-Type': 'application/json',
+			                },
+			        	body: JSON.stringify({ token })
+				    })
+				    .then(response => response.json())
+				    .then(data => {
+				        if (data.success) {
+				            console.log('AI assistance provided:', data.message);
+				            document.getElementById('remaining-requests').innerText = `Remaining AI requests: ${data.remainingRequests}`;
+				            // Actualizar la interfaz para reflejar las solicitudes restantes
+				            if (data.remainingRequests <= 0) {
+						const sendResponseButton = document.getElementById('ai-assistance');
+				                document.getElementById('ai-assistance').disabled = false;
+				            }
+					    // Obtener el código actualizado justo antes de llamar a fetchAIResponse
+	                                    const latestCode = document.getElementById('code-editor').value;
+					    fetchAIResponse(latestCode); // Ejecutar la función de AI	
+				        } else {
+				            console.log('Error:', data.message);
+				            const sendResponseButton = document.getElementById('ai-assistance'); // Deshabilitar el botón si ya no puede hacer más solicitudes
+				            document.getElementById('ai-assistance').disabled = true;
+					}
+				    })
+				    .catch(error => {
+				        console.error('Error:', error);
+				    });
+			        });
+			    } else {
+			        console.error("El elemento con ID 'ai-assistance' no existe en el DOM.");
+			    }
 		});
 		
 		async function guardarResultados() {
