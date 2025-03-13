@@ -62,14 +62,7 @@
     </div>
     <script>
 
-        const urlParams = new URLSearchParams(window.location.search);
-	const exerciseId = urlParams.get('exercise'); // Capturar el parámetro exercise de la URL
-	
-	if (exerciseId) {
-	   loadExercises(parseInt(exerciseId, 10)); // Pasar el número de ejercicio como entero
-	} else {
-	   console.error("No se encontró el parámetro 'exercise' en la URL.");
-	}
+        
 	    
 	 /*document.addEventListener("DOMContentLoaded", function() {
 	    const urlParams = new URLSearchParams(window.location.search);
