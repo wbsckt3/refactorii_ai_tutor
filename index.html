@@ -87,11 +87,11 @@
 	        //.then(() => loadScript(script2))
 	        .then(() => loadScript(script3))
 	        .catch((error) => console.error('Error al cargar los scripts:', error));
-
-	    window.onload = loadExercises;	
 		
 	});
-    
+
+document.addEventListener("DOMContentLoaded", loadExercises);
+	    
 function test_cases_scenario() {
     // Configuración del editor CodeMirror
     const editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
