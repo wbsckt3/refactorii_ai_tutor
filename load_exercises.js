@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-function loadExercises(exerciseId) {
+function loadExercises(exerciseId) {   console.log(exerciseId)
     fetch('exercises.json') // Cargar el JSON con los ejercicios
         .then(response => response.json())
         .then(exercises => {
