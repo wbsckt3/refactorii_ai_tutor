@@ -2,12 +2,13 @@ let exercises = [];
 let currentExerciseIndex = 0;
 
 function loadExercises(exerciseId) {
-    fetch('exercises.json') // Cargar el JSON con los ejercicios
+    fetch('exercises.json')
         .then(response => response.json())
-        .then(exercises => {
-            const selectedExercise = exercises.find(ex => ex.id === exerciseId);
+        .then(data => {
+            exercises = data; // Guardar los ejercicios cargados
+            const selectedExercise = exercises.find(ex => ex.id === Number(exerciseId)); // Convertir ID a número
             if (selectedExercise) {
-                loadExercise(exercises.indexOf(selectedExercise)); // Cargar solo el ejercicio filtrado
+                loadExercise(selectedExercise); // Pasar el objeto directamente
             } else {
                 console.error("Ejercicio no encontrado en el JSON.");
             }
@@ -16,7 +17,7 @@ function loadExercises(exerciseId) {
 }
 
 function loadExercise(exercise) {
-    if (!exercise) {
+    if (!exercise || typeof exercise !== "object") {
         console.error("No se proporcionó un ejercicio válido.");
         return;
     }
@@ -34,3 +35,15 @@ function loadExercise(exercise) {
     // Pasamos codeOkForExpect a token_functions.js
     getAIExpect(exercise.codeOkForExpect);
 }
+
+// Obtener el parámetro "exercise" de la URL y cargar el ejercicio
+document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const exerciseId = urlParams.get("exercise"); // Obtener el ID del ejercicio desde la URL
+
+    if (exerciseId) {
+        loadExercises(exerciseId);
+    } else {
+        console.error("No se proporcionó un ID de ejercicio en la URL.");
+    }
+});
