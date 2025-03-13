@@ -64,7 +64,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		        },
 		        body: JSON.stringify({
 		          model: 'deepseek-chat',  // El modelo que estás usando 
-		          /*messages: [
+		          messages: [
 		            {
 		                role: 'system',
 		                content: 'Eres un experto en JavaScript. Revisarás el código proporcionado por el usuario, corregirás errores y explicarás cómo funciona en español.'
@@ -73,27 +73,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		                role: 'user',
 		                content: `Aquí está mi código en JavaScript:\n\n${code}\n\nUsé este código para resolver este desafío: ${challenge}`
 		            }
-		          ],*/
-			  /* messages: [
-		            {
-		                role: 'system',
-		                content: 'Eres un experto en JavaScript. Revisarás el código proporcionado por el usuario, corregirás errores y generarás pruebas automáticas basadas en un molde específico.'
-		            },
-		            {
-		                role: 'user',
-		                content: `Aquí está mi código en JavaScript:\n\n${code}\n\nUsé este código para resolver este desafío: ${challenge}\n\nPor favor, genera una prueba automática que siga este molde:\n\n\`\`\`javascript\nit('should log correct values from calculator object', function (done) {\n    const output = [];\n    const originalConsoleLog = console.log;\n\n    // Redirigir console.log para capturar los mensajes\n    console.log = function (message) {\n        output.push(message);\n        originalConsoleLog.apply(console, arguments);\n    };\n\n    // Limpiar el output antes de cada ejecución\n    output.length = 0;\n\n    // Ejecutar el código del usuario\n    new Function(userCode)();\n\n    setTimeout(() => {\n        try {\n            // Verificar los valores registrados en console.log\n            expect(output[0]).to.equal(5); // Verifica el resultado de add(2, 3)\n            expect(output[1]).to.equal(20); // Verifica el resultado de multiply(4, 5)\n            done(); // Indicar que la prueba ha terminado\n        } catch (err) {\n            done(err); // Indicar que la prueba ha fallado\n        }\n    }, 10); // Esperar un poco para que se completen las operaciones\n});\n\`\`\`\n\nAsegúrate de que la prueba verifique los valores correctos que se deben registrar en \`console.log\` según el código proporcionado.`
-		            }
-		          ], */
-			  messages: [
-			    {
-			        "role": "system",
-			        "content": "Eres un experto en JavaScript y pruebas automatizadas con Mocha y Chai. Analizarás el código proporcionado por el usuario y generarás exclusivamente las expectativas (`expect(...)`) necesarias para verificar los valores registrados en `console.log`. Usa la sintaxis de Chai para comparar los valores esperados con los obtenidos en `output`. No incluyas ninguna otra parte del código, ni `try`, ni declaraciones de variables, ni comentarios. Solo devuelve las líneas con `expect(...)`."
-			    },
-			    {
-			        "role": "user",
-			        content: `Aquí está mi código en JavaScript:\n\n${userCode}\n\nUsé este código para resolver este desafío: ${challenge}\n\nPor favor, genera una prueba automática que siga este molde:\n\n\`\`\`javascript\nit('should log correct values', function (done) {\n    const output = [];\n    const originalConsoleLog = console.log;\n\n    // Redirigir console.log para capturar los mensajes\n    console.log = function (message) {\n        output.push(message);\n        originalConsoleLog.apply(console, arguments);\n    };\n\n    // Limpiar el output antes de cada ejecución\n    output.length = 0;\n\n    // Ejecutar el código del usuario\n    new Function(userCode)();\n\n    setTimeout(() => {\n        try {\n            // Verificar los valores registrados en console.log\n            expect(output[0]).to.equal(5); // Verifica el resultado de add(2, 3)\n            expect(output[1]).to.equal(20); // Verifica el resultado de multiply(4, 5)\n            done(); // Indicar que la prueba ha terminado\n        } catch (err) {\n            done(err); // Indicar que la prueba ha fallado\n        }\n    }, 10); // Esperar un poco para que se completen las operaciones\n});\n\`\`\`\n\nAsegúrate de que la prueba verifique los valores correctos que se deben registrar en \`console.log\` según el código proporcionado.`
-		       	    }
-			],
+		          ],
 			  "temperature": 0.5,
 			  "max_tokens": 500
 		        })
@@ -102,14 +82,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		      const data = await response.json();
 		      // Extraer solo el mensaje del assistant
 		      //document.getElementById('challenge').textContent = data.choices[0].message.content;
-		      //document.getElementById('challenge').innerHTML = `<pre><code>${escapeHTML(data.choices[0].message.content)}</code></pre>`;
-		      // Extraer solo el mensaje del assistant
-		const rawResponse = data.choices[0].message.content;
-		
-		// Filtrar solo las líneas que contienen "expect(...)"
-		const expectations = rawResponse.match(/expect\([^\n\r]+\);/g)?.join('\n') || '';
-		// Guardar en localStorage solo las expectativas
-		localStorage.setItem('testExpectations', expectations);
+		      document.getElementById('challenge').innerHTML = `<pre><code>${escapeHTML(data.choices[0].message.content)}</code></pre>`;
 			
 		}
 
@@ -188,5 +161,77 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 			        console.error('Error sending the results to the server:', error);
 			    }
 		}
-	
+
+                 async function getAiExpect() {
+                          fetch('https://www.refactorii.com/ai-assistance', {
+			        method: 'POST',
+			        headers: {
+			            'Content-Type': 'application/json',
+			        },
+			        body: JSON.stringify({ token })
+			    })
+			    .then(response => response.json())
+			    .then(data => {
+			        if (data.success) {
+			            console.log('AI assistance provided:', data.message);
+			            document.getElementById('remaining-requests').innerText = `Remaining AI requests: ${data.remainingRequests}`;
+			            // Actualizar la interfaz para reflejar las solicitudes restantes
+			            if (data.remainingRequests <= 0) {
+					const sendResponseButton = document.getElementById('ai-assistance');
+			                document.getElementById('ai-assistance').disabled = false;
+			            }
+				    // Obtener el código actualizado justo antes de llamar a fetchAIResponse
+                                    const latestCode = document.getElementById('code-editor').value;
+				    fetchAIResponseGetAiExpect(latestCode); // Ejecutar la función de AI	
+			        } else {
+			            console.log('Error:', data.message);
+			            const sendResponseButton = document.getElementById('ai-assistance'); // Deshabilitar el botón si ya no puede hacer más solicitudes
+			            document.getElementById('ai-assistance').disabled = true;
+				}
+			    })
+			    .catch(error => {
+			        console.error('Error:', error);
+			    });
+		 }
+
+                 
+		 async function fetchAIResponseGetAiExpect(userCode) {
+		      // Obtén el mensaje de desafío
+		      const challenge = document.getElementById('challenge').textContent;
+		      const apiKey = 'sk-f105145c838248dab59a4c3a54127e0f'; // Reemplaza con tu clave API real
+		      const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+		        method: 'POST',
+		        headers: {
+		          'Content-Type': 'application/json',
+		          'Authorization': `Bearer ${apiKey}`  // Incluye tu API key
+		        },
+		        body: JSON.stringify({
+		          model: 'deepseek-chat',  // El modelo que estás usando 
+			  messages: [
+			    {
+			        "role": "system",
+			        "content": "Eres un experto en JavaScript y pruebas automatizadas con Mocha y Chai. Analizarás el código proporcionado por el usuario y generarás exclusivamente las expectativas (`expect(...)`) necesarias para verificar los valores registrados en `console.log`. Usa la sintaxis de Chai para comparar los valores esperados con los obtenidos en `output`. No incluyas ninguna otra parte del código, ni `try`, ni declaraciones de variables, ni comentarios. Solo devuelve las líneas con `expect(...)`."
+			    },
+			    {
+			        "role": "user",
+			        content: `Aquí está mi código en JavaScript:\n\n${userCode}\n\nUsé este código para resolver este desafío: ${challenge}\n\nPor favor, genera una prueba automática que siga este molde:\n\n\`\`\`javascript\nit('should log correct values', function (done) {\n    const output = [];\n    const originalConsoleLog = console.log;\n\n    // Redirigir console.log para capturar los mensajes\n    console.log = function (message) {\n        output.push(message);\n        originalConsoleLog.apply(console, arguments);\n    };\n\n    // Limpiar el output antes de cada ejecución\n    output.length = 0;\n\n    // Ejecutar el código del usuario\n    new Function(userCode)();\n\n    setTimeout(() => {\n        try {\n            // Verificar los valores registrados en console.log\n            expect(output[0]).to.equal(5); // Verifica el resultado de add(2, 3)\n            expect(output[1]).to.equal(20); // Verifica el resultado de multiply(4, 5)\n            done(); // Indicar que la prueba ha terminado\n        } catch (err) {\n            done(err); // Indicar que la prueba ha fallado\n        }\n    }, 10); // Esperar un poco para que se completen las operaciones\n});\n\`\`\`\n\nAsegúrate de que la prueba verifique los valores correctos que se deben registrar en \`console.log\` según el código proporcionado.`
+		       	    }
+			],
+			  "temperature": 0.5,
+			  "max_tokens": 500
+		        })
+		      });
+		      // Procesa la respuesta
+		      const data = await response.json();
+		      // Extraer solo el mensaje del assistant
+		      //document.getElementById('challenge').textContent = data.choices[0].message.content;
+		      //document.getElementById('challenge').innerHTML = `<pre><code>${escapeHTML(data.choices[0].message.content)}</code></pre>`;
+		      // Extraer solo el mensaje del assistant
+			const rawResponse = data.choices[0].message.content;
+		
+			// Filtrar solo las líneas que contienen "expect(...)"
+			const expectations = rawResponse.match(/expect\([^\n\r]+\);/g)?.join('\n') || '';
+			// Guardar en localStorage solo las expectativas
+			localStorage.setItem('testExpectations', expectations);
+		 }
 	
