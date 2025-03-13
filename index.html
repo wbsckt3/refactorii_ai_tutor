@@ -117,7 +117,7 @@ function test_cases_scenario() {
         consoleElement.appendChild(messageElement);
     }
 
- document.getElementById('run-button').addEventListener('click', function() {
+ document.getElementById('run-button').addEventListener('click', async function() {
             // Clear previous results
             document.getElementById('console').innerHTML = '';
             document.getElementById('mocha').innerHTML = '';
@@ -125,8 +125,12 @@ function test_cases_scenario() {
 			
             // Get the user's code from the editor
             const userCode = editor.getValue();
+	    try {
             await fetchAIResponseGetAiExpect(userCode); // Ejecutar la función de AI	
-
+            } catch (error) {
+	        console.error("Error al obtener las expectativas de IA:", error);
+	    }
+	 
             // Redirect console.log to custom console
 			const output = [];
 			const originalConsoleLog = console.log;
