@@ -125,7 +125,7 @@ function test_cases_scenario() {
 			
             // Get the user's code from the editor
             const userCode = editor.getValue();
-            fetchAIResponseGetAiExpect(userCode); // Ejecutar la función de AI	
+            await fetchAIResponseGetAiExpect(userCode); // Ejecutar la función de AI	
 
             // Redirect console.log to custom console
 			const output = [];
