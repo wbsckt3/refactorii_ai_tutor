@@ -1,34 +1,25 @@
- let exercises = [];
-        let currentExerciseIndex = 0;
-        let editor;
+let exercises = [];
+let currentExerciseIndex = 0;
 
-        async function loadExercises() {
-            try {
-                const response = await fetch("exercises.json");
-                exercises = await response.json();
-                loadExercise(0);
-            } catch (error) {
-                console.error("Error cargando ejercicios:", error);
-            }
-        }
+async function loadExercises() {
+   try {
+      const response = await fetch("exercises.json");
+      exercises = await response.json();
+      loadExercise(0);
+   } catch (error) {
+      console.error("Error cargando ejercicios:", error);
+   }
+}
 
-        function loadExercise(index) {
-            if (index >= 0 && index < exercises.length) {
-                currentExerciseIndex = index;
-                const exercise = exercises[index];
+function loadExercise(index) {
+    if (index >= 0 && index < exercises.length) {
+       currentExerciseIndex = index;
+       const exercise = exercises[index];
 
-                //document.getElementById("exercise-title").innerText = exercise.title;
+       //document.getElementById("exercise-title").innerText = exercise.title;
+       document.getElementById("code-editor").value = exercise.codeKoToRefactor;
 
-                if (!editor) {
-                    editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
-                        mode: "javascript",
-                        lineNumbers: true
-                    });
-                }
-                
-                editor.setValue(exercise.codeKoToRefactor);
-
-                // Pasamos codeOkForExpect a token_functions.js
-                getAIExpect(exercise.codeOkForExpect);
-            }
-        }
+       // Pasamos codeOkForExpect a token_functions.js
+       getAIExpect(exercise.codeOkForExpect);
+    }
+}
