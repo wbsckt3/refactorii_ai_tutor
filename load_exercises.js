@@ -48,3 +48,10 @@ function loadExercise(exercise) {
         getAIExpect(exercise.codeOkForExpect);
     }, 100); // Un pequeño delay puede ayudar en ciertos casos
 }
+
+// Recargar la página solo una vez asegurándonos de que no se haga en bucle
+if (!sessionStorage.getItem("reloaded")) {
+    sessionStorage.setItem("reloaded", "true");
+    location.reload();
+}
+
