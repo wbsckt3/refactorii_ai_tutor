@@ -71,7 +71,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		            },
 		            {
 		                role: 'user',
-		                content: `Aquí está mi código en JavaScript:\n\n${code}\n\nUsé este código para resolver este desafío: ${challenge}`
+		                content: `Aquí está mi código en JavaScript:\n\n${userCode}\n\nUsé este código para resolver este desafío: ${challenge}`
 		            }
 		          ],
 			  "temperature": 0.5,
