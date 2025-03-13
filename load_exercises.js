@@ -36,14 +36,4 @@ function loadExercise(exercise) {
     getAIExpect(exercise.codeOkForExpect);
 }
 
-// Obtener el parámetro "exercise" de la URL y cargar el ejercicio
-document.addEventListener("DOMContentLoaded", function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const exerciseId = urlParams.get("exercise"); // Obtener el ID del ejercicio desde la URL
 
-    if (exerciseId) {
-        loadExercises(exerciseId);
-    } else {
-        console.error("No se proporcionó un ID de ejercicio en la URL.");
-    }
-});
