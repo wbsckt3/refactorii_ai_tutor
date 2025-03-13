@@ -17,7 +17,7 @@
                 currentExerciseIndex = index;
                 const exercise = exercises[index];
 
-                document.getElementById("exercise-title").innerText = exercise.title;
+                //document.getElementById("exercise-title").innerText = exercise.title;
 
                 if (!editor) {
                     editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
