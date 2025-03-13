@@ -1,14 +1,29 @@
 [
     {
         "id": 1,
-        "title": "Refactorizar función greet",
-        "codeKoToRefactor": "function greet(name) {\n    console.log(`Hello, ${name}!`);\n}\n\n// Test cases:\ngreet('Mat'); // Debe imprimir \"Hello, Alice!\"\ngreet('Bob'); // Debe imprimir \"Hello, Bob!\"",
-        "codeOkForExpect": "function greet(name) {\n    console.log(`Hello, ${name}!`);\n}\n\n// Test cases:\ngreet('Alice'); // Debe imprimir \"Hello, Alice!\"\ngreet('Bob'); // Debe imprimir \"Hello, Bob!\""
+        "title": "Ejercicio 1: Sintaxis Básica",
+        "description": "Para refactorizar este código, debes modificar los métodos out1 y out2 para que devuelvan los valores de name y age, respectivamente. Esto permitirá recuperar y utilizar estos valores cuando se llamen los métodos.",
+        "codeKoToRefactor": "function greet(name) {\n    console.log(`Hola, ${name}!`);\n}\n\n// Casos de prueba:\ngreet('Mat'); // Debe imprimir \"Hola, Alice!\"\ngreet('Bob'); // Debe imprimir \"Hola, Bob!\"",
+        "codeOkForExpect": "function greet(name) {\n    console.log(`Hola, ${name}!`);\n}\n\n// Casos de prueba:\ngreet('Alice'); // Debe imprimir \"Hola, Alice!\"\ngreet('Bob'); // Debe imprimir \"Hola, Bob!\"",
+        "modalClickMessage": "Para que la función muestre correctamente 0,1,2 en lugar de 3,3,3, puedes usar let en lugar de var para declarar la variable i...",
+        "errorMessage": "En JavaScript, los objetos pueden tener métodos que acceden a sus propias propiedades usando la palabra clave this. Sin embargo, si los métodos no están bien definidos, pueden no devolver ningún valor o no interactuar correctamente con las propiedades.\nEn este ejemplo, shape es un objeto con las propiedades name y age, y los métodos out1 y out2. Actualmente, estos métodos solo acceden a las propiedades sin devolver ningún valor, lo que los hace incompletos.\nPara refactorizar este código, debemos modificar los métodos out1 y out2 para que devuelvan los valores de name y age, respectivamente. Esto permitirá recuperar y utilizar estos valores cuando se llamen los métodos.",
+        "successMessage": "🎉 ¡Felicidades! Has completado el desafío con éxito. Tu determinación y habilidad han dado resultado. ¡Sigue así y continúa superándote! 🚀",
+        "variables": {
+            "title": "Ejercicio 1: Sintaxis Básica",
+            "paragraphText": "Para refactorizar este código, debes modificar los métodos out1 y out2 para que devuelvan los valores de name y age, respectivamente. Esto permitirá recuperar y utilizar estos valores cuando se llamen los métodos.",
+            "modalClickMessage": "Para que la función muestre correctamente 0,1,2 en lugar de 3,3,3, puedes usar let en lugar de var para declarar la variable i...",
+            "errorMessage": "En JavaScript, los objetos pueden tener métodos que acceden a sus propias propiedades usando la palabra clave this. Sin embargo, si los métodos no están bien definidos, pueden no devolver ningún valor o no interactuar correctamente con las propiedades.\nEn este ejemplo, shape es un objeto con las propiedades name y age, y los métodos out1 y out2. Actualmente, estos métodos solo acceden a las propiedades sin devolver ningún valor, lo que los hace incompletos.\nPara refactorizar este código, debemos modificar los métodos out1 y out2 para que devuelvan los valores de name y age, respectivamente. Esto permitirá recuperar y utilizar estos valores cuando se llamen los métodos.",
+            "successMessage": "🎉 ¡Felicidades! Has completado el desafío con éxito. Tu determinación y habilidad han dado resultado. ¡Sigue así y continúa superándote! 🚀"
+        }
     },
     {
         "id": 2,
         "title": "Ejemplo de otro ejercicio",
-        "codeKoToRefactor": "function sum(a, b) {\n    return a + b;\n}\n\n// Test cases:\nconsole.log(sum(2, 3)); // Debe imprimir 6",
-        "codeOkForExpect": "function sum(a, b) {\n    return a + b;\n}\n\n// Test cases:\nconsole.log(sum(2, 3)); // Debe imprimir 5"
+        "description": "Refactoriza la función sum para que devuelva el resultado correcto de la suma.",
+        "codeKoToRefactor": "function sum(a, b) {\n    return a + b;\n}\n\n// Casos de prueba:\nconsole.log(sum(2, 3)); // Debe imprimir 6",
+        "codeOkForExpect": "function sum(a, b) {\n    return a + b;\n}\n\n// Casos de prueba:\nconsole.log(sum(2, 3)); // Debe imprimir 5",
+        "modalClickMessage": "Verifica que la operación de suma esté devolviendo el valor correcto.",
+        "errorMessage": "El código actual devuelve un resultado incorrecto. Asegúrate de que la función sum devuelva la suma correcta de los valores.",
+        "successMessage": "¡Bien hecho! Has corregido la función de suma correctamente."
     }
 ]
