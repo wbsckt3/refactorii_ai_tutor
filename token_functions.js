@@ -172,10 +172,10 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 
                  async function getAiExpect() {
 
-			 const aiButton = document.getElementById('ai-assistance');
+			 const runButton = document.getElementById('run-button');
 			 const loader = document.createElement('span');
 			 loader.innerHTML = ' ⏳'; // Icono de carga
-			 aiButton.appendChild(loader); // Agregar el icono de carga
+			 runButton.appendChild(loader); // Agregar el icono de carga
 			 
                           fetch('https://www.refactorii.com/ai-assistance', {
 			        method: 'POST',
@@ -205,6 +205,9 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 			    })
 			    .catch(error => {
 			        console.error('Error:', error);
+			    }).finally(() => {
+			        // Remover el icono de carga al finalizar la operación
+			        loader.remove();
 			    });
 		 }
 
