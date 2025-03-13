@@ -259,6 +259,16 @@ describe('JavaScript Code Tests', function() {
 		// Variable para rastrear el estado de los tests
                 let allTestsPassed = true;	
                 // Run Mocha tests
+		    // Limpiar la instancia anterior si existe
+    if (window.mochaInstance) {
+        window.mochaInstance.suite.suites = []; // Limpia las pruebas previas
+    } else {
+        window.mochaInstance = new Mocha({
+            reporter: 'html',
+            cleanReferencesAfterRun: false // Evita que se eliminen referencias al terminar
+        });
+    }
+    mocha.setup({ ui: 'bdd', cleanReferencesAfterRun: false });
                 mocha.run()
                     .on('test', function(test) {
                         logToConsole('• Running test: ' + test.title);
