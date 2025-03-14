@@ -12,12 +12,8 @@ function loadExercise(exercise) {
         document.getElementById("h5_title").innerText = exercise.title; 
         document.getElementById("challenge").innerText = exercise.description; 
         const codeEditor = document.getElementById("code-editor");
-        // Borrar el contenido antes de actualizar
-        codeEditor.value = ""; 
-        // Usar requestAnimationFrame para actualizar el valor en la siguiente renderización
-        requestAnimationFrame(() => {
-            codeEditor.value = exercise.codeKoToRefactor; 
-        });
+        const codeEditor = document.getElementById("code-editor");
+        codeEditor.innerText = exercise.codeKoToRefactor;
         // Variables adicionales para mensajes
         window.modal_click_message = exercise.modalClickMessage;
         window.error_message = exercise.errorMessage;
