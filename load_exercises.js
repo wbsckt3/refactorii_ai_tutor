@@ -1,22 +1,6 @@
 let exercises = [];
 let currentExerciseIndex = 0;
 
-
-
-function loadExercises(exerciseId) {  
-    fetch('exercises.json') // Cargar el JSON con los ejercicios
-        .then(response => response.json())
-        .then(exercises => {
-            const selectedExercise = exercises.find(ex => String(ex.id) === String(exerciseId));
-            if (selectedExercise) {
-                loadExercise(selectedExercise); // Cargar solo el ejercicio filtrado
-            } else {
-                console.error("Ejercicio no encontrado en el JSON.");
-            }
-        })
-        .catch(error => console.error("Error al cargar los ejercicios:", error));
-}
-
 function loadExercise(exercise) {
     if (!exercise || typeof exercise !== "object") {
         console.error("No se proporcionó un ejercicio válido.");
@@ -49,9 +33,18 @@ function loadExercise(exercise) {
     }, 100); // Un pequeño delay puede ayudar en ciertos casos
 }
 
-// Recargar la página solo una vez asegurándonos de que no se haga en bucle
-if (!sessionStorage.getItem("reloaded")) {
-    sessionStorage.setItem("reloaded", "true");
-    location.reload();
+
+function loadExercises(exerciseId) {  
+    fetch('exercises.json') // Cargar el JSON con los ejercicios
+        .then(response => response.json())
+        .then(exercises => {
+            const selectedExercise = exercises.find(ex => String(ex.id) === String(exerciseId));
+            if (selectedExercise) {
+                loadExercise(selectedExercise); // Cargar solo el ejercicio filtrado
+            } else {
+                console.error("Ejercicio no encontrado en el JSON.");
+            }
+        })
+        .catch(error => console.error("Error al cargar los ejercicios:", error));
 }
 
