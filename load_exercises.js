@@ -17,7 +17,7 @@ function loadExercises(exerciseId) {
     fetch('exercises.json') // Cargar el JSON con los ejercicios
         .then(response => response.json())
         .then(exercises => {
-            const selectedExercise = exercises.find(ex => ex.id === exerciseId);
+            const selectedExercise = exercises.find(ex => String(ex.id) === String(exerciseId));
             if (selectedExercise) {
                 loadExercise(selectedExercise); // Cargar solo el ejercicio filtrado
             } else {
