@@ -34,17 +34,25 @@ function loadExercise(exercise) {
 }
 
 
-function loadExercises(exerciseId) {  
-    fetch('exercises.json') // Cargar el JSON con los ejercicios
-        .then(response => response.json())
-        .then(exercises => {
-            const selectedExercise = exercises.find(ex => String(ex.id) === String(exerciseId));
-            if (selectedExercise) {
-                loadExercise(selectedExercise); // Cargar solo el ejercicio filtrado
-            } else {
-                console.error("Ejercicio no encontrado en el JSON.");
-            }
-        })
-        .catch(error => console.error("Error al cargar los ejercicios:", error));
+async function loadExercises(exerciseId) {
+    try {
+        const response = await fetch('exercises.json');
+        const exercises = await response.json();
+
+        console.log("Ejercicios cargados:", exercises);
+        console.log("Buscando ejercicio con ID:", exerciseId);
+
+        const selectedExercise = exercises.find(ex => String(ex.id) === String(exerciseId));
+
+        if (selectedExercise) {
+            console.log("Ejercicio encontrado:", selectedExercise);
+            loadExercise(selectedExercise);
+        } else {
+            console.error("❌ Ejercicio no encontrado en el JSON.");
+        }
+    } catch (error) {
+        console.error("⚠️ Error al cargar los ejercicios:", error);
+    }
 }
+
 
