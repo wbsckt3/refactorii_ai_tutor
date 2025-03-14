@@ -14,9 +14,9 @@ function loadExercise(exercise) {
 
         // Esperar a que CodeMirror se inicialice antes de asignar el código
         let interval = setInterval(() => {
-            if (window.codeEditor) { // ✅ Verificar si CodeMirror está listo
+            if (window.editor) { // ✅ Verificar si CodeMirror está listo
                 clearInterval(interval); // Detener el intervalo
-                codeEditor.setValue(exercise.codeKoToRefactor);
+                editor.setValue(exercise.codeKoToRefactor);
             }
         }, 50);
 
