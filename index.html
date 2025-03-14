@@ -110,7 +110,7 @@ let editor; // Variable global para CodeMirror
 	    
 function test_cases_scenario() {
     // Configuración del editor CodeMirror
-    const editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
+    editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
         lineNumbers: true,
         mode: 'javascript',
         lineWrapping: true,
