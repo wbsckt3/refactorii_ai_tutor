@@ -12,7 +12,7 @@ function loadExercise(exercise) {
         document.getElementById("h5_title").innerText = exercise.title;
         document.getElementById("challenge").innerText = exercise.description;
         document.getElementById("code-editor").value = exercise.codeKoToRefactor;
-
+console.log( exercise.codeKoToRefactor)
         const codeEditor = document.getElementById("code-editor");
 
         // Variables adicionales para mensajes
