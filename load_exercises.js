@@ -24,7 +24,7 @@ function loadExercise(exercise) {
         window.success_message = exercise.successMessage;
         // Pasamos codeOkForExpect a token_functions.js
         getAIExpect(exercise.codeOkForExpect);
-    }, 100); // Un pequeño delay puede ayudar en ciertos casos
+    }, 300); // Un pequeño delay puede ayudar en ciertos casos
 }
 
 
