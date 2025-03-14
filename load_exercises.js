@@ -10,14 +10,18 @@ function loadExercise(exercise) {
     // Asegurar que el código se renderice correctamente
     setTimeout(() => {
         document.getElementById("h5_title").innerText = exercise.title; 
-        document.getElementById("challenge").innerText = exercise.description; console.log(exercise.codeKoToRefactor)
-        document.getElementById("code-editor").value = exercise.codeKoToRefactor;
-
+        document.getElementById("challenge").innerText = exercise.description; 
+        const codeEditor = document.getElementById("code-editor");
+        // Borrar el contenido antes de actualizar
+        codeEditor.value = ""; 
+        // Usar requestAnimationFrame para actualizar el valor en la siguiente renderización
+        requestAnimationFrame(() => {
+            codeEditor.value = exercise.codeKoToRefactor; 
+        });
         // Variables adicionales para mensajes
         window.modal_click_message = exercise.modalClickMessage;
         window.error_message = exercise.errorMessage;
         window.success_message = exercise.successMessage;
-
         // Pasamos codeOkForExpect a token_functions.js
         getAIExpect(exercise.codeOkForExpect);
     }, 100); // Un pequeño delay puede ayudar en ciertos casos
