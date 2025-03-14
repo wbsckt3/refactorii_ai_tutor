@@ -11,14 +11,8 @@ function loadExercise(exercise) {
     setTimeout(() => {
         document.getElementById("h5_title").innerText = exercise.title; 
         document.getElementById("challenge").innerText = exercise.description; 
-
-        // Esperar a que CodeMirror se inicialice antes de asignar el código
-        let interval = setInterval(() => {
-            if (window.editor) { // ✅ Verificar si CodeMirror está listo
-                clearInterval(interval); // Detener el intervalo
-                editor.setValue(exercise.codeKoToRefactor);
-            }
-        }, 50);
+     
+        editor.setValue(exercise.codeKoToRefactor);
 
         // Variables adicionales para mensajes
         window.modal_click_message = exercise.modalClickMessage;
