@@ -11,17 +11,9 @@ function loadExercise(exercise) {
     setTimeout(() => {
         document.getElementById("h5_title").innerText = exercise.title;
         document.getElementById("challenge").innerText = exercise.description;
-        //document.getElementById("code-editor").value = exercise.codeKoToRefactor;
+        document.getElementById("code-editor").value = exercise.codeKoToRefactor;
 
         const codeEditor = document.getElementById("code-editor");
-
-        // 🔥 Forzar reactividad con requestAnimationFrame
-        requestAnimationFrame(() => {
-            codeEditor.value = ""; // Borrar para asegurar actualización
-            requestAnimationFrame(() => {
-                codeEditor.value = exercise.codeKoToRefactor; // Asignar nuevo código
-            });
-        });
 
         // Variables adicionales para mensajes
         window.modal_click_message = exercise.modalClickMessage;
