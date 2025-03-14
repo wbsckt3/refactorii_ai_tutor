@@ -12,8 +12,11 @@ function loadExercise(exercise) {
         document.getElementById("h5_title").innerText = exercise.title; 
         document.getElementById("challenge").innerText = exercise.description; 
 
-        const codeEditor = document.getElementById("code-editor");
-        codeEditor.getDoc().setValue(exercise.codeKoToRefactor);
+        if (editor) {
+            editor.setValue(exercise.codeKoToRefactor); // ✅ Ahora sí se actualizará
+        } else {
+            console.error("CodeMirror aún no está inicializado.");
+        }
 
         // Variables adicionales para mensajes
         window.modal_click_message = exercise.modalClickMessage;
