@@ -12,11 +12,13 @@ function loadExercise(exercise) {
         document.getElementById("h5_title").innerText = exercise.title; 
         document.getElementById("challenge").innerText = exercise.description; 
 
-        if (editor) {
-            editor.setValue(exercise.codeKoToRefactor); // ✅ Ahora sí se actualizará
-        } else {
-            console.error("CodeMirror aún no está inicializado.");
-        }
+        // Esperar a que CodeMirror se inicialice antes de asignar el código
+        let interval = setInterval(() => {
+            if (window.codeEditor) { // ✅ Verificar si CodeMirror está listo
+                clearInterval(interval); // Detener el intervalo
+                codeEditor.setValue(exercise.codeKoToRefactor);
+            }
+        }, 50);
 
         // Variables adicionales para mensajes
         window.modal_click_message = exercise.modalClickMessage;
