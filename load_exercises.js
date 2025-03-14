@@ -12,14 +12,9 @@ function loadExercise(exercise) {
         document.getElementById("h5_title").innerText = exercise.title; 
         document.getElementById("challenge").innerText = exercise.description; 
         
-        const codeEditor = document.getElementById("code-editor");
-        if (!codeEditor) {
-            console.error("No se encontró el textarea 'code-editor'.");
-            return;
-        }
-        console.log("Textarea encontrado. Asignando valor...");
+        codeEditor.value = "";
         codeEditor.value = exercise.codeKoToRefactor;
-        console.log("Valor asignado:", codeEditor.value);
+        codeEditor.dispatchEvent(new Event("input", { bubbles: true }));
 
         // Variables adicionales para mensajes
         window.modal_click_message = exercise.modalClickMessage;
