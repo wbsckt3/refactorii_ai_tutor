@@ -10,10 +10,8 @@ function loadExercise(exercise) {
     // Asegurar que el código se renderice correctamente
     setTimeout(() => {
         document.getElementById("h5_title").innerText = exercise.title; 
-        document.getElementById("challenge").innerText = exercise.description; console.log( exercise.description)
+        document.getElementById("challenge").innerText = exercise.description; console.log(exercise.codeKoToRefactor)
         document.getElementById("code-editor").value = exercise.codeKoToRefactor;
-
-        const codeEditor = document.getElementById("code-editor");
 
         // Variables adicionales para mensajes
         window.modal_click_message = exercise.modalClickMessage;
