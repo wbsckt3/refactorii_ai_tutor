@@ -13,9 +13,7 @@ function loadExercise(exercise) {
         document.getElementById("challenge").innerText = exercise.description; 
 
         const codeEditor = document.getElementById("code-editor");
-        codeEditor.value = "";
-        codeEditor.value = exercise.codeKoToRefactor;
-        codeEditor.dispatchEvent(new Event("input", { bubbles: true }));
+        codeEditor.getDoc().setValue(exercise.codeKoToRefactor);
 
         // Variables adicionales para mensajes
         window.modal_click_message = exercise.modalClickMessage;
