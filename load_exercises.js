@@ -1,16 +1,6 @@
 let exercises = [];
 let currentExerciseIndex = 0;
 
-document.addEventListener("DOMContentLoaded", function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const exerciseId = parseInt(urlParams.get("exercise"), 10); // Asegurar que sea número
-
-    if (!isNaN(exerciseId)) {
-        loadExercises(exerciseId);
-    } else {
-        console.error("No se encontró un ID de ejercicio válido en la URL.");
-    }
-});
 
 
 function loadExercises(exerciseId) {  
