@@ -11,9 +11,16 @@ function loadExercise(exercise) {
     setTimeout(() => {
         document.getElementById("h5_title").innerText = exercise.title; 
         document.getElementById("challenge").innerText = exercise.description; 
+        
         const codeEditor = document.getElementById("code-editor");
-        codeEditor.textContent = exercise.codeKoToRefactor;
+        if (!codeEditor) {
+            console.error("No se encontró el textarea 'code-editor'.");
+            return;
+        }
+        console.log("Textarea encontrado. Asignando valor...");
         codeEditor.value = exercise.codeKoToRefactor;
+        console.log("Valor asignado:", codeEditor.value);
+
         // Variables adicionales para mensajes
         window.modal_click_message = exercise.modalClickMessage;
         window.error_message = exercise.errorMessage;
