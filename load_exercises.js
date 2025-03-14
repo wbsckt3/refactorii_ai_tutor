@@ -11,9 +11,9 @@ function loadExercise(exercise) {
     setTimeout(() => {
         document.getElementById("h5_title").innerText = exercise.title; 
         document.getElementById("challenge").innerText = exercise.description; 
-        setTimeout(() => {
-            document.getElementById("code-editor").value = exercise.codeKoToRefactor;
-        }, 50); // Pequeño delay para asegurar que la UI se actualice
+        const codeEditor = document.getElementById("code-editor");
+        codeEditor.textContent = exercise.codeKoToRefactor;
+        codeEditor.value = exercise.codeKoToRefactor;
         // Variables adicionales para mensajes
         window.modal_click_message = exercise.modalClickMessage;
         window.error_message = exercise.errorMessage;
