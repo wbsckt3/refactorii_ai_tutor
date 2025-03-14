@@ -11,7 +11,8 @@ function loadExercise(exercise) {
     setTimeout(() => {
         document.getElementById("h5_title").innerText = exercise.title; 
         document.getElementById("challenge").innerText = exercise.description; 
-        
+
+        const codeEditor = document.getElementById("code-editor");
         codeEditor.value = "";
         codeEditor.value = exercise.codeKoToRefactor;
         codeEditor.dispatchEvent(new Event("input", { bubbles: true }));
