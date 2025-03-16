@@ -1,4 +1,4 @@
-async function fetchAIResponseGetAiExpect(userCode) {
+/* async function fetchAIResponseGetAiExpect(userCode) {
 		    try {
 		        const challenge = document.getElementById('challenge').textContent;
 		        const response = await fetch('https://www.refactorii.com/fetchAIExpectations', { // Ahora va al backend
@@ -18,7 +18,7 @@ async function fetchAIResponseGetAiExpect(userCode) {
 		    } catch (error) {
 		        console.error("Error al obtener expectativas de IA:", error);
 		    }
-}
+} */
 
 /*let exercises = [];
 let currentExerciseIndex = 0;
