@@ -91,7 +91,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		    const challenge = document.getElementById('challenge').textContent;
 		
 		    // Enviar código al backend para obtener respuesta de la IA
-		    const response = await fetch('/api/fetchAIResponseBack', {
+		    const response = await fetch('https://www.refactorii.com//api/fetchAIResponseBack', {
 		        method: 'POST',
 		        headers: {
 		            'Content-Type': 'application/json'
