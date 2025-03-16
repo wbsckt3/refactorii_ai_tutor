@@ -80,21 +80,25 @@ editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
 let exercises = [];
 let currentExerciseIndex = 0;
 
-function loadExercise(exercise) {
+async function loadExercise(exercise) {
     if (!exercise || typeof exercise !== "object") {
         console.error("No se proporcionó un ejercicio válido.");
         return;
     }
-    setTimeout(async () => {
-        document.getElementById("h5_title").innerText = exercise.title;
-        document.getElementById("challenge").innerText = exercise.description;
-        editor.setValue(exercise.codeKoToRefactor);
-        window.modal_click_message = exercise.modalClickMessage;
-        window.error_message = exercise.errorMessage;
-        window.success_message = exercise.successMessage;
+    document.getElementById("h5_title").innerText = exercise.title;
+    document.getElementById("challenge").innerText = exercise.description;
+    editor.setValue(exercise.codeKoToRefactor);
+    window.modal_click_message = exercise.modalClickMessage;
+    window.error_message = exercise.errorMessage;
+    window.success_message = exercise.successMessage;
+
+    try {
         await fetchAIResponseGetAiExpect(exercise.codeOkForExpect);
-    }, 300);
+    } catch (error) {
+        console.error("Error al obtener expectativas de IA:", error);
+    }
 }
+
 
 async function loadExercises(exerciseId) {
     try {
