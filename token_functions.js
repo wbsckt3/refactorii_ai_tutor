@@ -173,7 +173,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 				        headers: {
 				            'Content-Type': 'application/json'
 				        },
-				        body: JSON.stringify({ code: userCode, challenge: challenge })
+				        body: JSON.stringify({ code: latestCode, challenge: challenge })
 				    });
 				    const data = await response.json();
 				    if (data.success) {
