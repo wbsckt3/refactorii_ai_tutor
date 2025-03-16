@@ -12,19 +12,18 @@ h1 {
 
 .container {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    justify-content: space-between; /* Separa los bloques */
+    align-items: flex-start; /* Alinea desde arriba */
+    flex-wrap: wrap; /* Permite que los elementos bajen si no hay espacio */
     gap: 20px;
-    margin-bottom: 20px;
-    padding: 0 10px; /* Agregamos un pequeño margen lateral */
 }
 
 /* Ajustamos las columnas */
 .codes, .concepts {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    width: 45%;
+    gap: 11px;
+    width: 50%; /* Asegura que ocupen la mitad del espacio */
 }
 
 .code-snippet, .droppable {
@@ -113,7 +112,7 @@ button:hover {
 }
 
 .code-snippet, .droppable {
-    max-width: 100%;
+    max-width: 90%;
 }
 
 @media (max-width: 900px) {
