@@ -308,7 +308,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 			 
 		 } */
 
-		async function fetchAIResponseGetAiExpect(userCode) {
+		/*async function fetchAIResponseGetAiExpect(userCode) {
 		    try {
 		        const challenge = document.getElementById('challenge').textContent;
 		
@@ -340,7 +340,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		    } catch (error) {
 		        console.error("Error al obtener las expectativas de IA:", error);
 		    }
-		}
+		} */
 		
 		// Llamar a la función async
 		getAIExpect();
