@@ -100,7 +100,7 @@ button:hover {
 .buttons-container {
   display: flex;
   justify-content: flex-start;
-  gap: -6px;
+  gap: 6px;
 }
 
 .boton-reto {
@@ -111,4 +111,15 @@ button:hover {
     cursor: pointer;
     border-radius: 5px;
 }
+
+.code-snippet, .droppable {
+    max-width: 100%;
+}
+
+@media (max-width: 900px) {
+    .codes, .concepts {
+        width: 100%; /* Ocupan el ancho completo en pantallas pequeñas */
+    }
+}
+
 
