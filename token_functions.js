@@ -167,7 +167,8 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		                // Obtener el código actualizado y el desafío en el momento del clic
 		                const latestCode = document.getElementById('code-editor').value;
 		                const challenge = document.getElementById('challenge').textContent;
-		                
+		                console.log("Enviando código:", latestCode);
+                                console.log("Enviando desafío:", challenge);
 		                // Enviar código al backend para obtener respuesta de la IA
 		                const response = await fetch('https://www.refactorii.com/fetchAIResponseBack', {  // Corrección de URL
 		                    method: 'POST',
