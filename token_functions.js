@@ -165,7 +165,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		            
 		            try {
 		                // Obtener el código actualizado y el desafío en el momento del clic
-		                const latestCode = document.getElementById('code-editor').value;
+		                const latestCode = editor.getValue();
 		                const challenge = document.getElementById('challenge').textContent;
 		                console.log("Enviando código:", latestCode);
                                 console.log("Enviando desafío:", challenge);
