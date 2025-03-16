@@ -86,7 +86,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 			
 		} */
 
-		async function fetchAIResponse(userCode) {
+		/*async function fetchAIResponse(userCode) {
 		    // Obtener el mensaje de desafío
 		    const challenge = document.getElementById('challenge').textContent;
 		
@@ -106,7 +106,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		    } else {
 		        console.error('Error en la respuesta de la IA:', data.message);
 		    }
-		}
+		} */
 
 		// Función para escapar caracteres especiales en HTML
 		function escapeHTML(str) {
@@ -185,7 +185,23 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		                    const latestCode = document.getElementById('code-editor').value;
 		                    
 		                    // 💡 Asegurar que la función espere la respuesta del backend
-		                    await fetchAIResponse(latestCode); 
+		                    const challenge = document.getElementById('challenge').textContent;
+		
+				    // Enviar código al backend para obtener respuesta de la IA
+				    const response = await fetch('https://www.refactorii.com//api/fetchAIResponseBack', {
+				        method: 'POST',
+				        headers: {
+				            'Content-Type': 'application/json'
+				        },
+				        body: JSON.stringify({ code: userCode, challenge: challenge })
+				    });
+				    const data = await response.json();
+				    if (data.success) {
+				        document.getElementById('challenge').innerHTML = `<pre><code>${escapeHTML(data.message)}</code></pre>`;
+				    } else {
+				        console.error('Error en la respuesta de la IA:', data.message);
+				    }
+					
 		                } else {
 		                    console.log('Error:', data.message);
 		                    document.getElementById('ai-assistance').disabled = true;
