@@ -161,29 +161,9 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		    if (aiButton) {
 		        aiButton.addEventListener('click', async () => {
 		            console.log("Botón de asistencia de IA clickeado");
-		
 		            try {
-		                const response = await fetch('https://www.refactorii.com/ai-assistance', {
-		                    method: 'POST',
-		                    headers: {
-		                        'Content-Type': 'application/json',
-		                    },
-		                    body: JSON.stringify({ token })
-		                });
-		
-		                const data = await response.json();
-		
-		                if (data.success) {
-		                    console.log('AI assistance provided:', data.message);
-		                    document.getElementById('remaining-requests').innerText = `Remaining AI requests: ${data.remainingRequests}`;
-		
-		                    if (data.remainingRequests <= 0) {
-		                        document.getElementById('ai-assistance').disabled = false;
-		                    }
-		
 		                    // Obtener el código actualizado antes de llamar a fetchAIResponse
 		                    const latestCode = document.getElementById('code-editor').value;
-		                    
 		                    // 💡 Asegurar que la función espere la respuesta del backend
 		                    const challenge = document.getElementById('challenge').textContent;
 		
@@ -201,11 +181,6 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 				    } else {
 				        console.error('Error en la respuesta de la IA:', data.message);
 				    }
-					
-		                } else {
-		                    console.log('Error:', data.message);
-		                    document.getElementById('ai-assistance').disabled = true;
-		                }
 		            } catch (error) {
 		                console.error('Error:', error);
 		            }
