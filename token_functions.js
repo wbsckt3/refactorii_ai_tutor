@@ -50,8 +50,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 			    return JSON.parse(jsonPayload);
 		}
 		
-		// Obtener el botón de ai-assistance
-		const runButton = document.getElementById('ai-assistance');	     
+		     
 		/*async function fetchAIResponse(userCode) {
 		      // Obtén el mensaje de desafío
 		      const challenge = document.getElementById('challenge').textContent;
@@ -268,7 +267,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		 }
 
                  
-		 async function fetchAIResponseGetAiExpect(userCode) {
+		 /*async function fetchAIResponseGetAiExpect(userCode) {
 		      // Obtén el mensaje de desafío
 		      const challenge = document.getElementById('challenge').textContent;
 		      const apiKey = 'sk-f105145c838248dab59a4c3a54127e0f'; // Reemplaza con tu clave API real
@@ -307,7 +306,33 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 			// Guardar en localStorage solo las expectativas
 			localStorage.setItem('testExpectations', expectations);
 			 
-		 }
+		 } */
+
+		async function fetchAIResponseGetAiExpect(userCode) {
+		    try {
+		        const challenge = document.getElementById('challenge').textContent;
+		
+		        const response = await fetch('https://www.refactorii.com/fetchAIExpectations', { // Ahora va al backend
+		            method: 'POST',
+		            headers: {
+		                'Content-Type': 'application/json'
+		            },
+		            body: JSON.stringify({ code: userCode, challenge: challenge })
+		        });
+		
+		        const data = await response.json();
+		
+		        if (data.success) {
+		            localStorage.setItem('testExpectations', data.expectations);
+		            console.log("Expectativas guardadas:", data.expectations);
+		        } else {
+		            console.error("Error en la respuesta de la IA:", data.message);
+		        }
+		
+		    } catch (error) {
+		        console.error("Error al obtener expectativas de IA:", error);
+		    }
+		}
 
 		async function getAIExpect(codeOkForExpect) {
 		    try {
