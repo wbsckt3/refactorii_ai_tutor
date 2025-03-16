@@ -156,17 +156,17 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 			    }
 		}); */
 
+                // Obtener el código actualizado antes de llamar a fetchAIResponse
+		const latestCode = document.getElementById('code-editor').value;
+		// 💡 Asegurar que la función espere la respuesta del backend
+		const challenge = document.getElementById('challenge').textContent;
+
 		document.addEventListener("DOMContentLoaded", function () {
 		    const aiButton = document.getElementById('ai-assistance');
 		    if (aiButton) {
 		        aiButton.addEventListener('click', async () => {
 		            console.log("Botón de asistencia de IA clickeado");
-		            try {
-		                    // Obtener el código actualizado antes de llamar a fetchAIResponse
-		                    const latestCode = document.getElementById('code-editor').value;
-		                    // 💡 Asegurar que la función espere la respuesta del backend
-		                    const challenge = document.getElementById('challenge').textContent;
-		
+		            try {		
 				    // Enviar código al backend para obtener respuesta de la IA
 				    const response = await fetch('https://www.refactorii.com/fetchAIResponseBack', {
 				        method: 'POST',
