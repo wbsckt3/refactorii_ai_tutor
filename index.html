@@ -92,6 +92,7 @@ async function loadExercise(exercise) {
     window.error_message = exercise.errorMessage;
     window.success_message = exercise.successMessage;
     const codeOkForExpect = exercise.codeOkForExpect;
+	console.log(codeOkForExpect)
     try {
         await fetchAIResponseGetAiExpect(codeOkForExpect);
     } catch (error) {
