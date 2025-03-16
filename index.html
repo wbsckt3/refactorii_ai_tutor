@@ -91,9 +91,9 @@ async function loadExercise(exercise) {
     window.modal_click_message = exercise.modalClickMessage;
     window.error_message = exercise.errorMessage;
     window.success_message = exercise.successMessage;
-
+    const codeOkForExpect = exercise.codeOkForExpect;
     try {
-        await fetchAIResponseGetAiExpect(exercise.codeOkForExpect);
+        await fetchAIResponseGetAiExpect(codeOkForExpect);
     } catch (error) {
         console.error("Error al obtener expectativas de IA:", error);
     }
