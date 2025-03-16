@@ -160,8 +160,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		    const aiButton = document.getElementById('ai-assistance');
 		    if (aiButton) {
 		        aiButton.addEventListener('click', async () => {
-		            console.log("Botón de asistencia de IA clickeado");
-		            
+		            console.log("Botón de asistencia de IA clickeado");  
 		            try {
 		                const latestCode = editor.getValue();
 		                const challenge = document.getElementById('challenge').textContent;
@@ -174,7 +173,9 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		                });	
 		                const data = await response.json();
 		                if (data.success) {
-		                    document.getElementById('challenge').innerHTML = `<pre><code>${escapeHTML(data.message)}</code></pre>`;
+		                      // document.getElementById('challenge').innerHTML = `<pre><code>${escapeHTML(data.message)}</code></pre>`;
+				      $('#errorMessageModalBody').html(`<pre><code>${escapeHTML(data.message)}</code></pre>`); // Coloca el contenido del error en el cuerpo del modal
+                                      $('#errorMessageModal').modal('show'); // Muestra el modal
 		                } else {
 		                    console.error('Error en la respuesta de la IA:', data.message);
 		                }
