@@ -225,7 +225,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 			    }
 		}
 
-                 async function getAiExpect() {
+                /* async function getAiExpect() {
 
 			 const runButton = document.getElementById('run-button');
 			 const loader = document.createElement('span');
@@ -264,7 +264,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 			        // Remover el icono de carga al finalizar la operación
 			        loader.remove();
 			    });
-		 }
+		 } */
 
                  
 		 /*async function fetchAIResponseGetAiExpect(userCode) {
@@ -343,7 +343,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		} */
 		
 		// Llamar a la función async
-		getAIExpect();
+		//getAIExpect();
 
 
 
