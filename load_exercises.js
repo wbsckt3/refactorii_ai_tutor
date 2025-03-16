@@ -20,7 +20,7 @@ async function fetchAIResponseGetAiExpect(userCode) {
 		    }
 }
 
-let exercises = [];
+/*let exercises = [];
 let currentExerciseIndex = 0;
 
 function loadExercise(exercise) {
@@ -53,4 +53,4 @@ async function loadExercises(exerciseId) {
     } catch (error) {
         console.error("⚠️ Error al cargar los ejercicios:", error);
     }
-}
+} */
