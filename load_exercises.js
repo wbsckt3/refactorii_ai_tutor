@@ -1,3 +1,25 @@
+async function fetchAIResponseGetAiExpect(userCode) {
+		    try {
+		        const challenge = document.getElementById('challenge').textContent;
+		        const response = await fetch('https://www.refactorii.com/fetchAIExpectations', { // Ahora va al backend
+		            method: 'POST',
+		            headers: {
+		                'Content-Type': 'application/json'
+		            },
+		            body: JSON.stringify({ code: userCode, challenge: challenge })
+		        });
+		        const data = await response.json();
+		        if (data.success) {
+		            localStorage.setItem('testExpectations', data.expectations);
+		            console.log("Expectativas guardadas:", data.expectations);
+		        } else {
+		            console.error("Error en la respuesta de la IA:", data.message);
+		        }
+		    } catch (error) {
+		        console.error("Error al obtener expectativas de IA:", error);
+		    }
+}
+
 let exercises = [];
 let currentExerciseIndex = 0;
 
@@ -6,34 +28,22 @@ function loadExercise(exercise) {
         console.error("No se proporcionó un ejercicio válido.");
         return;
     }
-
-    // Asegurar que el código se renderice correctamente
     setTimeout(() => {
         document.getElementById("h5_title").innerText = exercise.title; 
         document.getElementById("challenge").innerText = exercise.description; 
-     
         editor.setValue(exercise.codeKoToRefactor);
-
-        // Variables adicionales para mensajes
         window.modal_click_message = exercise.modalClickMessage;
         window.error_message = exercise.errorMessage;
         window.success_message = exercise.successMessage;
-        // Pasamos codeOkForExpect a token_functions.js
-        getAIExpect(exercise.codeOkForExpect);
-    }, 300); // Un pequeño delay puede ayudar en ciertos casos
+        await fetchAIResponseGetAiExpect(exercise.codeOkForExpect); 
+    }, 300); 
 }
-
 
 async function loadExercises(exerciseId) {
     try {
         const response = await fetch('exercises.json');
         const exercises = await response.json();
-
-        console.log("Ejercicios cargados:", exercises);
-        console.log("Buscando ejercicio con ID:", exerciseId);
-
         const selectedExercise = exercises.find(ex => String(ex.id) === String(exerciseId));
-
         if (selectedExercise) {
             console.log("Ejercicio encontrado:", selectedExercise);
             loadExercise(selectedExercise);
@@ -44,5 +54,3 @@ async function loadExercises(exerciseId) {
         console.error("⚠️ Error al cargar los ejercicios:", error);
     }
 }
-
-
