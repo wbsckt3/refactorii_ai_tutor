@@ -156,31 +156,34 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 			    }
 		}); */
 
-                // Obtener el código actualizado antes de llamar a fetchAIResponse
-		const latestCode = document.getElementById('code-editor').value;
-		// 💡 Asegurar que la función espere la respuesta del backend
-		const challenge = document.getElementById('challenge').textContent;
-
-		document.addEventListener("DOMContentLoaded", function () {
+               document.addEventListener("DOMContentLoaded", function () {
 		    const aiButton = document.getElementById('ai-assistance');
+		    
 		    if (aiButton) {
 		        aiButton.addEventListener('click', async () => {
 		            console.log("Botón de asistencia de IA clickeado");
-		            try {		
-				    // Enviar código al backend para obtener respuesta de la IA
-				    const response = await fetch('https://www.refactorii.com/fetchAIResponseBack', {
-				        method: 'POST',
-				        headers: {
-				            'Content-Type': 'application/json'
-				        },
-				        body: JSON.stringify({ code: latestCode, challenge: challenge })
-				    });
-				    const data = await response.json();
-				    if (data.success) {
-				        document.getElementById('challenge').innerHTML = `<pre><code>${escapeHTML(data.message)}</code></pre>`;
-				    } else {
-				        console.error('Error en la respuesta de la IA:', data.message);
-				    }
+		            
+		            try {
+		                // Obtener el código actualizado y el desafío en el momento del clic
+		                const latestCode = document.getElementById('code-editor').value;
+		                const challenge = document.getElementById('challenge').textContent;
+		                
+		                // Enviar código al backend para obtener respuesta de la IA
+		                const response = await fetch('https://www.refactorii.com/api/fetchAIResponseBack', {  // Corrección de URL
+		                    method: 'POST',
+		                    headers: {
+		                        'Content-Type': 'application/json'
+		                    },
+		                    body: JSON.stringify({ code: latestCode, challenge: challenge })
+		                });
+		
+		                const data = await response.json();
+		
+		                if (data.success) {
+		                    document.getElementById('challenge').innerHTML = `<pre><code>${escapeHTML(data.message)}</code></pre>`;
+		                } else {
+		                    console.error('Error en la respuesta de la IA:', data.message);
+		                }
 		            } catch (error) {
 		                console.error('Error:', error);
 		            }
@@ -189,6 +192,7 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 		        console.error("El elemento con ID 'ai-assistance' no existe en el DOM.");
 		    }
 		});
+
 
 		
 		async function guardarResultados() {
