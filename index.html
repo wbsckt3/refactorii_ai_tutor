@@ -67,11 +67,45 @@
     </div>
     <script>
 
+        let exercises = [];
+	let currentExerciseIndex = 0;
+	
+	function loadExercise(exercise) {
+	    if (!exercise || typeof exercise !== "object") {
+	        console.error("No se proporcionó un ejercicio válido.");
+	        return;
+	    }
+	    setTimeout(() => {
+	        document.getElementById("h5_title").innerText = exercise.title; 
+	        document.getElementById("challenge").innerText = exercise.description; 
+	        editor.setValue(exercise.codeKoToRefactor);
+	        window.modal_click_message = exercise.modalClickMessage;
+	        window.error_message = exercise.errorMessage;
+	        window.success_message = exercise.successMessage;
+	        await fetchAIResponseGetAiExpect(exercise.codeOkForExpect); 
+	    }, 300); 
+	}
+	
+	async function loadExercises(exerciseId) {
+	    try {
+	        const response = await fetch('exercises.json');
+	        const exercises = await response.json();
+	        const selectedExercise = exercises.find(ex => String(ex.id) === String(exerciseId));
+	        if (selectedExercise) {
+	            console.log("Ejercicio encontrado:", selectedExercise);
+	            loadExercise(selectedExercise);
+	        } else {
+	            console.error("❌ Ejercicio no encontrado en el JSON.");
+	        }
+	    } catch (error) {
+	        console.error("⚠️ Error al cargar los ejercicios:", error);
+	    }
+	}
+	    
         // Obtener el parámetro "exercise" de la URL y cargar el ejercicio
 	document.addEventListener("DOMContentLoaded", function () {
 	    const urlParams = new URLSearchParams(window.location.search);
 	    const exerciseId = urlParams.get("exercise"); // Obtener el ID del ejercicio desde la URL
-	
 	    if (exerciseId) {
 	        loadExercises(exerciseId);
 	    } else {
