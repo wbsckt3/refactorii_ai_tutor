@@ -67,6 +67,25 @@
   
 <script>
 
+async function fetchAIResponseGetAiExpect(userCode) {
+    try {
+        const challenge = document.getElementById('challenge').textContent;
+        const response = await fetch('https://www.refactorii.com/fetchAIExpectations', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ code: userCode, challenge: challenge })
+        });
+        const data = await response.json();
+        if (data.success) {
+            localStorage.setItem('testExpectations', data.expectations);
+        } else {
+            console.error("Error en la respuesta de la IA:", data.message);
+        }
+    } catch (error) {
+        console.error("Error al obtener expectativas de IA:", error);
+    }
+}    
+	
  let editor; // Variable global para CodeMirror
 // Configuración del editor CodeMirror
 editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
@@ -91,10 +110,10 @@ async function loadExercise(exercise) {
     window.modal_click_message = exercise.modalClickMessage;
     window.error_message = exercise.errorMessage;
     window.success_message = exercise.successMessage;
-    const codeOkForExpect = exercise.codeOkForExpect;
-	console.log(codeOkForExpect)
+    // const codeOkForExpect = exercise.codeOkForExpect;
+    // console.log(codeOkForExpect)
     try {
-        await fetchAIResponseGetAiExpect(codeOkForExpect);
+        await fetchAIResponseGetAiExpect(exercise.codeOkForExpect);
     } catch (error) {
         console.error("Error al obtener expectativas de IA:", error);
     }
@@ -227,24 +246,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-async function fetchAIResponseGetAiExpect(userCode) {
-    try {
-        const challenge = document.getElementById('challenge').textContent;
-        const response = await fetch('https://www.refactorii.com/fetchAIExpectations', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ code: userCode, challenge: challenge })
-        });
-        const data = await response.json();
-        if (data.success) {
-            localStorage.setItem('testExpectations', data.expectations);
-        } else {
-            console.error("Error en la respuesta de la IA:", data.message);
-        }
-    } catch (error) {
-        console.error("Error al obtener expectativas de IA:", error);
-    }
-}       
+   
         
 </script>
 
