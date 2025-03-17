@@ -141,7 +141,7 @@ function test_cases_scenario() {
 
         const userCode = editor.getValue();
         const originalConsoleLog = console.log;
-        console.log = function(...args) {
+        console.log = function(...args) {  console.log("Procesando...");
             originalConsoleLog.apply(console, args);
             logToConsole(args.join(' '));
         };
@@ -231,7 +231,6 @@ async function fetchAIResponseGetAiExpect(userCode) {
         const data = await response.json();
         if (data.success) {
             localStorage.setItem('testExpectations', data.expectations);
-            console.log("Expectativas guardadas:", data.expectations);
         } else {
             console.error("Error en la respuesta de la IA:", data.message);
         }
