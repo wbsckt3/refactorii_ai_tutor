@@ -141,9 +141,11 @@ function test_cases_scenario() {
 
         const userCode = editor.getValue();
         const originalConsoleLog = console.log;
-        console.log = function(...args) {  console.log("Procesando...");
-            originalConsoleLog.apply(console, args);
-            logToConsole(args.join(' '));
+
+        // Redefinir console.log solo una vez
+        console.log = function(...args) {
+            originalConsoleLog.apply(console, args); // Llama a la función original
+            logToConsole(args.join(' ')); // Registra en la consola personalizada
         };
 
         setTimeout(() => {
@@ -164,11 +166,16 @@ function test_cases_scenario() {
                     const expectations = localStorage.getItem('testExpectations') || '';
                     it('should log correct values', function(done) {
                         const output = [];
+                        const originalConsoleLog = console.log; // Guardar la referencia original
+
+                        // Redefinir console.log para capturar los mensajes
                         console.log = function (message) {
                             output.push(message);
-                            originalConsoleLog.apply(console, arguments);
+                            originalConsoleLog.apply(console, arguments); // Llama a la función original
                         };
+
                         new Function(userCode)();
+
                         setTimeout(() => {
                             try {
                                 eval(expectations);
@@ -202,7 +209,7 @@ function test_cases_scenario() {
                 console.error('Error evaluating user code:', e);
                 logToConsole('Error: ' + e.message, 'red');
             } finally {
-                console.log = originalConsoleLog;
+                console.log = originalConsoleLog; // Restaurar console.log original
             }
         }, 3000);
     });
