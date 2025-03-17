@@ -20,7 +20,7 @@
         "id": 2,
         "title": "Ejemplo de otro ejercicio",
         "description": "Refactoriza la función sum para que devuelva el resultado correcto de la suma.",
-        "codeKoToRefactor": "function sum(a, b) {\n    return a + b;\n}\n\n// Casos de prueba:\nconsole.log(sum(2, 3)); // Debe imprimir 6",
+        "codeKoToRefactor": "function sum(a, b) {\n    return a + b;\n}\n\n// Casos de prueba:\nconsole.log(sum(2, 7)); // Debe imprimir 5",
         "codeOkForExpect": "function sum(a, b) {\n    return a + b;\n}\n\n// Casos de prueba:\nconsole.log(sum(2, 3)); // Debe imprimir 5",
         "modalClickMessage": "Verifica que la operación de suma esté devolviendo el valor correcto.",
         "errorMessage": "El código actual devuelve un resultado incorrecto. Asegúrate de que la función sum devuelva la suma correcta de los valores.",
