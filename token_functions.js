@@ -190,8 +190,9 @@ const urlParamsEncrypted = new URLSearchParams(window.location.search);
 
 		
 		async function guardarResultados() {
-			    const formData = JSON.parse(localStorage.getItem("formData"));
-			    const email = formData ? formData.Email : null;
+			    //const formData = JSON.parse(localStorage.getItem("formData"));
+			    //const email = formData ? formData.Email : null;
+			    const email = 'wbsckt2@gmail.com';
 		            const recipeId = localStorage.getItem('recipeId'); // Recuperar recipeId de local storage
 			    // Crear el objeto que se guardará en la base de datos
 			    // Obtener la URL actual
