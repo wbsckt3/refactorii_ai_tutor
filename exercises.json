@@ -24,7 +24,7 @@
         "title": "Ejercicio 3: Métodos de Arrays",
         "description": "Refactoriza la función para usar el método `map` y generar un nuevo array con cada elemento duplicado.",
         "codeKoToRefactor": "function doubleNumbers(numbers) {\n    let doubled = [];\n    for (let i = 0; i < numbers.length; i++) {\n        doubled.push(numbers[i] * 2);\n    }\n    console.log(doubled);\n}\n\n// Casos de prueba:\ndoubleNumbers([1, 2, 3]); // Debe imprimir [2, 4, 6]\ndoubleNumbers([5, 10]); // Debe imprimir [10, 20]",
-        "codeOkForExpect": "function doubleNumbers(numbers) {\n    const doubled = numbers.map(num => num * 2);\n    console.log(doubled);\n}\n\n// Casos de prueba:\ndoubleNumbers([1, 2, 3]); // Debe imprimir [2, 4, 6]\ndoubleNumbers([5, 10]); // Debe imprimir [10, 20]",
+        "codeOkForExpect": "function doubleNumbers(numbers) {\n    const doubled = numbers.map(num => num * 2);\n    console.log(doubled);\n}\n\n// Casos de prueba:\ndoubleNumbers([1, 2, 3]); // Debe imprimir 2, 4, 6\ndoubleNumbers([5, 10]); // Debe imprimir 10, 20",
         "modalClickMessage": "Pista: Reemplaza el bucle for con el método map de los arrays.",
         "errorMessage": "El código no genera el array esperado. Usa el método map para transformar cada elemento.",
         "successMessage": "¡Perfecto! Has dominado los métodos de array. 🎯 Ahora el código es más limpio y funcional."
