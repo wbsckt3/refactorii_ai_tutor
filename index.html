@@ -169,6 +169,14 @@ async function fetchAIResponseGetAiExpect(userCode) {
         localStorage.setItem('testExpectations', data.expectations);
         console.log("Expectativas almacenadas:", data.expectations);
 
+	const urlParams = new URLSearchParams(window.location.search);
+        const exerciseId = urlParams.get("exercise");
+        if (exerciseId) {
+          loadExercises(exerciseId);
+        } else {
+          console.error("No se proporcionó un ID de ejercicio en la URL.");
+        }
+
     } catch (error) {
         console.error("Error en fetchAIResponseGetAiExpect:", error);
         localStorage.removeItem('testExpectations');
@@ -303,7 +311,7 @@ function test_cases_scenario() {
 
 test_cases_scenario();
 
-document.addEventListener("DOMContentLoaded", function () {
+/*document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
     const exerciseId = urlParams.get("exercise");
     if (exerciseId) {
@@ -311,7 +319,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
         console.error("No se proporcionó un ID de ejercicio en la URL.");
     }
-});
+}); */
 
    
         
