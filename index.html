@@ -386,23 +386,20 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem('recipeId', recipeId);
         localStorage.setItem('email', email);
 
+        const exerciseId = urlParams.get("exercise");
+        if (exerciseId) {
+           loadExercises(exerciseId);
+        } else {
+            console.error("No se proporcionó un ID de ejercicio en la URL.");
+        }
+	  
         // Llamar a la función después de validar el token y almacenar los datos
         loadMarkdownFiles();
+        
+   }
 
-
-}
-
-// Ejecutar la función al cargar la página
-validateAndProcessToken();
-
-	
-    const exerciseId = urlParams.get("exercise");
-    if (exerciseId) {
-        loadExercises(exerciseId);
-    } else {
-        console.error("No se proporcionó un ID de ejercicio en la URL.");
-    }
-	
+   // Ejecutar la función al cargar la página
+   validateAndProcessToken();
 	
 });
 
