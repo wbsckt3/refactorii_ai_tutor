@@ -316,7 +316,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const token = urlParams.get('token'); 
     if (token) { 
 	    // Realiza una solicitud al servicio externo para validar el token
-	    fetch(`https://www.refactorii.com/validate-token?token=${token}`)
+	    await fetch(`https://www.refactorii.com/validate-token?token=${token}`)
 	    .then(response => response.json())
 	    .then(data => { alert(data)
 	        if (data.valid) {
