@@ -313,12 +313,12 @@ test_cases_scenario();
 
 document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token'); alert(token)
-    if (token) { alert(token)
+    const token = urlParams.get('token'); 
+    if (token) { 
 	    // Realiza una solicitud al servicio externo para validar el token
 	    fetch(`https://www.refactorii.com/validate-token?token=${token}`)
 	    .then(response => response.json())
-	    .then(data => {
+	    .then(data => { alert(data)
 	        if (data.valid) {
 	            console.log(data.valid);
 	             // Decodifica el token para obtener el payload
