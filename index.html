@@ -313,7 +313,7 @@ test_cases_scenario();
 
 document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
+    const token = urlParams.get('token'); alert(urlParams)
     if (token) {
 	    // Realiza una solicitud al servicio externo para validar el token
 	    fetch(`https://www.refactorii.com/validate-token?token=${token}`)
