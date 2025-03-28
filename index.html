@@ -95,6 +95,7 @@ const token = urlParams.get('token');
 	  	    document.body.innerHTML = 'Access denied. Invalid token.';
 	  	}
 	    }).catch(error => {
+		console.log(urlParams)
 	  	document.body.innerHTML = 'Error validating token.';
 	  	console.error('Error:', error);
 	    });
