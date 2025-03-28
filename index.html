@@ -349,7 +349,7 @@ document.addEventListener("DOMContentLoaded", function () {
      document.body.innerHTML = 'Access denied. No token provided.';
     } */
 
-	async function validateAndProcessToken() {
+  async function validateAndProcessToken() {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
 
@@ -358,7 +358,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    try {
         const response = await fetch(`https://www.refactorii.com/validate-token?token=${token}`);
         const data = await response.json();
 
@@ -390,10 +389,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Llamar a la función después de validar el token y almacenar los datos
         loadMarkdownFiles();
 
-    } catch (error) {
-        console.error("Error validando token:", error);
-        document.body.innerHTML = 'Error validating token.';
-    }
+
 }
 
 // Ejecutar la función al cargar la página
