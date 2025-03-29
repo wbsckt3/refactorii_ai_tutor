@@ -176,6 +176,33 @@ async function fetchAIResponseGetAiExpect(userCode) {
     }
 }
 
+async function loadExercises(exerciseId) {
+    try {
+        const response = await fetch('exercises.json');
+        if (!response.ok) throw new Error(`Error al cargar JSON: ${response.status}`);
+        
+        const exercises = await response.json();
+        const selectedExercise = exercises.find(ex => String(ex.id) === String(exerciseId));
+        
+        if (!selectedExercise) {
+            throw new Error(`Ejercicio con ID ${exerciseId} no encontrado`);
+        }
+
+        // Validar estructura del ejercicio seleccionado
+        if (!selectedExercise.codeOkForExpect) {
+            throw new Error("El ejercicio no tiene codeOkForExpect");
+        }
+
+        console.log("Ejercicio cargado:", selectedExercise);
+        await loadExercise(selectedExercise);
+
+    } catch (error) {
+        console.error("Error crítico en loadExercises:", error);
+        localStorage.removeItem('testExpectations');
+        throw error;
+    }
+}
+
 document.addEventListener("DOMContentLoaded", async function () {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token'); 
