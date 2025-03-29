@@ -208,10 +208,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     const token = urlParams.get('token'); 
 
     async function validateAndProcessToken() {
-        if (!token) {
-            document.body.innerHTML = 'Access denied. No token provided.';
-            return;
-        }
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+
+    if (!token) {
+        document.body.innerHTML = 'Access denied. No token provided.';
+        return;
+    }
 
         const response = await fetch(`https://www.refactorii.com/validate-token?token=${token}`);
         const data = await response.json();
@@ -223,15 +226,39 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
 
         console.log("Token válido:", data);
+
+        // Decodificar el token para obtener el payload
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(c =>
+            '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+        ).join(''));
+
+        const decodedToken = JSON.parse(jsonPayload);
+        const recipeId = decodedToken._id; // Asegúrate de usar el nombre correcto del campo en el payload
+        const email = decodedToken.email;
+
+        console.log('Recipe ID:', recipeId);
+
+        // Almacenar en localStorage
+        localStorage.setItem('recipeId', recipeId);
+        localStorage.setItem('email', email);
+
         const exerciseId = urlParams.get("exercise");
         if (exerciseId) {
            loadExercises(exerciseId);
         } else {
             console.error("No se proporcionó un ID de ejercicio en la URL.");
         }
-    }
+	  
+        // Llamar a la función después de validar el token y almacenar los datos
+        loadMarkdownFiles();
+        
+   }
 
-    validateAndProcessToken();
+   // Ejecutar la función al cargar la página
+   validateAndProcessToken();
+
 });
 
 </script>
