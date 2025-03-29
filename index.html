@@ -28,8 +28,7 @@
 <body>
     <div id="editor-container">
         <textarea id="code-editor"></textarea>
-        <button id="run-button" onclick="simulateCompilation()">Run</button>
-	<button id="retry-button" onClick="resetEditor()" style="display: none;">Reintentar</button>    
+        <button id="run-button" onclick="simulateCompilation()">Run</button>  
     </div>
     <div id="app-container">
         <div id="app">
@@ -38,6 +37,7 @@
 	    <div id="challenge"></div>
             <p id="modify-message"></p>
 	    <button id="send-response-button" onClick="guardarResultados()" style="display: none;">Guardar resultados</button>
+	    <button id="retry-button" onClick="resetEditor()" style="display: none;">Reintentar</button>  
         </div>
 	<!-- Footer -->
         <footer id="app-footer">
