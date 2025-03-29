@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "title": "Ejercicio 1: Clase y Método Público",
+    "description": "Corrige el código para que compile correctamente usando el modificador adecuado.",
+    "language": "Java",
+    "codeKoToRefactor": "class Persona {\n    String nombre;\n    void saludar() {\n        System.out.println(\"Hola, soy \" + nombre);\n    }\n}",
+    "codeOkForExpect": "public class Persona {\n    String nombre;\n    public void saludar() {\n        System.out.println(\"Hola, soy \" + nombre);\n    }\n}",
+    "expectedConsoleOutput": "Hola, soy Juan",
+    "errorSimulation": "Error: Clase 'Persona' no es accesible fuera del paquete.",
+    "successMessage": "¡Bien hecho! Ahora la clase es pública y accesible."
+  },
+  {
+    "id": 2,
+    "title": "Ejercicio 2: Modificador 'private'",
+    "description": "Corrige el código asegurando que la variable solo pueda ser accedida dentro de la clase.",
+    "language": "Java",
+    "codeKoToRefactor": "public class CuentaBancaria {\n    int saldo;\n    public void depositar(int cantidad) {\n        saldo += cantidad;\n    }\n}",
+    "codeOkForExpect": "public class CuentaBancaria {\n    private int saldo;\n    public void depositar(int cantidad) {\n        saldo += cantidad;\n    }\n}",
+    "expectedConsoleOutput": "",
+    "errorSimulation": "Error: No se debe acceder a 'saldo' fuera de la clase.",
+    "successMessage": "¡Bien! Ahora el saldo está protegido con 'private'."
+  },
+  {
+    "id": 3,
+    "title": "Ejercicio 3: Métodos 'private' y encapsulación",
+    "description": "Corrige el código asegurando que la manipulación del saldo sea interna.",
+    "language": "Java",
+    "codeKoToRefactor": "public class CuentaBancaria {\n    private int saldo;\n    void actualizarSaldo(int cantidad) {\n        saldo += cantidad;\n    }\n}",
+    "codeOkForExpect": "public class CuentaBancaria {\n    private int saldo;\n    private void actualizarSaldo(int cantidad) {\n        saldo += cantidad;\n    }\n}",
+    "expectedConsoleOutput": "",
+    "errorSimulation": "Error: 'actualizarSaldo' no debería ser accesible fuera de la clase.",
+    "successMessage": "¡Perfecto! Has encapsulado correctamente el método privado."
+  },
+  {
+    "id": 4,
+    "title": "Ejercicio 4: Uso de 'protected'",
+    "description": "Corrige el código para permitir que una subclase acceda al atributo.",
+    "language": "Java",
+    "codeKoToRefactor": "public class Animal {\n    private String tipo;\n}\n\nclass Perro extends Animal {\n    void mostrarTipo() {\n        System.out.println(tipo);\n    }\n}",
+    "codeOkForExpect": "public class Animal {\n    protected String tipo;\n}\n\nclass Perro extends Animal {\n    void mostrarTipo() {\n        System.out.println(tipo);\n    }\n}",
+    "expectedConsoleOutput": "",
+    "errorSimulation": "Error: 'tipo' no es accesible en la subclase.",
+    "successMessage": "¡Correcto! Ahora la subclase puede acceder al atributo con 'protected'."
+  },
+  {
+    "id": 5,
+    "title": "Ejercicio 5: Clases 'final'",
+    "description": "Corrige el código para impedir que se herede de la clase.",
+    "language": "Java",
+    "codeKoToRefactor": "class Constante {\n    void mostrarValor() {\n        System.out.println(\"Valor constante\");\n    }\n}\n\nclass SubClase extends Constante {}",
+    "codeOkForExpect": "final class Constante {\n    void mostrarValor() {\n        System.out.println(\"Valor constante\");\n    }\n}",
+    "expectedConsoleOutput": "Valor constante",
+    "errorSimulation": "Error: No se puede heredar de una clase 'final'.",
+    "successMessage": "¡Bien hecho! Has prevenido la herencia con 'final'."
+  }
+]
