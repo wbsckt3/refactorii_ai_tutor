@@ -138,7 +138,7 @@ async function simulateCompilation() {
             } else {
                 let messages = differences.map(diff => `<b>${diff.element}:</b> Esperado "${diff.expected}", encontrado "${diff.actual}".`).join("<br>");
                 printToConsole(`<b style="color:red;">Errores encontrados:</b><br>${messages}`);
-
+                document.getElementById("run-button").style.display = "none";
                 document.getElementById("send-response-button").style.display = "none";
                 document.getElementById("retry-button").style.display = "block";
                 failCount++;
@@ -157,6 +157,7 @@ function resetEditor() {
     editor.setValue(currentExercise.codeKoToRefactor);
     document.getElementById("console").innerHTML = "";
     document.getElementById("retry-button").style.display = "none";
+    document.getElementById("run-button").style.display = "block";
     failCount = 0;
 }
 
