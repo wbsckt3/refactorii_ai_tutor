@@ -65,7 +65,7 @@
             </div>
         </div>
     </div>
-</body>  
+  
 <script>
 let editor;
 
@@ -82,7 +82,12 @@ let currentExercise;
 let failCount = 0; // Contador de fallos consecutivos
 
 function normalizeCode(code) {
-    return code.replace(/\s+/g, ' ').trim();
+    return code
+        .replace(/\s+/g, ' ')  // Reemplaza múltiples espacios y saltos de línea por un solo espacio
+        .replace(/\s*{\s*/g, ' { ')  // Normaliza llaves
+        .replace(/\s*}\s*/g, ' } ') 
+        .replace(/\s*;\s*/g, '; ')  // Normaliza punto y coma
+        .trim();
 }
 
 function printToConsole(message) {
@@ -101,6 +106,10 @@ function simulateCompilation() {
         }
         
         const expectedCode = normalizeCode(currentExercise.codeOkForExpect);
+        
+        console.log("User Code:", userCode);
+        console.log("Expected Code:", expectedCode);
+        
         if (userCode === expectedCode) {
             printToConsole(currentExercise.expectedConsoleOutput || "Ejecutado correctamente");
             document.getElementById("send-response-button").style.display = "block";
