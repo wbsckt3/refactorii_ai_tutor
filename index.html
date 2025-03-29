@@ -115,34 +115,46 @@ async function simulateCompilation() {
             const data = await response.json();
             console.log("Respuesta del backend:", data);
 
-            if (!data.success || !data.expectations || !data.expectations.test_cases) {
-                throw new Error("Error en la respuesta del servidor. Datos incompletos.");
+            if (!data.success) {
+                throw new Error(data.message || "Respuesta del servidor inválida");
             }
 
-            // Verificar si al menos una de las pruebas pasa
-            const expectedOutput = currentExercise.expectedConsoleOutput.trim();
-            const testCases = data.expectations.test_cases;
-            let passed = false;
-
-            for (const testCase of testCases) {
-                if (testCase.expected_output.trim() === expectedOutput) {
-                    passed = true;
-                    break;
-                }
-            }
-
-            // Mostrar el resultado en la consola
-            printToConsole(passed ? "Código validado correctamente." : "Error: La salida no es la esperada.");
-
-            // Mostrar botones según el resultado
-            if (passed) {
+            // Verificación de la corrección
+            const isCorrect = data.isCorrect;
+            const differences = data.differences || [];
+            
+            if (isCorrect) {
+                printToConsole("Código validado correctamente.");
                 document.getElementById("send-response-button").style.display = "block";
                 document.getElementById("retry-button").style.display = "none";
                 failCount = 0;
             } else {
-                document.getElementById("send-response-button").style.display = "none";
-                document.getElementById("retry-button").style.display = "block";
-                failCount++;
+                // Evaluamos las diferencias para determinar si son errores críticos o menores
+                let criticalError = false;
+                let messages = [];
+
+                for (const diff of differences) {
+                    messages.push(`${diff.element}: Esperado "${diff.expected}", encontrado "${diff.actual}".`);
+                    if (diff.issue === "modificador de acceso cambiado") {
+                        // No lo tratamos como error crítico
+                        continue;
+                    } else {
+                        criticalError = true;
+                    }
+                }
+
+                printToConsole(messages.join("<br>"));
+
+                if (criticalError) {
+                    document.getElementById("retry-button").style.display = "block";
+                    document.getElementById("send-response-button").style.display = "none";
+                    failCount++;
+                } else {
+                    // Si solo hay errores menores, permitir guardar el progreso
+                    printToConsole("Código aceptable con pequeñas diferencias.");
+                    document.getElementById("send-response-button").style.display = "block";
+                    document.getElementById("retry-button").style.display = "none";
+                }
             }
         } catch (error) {
             console.error("Error en simulateCompilation:", error);
@@ -151,6 +163,7 @@ async function simulateCompilation() {
         }
     }, 1000);
 }
+
 
 function resetEditor() {
     editor.setValue(currentExercise.codeKoToRefactor);
