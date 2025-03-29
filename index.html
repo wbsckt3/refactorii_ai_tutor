@@ -37,6 +37,7 @@
 	    <div id="challenge"></div>
             <p id="modify-message"></p>
 	    <button id="send-response-button" onClick="guardarResultados()" style="display: none;">Guardar resultados</button>
+            <button id="retry-button" onClick="resetEditor()" style="display: none;">Reintentar</button>
         </div>
 	<!-- Footer -->
         <footer id="app-footer">
@@ -78,6 +79,11 @@ editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
 });
 
 let currentExercise;
+let failCount = 0; // Contador de fallos consecutivos
+
+function normalizeCode(code) {
+    return code.replace(/\s+/g, ' ').trim();
+}
 
 function printToConsole(message) {
     const consoleDiv = document.getElementById("console");
@@ -87,22 +93,35 @@ function printToConsole(message) {
 function simulateCompilation() {
     document.getElementById("console").innerHTML = "<p>Compilando...</p>";
     setTimeout(() => {
-        const userCode = editor.getValue();
+        const userCode = normalizeCode(editor.getValue());
         
         if (!currentExercise) {
             printToConsole("Error: No se ha cargado un ejercicio.");
             return;
         }
         
-        const expectedOutput = currentExercise.expectedConsoleOutput;
-        if (userCode.trim() === currentExercise.codeOkForExpect.trim()) {
-            printToConsole(expectedOutput || "Ejecutado correctamente");
+        const expectedCode = normalizeCode(currentExercise.codeOkForExpect);
+        if (userCode === expectedCode) {
+            printToConsole(currentExercise.expectedConsoleOutput || "Ejecutado correctamente");
             document.getElementById("send-response-button").style.display = "block";
+            document.getElementById("retry-button").style.display = "none";
+            failCount = 0; // Reiniciar contador
         } else {
             printToConsole("Error: El código no es correcto.");
             document.getElementById("send-response-button").style.display = "none";
+            failCount++;
+            if (failCount >= 2) {
+                document.getElementById("retry-button").style.display = "block";
+            }
         }
     }, 1000);
+}
+
+function resetEditor() {
+    editor.setValue(currentExercise.codeKoToRefactor);
+    document.getElementById("console").innerHTML = "";
+    document.getElementById("retry-button").style.display = "none";
+    failCount = 0;
 }
 
 async function loadExercise(exercise) {
