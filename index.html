@@ -126,7 +126,7 @@ async function fetchAIResponseGetAiExpect(userCode) {
 
         console.log("Enviando al backend:", { code: userCode, challenge: challenge });
 
-        const response = await fetch('https://www.refactorii.com/fetchAIExpectations', {
+        const response = await fetch('https://www.refactorii.com/fetchAIExpectationsAgnostic', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
