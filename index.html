@@ -114,7 +114,7 @@ async function simulateCompilation() {
 
             const data = await response.json();
             console.log("Respuesta del backend:", data);
-            document.getElementById("modify-message").innerText = data.feedback || "Sin comentarios adicionales.";
+            document.getElementById("modify-message").innerText = data.feedback;
 
             if (!data.success) {
                 throw new Error(data.message || "Respuesta del servidor inválida");
