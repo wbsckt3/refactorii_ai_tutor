@@ -81,47 +81,59 @@ editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
 let currentExercise;
 let failCount = 0; // Contador de fallos consecutivos
 
-function normalizeCode(code) {
-    return code
-        .replace(/\s+/g, ' ')  // Reemplaza múltiples espacios y saltos de línea por un solo espacio
-        .replace(/\s*{\s*/g, ' { ')  // Normaliza llaves
-        .replace(/\s*}\s*/g, ' } ') 
-        .replace(/\s*;\s*/g, '; ')  // Normaliza punto y coma
-        .trim();
-}
-
 function printToConsole(message) {
     const consoleDiv = document.getElementById("console");
     consoleDiv.innerHTML += `<p>${message}</p>`;
 }
 
-function simulateCompilation() {
+async function simulateCompilation() {
     document.getElementById("console").innerHTML = "<p>Compilando...</p>";
-    setTimeout(() => {
-        const userCode = normalizeCode(editor.getValue());
+    setTimeout(async () => {
+        const userCode = editor.getValue();
         
         if (!currentExercise) {
             printToConsole("Error: No se ha cargado un ejercicio.");
             return;
         }
         
-        const expectedCode = normalizeCode(currentExercise.codeOkForExpect);
-        
-        console.log("User Code:", userCode);
-        console.log("Expected Code:", expectedCode);
-        
-        if (userCode === expectedCode) {
-            printToConsole(currentExercise.expectedConsoleOutput || "Ejecutado correctamente");
-            document.getElementById("send-response-button").style.display = "block";
-            document.getElementById("retry-button").style.display = "none";
-            failCount = 0; // Reiniciar contador
-        } else {
-            printToConsole("Error: El código no es correcto.");
-            document.getElementById("send-response-button").style.display = "none";
-            failCount++;
-            if (failCount >= 2) {
-                document.getElementById("retry-button").style.display = "block";
+        try {
+            const response = await fetch('https://www.refactorii.com/fetchAIExpectationsAgnostic', { 
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    code: userCode,
+                    challenge: currentExercise,
+                    language: currentExercise.language,
+                    timestamp: new Date().toISOString()
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error HTTP! estado: ${response.status}`);
             }
+
+            const data = await response.json();
+            console.log("Respuesta del backend:", data);
+
+            if (!data.success) {
+                throw new Error(data.message || "Respuesta del servidor inválida");
+            }
+
+            printToConsole(data.consoleOutput);
+            
+            if (data.success) {
+                document.getElementById("send-response-button").style.display = "block";
+                document.getElementById("retry-button").style.display = "none";
+                failCount = 0;
+            } else {
+                document.getElementById("send-response-button").style.display = "none";
+                document.getElementById("retry-button").style.display = "block";
+                failCount++;
+            }
+        } catch (error) {
+            console.error("Error en simulateCompilation:", error);
+            printToConsole("Error en la validación del código.");
+            document.getElementById("retry-button").style.display = "block";
         }
     }, 1000);
 }
@@ -139,7 +151,7 @@ async function loadExercise(exercise) {
             throw new Error("Objeto exercise no válido o undefined");
         }
 
-        const requiredProps = ['title', 'description', 'codeKoToRefactor', 'codeOkForExpect', 'expectedConsoleOutput'];
+        const requiredProps = ['title', 'description', 'codeKoToRefactor', 'codeOkForExpect', 'expectedConsoleOutput', 'language'];
         const missingProps = requiredProps.filter(prop => !(prop in exercise));
         
         if (missingProps.length > 0) {
@@ -157,7 +169,7 @@ async function loadExercise(exercise) {
         throw error;
     }
 }
-
+	
 async function loadExercises(exerciseId) {
     try {
         const response = await fetch('exercises-java.json');
