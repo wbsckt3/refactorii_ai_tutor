@@ -67,114 +67,66 @@
   
 <script>
 
-let editor;
 
-// Configuración de CodeMirror para ser agnóstico al lenguaje
-editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
-    lineNumbers: true,
-    mode: 'text/x-java', // Se configura como Java para sintaxis
-    lineWrapping: true,
-    theme: 'seti',
-    scrollbarStyle: 'null'
-});
 
-let exercises = [];
-let currentExerciseIndex = 0;
+document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token'); 
 
-async function loadExercise(exercise) {
-    try {
-        if (!exercise || typeof exercise !== "object") {
-            throw new Error("Objeto exercise no válido o undefined");
-        }
+  async function validateAndProcessToken() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
 
-        const requiredProps = ['title', 'description', 'codeKoToRefactor', 'codeOkForExpect', 'expectedConsoleOutput', 'errorSimulation'];
-        const missingProps = requiredProps.filter(prop => !(prop in exercise));
-        
-        if (missingProps.length > 0) {
-            throw new Error(`Ejercicio corrupto. Faltan propiedades: ${missingProps.join(', ')}`);
-        }
-
-        document.getElementById("h5_title").innerText = exercise.title;
-        document.getElementById("challenge").innerText = exercise.description;
-        editor.setValue(exercise.codeKoToRefactor);
-
-        window.expectedOutput = exercise.expectedConsoleOutput;
-        window.errorSimulation = exercise.errorSimulation;
-        window.successMessage = exercise.successMessage;
-    } catch (error) {
-        console.error("Error crítico en loadExercise:", error);
-        localStorage.removeItem('testExpectations');
-        throw error;
+    if (!token) {
+        document.body.innerHTML = 'Access denied. No token provided.';
+        return;
     }
-}
 
-document.getElementById("run-button").addEventListener("click", async () => {
-    try {
-        const userCode = editor.getValue();
-        if (!userCode.trim()) {
-            throw new Error("No hay código para evaluar.");
-        }
-
-        console.log("Código enviado a la IA para testear:", userCode);
-        await fetchAIResponseGetAiExpect(userCode);
-
-        simulateJavaExecution(userCode);
-    } catch (error) {
-        console.error("Error al ejecutar código:", error);
-    }
-});
-
-function simulateJavaExecution(userCode) {
-    const consoleDiv = document.getElementById("console");
-    consoleDiv.innerHTML = "";
-    
-    if (userCode.includes("public class Persona") && userCode.includes("public void saludar()")) {
-        consoleDiv.innerHTML = `<pre>${window.expectedOutput}</pre>`;
-        document.getElementById("send-response-button").style.display = "block";
-    } else {
-        consoleDiv.innerHTML = `<pre style='color: red;'>${window.errorSimulation}</pre>`;
-        document.getElementById("send-response-button").style.display = "none";
-    }
-}
-
-async function fetchAIResponseGetAiExpect(userCode) {
-    try {
-        if (typeof userCode !== "string" || userCode.trim() === "") {
-            throw new Error(`Código inválido: ${typeof userCode}`);
-        }
-
-        const challenge = document.getElementById('challenge').textContent;
-        console.log("Enviando código a la API para generar expectativas:", { code: userCode, challenge });
-
-        const response = await fetch('https://www.refactorii.com/fetchAIExpectationsAgnostic', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                code: userCode,
-                challenge: challenge,
-                language: "java",
-                timestamp: new Date().toISOString()
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error(`Error HTTP! Estado: ${response.status}`);
-        }
-
+        const response = await fetch(`https://www.refactorii.com/validate-token?token=${token}`);
         const data = await response.json();
-        console.log("Respuesta de la API:", data);
 
-        if (!data.success || !data.expectations) {
-            throw new Error(data.message || "Respuesta del servidor inválida");
+        if (!data.valid) {
+            console.log("Token inválido");
+            document.body.innerHTML = 'Access denied. Invalid token.';
+            return;
         }
 
-        localStorage.setItem('testExpectations', JSON.stringify(data.expectations));
-        console.log("Expectativas almacenadas correctamente.");
-    } catch (error) {
-        console.error("Error en fetchAIResponseGetAiExpect:", error);
-        localStorage.removeItem('testExpectations');
-    }
-}
+        console.log("Token válido:", data);
+
+        // Decodificar el token para obtener el payload
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(c =>
+            '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+        ).join(''));
+
+        const decodedToken = JSON.parse(jsonPayload);
+        const recipeId = decodedToken._id; // Asegúrate de usar el nombre correcto del campo en el payload
+        const email = decodedToken.email;
+
+        console.log('Recipe ID:', recipeId);
+
+        // Almacenar en localStorage
+        localStorage.setItem('recipeId', recipeId);
+        localStorage.setItem('email', email);
+
+        const exerciseId = urlParams.get("exercise");
+        if (exerciseId) {
+           loadExercises(exerciseId);
+        } else {
+            console.error("No se proporcionó un ID de ejercicio en la URL.");
+        }
+	  
+        // Llamar a la función después de validar el token y almacenar los datos
+        loadMarkdownFiles();
+        
+   }
+
+   // Ejecutar la función al cargar la página
+   validateAndProcessToken();
+	
+});
+
 	
 </script>
 
