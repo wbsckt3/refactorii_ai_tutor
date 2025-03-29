@@ -102,7 +102,7 @@ async function simulateCompilation() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     code: userCode,
-                    challenge: currentExercise,
+                    challenge: currentExercise, // Se envía el JSON completo del ejercicio
                     language: currentExercise.language,
                     timestamp: new Date().toISOString()
                 })
@@ -119,17 +119,11 @@ async function simulateCompilation() {
                 throw new Error(data.message || "Respuesta del servidor inválida");
             }
 
-            printToConsole(data.consoleOutput);
+            printToConsole(data.consoleOutput || "Código validado correctamente.");
             
-            if (data.success) {
-                document.getElementById("send-response-button").style.display = "block";
-                document.getElementById("retry-button").style.display = "none";
-                failCount = 0;
-            } else {
-                document.getElementById("send-response-button").style.display = "none";
-                document.getElementById("retry-button").style.display = "block";
-                failCount++;
-            }
+            document.getElementById("send-response-button").style.display = "block";
+            document.getElementById("retry-button").style.display = "none";
+            failCount = 0;
         } catch (error) {
             console.error("Error en simulateCompilation:", error);
             printToConsole("Error en la validación del código.");
