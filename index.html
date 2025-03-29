@@ -32,7 +32,7 @@
     </div>
     <div id="app-container">
         <div id="app">
-	    <h5><button id="ai-assistance">Obtener asistencia IA</button> <span id="remaining-requests"></span> </h5>
+	    <h4 id="h4_language"></h4>
 	    <h5 id="h5_title"></h5>
 	    <div id="challenge"></div>
             <p id="modify-message"></p>
@@ -173,7 +173,7 @@ async function loadExercise(exercise) {
         if (missingProps.length > 0) {
             throw new Error(`Ejercicio corrupto. Faltan propiedades: ${missingProps.join(', ')}`);
         }
-
+        document.getElementById("h4_language").innerText = exercise.language;
         document.getElementById("h5_title").innerText = exercise.title;
         document.getElementById("challenge").innerText = exercise.description;
         editor.setValue(exercise.codeKoToRefactor);
