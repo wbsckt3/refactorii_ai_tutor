@@ -101,19 +101,26 @@ async function loadExercise(exercise) {
         window.modal_click_message = exercise.modalClickMessage || "Mensaje predeterminado";
         window.error_message = exercise.errorMessage || "Error predeterminado";
         window.success_message = exercise.successMessage || "¡Éxito!";
-
-        if (typeof exercise.codeOkForExpect !== "string" || exercise.codeOkForExpect.trim() === "") {
-            throw new Error("codeOkForExpect no es un código válido");
-        }
-        
-        console.log("Código para generar expectativas:", exercise.codeOkForExpect);
-        await fetchAIResponseGetAiExpect(exercise.codeOkForExpect);
     } catch (error) {
         console.error("Error crítico en loadExercise:", error);
         localStorage.removeItem('testExpectations');
         throw error;
     }
 }
+
+document.getElementById("run-button").addEventListener("click", async () => {
+    try {
+        const userCode = editor.getValue();
+        if (!userCode.trim()) {
+            throw new Error("No hay código para evaluar.");
+        }
+
+        console.log("Código enviado a la IA para testear:", userCode);
+        await fetchAIResponseGetAiExpect(userCode);
+    } catch (error) {
+        console.error("Error al ejecutar código:", error);
+    }
+});
 
 async function fetchAIResponseGetAiExpect(userCode) {
     try {
@@ -122,39 +129,35 @@ async function fetchAIResponseGetAiExpect(userCode) {
         }
 
         const challenge = document.getElementById('challenge').textContent;
-        const encodedCode = encodeURIComponent(userCode);
-        const encodedChallenge = encodeURIComponent(challenge);
-
-        console.log("Enviando al backend:", { code: userCode, challenge: challenge });
+        console.log("Enviando código a la API para generar expectativas:", { code: userCode, challenge });
 
         const response = await fetch('https://www.refactorii.com/fetchAIExpectationsAgnostic', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                code: encodedCode,
-                challenge: encodedChallenge,
+                code: userCode,
+                challenge: challenge,
                 language: "java",
                 timestamp: new Date().toISOString()
             })
         });
 
         if (!response.ok) {
-            throw new Error(`Error HTTP! estado: ${response.status}`);
+            throw new Error(`Error HTTP! Estado: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log("Respuesta del backend:", data);
+        console.log("Respuesta de la API:", data);
 
         if (!data.success || !data.expectations) {
             throw new Error(data.message || "Respuesta del servidor inválida");
         }
 
-        localStorage.setItem('testExpectations', data.expectations);
-        console.log("Expectativas almacenadas:", data.expectations);
+        localStorage.setItem('testExpectations', JSON.stringify(data.expectations));
+        console.log("Expectativas almacenadas correctamente.");
     } catch (error) {
         console.error("Error en fetchAIResponseGetAiExpect:", error);
         localStorage.removeItem('testExpectations');
-        throw error;
     }
 }
 
@@ -170,10 +173,6 @@ async function loadExercises(exerciseId) {
             throw new Error(`Ejercicio con ID ${exerciseId} no encontrado`);
         }
 
-        if (!selectedExercise.codeOkForExpect) {
-            throw new Error("El ejercicio no tiene codeOkForExpect");
-        }
-
         console.log("Ejercicio cargado:", selectedExercise);
         await loadExercise(selectedExercise);
     } catch (error) {
@@ -184,58 +183,54 @@ async function loadExercises(exerciseId) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token'); 
     async function validateAndProcessToken() {
-	    const urlParams = new URLSearchParams(window.location.search);
-	    const token = urlParams.get('token');
-	
-	    if (!token) {
-	        document.body.innerHTML = 'Access denied. No token provided.';
-	        return;
-	    }
-	
-	        const response = await fetch(`https://www.refactorii.com/validate-token?token=${token}`);
-	        const data = await response.json();
-	
-	        if (!data.valid) {
-	            console.log("Token inválido");
-	            document.body.innerHTML = 'Access denied. Invalid token.';
-	            return;
-	        }
-	
-	        console.log("Token válido:", data);
-	
-	        // Decodificar el token para obtener el payload
-	        const base64Url = token.split('.')[1];
-	        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-	        const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(c =>
-	            '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-	        ).join(''));
-	
-	        const decodedToken = JSON.parse(jsonPayload);
-	        const recipeId = decodedToken._id; // Asegúrate de usar el nombre correcto del campo en el payload
-	        const email = decodedToken.email;
-	
-	        console.log('Recipe ID:', recipeId);
-	
-	        // Almacenar en localStorage
-	        localStorage.setItem('recipeId', recipeId);
-	        localStorage.setItem('email', email);
-	
-	        const exerciseId = urlParams.get("exercise");
-	        if (exerciseId) {
-	           loadExercises(exerciseId);
-	        } else {
-	            console.error("No se proporcionó un ID de ejercicio en la URL.");
-	        }
-		  
-	        // Llamar a la función después de validar el token y almacenar los datos
-	        loadMarkdownFiles();
-     }
-     // Ejecutar la función al cargar la página
-     validateAndProcessToken();
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+    
+        if (!token) {
+            document.body.innerHTML = 'Access denied. No token provided.';
+            return;
+        }
+    
+        const response = await fetch(`https://www.refactorii.com/validate-token?token=${token}`);
+        const data = await response.json();
+    
+        if (!data.valid) {
+            console.log("Token inválido");
+            document.body.innerHTML = 'Access denied. Invalid token.';
+            return;
+        }
+    
+        console.log("Token válido:", data);
+    
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(c =>
+            '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+        ).join(''));
+    
+        const decodedToken = JSON.parse(jsonPayload);
+        const recipeId = decodedToken._id;
+        const email = decodedToken.email;
+    
+        console.log('Recipe ID:', recipeId);
+    
+        localStorage.setItem('recipeId', recipeId);
+        localStorage.setItem('email', email);
+    
+        const exerciseId = urlParams.get("exercise");
+        if (exerciseId) {
+           loadExercises(exerciseId);
+        } else {
+            console.error("No se proporcionó un ID de ejercicio en la URL.");
+        }
+    
+        loadMarkdownFiles();
+    }
+    
+    validateAndProcessToken();
 });
+
    
 </script>
 
