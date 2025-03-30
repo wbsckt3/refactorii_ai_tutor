@@ -203,7 +203,6 @@ async function loadExercises(exerciseId) {
             throw new Error("El ejercicio no tiene codeOkForExpect");
         }
 
-        console.log("Ejercicio cargado:", selectedExercise);
         await loadExercise(selectedExercise);
 
     } catch (error) {
