@@ -53,5 +53,60 @@
     "expectedConsoleOutput": "Valor constante",
     "errorSimulation": "Error: No se puede heredar de una clase 'final'.",
     "successMessage": "¡Bien hecho! Has prevenido la herencia con 'final'."
+  },
+  {
+    "id": 6,
+    "title": "Ejercicio 6: Métodos 'static'",
+    "description": "Corrige el código para que el método pueda llamarse sin necesidad de instanciar la clase.",
+    "language": "Java",
+    "codeKoToRefactor": "public class Utilidad {\n    void mostrarMensaje() {\n        System.out.println(\"Mensaje de utilidad\");\n    }\n}\n\nUtilidad.mostrarMensaje();",
+    "codeOkForExpect": "public class Utilidad {\n    static void mostrarMensaje() {\n        System.out.println(\"Mensaje de utilidad\");\n    }\n}\n\nUtilidad.mostrarMensaje();",
+    "expectedConsoleOutput": "Mensaje de utilidad",
+    "errorSimulation": "Error: No se puede llamar a 'mostrarMensaje' sin una instancia.",
+    "successMessage": "¡Correcto! Ahora el método puede llamarse sin instanciar la clase."
+  },
+  {
+    "id": 7,
+    "title": "Ejercicio 7: Interfaces en Java",
+    "description": "Corrige el código implementando correctamente la interfaz.",
+    "language": "Java",
+    "codeKoToRefactor": "interface Volador {\n    void volar();\n}\n\nclass Pajaro {\n    public void volar() {\n        System.out.println(\"Volando\");\n    }\n}",
+    "codeOkForExpect": "interface Volador {\n    void volar();\n}\n\nclass Pajaro implements Volador {\n    public void volar() {\n        System.out.println(\"Volando\");\n    }\n}",
+    "expectedConsoleOutput": "Volando",
+    "errorSimulation": "Error: Pajaro no implementa la interfaz 'Volador'.",
+    "successMessage": "¡Bien hecho! Ahora la clase implementa correctamente la interfaz."
+  },
+  {
+    "id": 8,
+    "title": "Ejercicio 8: Sobrecarga de métodos",
+    "description": "Corrige el código para permitir que el método pueda recibir diferentes parámetros.",
+    "language": "Java",
+    "codeKoToRefactor": "public class Calculadora {\n    int sumar(int a, int b) {\n        return a + b;\n    }\n\n    double sumar(double a, double b) {\n        return a + b;\n    }\n}",
+    "codeOkForExpect": "public class Calculadora {\n    int sumar(int a, int b) {\n        return a + b;\n    }\n\n    double sumar(double a, double b) {\n        return a + b;\n    }\n\n    int sumar(int a, int b, int c) {\n        return a + b + c;\n    }\n}",
+    "expectedConsoleOutput": "10",
+    "errorSimulation": "Error: No hay un método que acepte tres parámetros.",
+    "successMessage": "¡Perfecto! Ahora el método está sobrecargado correctamente."
+  },
+  {
+    "id": 9,
+    "title": "Ejercicio 9: Herencia y constructores",
+    "description": "Corrige el código para asegurar que la subclase llame al constructor de la superclase.",
+    "language": "Java",
+    "codeKoToRefactor": "class Vehiculo {\n    String marca;\n}\n\nclass Coche extends Vehiculo {\n    Coche(String marca) {\n        this.marca = marca;\n    }\n}",
+    "codeOkForExpect": "class Vehiculo {\n    String marca;\n    Vehiculo(String marca) {\n        this.marca = marca;\n    }\n}\n\nclass Coche extends Vehiculo {\n    Coche(String marca) {\n        super(marca);\n    }\n}",
+    "expectedConsoleOutput": "",
+    "errorSimulation": "Error: La clase 'Coche' no llama al constructor de la superclase.",
+    "successMessage": "¡Genial! Ahora la subclase inicializa correctamente la superclase."
+  },
+  {
+    "id": 10,
+    "title": "Ejercicio 10: Clases abstractas",
+    "description": "Corrige el código para que la clase derivada implemente el método abstracto.",
+    "language": "Java",
+    "codeKoToRefactor": "abstract class Figura {\n    abstract void dibujar();\n}\n\nclass Circulo extends Figura {}",
+    "codeOkForExpect": "abstract class Figura {\n    abstract void dibujar();\n}\n\nclass Circulo extends Figura {\n    void dibujar() {\n        System.out.println(\"Dibujando un círculo\");\n    }\n}",
+    "expectedConsoleOutput": "Dibujando un círculo",
+    "errorSimulation": "Error: La clase 'Circulo' no implementa el método abstracto 'dibujar'.",
+    "successMessage": "¡Excelente! Ahora la clase implementa el método abstracto requerido."
   }
 ]
