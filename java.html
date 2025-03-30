@@ -73,7 +73,7 @@ let editor;
 // Configuración de CodeMirror para ser agnóstico al lenguaje
 editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
     lineNumbers: true,
-    mode: 'null', // Se configura como Java para sintaxis
+    mode: 'text/x-java', // Se configura como Java para sintaxis
     lineWrapping: true,
     theme: 'seti',
     scrollbarStyle: 'null'
