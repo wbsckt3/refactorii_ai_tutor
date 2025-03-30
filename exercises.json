@@ -3,31 +3,34 @@
         "id": 1,
         "title": "Ejercicio 1: Sintaxis Básica",
         "description": "Modifica el método para que imprima la salida esperada, tip: falta algo ;)",
+        "language": "JavaScript",
         "codeKoToRefactor": "function greet() {\n    console.log(`Hola, ${name}!`);\n}\n\n// Casos de prueba:\ngreet('Alice'); // Debe imprimir \"Hola, Alice!\"\ngreet('Bob'); // Debe imprimir \"Hola, Bob!\"",
         "codeOkForExpect": "function greet(name) {\n    console.log(`Hola, ${name}!`);\n}\n\n// Casos de prueba:\ngreet('Alice'); // Debe imprimir \"Hola, Alice!\"\ngreet('Bob'); // Debe imprimir \"Hola, Bob!\"",
-        "modalClickMessage": "",
-        "errorMessage": "",
-        "successMessage": "🎉 ¡Felicidades! Has completado el desafío con éxito. Tu determinación y habilidad han dado resultado. ¡Sigue así y continúa adelante! 🚀"
+        "expectedConsoleOutput": "Hola, Alice!\nHola, Bob!",
+        "errorSimulation": "Error: name is not defined.",
+        "successMessage": "🎉 ¡Felicidades! Has completado el desafío con éxito. ¡Sigue así! 🚀"
     },
     {
         "id": 2,
         "title": "Ejercicio 2: Operaciones básicas",
         "description": "Refactoriza la función sum para que devuelva el resultado correcto de la suma.",
+        "language": "JavaScript",
         "codeKoToRefactor": "function sum(a, b) {\n   a + b;\n}\n\n// Casos de prueba:\nconsole.log(sum(2, 3)); // Debe imprimir 5",
         "codeOkForExpect": "function sum(a, b) {\n    return a + b;\n}\n\n// Casos de prueba:\nconsole.log(sum(2, 3)); // Debe imprimir 5",
-        "modalClickMessage": "",
-        "errorMessage": "El código actual devuelve un resultado incorrecto. Asegúrate de que la función sum devuelva la suma correcta de los valores.",
+        "expectedConsoleOutput": "5",
+        "errorSimulation": "Error: La función no retorna el valor esperado.",
         "successMessage": "¡Bien hecho! Has corregido la función de suma correctamente."
     },
     {
         "id": 3,
         "title": "Ejercicio 3: Métodos de Arrays",
         "description": "Refactoriza la función para usar el método `map` y generar un nuevo array con cada elemento duplicado.",
+        "language": "JavaScript",
         "codeKoToRefactor": "function doubleNumbers(numbers) {\n    let doubled = [];\n    for (let i = 0; i < numbers.length; i++) {\n        doubled.push(numbers[i] * 2);\n    }\n    console.log(doubled);\n}\n\n// Casos de prueba:\ndoubleNumbers([1, 2, 3]); // Debe imprimir [2, 4, 6]\ndoubleNumbers([5, 10]); // Debe imprimir [10, 20]",
         "codeOkForExpect": "function doubleNumbers(numbers) {\n    const doubled = numbers.map(num => num * 2);\n    console.log(doubled);\n}\n\n// Casos de prueba:\ndoubleNumbers([1, 2, 3]); // Debe imprimir [2, 4, 6]\ndoubleNumbers([5, 10]); // Debe imprimir [10, 20]",
-        "modalClickMessage": "Pista: Reemplaza el bucle for con el método map de los arrays.",
-        "errorMessage": "El código no genera el array esperado. Usa el método map para transformar cada elemento.",
-        "successMessage": "¡Perfecto! Has dominado los métodos de array. 🎯 Ahora el código es más limpio y funcional."
+        "expectedConsoleOutput": "[2, 4, 6]\n[10, 20]",
+        "errorSimulation": "Error: La función no genera el array esperado.",
+        "successMessage": "¡Perfecto! Has dominado los métodos de array. 🎯"
     },
     {
         "id": 4,
@@ -76,7 +79,7 @@
         "codeKoToRefactor": "function createCounter() {\n    let count = 0;\n    return function() {\n        count++;\n        return count;\n    };\n}\n\nconst counter = createCounter();\nconsole.log(counter()); // Debe imprimir 1\nconsole.log(counter()); // Debe imprimir 2",
         "codeOkForExpect": "// ¡El código original ya es correcto! Este ejercicio es una trampa para validar conocimientos.",
         "modalClickMessage": "Pista: ¿Realmente hay un error aquí? ¡Piensa en closures!",
-        "errorMessage": "¡Este código ya funciona! El error era imaginar que había uno 😉.",
+        "errorMessage": "¡Este código ya funciona! El error era imaginar que había uno 👀.",
         "successMessage": "¡Genial! No caíste en la trampa. Dominas los closures. 🎉"
     },
     {
@@ -86,7 +89,7 @@
         "codeKoToRefactor": "document.querySelector('button').addEventListener('click', function() {\n    this.textContent = 'Clickeado!';\n});\n\n// Caso de prueba: Hacer clic en el botón cambia su texto.",
         "codeOkForExpect": "// El código original ya es correcto. ¿Habrá un error real?",
         "modalClickMessage": "Pista: ¿Funciona el evento 'click'? Revisa si hay errores de sintaxis.",
-        "errorMessage": "¡Este código es correcto! El error era pensar que había uno 🕵️♂️.",
+        "errorMessage": "¡Este código es correcto! El error era pensar que había uno 🕵️‍♂️.",
         "successMessage": "¡Perfecto! Confirmaste que el código ya funciona. 🔍"
     },
     {
@@ -99,4 +102,5 @@
         "errorMessage": "La función no devuelve una promesa manejada con async/await.",
         "successMessage": "¡Impresionante! Has dominado async/await. ⚡"
     }
+   
 ]
