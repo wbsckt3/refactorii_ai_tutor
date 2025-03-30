@@ -1,112 +1,112 @@
 [
   {
     "id": 1,
-    "title": "Ejercicio 1: Clase y Método Público",
-    "description": "Corrige el código para que compile correctamente usando el modificador adecuado.",
+    "title": "🛠️ **Reto 1: Clase y Método Público** 🔓",
+    "description": "⚠️ ¡Corrige el código para que compile! **Pista:** Usa el modificador que abre puertas. 💻",
     "language": "Java",
     "codeKoToRefactor": "class Persona {\n    String nombre;\n    void saludar() {\n        System.out.println(\"Hola, soy \" + nombre);\n    }\n}",
     "codeOkForExpect": "public class Persona {\n    String nombre;\n    public void saludar() {\n        System.out.println(\"Hola, soy \" + nombre);\n    }\n}",
     "expectedConsoleOutput": "Hola, soy Juan",
-    "errorSimulation": "Error: Clase 'Persona' no es accesible fuera del paquete.",
-    "successMessage": "¡Bien hecho! Ahora la clase es pública y accesible."
+    "errorSimulation": "❌ Error: Clase 'Persona' no es accesible fuera del paquete. 🔒",
+    "successMessage": "🏆 ¡Bien hecho! Ahora la clase es pública y accesible. ¡Puertas abiertas! 🚪✨"
   },
   {
     "id": 2,
-    "title": "Ejercicio 2: Modificador 'private'",
-    "description": "Corrige el código asegurando que la variable solo pueda ser accedida dentro de la clase.",
+    "title": "🕵️♂️ **Reto 2: Modificador 'private'** 🔒",
+    "description": "👀 ¡Protege el saldo como un tesoro! **Pista:** Oculta esta variable de miradas indiscretas. 💰",
     "language": "Java",
     "codeKoToRefactor": "public class CuentaBancaria {\n    int saldo;\n    public void depositar(int cantidad) {\n        saldo += cantidad;\n    }\n}",
     "codeOkForExpect": "public class CuentaBancaria {\n    private int saldo;\n    public void depositar(int cantidad) {\n        saldo += cantidad;\n    }\n}",
     "expectedConsoleOutput": "",
-    "errorSimulation": "Error: No se debe acceder a 'saldo' fuera de la clase.",
-    "successMessage": "¡Bien! Ahora el saldo está protegido con 'private'."
+    "errorSimulation": "❌ Error: ¡Alguien está viendo tu saldo! 🕶️ No se debe acceder a 'saldo' fuera de la clase.",
+    "successMessage": "🛡️ ¡Bien! Ahora el saldo está bajo llave. ¡Protección máxima! 🔐"
   },
   {
     "id": 3,
-    "title": "Ejercicio 3: Métodos 'private' y encapsulación",
-    "description": "Corrige el código asegurando que la manipulación del saldo sea interna.",
+    "title": "📦 **Reto 3: Encapsulación con 'private'** 📪",
+    "description": "🤫 ¡Mantén los métodos sensibles en secreto! **Pista:** Solo la clase debe manipular esto. 🤖",
     "language": "Java",
     "codeKoToRefactor": "public class CuentaBancaria {\n    private int saldo;\n    void actualizarSaldo(int cantidad) {\n        saldo += cantidad;\n    }\n}",
     "codeOkForExpect": "public class CuentaBancaria {\n    private int saldo;\n    private void actualizarSaldo(int cantidad) {\n        saldo += cantidad;\n    }\n}",
     "expectedConsoleOutput": "",
-    "errorSimulation": "Error: 'actualizarSaldo' no debería ser accesible fuera de la clase.",
-    "successMessage": "¡Perfecto! Has encapsulado correctamente el método privado."
+    "errorSimulation": "❌ Error: ¡Intruso detectado! 🚨 'actualizarSaldo' no debería ser accesible fuera.",
+    "successMessage": "🎯 ¡Perfecto! Método encapsulado como un regalo bien envuelto. 🎁"
   },
   {
     "id": 4,
-    "title": "Ejercicio 4: Uso de 'protected'",
-    "description": "Corrige el código para permitir que una subclase acceda al atributo.",
+    "title": "👨👩👧👦 **Reto 4: Herencia con 'protected'** 🔑",
+    "description": "🧬 ¡Permite que la familia acceda! **Pista:** Modificador para clases parientes. 🧩",
     "language": "Java",
     "codeKoToRefactor": "public class Animal {\n    private String tipo;\n}\n\nclass Perro extends Animal {\n    void mostrarTipo() {\n        System.out.println(tipo);\n    }\n}",
     "codeOkForExpect": "public class Animal {\n    protected String tipo;\n}\n\nclass Perro extends Animal {\n    void mostrarTipo() {\n        System.out.println(tipo);\n    }\n}",
     "expectedConsoleOutput": "",
-    "errorSimulation": "Error: 'tipo' no es accesible en la subclase.",
-    "successMessage": "¡Correcto! Ahora la subclase puede acceder al atributo con 'protected'."
+    "errorSimulation": "❌ Error: ¡Fallo en la herencia! 🧬 'tipo' no es accesible en la subclase.",
+    "successMessage": "✅ ¡Correcto! Ahora la familia de clases puede compartir. 👪💞"
   },
   {
     "id": 5,
-    "title": "Ejercicio 5: Clases 'final'",
-    "description": "Corrige el código para impedir que se herede de la clase.",
+    "title": "🚫 **Reto 5: Clases 'final'** 🔗",
+    "description": "⛔ ¡Bloquea la herencia! **Pista:** Modificador que pone un candado eterno. 🔐",
     "language": "Java",
     "codeKoToRefactor": "class Constante {\n    void mostrarValor() {\n        System.out.println(\"Valor constante\");\n    }\n}\n\nclass SubClase extends Constante {}",
     "codeOkForExpect": "final class Constante {\n    void mostrarValor() {\n        System.out.println(\"Valor constante\");\n    }\n}",
     "expectedConsoleOutput": "Valor constante",
-    "errorSimulation": "Error: No se puede heredar de una clase 'final'.",
-    "successMessage": "¡Bien hecho! Has prevenido la herencia con 'final'."
+    "errorSimulation": "❌ Error: ¡Alguien quiere heredar! 👶 No se puede heredar de una clase 'final'.",
+    "successMessage": "🛑 ¡Bien hecho! Nadie podrá modificar tu clase. ¡Inmutable! 🧱"
   },
   {
     "id": 6,
-    "title": "Ejercicio 6: Métodos 'static'",
-    "description": "Corrige el código para que el método pueda llamarse sin necesidad de instanciar la clase.",
+    "title": "⚡ **Reto 6: Métodos 'static'** 🌐",
+    "description": "🚀 ¡Acceso instantáneo sin instancias! **Pista:** Modificador para funcionalidad global. 🌍",
     "language": "Java",
     "codeKoToRefactor": "public class Utilidad {\n    void mostrarMensaje() {\n        System.out.println(\"Mensaje de utilidad\");\n    }\n}\n\nUtilidad.mostrarMensaje();",
     "codeOkForExpect": "public class Utilidad {\n    static void mostrarMensaje() {\n        System.out.println(\"Mensaje de utilidad\");\n    }\n}\n\nUtilidad.mostrarMensaje();",
     "expectedConsoleOutput": "Mensaje de utilidad",
-    "errorSimulation": "Error: No se puede llamar a 'mostrarMensaje' sin una instancia.",
-    "successMessage": "¡Correcto! Ahora el método puede llamarse sin instanciar la clase."
+    "errorSimulation": "❌ Error: ¡Falta instancia! 🤖 No se puede llamar a 'mostrarMensaje' sin objeto.",
+    "successMessage": "🎇 ¡Correcto! Ahora el método es como un faro... ¡Accesible desde cualquier parte! 🌟"
   },
   {
     "id": 7,
-    "title": "Ejercicio 7: Interfaces en Java",
-    "description": "Corrige el código implementando correctamente la interfaz.",
+    "title": "🕊️ **Reto 7: Interfaces en Java** ✈️",
+    "description": "📜 ¡Cumple el contrato de la interfaz! **Pista:** Palabra clave para prometer funcionalidad. 🤝",
     "language": "Java",
     "codeKoToRefactor": "interface Volador {\n    void volar();\n}\n\nclass Pajaro {\n    public void volar() {\n        System.out.println(\"Volando\");\n    }\n}",
     "codeOkForExpect": "interface Volador {\n    void volar();\n}\n\nclass Pajaro implements Volador {\n    public void volar() {\n        System.out.println(\"Volando\");\n    }\n}",
     "expectedConsoleOutput": "Volando",
-    "errorSimulation": "Error: Pajaro no implementa la interfaz 'Volador'.",
-    "successMessage": "¡Bien hecho! Ahora la clase implementa correctamente la interfaz."
+    "errorSimulation": "❌ Error: ¡El pájaro no firmó el contrato! 📝 Falta implementar la interfaz.",
+    "successMessage": "🦅 ¡Bien hecho! Ahora el pájaro vuela bajo las reglas de la interfaz. 🌤️"
   },
   {
     "id": 8,
-    "title": "Ejercicio 8: Sobrecarga de métodos",
-    "description": "Corrige el código para permitir que el método pueda recibir diferentes parámetros.",
+    "title": "🏋️♂️ **Reto 8: Sobrecarga de métodos** 🏋️♀️",
+    "description": "🎭 ¡Un método, múltiples personalidades! **Pista:** Mismo nombre, distintos parámetros. 🔢",
     "language": "Java",
     "codeKoToRefactor": "public class Calculadora {\n    int sumar(int a, int b) {\n        return a + b;\n    }\n\n    double sumar(double a, double b) {\n        return a + b;\n    }\n}",
     "codeOkForExpect": "public class Calculadora {\n    int sumar(int a, int b) {\n        return a + b;\n    }\n\n    double sumar(double a, double b) {\n        return a + b;\n    }\n\n    int sumar(int a, int b, int c) {\n        return a + b + c;\n    }\n}",
     "expectedConsoleOutput": "10",
-    "errorSimulation": "Error: No hay un método que acepte tres parámetros.",
-    "successMessage": "¡Perfecto! Ahora el método está sobrecargado correctamente."
+    "errorSimulation": "❌ Error: ¡Falta una versión del método! 🤯 No hay método para tres parámetros.",
+    "successMessage": "🌈 ¡Perfecto! Ahora tu método es un camaleón... ¡Se adapta a todo! 🦎"
   },
   {
     "id": 9,
-    "title": "Ejercicio 9: Herencia y constructores",
-    "description": "Corrige el código para asegurar que la subclase llame al constructor de la superclase.",
+    "title": "🏗️ **Reto 9: Herencia y Constructores** 🚗",
+    "description": "👷 ¡Construye la herencia correctamente! **Pista:** Llama al padre primero. 👨💼",
     "language": "Java",
     "codeKoToRefactor": "class Vehiculo {\n    String marca;\n}\n\nclass Coche extends Vehiculo {\n    Coche(String marca) {\n        this.marca = marca;\n    }\n}",
     "codeOkForExpect": "class Vehiculo {\n    String marca;\n    Vehiculo(String marca) {\n        this.marca = marca;\n    }\n}\n\nclass Coche extends Vehiculo {\n    Coche(String marca) {\n        super(marca);\n    }\n}",
     "expectedConsoleOutput": "",
-    "errorSimulation": "Error: La clase 'Coche' no llama al constructor de la superclase.",
-    "successMessage": "¡Genial! Ahora la subclase inicializa correctamente la superclase."
+    "errorSimulation": "❌ Error: ¡El coche no heredó el motor! 🔧 Falta llamar al constructor padre.",
+    "successMessage": "🚦 ¡Genial! Ahora la herencia funciona como un reloj suizo. ⏱️"
   },
   {
     "id": 10,
-    "title": "Ejercicio 10: Clases abstractas",
-    "description": "Corrige el código para que la clase derivada implemente el método abstracto.",
+    "title": "🎨 **Reto 10: Clases Abstractas** 🖌️",
+    "description": "🧩 ¡Completa el rompecabezas de la abstracción! **Pista:** Implementa lo que falta. 🔍",
     "language": "Java",
     "codeKoToRefactor": "abstract class Figura {\n    abstract void dibujar();\n}\n\nclass Circulo extends Figura {}",
     "codeOkForExpect": "abstract class Figura {\n    abstract void dibujar();\n}\n\nclass Circulo extends Figura {\n    void dibujar() {\n        System.out.println(\"Dibujando un círculo\");\n    }\n}",
     "expectedConsoleOutput": "Dibujando un círculo",
-    "errorSimulation": "Error: La clase 'Circulo' no implementa el método abstracto 'dibujar'.",
-    "successMessage": "¡Excelente! Ahora la clase implementa el método abstracto requerido."
+    "errorSimulation": "❌ Error: ¡Falta arte en el círculo! 🖼️ No se implementó 'dibujar'.",
+    "successMessage": "🖼️ ¡Excelente! Ahora tu círculo es una obra de arte abstracta. 🎉"
   }
 ]
