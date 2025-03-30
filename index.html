@@ -188,7 +188,7 @@ async function loadExercise(exercise) {
 	
 async function loadExercises(exerciseId) {
     try {
-        const response = await fetch('exercises-java.json');
+        const response = await fetch('exercises.json');
         if (!response.ok) throw new Error(`Error al cargar JSON: ${response.status}`);
         
         const exercises = await response.json();
