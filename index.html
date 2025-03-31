@@ -34,7 +34,7 @@
         <div id="app">
 	    <h4 id="h4_language" style="padding-bottom: 16px;"></h4>
 	    <h5 id="h5_title"></h5>
-	    <div id="challenge"></div>
+	    <div id="challenge"></div>	
             <p id="modify-message"></p>
 	    <button id="send-response-button" onClick="guardarResultados()" style="display: none;">Guardar resultados</button>
 	    <button id="retry-button" onClick="resetEditor()" style="display: none;">Reintentar</button>  
@@ -176,6 +176,7 @@ async function loadExercise(exercise) {
         document.getElementById("h4_language").innerText = exercise.language;
         document.getElementById("h5_title").innerText = exercise.title;
         document.getElementById("challenge").innerText = exercise.description;
+	document.getElementById("modify-message").innerText = exercise.concept;
         editor.setValue(exercise.codeKoToRefactor);
 
         window.success_message = exercise.successMessage || "¡Éxito!";
