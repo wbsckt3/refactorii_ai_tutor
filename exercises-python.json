@@ -2,6 +2,7 @@
     {
         "id": 1,
         "title": "🐍 Exercise 1: Variables and Data Types 🧩",
+        "concept": "In Python, variables store values of different data types (integers, strings, etc.). Concatenation requires compatible types: you can't directly add numbers to text. Use `str()` to convert numbers to strings. Variables must be defined before use. Assignment (=) stores values in variables.",
         "description": "Fix the code so it correctly assigns the value to the variable and prints it. 🔍",
         "language": "Python",
         "codeKoToRefactor": "numero = 10\nprint(numero + texto)",
@@ -13,6 +14,7 @@
     {
         "id": 2,
         "title": "🔄 Exercise 2: Conditional Statements ⚖️",
+        "concept": "Conditional structures (if/elif/else) evaluate boolean expressions to decide which code to execute. Indentation is crucial in Python to define code blocks. Each condition must have a clear expression (e.g., num > 0). Only one block executes, depending on the first true condition.",
         "description": "Fix the code so it correctly evaluates whether a number is positive, negative, or zero. 🔄",
         "language": "Python",
         "codeKoToRefactor": "num = -5\nif num > 0:\nprint('Positive')\nelif num < 0:\nprint('Negative')\nelse:\nprint('Zero')",
@@ -24,6 +26,7 @@
     {
         "id": 3,
         "title": "🔁 Exercise 3: 'for' Loops and Lists 📋",
+        "concept": "`for` loops iterate over elements of a list or iterable. In each iteration, a temporary variable (e.g., 'i') takes a value from the list. The `print()` function requires parentheses in Python 3. Indentation defines which code repeats in the loop.",
         "description": "Fix the code so it prints each element of the list correctly. 🔄",
         "language": "Python",
         "codeKoToRefactor": "numbers = [1, 2, 3, 4, 5]\nfor i in numbers:\nprint i",
@@ -34,7 +37,8 @@
     },
     {
         "id": 4,
-        "title": "📦 Exercise 4: Functions 🧠",
+        "title": "📦 Exercise 4: Functions �",
+        "concept": "Functions are defined with `def` and can take parameters. `return` sends a value back to the caller, while `print()` only displays text. To use a function's result, you must return it. Functions without `return` default to `None`.",
         "description": "Fix the code so that the function correctly returns the sum of two numbers. ➕",
         "language": "Python",
         "codeKoToRefactor": "def sumar(a, b):\n    print(a + b)\nresultado = sumar(3, 4)",
@@ -46,6 +50,7 @@
     {
         "id": 5,
         "title": "📖 Exercise 5: Dictionaries 🔑",
+        "concept": "Dictionaries store key-value pairs. Keys must be immutable (strings, numbers) and enclosed in quotes. Access values with `dictionary[key]`. Dictionaries use {} and are mutable. Keys must exist to avoid KeyError.",
         "description": "Fix the code to correctly access dictionary values. 🔍",
         "language": "Python",
         "codeKoToRefactor": "persona = {nombre: 'Juan', edad: 25}\nprint(persona[nombre])",
@@ -57,6 +62,7 @@
     {
         "id": 6,
         "title": "📝 Exercise 6: Lists and Methods 🧩",
+        "concept": "Lists are ordered, mutable collections. The `+` operator creates new lists, while `append()` modifies the original. List methods (like append) perform in-place actions. To modify existing lists, use methods instead of operators.",
         "description": "Fix the code to correctly add an element to the list. ➕",
         "language": "Python",
         "codeKoToRefactor": "numeros = [1, 2, 3]\nnumeros + [4]\nprint(numeros)",
@@ -68,6 +74,7 @@
     {
         "id": 7,
         "title": "🛡️ Exercise 7: Exception Handling ⚠️",
+        "concept": "Exception handling (try/except) prevents errors from crashing the program. Specific error types (e.g., ZeroDivisionError) can be caught. The `try` block contains risky code; `except` handles errors. Clear error messages are good practice.",
         "description": "Fix the code to properly handle a division by zero exception. 🔄",
         "language": "Python",
         "codeKoToRefactor": "a = 5\nb = 0\nprint(a / b)",
@@ -79,6 +86,7 @@
     {
         "id": 8,
         "title": "👥 Exercise 8: Classes and Objects 🏗️",
+        "concept": "Classes are blueprints for objects. The `__init__` method initializes object attributes using `self`. Instance variables require `self.` to persist. Access attributes with `object.attribute`. Instantiation is done by calling the class.",
         "description": "Fix the code to correctly define and instantiate a class. 🔧",
         "language": "Python",
         "codeKoToRefactor": "class Persona:\n    def __init__(self, nombre):\n        nombre = nombre\np = Persona('Ana')\nprint(p.nombre)",
@@ -90,6 +98,7 @@
     {
         "id": 9,
         "title": "λ Exercise 9: Functional Programming 🎯",
+        "concept": "Lambda functions are anonymous one-line functions. Defined with `lambda parameters: expression`. Useful for simple operations. In Python 3, `print()` requires parentheses. Lambdas can be assigned to variables for reuse.",
         "description": "Fix the code to correctly use a lambda function. ➡️",
         "language": "Python",
         "codeKoToRefactor": "doble = lambda x: x * 2\nprint doble(5)",
@@ -101,6 +110,7 @@
     {
         "id": 10,
         "title": "📚 Exercise 10: Modules and Libraries 🌐",
+        "concept": "Modules are files with reusable code. Imported with `import module`. Functions are accessed via `module.function()`. Correct syntax includes parentheses in function calls. The standard library (e.g., math) provides advanced features.",
         "description": "Fix the code to correctly import a module and use it. 🔄",
         "language": "Python",
         "codeKoToRefactor": "import math\nprint(math.sqrt(16)",
