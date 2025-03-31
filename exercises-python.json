@@ -118,5 +118,61 @@
         "expectedConsoleOutput": "4.0",
         "errorSimulation": "❌ Error: Missing parenthesis in function call. 🧩",
         "successMessage": "🎉 Correct! Now you master modules like an expert. 🐍🚀"
+    },
+    {
+        "id": 11,
+        "title": "🌀 Exercise 11: List Comprehensions 🌪️",
+        "concept": "List comprehensions provide concise syntax to create new lists by applying operations to iterable items. Combine loops and conditionals in a single line. More efficient than traditional loops for list transformations.",
+        "description": "Convert the loop into a list comprehension. 🔄",
+        "language": "Python",
+        "codeKoToRefactor": "numbers = [1, 2, 3, 4, 5]\nsquares = []\nfor n in numbers:\n    squares.append(n**2)",
+        "codeOkForExpect": "numbers = [1, 2, 3, 4, 5]\nsquares = [n**2 for n in numbers]  # ✅",
+        "expectedConsoleOutput": "[1, 4, 9, 16, 25]",
+        "errorSimulation": "❌ Error: Inefficient list creation. 🐌",
+        "successMessage": "🎉 Mastered Pythonic way to create lists! 🐍💎"
+    },
+    {
+        "id": 12,
+        "title": "📁 Exercise 12: File Handling 🗃️",
+        "concept": "Use `open()` with proper mode (r/w/a) and always close files. Context managers (`with`) automatically handle resource cleanup. File paths can be absolute or relative.",
+        "description": "Fix the file writing code to ensure proper resource handling. 🔧",
+        "codeKoToRefactor": "file = open('data.txt', 'w')\nfile.write('Hello World')\nprint('File updated!')",
+        "codeOkForExpect": "with open('data.txt', 'w') as file:  # ✅\n    file.write('Hello World')\nprint('File updated!')",
+        "expectedConsoleOutput": "File updated!",
+        "errorSimulation": "❌ Warning: Resource leak detected! 💧",
+        "successMessage": "🛡️ Perfect! Now files are handled safely. 💾"
+    },
+    {
+        "id": 13,
+        "title": "🎀 Exercise 13: Decorators 🎭",
+        "concept": "Decorators modify function behavior without changing its code. Use `@decorator_name` syntax. Functions are first-class objects that can be passed as arguments.",
+        "description": "Create a timing decorator to measure function execution. ⏱️",
+        "codeKoToRefactor": "def my_func():\n    time.sleep(1)\n\nmy_func()",
+        "codeOkForExpect": "import time\n\ndef timer_decorator(func):\n    def wrapper():\n        start = time.time()\n        func()\n        print(f'Time: {time.time()-start:.2f}s')\n    return wrapper\n\n@timer_decorator  # ✅\ndef my_func():\n    time.sleep(1)\n\nmy_func()",
+        "expectedConsoleOutput": "Time: 1.00s",
+        "errorSimulation": "❌ Error: Missing wrapper function. 🎁",
+        "successMessage": "⏰ Wow! Now you're measuring performance like a pro! 🔬"
+    },
+    {
+        "id": 14,
+        "title": "🌱 Exercise 14: Generators 🌾",
+        "concept": "Generators produce values on-the-fly using `yield`. Memory efficient for large datasets. Maintain state between iterations. Created via functions or generator expressions.",
+        "description": "Convert the list to a generator for memory efficiency. 💾",
+        "codeKoToRefactor": "def get_numbers(n):\n    return [x for x in range(n)]\n\nprint(sum(get_numbers(1000000)))",
+        "codeOkForExpect": "def get_numbers(n):\n    for x in range(n):  # ✅\n        yield x\n\nprint(sum(get_numbers(1000000)))",
+        "expectedConsoleOutput": "499999500000",
+        "errorSimulation": "❌ Warning: High memory usage! 🚨",
+        "successMessage": "🌿 Excellent! Now handling big data efficiently. 🐘"
+    },
+    {
+        "id": 15,
+        "title": "🔗 Exercise 15: Context Managers 🔄",
+        "concept": "The `with` statement ensures proper resource management. Implement via `__enter__` and `__exit__` methods. Handles exceptions and cleanup automatically.",
+        "description": "Create a custom context manager for database connections. 🗃️",
+        "codeKoToRefactor": "conn = sqlite3.connect('test.db')\nconn.execute('CREATE TABLE IF NOT EXISTS users(id INTEGER)')\nconn.close()",
+        "codeOkForExpect": "class DBConnection:\n    def __init__(self, db_name):\n        self.db_name = db_name\n    \n    def __enter__(self):\n        self.conn = sqlite3.connect(self.db_name)\n        return self.conn\n    \n    def __exit__(self, exc_type, exc_val, exc_tb):\n        self.conn.close()\n\nwith DBConnection('test.db') as conn:  # ✅\n    conn.execute('CREATE TABLE IF NOT EXISTS users(id INTEGER)')",
+        "expectedConsoleOutput": "(Database created)",
+        "errorSimulation": "❌ Error: Connection not closed properly! 🔌",
+        "successMessage": "🎩 Bravo! Now managing resources like a Python wizard! 🧙♂️"
     }
 ]
