@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "title": "🛠️ **Challenge 1: Public Class and Method** 🔓",
+    "description": "⚠️ Fix the code to make it compile! **Hint:** Use the door-opening modifier. 💻",
+    "language": "Java",
+    "codeKoToRefactor": "class Persona {\n    String nombre;\n    void saludar() {\n        System.out.println(\"Hola, soy \" + nombre);\n    }\n}",
+    "codeOkForExpect": "public class Persona {\n    String nombre;\n    public void saludar() {\n        System.out.println(\"Hola, soy \" + nombre);\n    }\n}",
+    "expectedConsoleOutput": "Hola, soy Juan",
+    "errorSimulation": "❌ Error: Class 'Persona' is not accessible outside the package. 🔒",
+    "successMessage": "🏆 Well done! The class is now public and accessible. Open doors! 🚪✨"
+  },
+  {
+    "id": 2,
+    "title": "🕵️♂️ **Challenge 2: 'private' Modifier** 🔒",
+    "description": "👀 Protect the balance like a treasure! **Hint:** Hide this variable from prying eyes. 💰",
+    "language": "Java",
+    "codeKoToRefactor": "public class CuentaBancaria {\n    int saldo;\n    public void depositar(int cantidad) {\n        saldo += cantidad;\n    }\n}",
+    "codeOkForExpect": "public class CuentaBancaria {\n    private int saldo;\n    public void depositar(int cantidad) {\n        saldo += cantidad;\n    }\n}",
+    "expectedConsoleOutput": "",
+    "errorSimulation": "❌ Error: Someone's peeking at your balance! 🕶️ 'saldo' shouldn't be accessed outside the class.",
+    "successMessage": "🛡️ Good! Balance is now under lock. Maximum protection! 🔐"
+  },
+  {
+    "id": 3,
+    "title": "📦 **Challenge 3: Encapsulation with 'private'** 📪",
+    "description": "🤫 Keep sensitive methods secret! **Hint:** Only the class should handle this. 🤖",
+    "language": "Java",
+    "codeKoToRefactor": "public class CuentaBancaria {\n    private int saldo;\n    void actualizarSaldo(int cantidad) {\n        saldo += cantidad;\n    }\n}",
+    "codeOkForExpect": "public class CuentaBancaria {\n    private int saldo;\n    private void actualizarSaldo(int cantidad) {\n        saldo += cantidad;\n    }\n}",
+    "expectedConsoleOutput": "",
+    "errorSimulation": "❌ Error: Intruder detected! 🚨 'actualizarSaldo' shouldn't be accessible externally.",
+    "successMessage": "🎯 Perfect! Method encapsulated like a well-wrapped gift. 🎁"
+  },
+  {
+    "id": 4,
+    "title": "👨👩👧👦 **Challenge 4: Inheritance with 'protected'** 🔑",
+    "description": "🧬 Allow family access! **Hint:** Modifier for related classes. 🧩",
+    "language": "Java",
+    "codeKoToRefactor": "public class Animal {\n    private String tipo;\n}\n\nclass Perro extends Animal {\n    void mostrarTipo() {\n        System.out.println(tipo);\n    }\n}",
+    "codeOkForExpect": "public class Animal {\n    protected String tipo;\n}\n\nclass Perro extends Animal {\n    void mostrarTipo() {\n        System.out.println(tipo);\n    }\n}",
+    "expectedConsoleOutput": "",
+    "errorSimulation": "❌ Error: Inheritance failure! 🧬 'tipo' not accessible in subclass.",
+    "successMessage": "✅ Correct! Now class family can share. 👪💞"
+  },
+  {
+    "id": 5,
+    "title": "🚫 **Challenge 5: 'final' Classes** 🔗",
+    "description": "⛔ Block inheritance! **Hint:** Modifier that puts a permanent lock. 🔐",
+    "language": "Java",
+    "codeKoToRefactor": "class Constante {\n    void mostrarValor() {\n        System.out.println(\"Valor constante\");\n    }\n}\n\nclass SubClase extends Constante {}",
+    "codeOkForExpect": "final class Constante {\n    void mostrarValor() {\n        System.out.println(\"Valor constante\");\n    }\n}",
+    "expectedConsoleOutput": "Valor constante",
+    "errorSimulation": "❌ Error: Someone wants to inherit! 👶 Can't inherit from 'final' class.",
+    "successMessage": "🛑 Well done! No one can modify your class. Immutable! 🧱"
+  },
+  {
+    "id": 6,
+    "title": "⚡ **Challenge 6: 'static' Methods** 🌐",
+    "description": "🚀 Instant access without instances! **Hint:** Modifier for global functionality. 🌍",
+    "language": "Java",
+    "codeKoToRefactor": "public class Utilidad {\n    void mostrarMensaje() {\n        System.out.println(\"Mensaje de utilidad\");\n    }\n}\n\nUtilidad.mostrarMensaje();",
+    "codeOkForExpect": "public class Utilidad {\n    static void mostrarMensaje() {\n        System.out.println(\"Mensaje de utilidad\");\n    }\n}\n\nUtilidad.mostrarMensaje();",
+    "expectedConsoleOutput": "Mensaje de utilidad",
+    "errorSimulation": "❌ Error: Missing instance! 🤖 Can't call 'mostrarMensaje' without object.",
+    "successMessage": "🎇 Correct! Method is now like a beacon... Accessible anywhere! 🌟"
+  },
+  {
+    "id": 7,
+    "title": "🕊️ **Challenge 7: Java Interfaces** ✈️",
+    "description": "📜 Fulfill the interface contract! **Hint:** Keyword to promise functionality. 🤝",
+    "language": "Java",
+    "codeKoToRefactor": "interface Volador {\n    void volar();\n}\n\nclass Pajaro {\n    public void volar() {\n        System.out.println(\"Volando\");\n    }\n}",
+    "codeOkForExpect": "interface Volador {\n    void volar();\n}\n\nclass Pajaro implements Volador {\n    public void volar() {\n        System.out.println(\"Volando\");\n    }\n}",
+    "expectedConsoleOutput": "Volando",
+    "errorSimulation": "❌ Error: Bird didn't sign the contract! 📝 Missing interface implementation.",
+    "successMessage": "🦅 Well done! Bird now flies under interface rules. 🌤️"
+  },
+  {
+    "id": 8,
+    "title": "🏋️♂️ **Challenge 8: Method Overloading** 🏋️♀️",
+    "description": "🎭 One method, multiple personalities! **Hint:** Same name, different parameters. 🔢",
+    "language": "Java",
+    "codeKoToRefactor": "public class Calculadora {\n    int sumar(int a, int b) {\n        return a + b;\n    }\n\n    double sumar(double a, double b) {\n        return a + b;\n    }\n}",
+    "codeOkForExpect": "public class Calculadora {\n    int sumar(int a, int b) {\n        return a + b;\n    }\n\n    double sumar(double a, double b) {\n        return a + b;\n    }\n\n    int sumar(int a, int b, int c) {\n        return a + b + c;\n    }\n}",
+    "expectedConsoleOutput": "10",
+    "errorSimulation": "❌ Error: Missing method version! 🤯 No method for three parameters.",
+    "successMessage": "🌈 Perfect! Your method is now a chameleon... Adapts to everything! 🦎"
+  },
+  {
+    "id": 9,
+    "title": "🏗️ **Challenge 9: Inheritance and Constructors** 🚗",
+    "description": "👷 Build inheritance correctly! **Hint:** Call parent first. 👨💼",
+    "language": "Java",
+    "codeKoToRefactor": "class Vehiculo {\n    String marca;\n}\n\nclass Coche extends Vehiculo {\n    Coche(String marca) {\n        this.marca = marca;\n    }\n}",
+    "codeOkForExpect": "class Vehiculo {\n    String marca;\n    Vehiculo(String marca) {\n        this.marca = marca;\n    }\n}\n\nclass Coche extends Vehiculo {\n    Coche(String marca) {\n        super(marca);\n    }\n}",
+    "expectedConsoleOutput": "",
+    "errorSimulation": "❌ Error: Car didn't inherit the engine! 🔧 Missing parent constructor call.",
+    "successMessage": "🚦 Great! Inheritance now works like Swiss clockwork. ⏱️"
+  },
+  {
+    "id": 10,
+    "title": "🎨 **Challenge 10: Abstract Classes** 🖌️",
+    "description": "🧩 Complete the abstraction puzzle! **Hint:** Implement what's missing. 🔍",
+    "language": "Java",
+    "codeKoToRefactor": "abstract class Figura {\n    abstract void dibujar();\n}\n\nclass Circulo extends Figura {}",
+    "codeOkForExpect": "abstract class Figura {\n    abstract void dibujar();\n}\n\nclass Circulo extends Figura {\n    void dibujar() {\n        System.out.println(\"Dibujando un círculo\");\n    }\n}",
+    "expectedConsoleOutput": "Dibujando un círculo",
+    "errorSimulation": "❌ Error: Missing art in the circle! 🖼️ 'dibujar' not implemented.",
+    "successMessage": "🖼️ Excellent! Your circle is now abstract artwork. 🎉"
+  }
+]
