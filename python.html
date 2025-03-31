@@ -176,6 +176,7 @@ async function loadExercise(exercise) {
         document.getElementById("h4_language").innerText = exercise.language;
         document.getElementById("h5_title").innerText = exercise.title;
         document.getElementById("challenge").innerText = exercise.description;
+	document.getElementById("modify-message").innerText = exercise.concept;
         editor.setValue(exercise.codeKoToRefactor);
 
         window.success_message = exercise.successMessage || "¡Éxito!";
