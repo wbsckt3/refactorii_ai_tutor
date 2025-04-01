@@ -58,5 +58,60 @@
       "expectedConsoleOutput": "[['Date', 'Amount'], ['2023-01', '1500'], ...]",
       "errorSimulation": "❌ FileError: Unsafe file handling",
       "successMessage": "📈 CSV mastery! Ready for real-world datasets!"
-  }
+  },
+  {
+        "id": 6,
+        "title": "📊 Numpy Basics 🔢",
+        "concept": "Numerical computing with NumPy arrays. Vectorized operations for performance. Shape manipulation and broadcasting.",
+        "description": "Calculate average product prices from a NumPy array. 🧮",
+        "codeKoToRefactor": "import numpy as np\nprices = [12.5, 19.99, 8.75, 15.0]\navg = sum(prices) / len(prices)",
+        "codeOkForExpect": "prices = np.array([12.5, 19.99, 8.75, 15.0])\navg = np.mean(prices)  # ✅",
+        "expectedConsoleOutput": "14.06",
+        "errorSimulation": "❌ Warning: Inefficient list operations",
+        "successMessage": "🧮 NumPy mastery! Now processing numbers at light speed! ⚡"
+    },
+    {
+        "id": 7,
+        "title": "🐼 Pandas DataFrames 📋",
+        "concept": "Tabular data manipulation with Pandas. Series vs DataFrames. Essential methods: head(), describe(), loc[].",
+        "description": "Load and analyze sales data from CSV. 📈",
+        "codeKoToRefactor": "data = {'Product': ['A', 'B', 'C'], 'Sales': [150, 200, 175]}\nprint(data['Sales'])",
+        "codeOkForExpect": "import pandas as pd\ndf = pd.DataFrame(data)\nprint(df['Sales'].mean())  # ✅",
+        "expectedConsoleOutput": "175.0",
+        "errorSimulation": "❌ KeyError: Dictionary-style access",
+        "successMessage": "🐼 DataFrame pro! Tabular data conquered! 📊"
+    },
+    {
+        "id": 8,
+        "title": "📉 Matplotlib Basics 🖼️",
+        "concept": "Data visualization principles. Line plots vs bar charts. Customizing axes and labels.",
+        "description": "Plot monthly sales trends. 📈",
+        "codeKoToRefactor": "months = ['Jan', 'Feb', 'Mar']\nsales = [120, 150, 200]\nplt.plot(sales)",
+        "codeOkForExpect": "plt.plot(months, sales)\nplt.xlabel('Month')\nplt.ylabel('Sales')  # ✅",
+        "expectedConsoleOutput": "(Graph with labeled axes)",
+        "errorSimulation": "❌ VisualizationError: Unlabeled plot",
+        "successMessage": "🎨 Data storytelling master! Visual insights unlocked! 🔑"
+    },
+    {
+        "id": 9,
+        "title": "🧹 Missing Data Handling 🚿",
+        "concept": "Identifying (isna()) and handling (fillna(), dropna()) missing values. Imputation strategies.",
+        "description": "Clean dataset with null values. 🧼",
+        "codeKoToRefactor": "df = pd.read_csv('sales.csv')\nprint(df)",
+        "codeOkForExpect": "df = df.fillna(df.mean())  # ✅\nprint(df.head())",
+        "expectedConsoleOutput": "(DataFrame without NaN values)",
+        "errorSimulation": "❌ NullValueError: Unhandled missing data",
+        "successMessage": "🚿 Dataset cleaned! Ready for analysis! ✨"
+    },
+    {
+        "id": 10,
+        "title": "📚 Basic Statistics 📐",
+        "concept": "Descriptive statistics: mean, median, std. Correlation analysis. Pandas built-in methods.",
+        "description": "Analyze product price distribution. 📏",
+        "codeKoToRefactor": "prices = [45, 60, 32, 70, 55]\nprint(max(prices) - min(prices))",
+        "codeOkForExpect": "print(f'Range: {np.ptp(prices)} Std: {np.std(prices):.2f}')  # ✅",
+        "expectedConsoleOutput": "Range: 38 Std: 12.83",
+        "errorSimulation": "❌ StatError: Basic range calculation",
+        "successMessage": "📐 Statistical analysis unlocked! Data patterns revealed! 🔍"
+    }
 ]
