@@ -174,5 +174,61 @@
         "expectedConsoleOutput": "(Database created)",
         "errorSimulation": "❌ Error: Connection not closed properly! 🔌",
         "successMessage": "🎩 Bravo! Now managing resources like a Python wizard! 🧙♂️"
+    },
+    {
+        "id": 16,
+        "title": "🛡️ Exercise 16: Error Handling 🚨",
+        "concept": "Use try-except blocks to handle exceptions. Specific exceptions (ValueError, ZeroDivisionError) should be caught explicitly. Finally block always executes for cleanup.",
+        "description": "Add error handling to prevent program crash. 🛠️",
+        "language": "Python",
+        "codeKoToRefactor": "a = 5\nb = 0\nprint(a / b)",
+        "codeOkForExpect": "try:\n    a = 5\n    b = 0\n    print(a / b)\nexcept ZeroDivisionError:\n    print('Cannot divide by zero!')  # ✅",
+        "expectedConsoleOutput": "Cannot divide by zero!",
+        "errorSimulation": "❌ Traceback: ZeroDivisionError 💥",
+        "successMessage": "🛡️ Excellent error handling! Now your programs are crash-resistant!"
+    },
+    {
+        "id": 17,
+        "title": "📖 Exercise 17: Dictionary Manipulation 🗝️",
+        "concept": "Dictionaries store key-value pairs. Use dict comprehensions for concise creation. zip() combines iterables. Keys must be hashable, values can be any type.",
+        "description": "Convert two lists into a dictionary using zip(). 🔄",
+        "codeKoToRefactor": "keys = ['a', 'b', 'c']\nvals = [1, 2, 3]\nd = {}\nfor i in range(len(keys)):\n    d[keys[i]] = vals[i]",
+        "codeOkForExpect": "keys = ['a', 'b', 'c']\nvals = [1, 2, 3]\nd = {k: v for k,v in zip(keys, vals)}  # ✅",
+        "expectedConsoleOutput": "{'a': 1, 'b': 2, 'c': 3}",
+        "errorSimulation": "❌ Warning: Inefficient dictionary creation 🐢",
+        "successMessage": "🗝️ Dictionary mastery unlocked! Perfect for data organization!"
+    },
+    {
+        "id": 18,
+        "title": "🌀 Exercise 18: Recursive Functions ♾️",
+        "concept": "Recursion: functions calling themselves. Requires base case to terminate. Useful for problems with repetitive sub-tasks (factorial, Fibonacci). Watch for maximum recursion depth.",
+        "description": "Fix the recursive Fibonacci sequence. 🔧",
+        "codeKoToRefactor": "def fib(n):\n    return fib(n-1) + fib(n-2)\n\nprint(fib(5))",
+        "codeOkForExpect": "def fib(n):\n    if n <= 1:  # ✅\n        return n\n    return fib(n-1) + fib(n-2)\n\nprint(fib(5))",
+        "expectedConsoleOutput": "5",
+        "errorSimulation": "❌ RecursionError: Maximum depth exceeded! 🕳️",
+        "successMessage": "♾️ Recursion mastered! Now solve complex problems elegantly!"
+    },
+    {
+        "id": 19,
+        "title": "🌐 Exercise 19: Using External Libraries 📡",
+        "concept": "Install packages with pip. Import third-party libraries (requests, pandas). Handle API responses (status codes, JSON parsing). Always close network connections.",
+        "description": "Make a proper HTTP request using requests library. 🔄",
+        "codeKoToRefactor": "response = get('https://api.example.com')\nprint(response.json())",
+        "codeOkForExpect": "import requests  # ✅\nresponse = requests.get('https://api.example.com')\nif response.status_code == 200:\n    print(response.json())",
+        "expectedConsoleOutput": "{'data': 'example'}",
+        "errorSimulation": "❌ NameError: name 'get' is not defined 🌐",
+        "successMessage": "🌍 Now you're connecting Python to the world! API master!"
+    },
+    {
+        "id": 20,
+        "title": "λ Exercise 20: Lambda & Map 🗺️",
+        "concept": "Lambda functions are anonymous single-expression functions. Use with map(), filter(), sorted(). Map applies function to all iterable items. Returns iterator in Python 3.",
+        "description": "Convert the loop to use map() and lambda. 🔄",
+        "codeKoToRefactor": "numbers = [1, 2, 3, 4]\ndoubled = []\nfor n in numbers:\n    doubled.append(n * 2)",
+        "codeOkForExpect": "numbers = [1, 2, 3, 4]\ndoubled = list(map(lambda x: x*2, numbers))  # ✅",
+        "expectedConsoleOutput": "[2, 4, 6, 8]",
+        "errorSimulation": "❌ Warning: Non-Pythonic iteration detected 🐍",
+        "successMessage": "λ Functional programming unlocked! Clean and concise!"
     }
 ]
