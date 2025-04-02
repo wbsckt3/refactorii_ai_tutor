@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "title": "⚡ NumPy Vectorization 🚀",
+    "concept": "Vectorized operations vs loops. Broadcasting and efficient matrix operations.",
+    "description": "Calculate Euclidean distances between points WITHOUT loops. 📏",
+    "language": "Python",
+    "codeKoToRefactor": "points = np.array([[1,2], [4,6], [3,7]])\ndistances = []\nfor p1 in points:\n    for p2 in points:\n        distances.append(np.sqrt(sum((p1-p2)**2)))",
+    "codeOkForExpect": "diff = points[:, np.newaxis] - points\ndistances = np.sqrt(np.sum(diff**2, axis=2))  # ✅",
+    "expectedConsoleOutput": "[[0. 5. 5.1]\n [5. 0. 3.16]\n [5.1 3.16 0. ]]",
+    "errorSimulation": "❌ PerformanceError: O(n²) complexity",
+    "successMessage": "⚡ Vectorization mastered! Lightning-fast calculations!"
+  },
+  {
+    "id": 2,
+    "title": "🔗 Dataset Merging 🧩",
+    "concept": "Combine data with pd.merge(): inner, outer, left, right joins. Handling duplicate keys.",
+    "description": "Merge sales data with product information. 🛒",
+    "language": "Python",
+    "codeKoToRefactor": "combined = pd.concat([df_sales, df_products])",
+    "codeOkForExpect": "merged = pd.merge(df_sales, df_products, on='product_id', how='left')  # ✅",
+    "expectedConsoleOutput": "(DataFrame with 15 combined columns)",
+    "errorSimulation": "❌ MergeError: Duplicate columns uncontrolled",
+    "successMessage": "🧩 Perfect data merging! Professional joins achieved!"
+  },
+  {
+    "id": 3,
+    "title": "📊 Advanced Visualization 🎨",
+    "concept": "Subplots, advanced customization (colormaps, annotations), statistical plots (boxplots, heatmaps).",
+    "description": "Create a multi-plot dashboard. 📌",
+    "language": "Python",
+    "codeKoToRefactor": "plt.plot(data1)\nplt.plot(data2)",
+    "codeOkForExpect": "fig, axs = plt.subplots(2,2, figsize=(12,8))\naxs[0,0].hist(data1)  # ✅\naxs[0,1].boxplot(data2)",
+    "expectedConsoleOutput": "(Figure with 4 organized subplots)",
+    "errorSimulation": "❌ VisualizationError: Overlapping plots",
+    "successMessage": "🖼️ Professional visualization! Effective data storytelling!"
+  },
+  {
+    "id": 4,
+    "title": "🤖 Linear Regression 📐",
+    "concept": "Implementation with scikit-learn: train_test_split, model fitting, evaluation (R², MSE).",
+    "description": "Predict house prices. 🏠",
+    "language": "Python",
+    "codeKoToRefactor": "model.fit(X, y)\npredictions = model.predict(X)",
+    "codeOkForExpect": "X_train, X_test, y_train, y_test = train_test_split(X, y)\nmodel.fit(X_train, y_train)  # ✅\npredictions = model.predict(X_test)",
+    "expectedConsoleOutput": "R² score: 0.85",
+    "errorSimulation": "❌ OverfittingError: No test set validation",
+    "successMessage": "📈 Functional predictive model! First ML milestone!"
+  },
+  {
+    "id": 5,
+    "title": "🔧 Feature Engineering 🛠️",
+    "concept": "Feature creation: normalization (StandardScaler), polynomial features, variable binning.",
+    "description": "Preprocess data for classification model. 🎯",
+    "language": "Python",
+    "codeKoToRefactor": "model.fit(raw_data)",
+    "codeOkForExpect": "scaler = StandardScaler()\nX_scaled = scaler.fit_transform(raw_data)  # ✅\nmodel.fit(X_scaled)",
+    "expectedConsoleOutput": "(15% improved accuracy)",
+    "errorSimulation": "❌ PreprocessingError: Unscaled data",
+    "successMessage": "🛠️ Data model-ready! Premium feature quality!"
+  },
+  {
+    "id": 6,
+    "title": "📅 Time Series Analysis ⌛",
+    "concept": "Datetime index manipulation, resampling (monthly, quarterly), rolling windows.",
+    "description": "Analyze monthly sales trend. 📈",
+    "language": "Python",
+    "codeKoToRefactor": "df['date'] = pd.to_datetime(df['date'])",
+    "codeOkForExpect": "df = df.set_index('date').resample('M').sum()  # ✅\nrolling_avg = df.rolling(3).mean()",
+    "expectedConsoleOutput": "(Smoothed time series)",
+    "errorSimulation": "❌ ResamplingError: Raw daily data",
+    "successMessage": "⏳ Time analysis mastered! Trends uncovered!"
+  },
+  {
+    "id": 7,
+    "title": "🌀 One-Hot Encoding 🔥",
+    "concept": "Categorical variable conversion with pd.get_dummies()/OneHotEncoder. Handling rare categories.",
+    "description": "Prepare categorical data for modeling. 🌶️",
+    "language": "Python",
+    "codeKoToRefactor": "df['category'] = df['category'].astype(int)",
+    "codeOkForExpect": "encoded = pd.get_dummies(df, columns=['category'])  # ✅",
+    "expectedConsoleOutput": "(DataFrame with 5 new binary columns)",
+    "errorSimulation": "❌ EncodingError: Numeric categoricals",
+    "successMessage": "🔥 Proper encoding! Models understand categories!"
+  },
+  {
+    "id": 8,
+    "title": "📶 SQL in Python 🗄️",
+    "concept": "Database querying with pandas.read_sql(), SQLAlchemy connections. Direct JOINs in Python.",
+    "description": "Extract SQL data for analysis. 💾",
+    "language": "Python",
+    "codeKoToRefactor": "query = 'SELECT * FROM sales'",
+    "codeOkForExpect": "engine = create_engine('sqlite:///data.db')\ndf = pd.read_sql(query, engine)  # ✅",
+    "expectedConsoleOutput": "(DataFrame with 10,000 records)",
+    "errorSimulation": "❌ SQLError: Unmanaged connection",
+    "successMessage": "🗃️ SQL data integrated! Unified analysis achieved!"
+  },
+  {
+    "id": 9,
+    "title": "🎯 Model Evaluation 📊",
+    "concept": "Classification metrics: confusion matrix, precision/recall. ROC curves & AUC.",
+    "description": "Evaluate binary classification model. 🎲",
+    "language": "Python",
+    "codeKoToRefactor": "print(f'Accuracy: {accuracy}')",
+    "codeOkForExpect": "print(classification_report(y_test, predictions))  # ✅\nConfusionMatrixDisplay.from_predictions(y_test, predictions)",
+    "expectedConsoleOutput": "Precision: 0.92 | Recall: 0.88",
+    "errorSimulation": "❌ EvalError: Accuracy-only reporting",
+    "successMessage": "📏 Professional evaluation! True model understanding!"
+  },
+  {
+    "id": 10,
+    "title": "🚀 Code Optimization ⚡",
+    "concept": "Vectorization, parallel processing (joblib), Cython for critical bottlenecks.",
+    "description": "Speed up big data processing. 💽",
+    "language": "Python",
+    "codeKoToRefactor": "[process(x) for x in big_data]",
+    "codeOkForExpect": "Parallel(n_jobs=4)(delayed(process)(x) for x in big_data)  # ✅",
+    "expectedConsoleOutput": "70% reduced time",
+    "errorSimulation": "❌ PerformanceError: Sequential processing",
+    "successMessage": "⚡ Turbocharged code! Industrial-scale efficiency!"
+  }
+]
