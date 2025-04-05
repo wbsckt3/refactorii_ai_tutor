@@ -189,7 +189,7 @@ async function loadExercise(exercise) {
 	
 async function loadExercises(exerciseId) {
     try {
-        const response = await fetch('exercises-python-data-science2.json');
+        const response = await fetch('exercises-python.json');
         if (!response.ok) throw new Error(`Error al cargar JSON: ${response.status}`);
         
         const exercises = await response.json();
