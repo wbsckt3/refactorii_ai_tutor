@@ -1,4 +1,4 @@
-{
+[{
     "id": 42, 
     "title": "☢️ Exercise 42: The Halting Problem (Nuclear Edition)",
     "concept": "The Halting Problem proves that no algorithm can determine if an arbitrary program will halt or run forever. In Python, this means we can't write a function `will_halt()` that works for all possible programs. Try to 'solve' it anyway!",
@@ -10,4 +10,4 @@
     "errorSimulation": "❌ Error: Your `will_halt` function is incorrect. The program enters an infinite loop, proving the Halting Problem is undecidable! 🤯",
     "successMessage": "☢️ Cognitive contamination successful! You now know some problems are unsolvable. 🧠💥"
   
-}
+}]
