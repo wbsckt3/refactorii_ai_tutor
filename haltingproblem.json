@@ -1,0 +1,13 @@
+{
+    "id": 42, 
+    "title": "☢️ Exercise 42: The Halting Problem (Nuclear Edition)",
+    "concept": "The Halting Problem proves that no algorithm can determine if an arbitrary program will halt or run forever. In Python, this means we can't write a function `will_halt()` that works for all possible programs. Try to 'solve' it anyway!",
+    "description": "The code below tries to simulate a halting detector. Run it and observe why it's impossible. 💡",
+    "language": "Python",
+    "codeKoToRefactor": "def will_halt(program, input):\n    # Magic? Nope. This can't exist!\n    return True\n\ndef evil_program(program):\n    if will_halt(program, program):\n        while True:\n            print(\"Looping forever!\")\n    else:\n        print(\"I halted!\")\n\n# What happens if we run evil_program on itself?\nevil_program(evil_program)",
+    "codeOkForExpect": "# No correct solution exists! 🚨\n# This is a paradox, as proven by Alan Turing.\nprint(\"The Halting Problem is undecidable. 💀\")",
+    "expectedConsoleOutput": "Looping forever!\nLooping forever!\n... (infinite loop)",
+    "errorSimulation": "❌ Error: Your `will_halt` function is incorrect. The program enters an infinite loop, proving the Halting Problem is undecidable! 🤯",
+    "successMessage": "☢️ Cognitive contamination successful! You now know some problems are unsolvable. 🧠💥"
+  
+}
