@@ -187,9 +187,9 @@ async function loadExercise(exercise) {
     }
 }
 	
-async function loadExercises(exerciseId) {
+async function loadExercises(exerciseId, exercises_package) {
     try {
-        const response = await fetch('exercises.json');
+        const response = await fetch(`${exercises_package}.json`);
         if (!response.ok) throw new Error(`Error al cargar JSON: ${response.status}`);
         
         const exercises = await response.json();
@@ -255,8 +255,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         localStorage.setItem('email', email);
 
         const exerciseId = urlParams.get("exercise");
+	const exercises_package = urlParams.get("exercises_package");
         if (exerciseId) {
-           loadExercises(exerciseId);
+           loadExercises(exerciseId, exercises_package);
         } else {
             console.error("No se proporcionó un ID de ejercicio en la URL.");
         }
