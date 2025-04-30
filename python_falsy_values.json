@@ -1,4 +1,4 @@
-    {
+ [   {
         "id": 1,
         "title": "❌ Exercise 1: El engañoso 'None' 🕳️",
         "concept": "None en Python representa la ausencia de valor (como null en otros lenguajes). Es un valor falsy. ¡Cuidado al usarlo en condicionales o operaciones matemáticas!",
