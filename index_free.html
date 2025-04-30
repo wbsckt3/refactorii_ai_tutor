@@ -214,9 +214,9 @@ async function loadExercises(exerciseId, exercises_package) {
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
-
+        const urlParams = new URLSearchParams(window.location.search);
         const exerciseId = urlParams.get("exercise");
-	      const exercises_package = urlParams.get("exercises_package");
+	const exercises_package = urlParams.get("exercises_package");
         if (exerciseId) {
            loadExercises(exerciseId, exercises_package);
         } else {
