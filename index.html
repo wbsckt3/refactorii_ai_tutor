@@ -203,8 +203,9 @@ async function loadExercises(exerciseId, exercises_package) {
         if (!response.ok) throw new Error(`Error al cargar JSON: ${response.status}`);
         
         const exercises = await response.json();
-        const selectedExercise = exercises.find(ex => String(ex.id) === String(exerciseId));
-        
+        const selectedExercise = exercises.find(ex => String(ex.id) === String(exerciseId)); // con id=1 en json
+	const selectedExercise = exercises.find(ex => String(ex.id?.$numberInt || ex.id) === String(exerciseId)); // con id = "id": { "$numberInt": "1" },
+       
         if (!selectedExercise) {
             throw new Error(`Ejercicio con ID ${exerciseId} no encontrado`);
         }
