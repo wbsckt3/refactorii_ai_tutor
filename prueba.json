@@ -1,0 +1,132 @@
+[
+        {
+          "id": {
+            "$numberInt": "1"
+          },
+          "title": "🔤 Ejercicio 1: Variables traviesas",
+          "description": "Corrige los errores en la declaración y uso de variables para que el código muestre el mensaje correcto.",
+          "language": "php",
+          "codeKoToRefactor": "<?php\n$nombre = \"Juan\";\n$apellido = Perez;\necho \"Hola, mi nombre es \" . $nombre . \" y mi apellido es \" . $apellido;\n?>",
+          "codeOkForExpect": "<?php\n$nombre = \"Juan\";\n$apellido = \"Perez\";\necho \"Hola, mi nombre es \" . $nombre . \" y mi apellido es \" . $apellido;\n?>",
+          "expectedConsoleOutput": "Hola, mi nombre es Juan y mi apellido es Perez",
+          "errorSimulation": "Parse error: syntax error, unexpected 'Perez' (T_STRING) in /path/to/file.php on line 3",
+          "successMessage": "¡Excelente! 🎉 Ahora las variables están correctamente declaradas y el mensaje se muestra perfectamente."
+        },
+        {
+          "id": {
+            "$numberInt": "2"
+          },
+          "title": "🔢 Ejercicio 2: Suma mágica",
+          "description": "Arregla la función para que calcule correctamente la suma de dos números.",
+          "language": "php",
+          "codeKoToRefactor": "<?php\nfunction suma($a, $b) {\n    return $a - $b;\n}\necho suma(5, 3);\n?>",
+          "codeOkForExpect": "<?php\nfunction suma($a, $b) {\n    return $a + $b;\n}\necho suma(5, 3);\n?>",
+          "expectedConsoleOutput": "8",
+          "errorSimulation": "2",
+          "successMessage": "¡Lo lograste! ✨ Ahora la función suma correctamente los números. ¡Sigue así!"
+        },
+        {
+          "id": {
+            "$numberInt": "3"
+          },
+          "title": "🔄 Ejercicio 3: Bucle infinito",
+          "description": "Corrige el bucle while para que muestre los números del 1 al 5 sin entrar en un ciclo infinito.",
+          "language": "php",
+          "codeKoToRefactor": "<?php\n$i = 1;\nwhile ($i <= 5) {\n    echo $i;\n}\n?>",
+          "codeOkForExpect": "<?php\n$i = 1;\nwhile ($i <= 5) {\n    echo $i;\n    $i++;\n}\n?>",
+          "expectedConsoleOutput": "12345",
+          "errorSimulation": "111111111111... (bucle infinito)",
+          "successMessage": "¡Fantástico! 🚀 Ahora el bucle funciona correctamente y muestra solo los números del 1 al 5."
+        },
+        {
+          "id": {
+            "$numberInt": "4"
+          },
+          "title": "🍎 Ejercicio 4: Frutas favoritas",
+          "description": "Arregla el array para que muestre correctamente todas las frutas en la lista.",
+          "language": "php",
+          "codeKoToRefactor": "<?php\n$frutas = array(\"Manzana\", \"Banana\" \"Naranja\");\nforeach ($frutas as $fruta) {\n    echo $fruta . \" \";\n}\n?>",
+          "codeOkForExpect": "<?php\n$frutas = array(\"Manzana\", \"Banana\", \"Naranja\");\nforeach ($frutas as $fruta) {\n    echo $fruta . \" \";\n}\n?>",
+          "expectedConsoleOutput": "Manzana Banana Naranja ",
+          "errorSimulation": "Parse error: syntax error, unexpected '\"Naranja\"' (T_CONSTANT_ENCAPSED_STRING) in /path/to/file.php on line 2",
+          "successMessage": "¡Muy bien! 🍏 Ahora el array está correctamente definido y muestra todas las frutas."
+        },
+        {
+          "id": {
+            "$numberInt": "5"
+          },
+          "title": "🔍 Ejercicio 5: Buscando el mayor",
+          "description": "Corrige la función para que devuelva correctamente el número mayor entre dos valores.",
+          "language": "php",
+          "codeKoToRefactor": "<?php\nfunction mayor($a, $b) {\n    if ($a > $b) {\n        return $b;\n    } else {\n        return $a;\n    }\n}\necho mayor(10, 5);\n?>",
+          "codeOkForExpect": "<?php\nfunction mayor($a, $b) {\n    if ($a > $b) {\n        return $a;\n    } else {\n        return $b;\n    }\n}\necho mayor(10, 5);\n?>",
+          "expectedConsoleOutput": "10",
+          "errorSimulation": "5",
+          "successMessage": "¡Correcto! 🔥 Ahora la función identifica perfectamente cuál número es mayor. ¡Buen trabajo!"
+        },
+        {
+          "id": {
+            "$numberInt": "6"
+          },
+          "title": "📝 Ejercicio 6: Concatenación creativa",
+          "description": "Arregla el código para que concatene correctamente las dos cadenas de texto.",
+          "language": "php",
+          "codeKoToRefactor": "<?php\n$saludo = \"Hola\";\n$nombre = \"Mundo\";\necho $saludo + $nombre;\n?>",
+          "codeOkForExpect": "<?php\n$saludo = \"Hola\";\n$nombre = \"Mundo\";\necho $saludo . $nombre;\n?>",
+          "expectedConsoleOutput": "HolaMundo",
+          "errorSimulation": "0",
+          "successMessage": "¡Perfecto! 🌍 Ahora las cadenas se concatenan correctamente. ¡Sigue avanzando!"
+        },
+        {
+          "id": {
+            "$numberInt": "7"
+          },
+          "title": "🔢 Ejercicio 7: Factorial falso",
+          "description": "Corrige la función factorial para que calcule correctamente el factorial de un número.",
+          "language": "php",
+          "codeKoToRefactor": "<?php\nfunction factorial($n) {\n    $resultado = 1;\n    for ($i = 1; $i <= $n; $i--) {\n        $resultado *= $i;\n    }\n    return $resultado;\n}\necho factorial(5);\n?>",
+          "codeOkForExpect": "<?php\nfunction factorial($n) {\n    $resultado = 1;\n    for ($i = 1; $i <= $n; $i++) {\n        $resultado *= $i;\n    }\n    return $resultado;\n}\necho factorial(5);\n?>",
+          "expectedConsoleOutput": "120",
+          "errorSimulation": "1 (bucle infinito en algunos entornos)",
+          "successMessage": "¡Excelente trabajo! 🧮 Ahora la función factorial calcula correctamente el resultado. ¡Eres un genio de las matemáticas!"
+        },
+        {
+          "id": {
+            "$numberInt": "8"
+          },
+          "title": "🔄 Ejercicio 8: For fantasma",
+          "description": "Arregla el bucle for para que muestre los números del 5 al 1 en orden descendente.",
+          "language": "php",
+          "codeKoToRefactor": "<?php\nfor ($i = 5; $i > 0; $i++) {\n    echo $i . \" \";\n}\n?>",
+          "codeOkForExpect": "<?php\nfor ($i = 5; $i > 0; $i--) {\n    echo $i . \" \";\n}\n?>",
+          "expectedConsoleOutput": "5 4 3 2 1 ",
+          "errorSimulation": "5 6 7 8 9... (bucle infinito)",
+          "successMessage": "¡Bravo! 📉 Ahora el bucle muestra correctamente la cuenta regresiva. ¡Dominas los bucles!"
+        },
+        {
+          "id": {
+            "$numberInt": "9"
+          },
+          "title": "🔡 Ejercicio 9: Mayúsculas misteriosas",
+          "description": "Corrige la función para que convierta correctamente una cadena a mayúsculas.",
+          "language": "php",
+          "codeKoToRefactor": "<?php\nfunction aMayusculas($texto) {\n    return strtolower($texto);\n}\necho aMayusculas(\"hola mundo\");\n?>",
+          "codeOkForExpect": "<?php\nfunction aMayusculas($texto) {\n    return strtoupper($texto);\n}\necho aMayusculas(\"hola mundo\");\n?>",
+          "expectedConsoleOutput": "HOLA MUNDO",
+          "errorSimulation": "hola mundo",
+          "successMessage": "¡Magnífico! 📢 Ahora la función convierte el texto a mayúsculas correctamente. ¡Tu código grita éxito!"
+        },
+        {
+          "id": {
+            "$numberInt": "10"
+          },
+          "title": "🔢 Ejercicio 10: Par o impar",
+          "description": "Arregla la función para que determine correctamente si un número es par o impar.",
+          "language": "php",
+          "codeKoToRefactor": "<?php\nfunction esPar($numero) {\n    if ($numero % 2 = 0) {\n        return \"Par\";\n    } else {\n        return \"Impar\";\n    }\n}\necho esPar(4);\n?>",
+          "codeOkForExpect": "<?php\nfunction esPar($numero) {\n    if ($numero % 2 == 0) {\n        return \"Par\";\n    } else {\n        return \"Impar\";\n    }\n}\necho esPar(4);\n?>",
+          "expectedConsoleOutput": "Par",
+          "errorSimulation": "Parse error: syntax error, unexpected 'return' (T_RETURN) in /path/to/file.php on line 3",
+          "successMessage": "¡Lo has conseguido! 🎯 Ahora la función identifica perfectamente números pares e impares. ¡Eres un crack de la lógica!"
+        }
+      ]
