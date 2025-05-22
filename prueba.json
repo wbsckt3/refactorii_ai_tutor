@@ -1,8 +1,6 @@
 [
         {
-          "id": {
-            "$numberInt": "1"
-          },
+           "id": 1,
           "title": "🔤 Ejercicio 1: Variables traviesas",
           "description": "Corrige los errores en la declaración y uso de variables para que el código muestre el mensaje correcto.",
           "language": "php",
