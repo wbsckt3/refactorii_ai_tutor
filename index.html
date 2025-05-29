@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token'); 
     const rawData = urlParams.get("data"); // <- ahora viene el ejercicio completo codificado
-
+console.log(token)
     async function validateAndProcessToken() {
         if (!token) {
             document.body.innerHTML = 'Access denied. No token provided.';
