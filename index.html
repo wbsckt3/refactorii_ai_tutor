@@ -197,7 +197,7 @@ async function loadExercise(exercise) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", async function () {
+/* document.addEventListener("DOMContentLoaded", async function () {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token'); 
     const rawData = urlParams.get("data"); // <- ahora viene el ejercicio completo codificado
@@ -255,9 +255,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     }
     validateAndProcessToken();
-});
+}); */
 
-/*document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener("DOMContentLoaded", async function () {
     const urlParams = new URLSearchParams(window.location.search);
     const rawData = urlParams.get("data"); // El ejercicio completo codificado
 
@@ -280,7 +280,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         console.error("Error al procesar el ejercicio desde la URL:", err);
         document.body.innerHTML = 'Error al cargar el ejercicio.';
     }
-});*/
+});
 
 
 </script>
