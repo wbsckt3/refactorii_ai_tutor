@@ -208,7 +208,7 @@ console.log(token)
             return;
         }
 
-        const response = await fetch(`https://www.refactorii.com/validate-token?token=${token}`);
+        const response = await fetch(`https://www.refactorii.com//validate-token-in-refactorii-ai-tutor?token=${token}`);
         const data = await response.json();
 
         if (!data.valid) {
@@ -227,11 +227,10 @@ console.log(token)
         ).join(''));
 
         const decodedToken = JSON.parse(jsonPayload);
-        const recipeId = decodedToken._id;
-        const email = decodedToken.email;
-
-        localStorage.setItem('recipeId', recipeId);
-        localStorage.setItem('email', email);
+        //const recipeId = decodedToken._id;
+        //const email = decodedToken.email;
+        //localStorage.setItem('recipeId', recipeId);
+        //localStorage.setItem('email', email);
 
         // ✅ En vez de usar loadExercises, ahora decodificamos directamente el ejercicio
         if (rawData) {
