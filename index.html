@@ -24,6 +24,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/seti.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.css">
     <script src="guardar_resultados.js"></script>
+    <style>
+	.logo-pi {
+  		font-size: 1.5rem;
+  		color: #f59e0b;
+  		font-weight: bold;
+  		margin: 0 0.25rem;
+	}
+    </style>
 </head>
 <body>
     <div id="editor-container">
@@ -35,7 +43,7 @@
 	    color: #fff;
 	    font-weight: bold;
 	    padding-left: 19px;">
-           <h2 style="font-weight: bold; font-size: 25px;">Refactorii 🚀</h2>
+           <h2 style="font-weight: bold; font-size: 25px;"><span class="logo-pi">π</span>Refactorii</h2>
     	</header>
         <textarea id="code-editor"></textarea>
         <button id="run-button" onclick="simulateCompilation()">Run</button>  
