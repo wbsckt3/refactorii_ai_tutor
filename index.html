@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tutor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/8.4.0/mocha.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.6.3/dist/vuetify.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>  
+    <link rel="stylesheet" href="https://wbsckt3.github.io/mocha_test_cases_styles_2/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.6.3/dist/vuetify.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuex@3.6.2/dist/vuex.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/8.4.0/mocha.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.3.4/chai.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@4.0.0/build/cjs/index.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/seti.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.css">
+    <script src="guardar_resultados.js"></script>
+    <style>
+	.logo-pi {
+  		font-size: 33px;
+  		color: #f59e0b;
+  		font-weight: bold;
+  		margin: 0 0.25rem;
+	}
+    </style>
+</head>
+<body>
+    <div id="editor-container">
+	<header style="width: 100%;
+	    background: #007bff;
+	    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+	    background:#007bff;
+	    padding:5px;
+	    color: #fff;
+	    font-weight: bold;
+	    padding-left: 19px;">
+           <h2 style="font-weight: bold; font-size: 30px;"><span class="logo-pi">π</span>refactorii</h2>
+    	</header>
+        <textarea id="code-editor"></textarea>
+        <button id="run-button" onclick="simulateCompilation()">Run</button>  
+    </div>
+    <div id="app-container">
+        <div id="app">
+	    <h4 id="h4_language" style="padding-bottom: 16px;"></h4>
+	    <h5 id="h5_title"></h5>
+	    <div id="challenge"></div>	
+            <p id="modify-message"></p>
+	    <button id="send-response-button" onClick="guardarResultados()" style="display: none;">Guardar resultados</button>
+	    <button id="retry-button" onClick="resetEditor()" style="display: none;">Reintentar</button>  
+        </div>
+	<!-- Footer -->
+        <footer id="app-footer">
+           © 2025 RefactorII AI Tutor
+        </footer>
+    </div>
+    <div id="console-container"><div id="console"></div></div>
+    <div id="mocha-container"><div id="mocha"></div></div>
+    <script>mocha.setup('bdd');</script>
+
+    <!-- Modal -->
+    <div class="modal fade" id="errorMessageModal" tabindex="-1" role="dialog" aria-labelledby="errorMessageModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorMessageModalLabel">Concept</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="errorMessageModalBody"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+<script>
+let editor;
+
+// Configuración de CodeMirror para ser agnóstico al lenguaje
+editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
+    lineNumbers: true,
+    mode: 'javascript', // Se configura como Java para sintaxis
+    lineWrapping: true,
+    theme: 'seti',
+    scrollbarStyle: 'null'
+});
+
+let currentExercise;
+let failCount = 0; // Contador de fallos consecutivos
+
+function printToConsole(message) {
+    const consoleDiv = document.getElementById("console");
+    consoleDiv.innerHTML += `<p>${message}</p>`;
+}
+
+async function simulateCompilation() {
+    document.getElementById("console").innerHTML = "<p>Compilando...</p>";
+    setTimeout(() => {
+        const userCode = editor.getValue();
+
+        if (!currentExercise) {
+            printToConsole("Error: No se ha cargado un ejercicio.");
+            return;
+        }
+
+        try {
+            // ✅ VALIDACIÓN LOCAL: Comparar con codeOkForExpect almacenado en localStorage
+            const correctCode = currentExercise.codeOkForExpect;
+            const expectedOutput = currentExercise.expectedConsoleOutput;
+            const errorSimulation = currentExercise.errorSimulation;
+
+            // Normalizar el código para comparación (eliminar espacios extra, saltos de línea)
+            const normalizeCode = (code) => {
+                return code.replace(/\s+/g, ' ').trim();
+            };
+
+            const userCodeNormalized = normalizeCode(userCode);
+            const correctCodeNormalized = normalizeCode(correctCode);
+
+            // Simular la ejecución del código
+            printToConsole(`<b>Salida esperada:</b> ${expectedOutput}`);
+            
+            // Verificar si el código es correcto
+            const isCorrect = userCodeNormalized === correctCodeNormalized;
+
+            if (isCorrect) {
+                // ✅ Código correcto
+                printToConsole(`<b>Salida obtenida:</b> ${expectedOutput}`);
+                printToConsole(`<b style="color:green;">${currentExercise.successMessage}</b>`);
+                document.getElementById("send-response-button").style.display = "block";
+                document.getElementById("send-response-button").disabled = false;    
+                document.getElementById("retry-button").style.display = "none";
+                document.getElementById("run-button").style.display = "none";
+                failCount = 0;
+            } else {
+                // ❌ Código incorrecto
+                printToConsole(`<b>Salida obtenida:</b> ${errorSimulation}`);
+                printToConsole(`<b style="color:red;">Errores encontrados:</b>`);
+                
+                // Análisis de diferencias básico
+                const differences = analyzeCodeDifferences(userCode, correctCode);
+                if (differences.length > 0) {
+                    const messages = differences.map(diff => `<b>${diff.type}:</b> ${diff.message}`).join("<br>");
+                    printToConsole(messages);
+                } else {
+                    printToConsole("El código no coincide con la solución esperada. Revisa la sintaxis y la lógica.");
+                }
+                
+                document.getElementById("run-button").style.display = "none";
+                document.getElementById("send-response-button").style.display = "none";
+                document.getElementById("retry-button").style.display = "block";
+                failCount++;
+            }
+        } catch (error) {
+            console.error("Error en simulateCompilation:", error);
+            printToConsole("Error en la validación del código.");
+            document.getElementById("retry-button").style.display = "block";
+        }
+    }, 1000);
+}
+
+// ✅ Función para analizar diferencias entre códigos
+function analyzeCodeDifferences(userCode, correctCode) {
+    const differences = [];
+    
+    // Verificar diferencias básicas
+    if (!userCode.includes('int[]') && correctCode.includes('int[]')) {
+        differences.push({
+            type: "Sintaxis",
+            message: "Usa la sintaxis recomendada: int[] en lugar de int array[]"
+        });
+    }
+    
+    if (userCode.includes('int array[]') && correctCode.includes('int[]')) {
+        differences.push({
+            type: "Sintaxis", 
+            message: "La declaración del array debe ser: int[] nombreArray"
+        });
+    }
+    
+    // Verificar si faltan elementos esenciales
+    const userLines = userCode.split('\n').map(line => line.trim()).filter(line => line);
+    const correctLines = correctCode.split('\n').map(line => line.trim()).filter(line => line);
+    
+    if (userLines.length !== correctLines.length) {
+        differences.push({
+            type: "Estructura",
+            message: `Número de líneas incorrecto. Esperado: ${correctLines.length}, encontrado: ${userLines.length}`
+        });
+    }
+    
+    return differences;
+}
+
+
+
+function resetEditor() {
+    editor.setValue(currentExercise.codeKoToRefactor);
+    document.getElementById("console").innerHTML = "";
+    document.getElementById("retry-button").style.display = "none";
+    document.getElementById("run-button").style.display = "block";
+    failCount = 0;
+}
+
+async function loadExercise(exercise) {
+    try {
+        if (!exercise || typeof exercise !== "object") {
+            throw new Error("Objeto exercise no válido o undefined");
+        }
+
+        const requiredProps = ['title', 'description', 'codeKoToRefactor', 'codeOkForExpect', 'expectedConsoleOutput', 'language'];
+        const missingProps = requiredProps.filter(prop => !(prop in exercise));
+        
+        if (missingProps.length > 0) {
+            throw new Error(`Ejercicio corrupto. Faltan propiedades: ${missingProps.join(', ')}`);
+        }
+        document.getElementById("h4_language").innerText = exercise.language;
+        document.getElementById("h5_title").innerText = exercise.title;
+        document.getElementById("challenge").innerText = exercise.description;
+	document.getElementById("modify-message").innerText = exercise.concept;
+        editor.setValue(exercise.codeKoToRefactor);
+
+        window.success_message = exercise.successMessage || "¡Éxito!";
+        currentExercise = exercise;
+    } catch (error) {
+        console.error("Error crítico en loadExercise:", error);
+        throw error;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", async function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token'); 
+    const rawData = urlParams.get("data"); // <- ahora viene el ejercicio completo codificado
+console.log(token)
+    async function validateAndProcessToken() {
+        if (!token) {
+            document.body.innerHTML = 'Access denied. No token provided.';
+            return;
+        }
+
+        const response = await fetch(`https://www.refactorii.com/validate-token-in-refactorii-ai-tutor?token=${token}`);
+
+       fetch(`https://www.refactorii.com/validate-token?token=${token}`)
+	    .then(response => response.json())
+	    .then(data => {
+	        if (data.valid) {
+	            console.log(data.valid);
+	             // Decodifica el token para obtener el payload
+		     var base64Url = token.split('.')[1];
+	             var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+	             var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+	                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+	             }).join(''));
+                     const decodedToken = JSON.parse(jsonPayload);
+         	    /* const recipeId = decodedToken._id; // Asegúrate de usar el nombre correcto del campo en el payload
+		     const email = decodedToken.email;
+                     console.log('Recipe ID:', recipeId);
+		     // Almacenar recipeId en local storage
+                     localStorage.setItem('recipeId', recipeId);
+		     localStorage.setItem('email', email);
+		     loadMarkdownFiles(); */
+	    	} else {
+	  	    console.log(data.valid);
+	  	    document.body.innerHTML = 'Access denied. Invalid token.';
+	  	}
+	    }).catch(error => {
+	  	document.body.innerHTML = 'Error validating token.';
+	  	console.error('Error:', error);
+	    });
+	     
+       /* const data = await response.json();
+
+        if (!data.valid) {
+            console.log("Token inválido");
+            document.body.innerHTML = 'Access denied. Invalid token.';
+            return;
+        }
+
+        console.log("Token válido:", data);
+
+        // Decodificar el token para obtener el payload
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(c =>
+            '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+        ).join(''));
+
+        const decodedToken = JSON.parse(jsonPayload);*/
+        //const recipeId = decodedToken._id;
+        //const email = decodedToken.email;
+        //localStorage.setItem('recipeId', recipeId);
+        //localStorage.setItem('email', email);
+
+        // ✅ En vez de usar loadExercises, ahora decodificamos directamente el ejercicio
+        if (rawData) {
+            try {
+                const ejercicio = JSON.parse(decodeURIComponent(rawData));
+                if (!ejercicio.codeOkForExpect) {
+                    throw new Error("El ejercicio no tiene codeOkForExpect");
+                }
+
+                await loadExercise(ejercicio); // Carga directa del ejercicio
+
+            } catch (err) {
+                console.error("Error al procesar el ejercicio desde la URL:", err);
+                document.body.innerHTML = 'Error al cargar el ejercicio.';
+                return;
+            }
+        } else {
+            console.error("No se proporcionó el parámetro 'data' con el ejercicio en la URL.");
+            document.body.innerHTML = 'No se encontró el ejercicio.';
+            return;
+        }
+    }
+    validateAndProcessToken();
+}); 
+
+/* document.addEventListener("DOMContentLoaded", async function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const rawData = urlParams.get("data"); // El ejercicio completo codificado
+
+    if (!rawData) {
+        console.error("No se proporcionó el parámetro 'data' con el ejercicio en la URL.");
+        document.body.innerHTML = 'No se encontró el ejercicio.';
+        return;
+    }
+
+    try {
+        const ejercicio = JSON.parse(decodeURIComponent(rawData));
+
+        if (!ejercicio.codeOkForExpect) {
+            throw new Error("El ejercicio no tiene codeOkForExpect");
+        }
+
+        await loadExercise(ejercicio); // Carga directa del ejercicio
+
+    } catch (err) {
+        console.error("Error al procesar el ejercicio desde la URL:", err);
+        document.body.innerHTML = 'Error al cargar el ejercicio.';
+    }
+}); */
+
+
+</script>
+
+</body>
+</html>
