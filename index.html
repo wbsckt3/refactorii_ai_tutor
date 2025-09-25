@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AI Tutor</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/8.4.0/mocha.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
@@ -198,8 +198,11 @@ async function simulateCompilation() {
     document.getElementById("console").innerHTML = "<p>Compilando...</p>";
     document.getElementById("console-mobile").innerHTML = "<p>Compilando...</p>";
     
-    // Mostrar "Compilando..." en ambas consolas
-    printToConsole("Compilando...");
+    // En móviles, mostrar el modal con "Compilando..."
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+        $('#consoleModal').modal('show');
+    }
     
     // Esperar 4-5 segundos antes de procesar el resultado
     setTimeout(() => {
