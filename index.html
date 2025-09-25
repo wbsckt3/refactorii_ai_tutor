@@ -144,7 +144,8 @@
                     <div id="console-mobile"></div>
                 </div>
                 <div class="modal-footer bg-dark">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal-close-btn">Cerrar</button>
+                    <button type="button" class="btn btn-warning" id="modal-retry-btn" onclick="resetEditorFromModal()" style="display: none;">Reintentar</button>
                 </div>
             </div>
         </div>
@@ -181,6 +182,15 @@ function printToConsole(message) {
         const consoleDiv = document.getElementById("console");
         consoleDiv.innerHTML += `<p>${message}</p>`;
     }
+}
+
+// Función para resetear el editor desde el modal
+function resetEditorFromModal() {
+    // Cerrar el modal
+    $('#consoleModal').modal('hide');
+    
+    // Resetear el editor
+    resetEditor();
 }
 
 async function simulateCompilation() {
@@ -225,6 +235,13 @@ async function simulateCompilation() {
                 document.getElementById("retry-button").style.display = "none";
                 document.getElementById("run-button").style.display = "none";
                 failCount = 0;
+                
+                // En móviles, mostrar botón "Cerrar" en el modal
+                const isMobile = window.innerWidth <= 768;
+                if (isMobile) {
+                    document.getElementById("modal-close-btn").style.display = "block";
+                    document.getElementById("modal-retry-btn").style.display = "none";
+                }
             } else {
                 // ❌ Código incorrecto
                 printToConsole(`<b>Salida obtenida:</b> ${errorSimulation}`);
@@ -243,11 +260,25 @@ async function simulateCompilation() {
                 document.getElementById("send-response-button").style.display = "none";
                 document.getElementById("retry-button").style.display = "block";
                 failCount++;
+                
+                // En móviles, mostrar botón "Reintentar" en el modal
+                const isMobile = window.innerWidth <= 768;
+                if (isMobile) {
+                    document.getElementById("modal-close-btn").style.display = "none";
+                    document.getElementById("modal-retry-btn").style.display = "block";
+                }
             }
         } catch (error) {
             console.error("Error en simulateCompilation:", error);
             printToConsole("Error en la validación del código.");
             document.getElementById("retry-button").style.display = "block";
+            
+            // En móviles, mostrar botón "Reintentar" en el modal
+            const isMobile = window.innerWidth <= 768;
+            if (isMobile) {
+                document.getElementById("modal-close-btn").style.display = "none";
+                document.getElementById("modal-retry-btn").style.display = "block";
+            }
         }
     }, 1000);
 }
