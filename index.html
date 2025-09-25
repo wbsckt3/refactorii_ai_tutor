@@ -31,6 +31,43 @@
   		font-weight: bold;
   		margin: 0 0.25rem;
 	}
+
+	/* Ocultar consola en móviles */
+	@media (max-width: 768px) {
+		#console-container {
+			display: none !important;
+		}
+	}
+
+	/* Estilos para la consola móvil */
+	#console-mobile {
+		background-color: #1e1e1e;
+		color: #ffffff;
+		font-family: 'Courier New', monospace;
+		padding: 10px;
+		border-radius: 5px;
+		min-height: 200px;
+	}
+
+	#console-mobile p {
+		margin: 5px 0;
+		padding: 2px 0;
+	}
+
+	/* Estilos para el botón Run en móviles */
+	@media (max-width: 768px) {
+		#run-button {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			z-index: 1000;
+			border-radius: 50px;
+			padding: 15px 25px;
+			font-size: 16px;
+			font-weight: bold;
+			box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+		}
+	}
     </style>
 </head>
 <body>
@@ -83,6 +120,26 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal para Consola en Móviles -->
+    <div class="modal fade" id="consoleModal" tabindex="-1" role="dialog" aria-labelledby="consoleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="consoleModalLabel">📱 Consola de Ejecución</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="background-color: #1e1e1e; color: #ffffff; font-family: 'Courier New', monospace; max-height: 400px; overflow-y: auto;">
+                    <div id="console-mobile"></div>
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
   
 <script>
 let editor;
@@ -100,12 +157,28 @@ let currentExercise;
 let failCount = 0; // Contador de fallos consecutivos
 
 function printToConsole(message) {
-    const consoleDiv = document.getElementById("console");
-    consoleDiv.innerHTML += `<p>${message}</p>`;
+    // Detectar si es móvil
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+        // En móviles, usar el modal
+        const consoleMobile = document.getElementById("console-mobile");
+        consoleMobile.innerHTML += `<p>${message}</p>`;
+        
+        // Mostrar el modal automáticamente
+        $('#consoleModal').modal('show');
+    } else {
+        // En escritorio, usar la consola normal
+        const consoleDiv = document.getElementById("console");
+        consoleDiv.innerHTML += `<p>${message}</p>`;
+    }
 }
 
 async function simulateCompilation() {
+    // Limpiar ambas consolas
     document.getElementById("console").innerHTML = "<p>Compilando...</p>";
+    document.getElementById("console-mobile").innerHTML = "<p>Compilando...</p>";
+    
     setTimeout(() => {
         const userCode = editor.getValue();
 
@@ -208,6 +281,7 @@ function analyzeCodeDifferences(userCode, correctCode) {
 function resetEditor() {
     editor.setValue(currentExercise.codeKoToRefactor);
     document.getElementById("console").innerHTML = "";
+    document.getElementById("console-mobile").innerHTML = "";
     document.getElementById("retry-button").style.display = "none";
     document.getElementById("run-button").style.display = "block";
     failCount = 0;
@@ -238,6 +312,22 @@ async function loadExercise(exercise) {
         throw error;
     }
 }
+
+// Función para manejar el responsive
+function handleResponsive() {
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+        // En móviles, ocultar consola normal
+        document.getElementById("console-container").style.display = "none";
+    } else {
+        // En escritorio, mostrar consola normal
+        document.getElementById("console-container").style.display = "block";
+    }
+}
+
+// Escuchar cambios de tamaño de ventana
+window.addEventListener('resize', handleResponsive);
 
 document.addEventListener("DOMContentLoaded", async function () {
     const urlParams = new URLSearchParams(window.location.search);
@@ -325,6 +415,9 @@ console.log(token)
         }
     }
     validateAndProcessToken();
+    
+    // Inicializar el responsive
+    handleResponsive();
 }); 
 
 /* document.addEventListener("DOMContentLoaded", async function () {
