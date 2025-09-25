@@ -194,10 +194,14 @@ function resetEditorFromModal() {
 }
 
 async function simulateCompilation() {
-    // Limpiar ambas consolas
+    // Limpiar ambas consolas y mostrar "Compilando..."
     document.getElementById("console").innerHTML = "<p>Compilando...</p>";
     document.getElementById("console-mobile").innerHTML = "<p>Compilando...</p>";
     
+    // Mostrar "Compilando..." en ambas consolas
+    printToConsole("Compilando...");
+    
+    // Esperar 4-5 segundos antes de procesar el resultado
     setTimeout(() => {
         const userCode = editor.getValue();
 
@@ -280,7 +284,7 @@ async function simulateCompilation() {
                 document.getElementById("modal-retry-btn").style.display = "block";
             }
         }
-    }, 1000);
+    }, 4500); // 4.5 segundos de espera para simular compilación
 }
 
 // ✅ Función para analizar diferencias entre códigos
