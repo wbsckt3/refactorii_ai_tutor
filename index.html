@@ -35,6 +35,24 @@
     #console-container{
         background-color: #000000;
     }
+
+    /* Asegurar que el botón Run mantenga su posición original */
+    #run-button {
+        position: static !important;
+        bottom: auto !important;
+        right: auto !important;
+        z-index: auto !important;
+        border-radius: 0 !important;
+        padding: 10px 20px !important;
+        font-size: 14px !important;
+        font-weight: normal !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        width: 100% !important;
+        background-color: #007bff !important;
+        color: white !important;
+        border: none !important;
+    }
 	/* Ocultar consola en móviles */
 	@media (max-width: 768px) {
 		#console-container {
