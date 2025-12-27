@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔄 Traza Completa del Flujo - Refactorii</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.2em;
+        }
+
+        .mindmap {
+            position: relative;
+            min-height: 800px;
+            padding: 40px;
+        }
+
+        .flow-section {
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .section-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .section-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .section-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .section-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+
+        .node {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid;
+            position: relative;
+        }
+
+        .node:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .node.frontend { border-left-color: #667eea; }
+        .node.backend { border-left-color: #f5576c; }
+        .node.github { border-left-color: #00f2fe; }
+        .node.script { border-left-color: #38f9d7; }
+
+        .node-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .node-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        .node-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .node-location {
+            font-size: 0.85em;
+            color: #666;
+            margin-left: auto;
+            background: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .node-actions {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .node-actions li {
+            margin: 5px 0;
+            color: #555;
+            list-style: none;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .node-actions li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .arrow {
+            text-align: center;
+            font-size: 2em;
+            color: #667eea;
+            margin: 20px 0;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+        }
+
+        .code-block .method { color: #66d9ef; }
+        .code-block .string { color: #a6e22e; }
+        .code-block .number { color: #ae81ff; }
+
+        .summary {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .summary h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .summary-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .summary-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .summary-card li {
+            padding: 5px 0;
+            color: #555;
+        }
+
+        .summary-card li:before {
+            content: "✓ ";
+            color: #43e97b;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .token-info {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .token-info strong {
+            color: #856404;
+        }
+
+        .debug-points {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .debug-points strong {
+            color: #0d47a1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .mindmap {
+                padding: 20px;
+            }
+        }
+
+        .expandable {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .expandable:hover {
+            opacity: 0.8;
+        }
+
+        .details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .details.expanded {
+            max-height: 1000px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔄 Traza Completa del Flujo</h1>
+        <p class="subtitle">Frontend → Backend → GitHub Actions → MongoDB</p>
+
+        <div class="mindmap">
+            <!-- SECCIÓN 1: FRONTEND -->
+            <div class="flow-section">
+                <div class="section-title section-1">1. FRONTEND: dynamic-route-editor.html</div>
+                
+                <div class="node frontend">
+                    <div class="node-header">
+                        <span class="node-icon">👤</span>
+                        <span class="node-title">Usuario hace clic en "Procesar con IA"</span>
+                        <span class="node-location">Línea ~466</span>
+                    </div>
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <div class="node frontend">
+                    <div class="node-header">
+                        <span class="node-icon">⚙️</span>
+                        <span class="node-title">Función: generarRuta()</span>
+                        <span class="node-location">Línea ~880-897</span>
+                    </div>
+                    <ul class="node-actions">
+                        <li>Crea objeto rutaData con datos del canvas</li>
+                        <li>Guarda en localStorage</li>
+                        <li>Configura Socket.IO listeners</li>
+                        <li>Llama a: saveRoutes()</li>
+                    </ul>
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <div class="node frontend">
+                    <div class="node-header">
+                        <span class="node-icon">💾</span>
+                        <span class="node-title">Función: saveRoutes()</span>
+                        <span class="node-location">Línea 1278-1360</span>
+                    </div>
+                    <ul class="node-actions">
+                        <li>Lee formData del localStorage (email del usuario)</li>
+                        <li>Lee rutas guardadas del localStorage</li>
+                        <li>Obtiene la última ruta creada</li>
+                        <li>Valida estructura (ID, datos)</li>
+                        <li>Construye URL del endpoint</li>
+                    </ul>
+                    <div class="code-block">
+                        <span class="method">POST</span> https://www.refactorii.com/api/tenant/workflow/<span class="string">saveLearningPathsWithOllama</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 2: BACKEND -->
+            <div class="flow-section">
+                <div class="section-title section-2">2. BACKEND: workflow.controller.js</div>
+                
+                <div class="node backend">
+                    <div class="node-header">
+                        <span class="node-icon">🔌</span>
+                        <span class="node-title">Endpoint: saveLearningPathsWithOllama</span>
+                        <span class="node-location">Línea 541-736</span>
+                    </div>
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <div class="node backend">
+                    <div class="node-header">
+                        <span class="node-icon">🔍</span>
+                        <span class="node-title">Paso 0: ensureMongoConnection()</span>
+                        <span class="node-location">Línea 544</span>
+                    </div>
+                    <ul class="node-actions">
+                        <li>Verifica conexión a MongoDB</li>
+                        <li>Reconecta si es necesario</li>
+                    </ul>
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <div class="node backend">
+                    <div class="node-header">
+                        <span class="node-icon">✅</span>
+                        <span class="node-title">Paso 1: Validaciones</span>
+                        <span class="node-location">Línea 546-565</span>
+                    </div>
+                    <ul class="node-actions">
+                        <li>Valida userEmail del header</li>
+                        <li>Valida newLearningPath del body</li>
+                        <li>Valida GH_PAT (token de GitHub)</li>
+                    </ul>
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <div class="node backend">
+                    <div class="node-header">
+                        <span class="node-icon">👥</span>
+                        <span class="node-title">Paso 2: Buscar Usuario</span>
+                        <span class="node-location">Línea 568-576</span>
+                    </div>
+                    <div class="code-block">
+                        GoogleSigninUser.<span class="method">findOne</span>({ Email: userEmail })
+                    </div>
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <div class="node backend">
+                    <div class="node-header">
+                        <span class="node-icon">🏢</span>
+                        <span class="node-title">Paso 3: Buscar Compañías</span>
+                        <span class="node-location">Línea 579-585</span>
+                    </div>
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <div class="node backend">
+                    <div class="node-header">
+                        <span class="node-icon">💾</span>
+                        <span class="node-title">Paso 4: Guardar Ruta en MongoDB</span>
+                        <span class="node-location">Línea 592-617</span>
+                    </div>
+                    <div class="code-block">
+                        GoogleSigninUser.<span class="method">findOneAndUpdate</span>(<br>
+                        &nbsp;&nbsp;{ Email: userId },<br>
+                        &nbsp;&nbsp;{ $push: { learningPaths: newLearningPath } }
+                        )
+                    </div>
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <div class="node backend">
+                    <div class="node-header">
+                        <span class="node-icon">🤖</span>
+                        <span class="node-title">Paso 5: Crear Prompt para IA</span>
+                        <span class="node-location">Línea 619-647</span>
+                    </div>
+                    <ul class="node-actions">
+                        <li>Construye prompt con: Tema, Lenguaje, Nivel, Propósito</li>
+                        <li>Formato: JSON array con estructura de ejercicios</li>
+                    </ul>
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <div class="node backend">
+                    <div class="node-header">
+                        <span class="node-icon">🚀</span>
+                        <span class="node-title">Paso 6: Disparar GitHub Actions</span>
+                        <span class="node-location">Línea 659-702</span>
+                    </div>
+                    <div class="code-block">
+                        <span class="method">POST</span> https://api.github.com/repos/wbsckt3/<br>
+                        &nbsp;&nbsp;refactorii-learning-map-drawflow__server-js__this__deep-seek__mongoDB/<br>
+                        &nbsp;&nbsp;dispatches<br><br>
+                        Headers:<br>
+                        &nbsp;&nbsp;Authorization: Bearer <span class="string">${GH_PAT}</span><br><br>
+                        Body:<br>
+                        &nbsp;&nbsp;{<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"event_type": <span class="string">"generate_ai_exercises"</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"client_payload": { ... }<br>
+                        &nbsp;&nbsp;}
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 3: GITHUB ACTIONS -->
+            <div class="flow-section">
+                <div class="section-title section-3">3. GITHUB ACTIONS: generate-ai-test.yml</div>
+                
+                <div class="node github">
+                    <div class="node-header">
+                        <span class="node-icon">⚡</span>
+                        <span class="node-title">Trigger: repository_dispatch</span>
+                        <span class="node-location">Línea 20-21</span>
+                    </div>
+                    <ul class="node-actions">
+                        <li>Event type: generate_ai_exercises</li>
+                        <li>Se activa automáticamente</li>
+                    </ul>
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <div class="node github">
+                    <div class="node-header">
+                        <span class="node-icon">📦</span>
+                        <span class="node-title">Step 1: Checkout código</span>
+                        <span class="node-location">Línea 32-33</span>
+                    </div>
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <div class="node github">
+                    <div class="node-header">
+                        <span class="node-icon">⚙️</span>
+                        <span class="node-title">Step 2: Configurar Node.js</span>
+                        <span class="node-location">Línea 35-40</span>
+                    </div>
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <div class="node github">
+                    <div class="node-header">
+                        <span class="node-icon">📥</span>
+                        <span class="node-title">Step 3: Instalar dependencias</span>
+                        <span class="node-location">Línea 42-45</span>
+                    </div>
+                    <div class="code-block">npm install</div>
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <div class="node github">
+                    <div class="node-header">
+                        <span class="node-icon">🤖</span>
+                        <span class="node-title">Step 4: Generar ejercicios con GitHub Models</span>
+                        <span class="node-location">Línea 47-60</span>
+                    </div>
+                    <ul class="node-actions">
+                        <li>MONGO_URI: ${{ secrets.MONGO_URI }}</li>
+                        <li>GITHUB_TOKEN: ${{ github.token }}</li>
+                        <li>GITHUB_MODEL: gpt-4o-mini</li>
+                        <li>USER_ID, PATH_ID, IA_PROMPT desde client_payload</li>
+                    </ul>
+                    <div class="code-block">node generateExercisesFromGitHub.js</div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 4: SCRIPT -->
+            <div class="flow-section">
+                <div class="section-title section-4">4. SCRIPT: generateExercisesFromGitHub.js</div>
+                
+                <div class="node script">
+                    <div class="node-header">
+                        <span class="node-icon">🔌</span>
+                        <span class="node-title">Paso 1: Conectar a MongoDB</span>
+                        <span class="node-location">Línea 14-22</span>
+                    </div>
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <div class="node script">
+                    <div class="node-header">
+                        <span class="node-icon">🔍</span>
+                        <span class="node-title">Paso 2: Buscar Usuario y Ruta</span>
+                        <span class="node-location">Línea 88-100</span>
+                    </div>
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <div class="node script">
+                    <div class="node-header">
+                        <span class="node-icon">🤖</span>
+                        <span class="node-title">Paso 3: Llamar a GitHub Models API</span>
+                        <span class="node-location">Línea 25-79</span>
+                    </div>
+                    <div class="code-block">
+                        <span class="method">POST</span> https://models.inference.ai.azure.com/chat/completions<br><br>
+                        Headers:<br>
+                        &nbsp;&nbsp;Authorization: Bearer <span class="string">${GITHUB_TOKEN}</span><br><br>
+                        Body:<br>
+                        &nbsp;&nbsp;{<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"model": <span class="string">"gpt-4o-mini"</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"messages": [...],<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"response_format": { "type": <span class="string">"json_object"</span> }<br>
+                        &nbsp;&nbsp;}
+                    </div>
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <div class="node script">
+                    <div class="node-header">
+                        <span class="node-icon">⚙️</span>
+                        <span class="node-title">Paso 4: Procesar Respuesta de IA</span>
+                        <span class="node-location">Línea ~100-200</span>
+                    </div>
+                    <ul class="node-actions">
+                        <li>Parsea JSON de la respuesta</li>
+                        <li>Valida estructura de ejercicios</li>
+                        <li>Formatea ejercicios según estructura esperada</li>
+                    </ul>
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <div class="node script">
+                    <div class="node-header">
+                        <span class="node-icon">💾</span>
+                        <span class="node-title">Paso 5: Guardar Ejercicios en MongoDB</span>
+                        <span class="node-location">Línea ~200-250</span>
+                    </div>
+                    <div class="code-block">
+                        GoogleSigninUser.<span class="method">findOneAndUpdate</span>(<br>
+                        &nbsp;&nbsp;{ Email: userId },<br>
+                        &nbsp;&nbsp;{ $set: { "learningPaths.$[elem].exercises": ejerciciosGenerados } }
+                        )
+                    </div>
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <div class="node script">
+                    <div class="node-header">
+                        <span class="node-icon">📢</span>
+                        <span class="node-title">Paso 6: Notificar vía Socket.IO</span>
+                    </div>
+                    <ul class="node-actions">
+                        <li>Emite evento 'exercises_ready' con pathId</li>
+                        <li>Frontend recibe notificación y actualiza UI</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESUMEN -->
+        <div class="summary">
+            <h2>📋 Resumen de Archivos y Funciones</h2>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h3>1. Frontend</h3>
+                    <ul>
+                        <li>Archivo: dynamic-route-editor.html</li>
+                        <li>Función: saveRoutes() (línea 1278)</li>
+                        <li>Trigger: Botón "Procesar con IA"</li>
+                    </ul>
+                </div>
+                <div class="summary-card">
+                    <h3>2. Backend</h3>
+                    <ul>
+                        <li>Archivo: workflow.controller.js</li>
+                        <li>Función: saveLearningPathsWithOllama</li>
+                        <li>Endpoint: /api/tenant/workflow/saveLearningPathsWithOllama</li>
+                    </ul>
+                </div>
+                <div class="summary-card">
+                    <h3>3. GitHub Actions</h3>
+                    <ul>
+                        <li>Archivo: generate-ai-test.yml</li>
+                        <li>Trigger: repository_dispatch</li>
+                        <li>Job: generate-exercises</li>
+                    </ul>
+                </div>
+                <div class="summary-card">
+                    <h3>4. Script</h3>
+                    <ul>
+                        <li>Archivo: generateExercisesFromGitHub.js</li>
+                        <li>Función: callGitHubModels()</li>
+                        <li>Endpoint: models.inference.ai.azure.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="token-info">
+                <h3>🔑 Tokens y Configuración</h3>
+                <p><strong>GH_PAT:</strong> Token del backend para disparar GitHub Actions (workflow.controller.js línea 8)</p>
+                <p><strong>GITHUB_TOKEN:</strong> Token automático de GitHub Actions para llamar a GitHub Models (github.token)</p>
+            </div>
+
+            <div class="debug-points">
+                <h3>🎯 Puntos de Debug</h3>
+                <p><strong>Frontend:</strong> Consola del navegador (F12)</p>
+                <p><strong>Backend:</strong> Logs del servidor (PM2 logs)</p>
+                <p><strong>GitHub Actions:</strong> https://github.com/wbsckt3/refactorii-learning-map-drawflow__server-js__this__deep-seek__mongoDB/actions</p>
+                <p><strong>MongoDB:</strong> Colección googlesigninusers → learningPaths → exercises</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
