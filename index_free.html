@@ -25,37 +25,264 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/seti.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.css">
     <script src="guardar_resultados.js"></script>
+    <style>
+        :root {
+            --primary: #007bff;
+            --surface: #ececee;
+            --card: #ffffff;
+            --text: #212529;
+            --muted: #6c757d;
+        }
+
+        body {
+            display: block !important;
+            height: auto !important;
+            min-height: 100vh;
+            background: var(--surface);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .site-header {
+            background: var(--primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+            padding: 12px 18px;
+            color: #fff;
+        }
+
+        .site-header h2 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        #editor-container,
+        #app-container {
+            width: 100% !important;
+            height: auto !important;
+            overflow: visible !important;
+        }
+
+        #editor-container {
+            background: var(--surface);
+        }
+
+        .code-panel {
+            background: #1e1e1e;
+        }
+
+        .code-panel .CodeMirror {
+            height: auto !important;
+            min-height: 140px;
+            max-height: 220px;
+            background: #1e1e1e !important;
+            padding: 12px 0 !important;
+        }
+
+        .editor-toolbar {
+            background: var(--surface);
+            padding: 12px 16px 0;
+        }
+
+        #run-button,
+        #send-response-button,
+        #retry-button {
+            display: block;
+            width: 100%;
+            margin: 0 0 12px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 123, 255, 0.25);
+        }
+
+        #send-response-button {
+            background: #28a745;
+            color: #fff;
+        }
+
+        #retry-button {
+            background: #6c757d;
+            color: #fff;
+        }
+
+        #console-container {
+            display: none;
+            width: calc(100% - 32px) !important;
+            height: auto !important;
+            margin: 0 16px 12px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #console-container.is-visible {
+            display: block;
+        }
+
+        #console {
+            padding: 12px 16px;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        #console p {
+            margin: 0 0 8px;
+        }
+
+        #console p:last-child {
+            margin-bottom: 0;
+        }
+
+        #mocha-container {
+            display: none !important;
+        }
+
+        #app-container {
+            padding: 0 !important;
+            background: var(--surface) !important;
+        }
+
+        #app {
+            flex: none !important;
+            margin: 0 !important;
+            padding: 18px 16px 8px;
+        }
+
+        .language-tag {
+            display: inline-block;
+            margin: 0 0 10px;
+            padding: 4px 10px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            border-radius: 999px;
+        }
+
+        #h5_title {
+            display: block;
+            margin: 0 0 14px !important;
+            font-size: 1.1rem;
+            line-height: 1.35;
+            font-weight: 700 !important;
+            color: var(--text);
+        }
+
+        #challenge {
+            margin-bottom: 14px;
+            padding: 14px;
+            background: var(--card);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        #modify-message {
+            margin: 0 0 16px;
+            padding: 12px 14px;
+            background: #f8f9fa;
+            border: 1px solid #e2e6ea;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--muted);
+        }
+
+        #app-footer {
+            height: auto !important;
+            margin: 0 !important;
+            padding: 14px 16px 20px;
+            text-align: center;
+            font-size: 0.75rem;
+            line-height: 1.4;
+            color: var(--muted);
+        }
+
+        #app-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        @media (min-width: 769px) {
+            body {
+                display: flex !important;
+                flex-wrap: wrap;
+                height: 100vh !important;
+            }
+
+            #editor-container,
+            #app-container {
+                width: 50% !important;
+                height: 100% !important;
+                overflow-y: auto !important;
+            }
+
+            .code-panel {
+                flex: 1;
+                min-height: 0;
+            }
+
+            .code-panel .CodeMirror {
+                min-height: 0;
+                max-height: none;
+                height: 100% !important;
+            }
+
+            .editor-toolbar {
+                padding: 10px 12px;
+            }
+
+            #run-button,
+            #send-response-button,
+            #retry-button {
+                width: auto;
+                margin: 0;
+            }
+
+            #console-container.is-visible {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 50% !important;
+                max-height: 30vh;
+                overflow-y: auto;
+                z-index: 10;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="editor-container">
-	<header style="width: 100%;
-	    background: #007bff;
-	    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-	    background:#007bff;
-	    padding:5px;
-	    color: #fff;
-	    font-weight: bold;
-	    padding-left: 19px;">
-           <h2>Refactorii 🚀</h2>
-    	</header>
-        <textarea id="code-editor"></textarea>
-        <button id="run-button" onclick="simulateCompilation()">Run</button>  
+        <header class="site-header">
+            <h2>Refactorii 🚀</h2>
+        </header>
+        <div class="code-panel">
+            <textarea id="code-editor"></textarea>
+        </div>
+        <div class="editor-toolbar">
+            <button id="run-button" onclick="simulateCompilation()">Run</button>
+        </div>
+        <div id="console-container"><div id="console"></div></div>
     </div>
     <div id="app-container">
         <div id="app">
-	    <h4 id="h4_language" style="padding-bottom: 16px;"></h4>
-	    <h5 id="h5_title"></h5>
-	    <div id="challenge"></div>	
+            <span id="h4_language" class="language-tag"></span>
+            <h5 id="h5_title"></h5>
+            <div id="challenge"></div>
             <p id="modify-message"></p>
-	    <button id="send-response-button" onClick="guardarResultados()" style="display: none;">Guardar resultados</button>
-	    <button id="retry-button" onClick="resetEditor()" style="display: none;">Reintentar</button>  
+            <button id="send-response-button" onClick="guardarResultados()" style="display: none;">Guardar resultados</button>
+            <button id="retry-button" onClick="resetEditor()" style="display: none;">Reintentar</button>
         </div>
-	<!-- Footer -->
         <footer id="app-footer">
-           © 2025 RefactorII AI Tutor | <a href="https://www.refactorii.com">mas cursos?</a>
+            © 2025 RefactorII AI Tutor | <a href="https://www.refactorii.com">mas cursos?</a>
         </footer>
     </div>
-    <div id="console-container"><div id="console"></div></div>
     <div id="mocha-container"><div id="mocha"></div></div>
     <script>mocha.setup('bdd');</script>
 
@@ -106,10 +333,14 @@ let failCount = 0; // Contador de fallos consecutivos
 
 function printToConsole(message) {
     const consoleDiv = document.getElementById("console");
+    const consoleContainer = document.getElementById("console-container");
+    consoleContainer.classList.add("is-visible");
     consoleDiv.innerHTML += `<p>${message}</p>`;
 }
 
 async function simulateCompilation() {
+    const consoleContainer = document.getElementById("console-container");
+    consoleContainer.classList.add("is-visible");
     document.getElementById("console").innerHTML = "<p>Compilando...</p>";
     setTimeout(async () => {
         const userCode = editor.getValue();
@@ -180,6 +411,7 @@ async function simulateCompilation() {
 function resetEditor() {
     editor.setValue(currentExercise.codeKoToRefactor);
     document.getElementById("console").innerHTML = "";
+    document.getElementById("console-container").classList.remove("is-visible");
     document.getElementById("retry-button").style.display = "none";
     document.getElementById("run-button").style.display = "block";
     failCount = 0;
