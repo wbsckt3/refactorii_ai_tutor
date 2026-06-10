@@ -319,6 +319,51 @@ const LANGUAGE_MODES = {
     JavaScript: "javascript"
 };
 
+function getExercisesJsonUrl(exercisesPackage, exercisesBase) {
+    const fileName = `${exercisesPackage}.json`;
+    if (exercisesBase) {
+        return new URL(fileName, exercisesBase.endsWith("/") ? exercisesBase : `${exercisesBase}/`).href;
+    }
+    return new URL(fileName, window.location.href).href;
+}
+
+function showExerciseLoadError(message) {
+    document.getElementById("h4_language").innerText = "Error";
+    document.getElementById("h5_title").innerText = "No se pudo cargar el ejercicio";
+    document.getElementById("challenge").innerText = message;
+    document.getElementById("modify-message").innerText =
+        "Verifica que el archivo .json esté publicado en la misma carpeta que index_free.html.";
+    document.getElementById("run-button").disabled = true;
+}
+
+async function fetchExercisesJson(exercisesPackage, exercisesBase) {
+    const jsonUrl = getExercisesJsonUrl(exercisesPackage, exercisesBase);
+    const response = await fetch(jsonUrl, { cache: "no-store" });
+
+    if (!response.ok) {
+        throw new Error(`No se pudo cargar ${exercisesPackage}.json (HTTP ${response.status}) desde ${jsonUrl}`);
+    }
+
+    const rawText = (await response.text()).trim();
+    const contentType = (response.headers.get("content-type") || "").toLowerCase();
+
+    if (rawText.startsWith("<") || contentType.includes("text/html")) {
+        throw new Error(
+            `El servidor devolvió HTML en lugar de JSON para ${exercisesPackage}.json. ` +
+            `Sube el archivo junto a index_free.html o usa exercises_base en la URL.`
+        );
+    }
+
+    try {
+        return JSON.parse(rawText);
+    } catch (parseError) {
+        throw new Error(
+            `${exercisesPackage}.json tiene JSON inválido (${parseError.message}). ` +
+            `Revisa comas finales, comillas y que el archivo no esté corrupto.`
+        );
+    }
+}
+
 // Configuración de CodeMirror (el mode se ajusta al cargar el ejercicio)
 editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
     lineNumbers: true,
@@ -444,41 +489,42 @@ async function loadExercise(exercise) {
     }
 }
 	
-async function loadExercises(exerciseId, exercises_package) {
+async function loadExercises(exerciseId, exercises_package, exercises_base) {
     try {
-        const response = await fetch(`${exercises_package}.json`);
-        if (!response.ok) throw new Error(`Error al cargar JSON: ${response.status}`);
-        
-        const exercises = await response.json();
-        const selectedExercise = exercises.find(ex => String(ex.id) === String(exerciseId));
-        
-        if (!selectedExercise) {
-            throw new Error(`Ejercicio con ID ${exerciseId} no encontrado`);
+        if (!exercises_package) {
+            throw new Error("Falta el parámetro exercises_package en la URL.");
         }
 
-        // Validar estructura del ejercicio seleccionado
+        const exercises = await fetchExercisesJson(exercises_package, exercises_base);
+        const selectedExercise = exercises.find(ex => String(ex.id) === String(exerciseId));
+
+        if (!selectedExercise) {
+            throw new Error(`Ejercicio con ID ${exerciseId} no encontrado en ${exercises_package}.json`);
+        }
+
         if (!selectedExercise.codeOkForExpect) {
             throw new Error("El ejercicio no tiene codeOkForExpect");
         }
-	    
-        await loadExercise(selectedExercise);
 
+        await loadExercise(selectedExercise);
     } catch (error) {
         console.error("Error crítico en loadExercises:", error);
-        localStorage.removeItem('testExpectations');
-        throw error;
+        localStorage.removeItem("testExpectations");
+        showExerciseLoadError(error.message);
     }
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const exerciseId = urlParams.get("exercise");
-	const exercises_package = urlParams.get("exercises_package");
-        if (exerciseId) {
-           loadExercises(exerciseId, exercises_package);
-        } else {
-            console.error("No se proporcionó un ID de ejercicio en la URL.");
-        }
+    const urlParams = new URLSearchParams(window.location.search);
+    const exerciseId = urlParams.get("exercise");
+    const exercises_package = urlParams.get("exercises_package");
+    const exercises_base = urlParams.get("exercises_base");
+
+    if (exerciseId) {
+        loadExercises(exerciseId, exercises_package, exercises_base);
+    } else {
+        showExerciseLoadError("No se proporcionó el parámetro exercise en la URL.");
+    }
 });
 
 </script>

@@ -1,0 +1,122 @@
+[
+    {
+        "id": 1,
+        "title": "❌ Exercise 1: El engañoso 'None' 🕳️",
+        "concept": "None en Python representa la ausencia de valor (como null en otros lenguajes). Es un valor falsy. ¡Cuidado al usarlo en condicionales o operaciones matemáticas!",
+        "description": "Corrige el código para evitar el error al sumar un número con None.",
+        "language": "Python",
+        "codeKoToRefactor": "resultado = None\nif resultado:\n    print(resultado + 5)",
+        "codeOkForExpect": "resultado = None\nif resultado is not None:\n    print(resultado + 5)  # ✅ Verifica primero\nelse:\n    print('No hay resultado')",
+        "expectedConsoleOutput": "No hay resultado",
+        "errorSimulation": "❌ TypeError: unsupported operand type(s) for +: 'NoneType' and 'int'",
+        "successMessage": "🎉 ¡Correcto! None debe verificarse con 'is' o 'is not'. ⚡"
+    },
+    {
+        "id": 2,
+        "title": "🔍 Exercise 2: La cadena vacía que no muestra nada 🧩",
+        "concept": "Una cadena vacía ('') es falsy. Al usarla en condicionales, se evalúa como False. ¡No confundir con cadenas con espacios!",
+        "description": "Corrige la condición para detectar cadenas vacías.",
+        "language": "Python",
+        "codeKoToRefactor": "nombre = ''\nif nombre:\n    print('Hola, ' + nombre)\nelse:\n    print('Nombre no válido')",
+        "codeOkForExpect": "nombre = ''\nif not nombre:\n    print('Nombre no válido')  # ✅ Falsy detectado\nelse:\n    print('Hola, ' + nombre)",
+        "expectedConsoleOutput": "Nombre no válido",
+        "errorSimulation": "❌ Mensaje incorrecto: el código original no detecta la cadena vacía.",
+        "successMessage": "✨ ¡Bien! Las cadenas vacías son falsy. Usa 'if not' para detectarlas."
+    },
+    {
+        "id": 3,
+        "title": "⚖️ Exercise 3: El cero que miente 🎭",
+        "concept": "El número 0 (int, float, complex) es falsy. Útil para validar entradas numéricas, pero peligroso en divisiones.",
+        "description": "Evita la división por cero usando una condición falsy.",
+        "language": "Python",
+        "codeKoToRefactor": "divisor = 0\nif divisor:\n    print(10 / divisor)\nelse:\n    print('Divisor no puede ser cero')",
+        "codeOkForExpect": "divisor = 0\nif not divisor:\n    print('Divisor no puede ser cero')  # ✅ Detecta 0\nelse:\n    print(10 / divisor)",
+        "expectedConsoleOutput": "Divisor no puede ser cero",
+        "errorSimulation": "❌ ZeroDivisionError: division by zero",
+        "successMessage": "🚀 ¡Perfecto! El 0 es falsy, ideal para prevenir errores matemáticos."
+    },
+    {
+        "id": 4,
+        "title": "📦 Exercise 4: La lista vacía que no itera 🔄",
+        "concept": "Una lista vacía ([]) es falsy. Al iterar sobre ella, el bucle no se ejecutará. ¡Verifica si tiene elementos!",
+        "description": "Corrige el código para manejar listas vacías.",
+        "language": "Python",
+        "codeKoToRefactor": "productos = []\nfor p in productos:\n    print(p)\nprint('Fin')",
+        "codeOkForExpect": "productos = []\nif productos:\n    for p in productos:\n        print(p)\nelse:\n    print('No hay productos')  # ✅\nprint('Fin')",
+        "expectedConsoleOutput": "No hay productos\nFin",
+        "errorSimulation": "❌ Salida incorrecta: el bucle no muestra advertencia para listas vacías.",
+        "successMessage": "🏆 ¡Excelente! Las listas vacías se manejan con condicionales falsy."
+    },
+    {
+        "id": 5,
+        "title": "🗝️ Exercise 5: Diccionario vacío, ¿claves inexistentes? 🧳",
+        "concept": "Un diccionario vacío ({}) es falsy. Al acceder a claves inexistentes, genera KeyError. Usa 'if' o métodos como .get() para evitarlo.",
+        "description": "Verifica si el diccionario está vacío antes de acceder a una clave.",
+        "language": "Python",
+        "codeKoToRefactor": "usuario = {}\nprint(usuario['nombre'])",
+        "codeOkForExpect": "usuario = {}\nif usuario:\n    print(usuario['nombre'])  # ✅\nelse:\n    print('Usuario no registrado')",
+        "expectedConsoleOutput": "Usuario no registrado",
+        "errorSimulation": "❌ KeyError: 'nombre'",
+        "successMessage": "🔑 ¡Sí! Los diccionarios vacíos son falsy. ¡Clave evitada!"
+    },
+    {
+        "id": 6,
+        "title": "🎭 Exercise 6: El booleano False que confunde ⚠️",
+        "concept": "El valor booleano False es falsy por definición. No confundir con cadenas 'False' o otros valores que se evalúen como True.",
+        "description": "Corrige la condición para detectar explícitamente False.",
+        "language": "Python",
+        "codeKoToRefactor": "activo = False\nif activo:\n    print('Sistema activado')\nelse:\n    print('Sistema en standby')",
+        "codeOkForExpect": "activo = False\nif not activo:  # ✅\n    print('Sistema en standby')\nelse:\n    print('Sistema activado')",
+        "expectedConsoleOutput": "Sistema en standby",
+        "errorSimulation": "❌ Mensaje incorrecto: el código original no maneja explícitamente False.",
+        "successMessage": "💡 ¡Correcto! False es falsy, pero verifica el contexto para evitar confusiones."
+    },
+    {
+        "id": 7,
+        "title": "📜 Exercise 7: Tupla vacía, ¿elementos invisibles? 👻",
+        "concept": "Una tupla vacía (()) es falsy. Al igual que las listas, verifica si tiene elementos antes de operar con ella.",
+        "description": "Evita el error al intentar acceder al primer elemento de una tupla vacía.",
+        "language": "Python",
+        "codeKoToRefactor": "coordenadas = ()\nprint(coordenadas[0])",
+        "codeOkForExpect": "coordenadas = ()\nif coordenadas:\n    print(coordenadas[0])  # ✅\nelse:\n    print('No hay coordenadas')",
+        "expectedConsoleOutput": "No hay coordenadas",
+        "errorSimulation": "❌ IndexError: tuple index out of range",
+        "successMessage": "🌍 ¡Bravo! Las tuplas vacías son falsy, igual que las listas."
+    },
+    {
+        "id": 8,
+        "title": "🌀 Exercise 8: range(0), el iterable que no itera 🔄",
+        "concept": "range(0) genera una secuencia vacía (falsy). Un bucle for sobre él no se ejecutará. ¡Valida antes de iterar!",
+        "description": "Corrige el código para manejar rangos vacíos.",
+        "language": "Python",
+        "codeKoToRefactor": "for i in range(0):\n    print(i)\nprint('Fin')",
+        "codeOkForExpect": "rango = range(0)\nif rango:\n    for i in rango:\n        print(i)\nelse:\n    print('Rango vacío')  # ✅\nprint('Fin')",
+        "expectedConsoleOutput": "Rango vacío\nFin",
+        "errorSimulation": "❌ Salida incorrecta: el bucle no muestra advertencia para rangos vacíos.",
+        "successMessage": "⏱️ ¡Perfecto! range(0) es falsy y debe validarse."
+    },
+    {
+        "id": 9,
+        "title": "🧪 Exercise 9: set() y frozenset(), colecciones vacías 🧊",
+        "concept": "Un set vacío (set()) y frozenset() son falsy. Al igual que otras colecciones, verifica si tienen elementos.",
+        "description": "Corrige el código para detectar conjuntos vacíos.",
+        "language": "Python",
+        "codeKoToRefactor": "numeros = set()\nprint(numeros.pop())",
+        "codeOkForExpect": "numeros = set()\nif numeros:\n    print(numeros.pop())  # ✅\nelse:\n    print('Conjunto vacío')",
+        "expectedConsoleOutput": "Conjunto vacío",
+        "errorSimulation": "❌ KeyError: 'pop from an empty set'",
+        "successMessage": "🎯 ¡Excelente! Los conjuntos vacíos son falsy. ¡Error evitado!"
+    },
+    {
+        "id": 10,
+        "title": "🎲 Exercise 10: Combinando múltiples valores falsy 🧩",
+        "concept": "Los valores falsy pueden combinarse (ej: 0 y ''). Usa condiciones específicas para evitar falsos positivos.",
+        "description": "Corrige la condición para detectar solo cadenas vacías, no otros valores falsy.",
+        "language": "Python",
+        "codeKoToRefactor": "entrada = 0\nif not entrada:\n    print('Entrada inválida')",
+        "codeOkForExpect": "entrada = 0\nif entrada == '':  # ✅ Comparación explícita\n    print('Cadena vacía')\nelif not entrada:\n    print('Otro valor falsy')",
+        "expectedConsoleOutput": "Otro valor falsy",
+        "errorSimulation": "❌ Mensaje genérico: no distingue entre tipos de falsy.",
+        "successMessage": "🏅 ¡Genial! Ahora distingues entre diferentes tipos de falsy."
+    }
+]
