@@ -1,15 +1,18 @@
  [   {
         "id": 1,
         "title": "❌ Exercise 1: El engañoso 'None' 🕳️",
-        "concept": "None en Python representa la ausencia de valor (como null en otros lenguajes). Es un valor falsy. ¡Cuidado al usarlo en condicionales o operaciones matemáticas!",
+        "concept": "None representa la ausencia de valor. No puede utilizarse en operaciones matemáticas sin validación previa.",
         "description": "Corrige el código para evitar el error al sumar un número con None.",
         "language": "Python",
-        "codeKoToRefactor": "resultado = None\nif resultado:\n    print(resultado + 5)",
-        "codeOkForExpect": "resultado = None\nif resultado is not None:\n    print(resultado + 5)  # ✅ Verifica primero\nelse:\n    print('No hay resultado')",
+        "codeKoToRefactor": "resultado = None\nprint(resultado + 5)",
+        "codeOkForExpect": "resultado = None\nif resultado is not None:\n    print(resultado + 5)\nelse:\n    print('No hay resultado')",
         "expectedConsoleOutput": "No hay resultado",
-        "errorSimulation": "❌ TypeError: unsupported operand type(s) for +: 'NoneType' and 'int'",
-        "successMessage": "🎉 ¡Correcto! None debe verificarse con 'is' o 'is not'. ⚡"
-    },
+        "errorSimulation": "TypeError: unsupported operand type(s) for +: 'NoneType' and 'int'",
+        "successMessage": "🎉 ¡Correcto! None debe verificarse con 'is None' o 'is not None'.",
+        "validationHints": [
+          "is not None",
+          "No hay resultado"
+        ],
     {
         "id": 2,
         "title": "🔍 Exercise 2: La cadena vacía que no muestra nada 🧩",
