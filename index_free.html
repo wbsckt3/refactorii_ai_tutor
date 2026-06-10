@@ -16,6 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.3.4/chai.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -79,13 +80,25 @@
 <script>
 let editor;
 
-// Configuración de CodeMirror para ser agnóstico al lenguaje
+const AI_API_URL =
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1"
+        ? "/fetchAIExpectationsAgnostic"
+        : "https://www.refactorii.com/fetchAIExpectationsAgnostic";
+
+const LANGUAGE_MODES = {
+    Python: "python",
+    Java: "text/x-java",
+    JavaScript: "javascript"
+};
+
+// Configuración de CodeMirror (el mode se ajusta al cargar el ejercicio)
 editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
     lineNumbers: true,
-    mode: 'javascript', // Se configura como Java para sintaxis
+    mode: "javascript",
     lineWrapping: true,
-    theme: 'seti',
-    scrollbarStyle: 'null'
+    theme: "seti",
+    scrollbarStyle: "null"
 });
 
 let currentExercise;
@@ -107,28 +120,29 @@ async function simulateCompilation() {
         }
 
         try {
-            const response = await fetch('https://www.refactorii.com/fetchAIExpectationsAgnostic', { 
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+            const response = await fetch(AI_API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     code: userCode,
-                    challenge: currentExercise, // Se envía el JSON completo del ejercicio
+                    challenge: currentExercise,
                     language: currentExercise.language,
                     timestamp: new Date().toISOString()
                 })
             });
 
-            if (!response.ok) {
-                throw new Error(`Error HTTP! estado: ${response.status}`);
-            }
-
             const data = await response.json();
             console.log("Respuesta del backend:", data);
-            document.getElementById("modify-message").innerText = data.expectations.feedback;
 
-            if (!data.success) {
-                throw new Error(data.message || "Respuesta del servidor inválida");
+            if (!response.ok || !data.success) {
+                throw new Error(data.message || `Error HTTP! estado: ${response.status}`);
             }
+
+            if (!data.expectations) {
+                throw new Error("Respuesta del servidor sin expectations");
+            }
+
+            document.getElementById("modify-message").innerText = data.expectations.feedback || "";
 
             // Simulación de ejecución
             printToConsole(`<b>Salida esperada:</b> ${currentExercise.expectedConsoleOutput}`);
@@ -186,7 +200,8 @@ async function loadExercise(exercise) {
         document.getElementById("h4_language").innerText = exercise.language;
         document.getElementById("h5_title").innerText = exercise.title;
         document.getElementById("challenge").innerText = exercise.description;
-	document.getElementById("modify-message").innerText = exercise.concept;
+        document.getElementById("modify-message").innerText = exercise.concept;
+        editor.setOption("mode", LANGUAGE_MODES[exercise.language] || "javascript");
         editor.setValue(exercise.codeKoToRefactor);
 
         window.success_message = exercise.successMessage || "¡Éxito!";
